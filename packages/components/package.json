@@ -1,0 +1,24 @@
+{
+  "name": "@site-pro/components",
+  "version": "0.3.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build"
+  },
+  "types": "./dist",
+  "module": "./dist/index.esm.js",
+  "main": "./dist/index.cjs.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
+    }
+  },
+  "devDependencies": {
+    "@site-pro/utils": "workspace:*"
+  },
+  "files": [
+    "dist"
+  ]
+}
