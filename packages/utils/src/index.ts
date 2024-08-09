@@ -1,2 +1,5 @@
+export * from './is'
+export * from './util'
 export * from './dom'
 export * from './event'
+export * from './props-util'

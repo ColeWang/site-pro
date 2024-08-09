@@ -3,7 +3,16 @@ import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
 import { isEmpty } from './is'
 
-export function valueEnumToOptions (valueEnum = {}) {
+interface Option {
+    value: number | string;
+    label: string;
+}
+
+interface ValueEnum {
+    [key: string]: string | {};
+}
+
+export function valueEnumToOptions (valueEnum: ValueEnum = {}) {
     const options = map(valueEnum, (value, key) => {
         if (isEmpty(value)) return value
         if (isObject(value) && value.text) {
@@ -33,7 +42,7 @@ export function optionsToValueEnum (options = [], fieldNames) {
     return traverseOptions(options, {})
 }
 
-export function valueEnumToText (text, valueEnum = {}) {
+export function valueEnumToText (text: any, valueEnum = {}) {
     if (isEmpty(text)) return text
     if (isArray(text)) {
         const children = compact(text).map((value) => {
