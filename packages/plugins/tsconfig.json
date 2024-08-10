@@ -1,4 +1,8 @@
 {
+  "compilerOptions": {
+    "baseUrl": ".",
+    "preserveSymlinks": true
+  },
   "files": [],
   "references": [
     {

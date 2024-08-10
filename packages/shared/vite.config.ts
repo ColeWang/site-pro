@@ -47,15 +47,25 @@ export default defineConfig((config) => {
                     'dayjs',
                     'ant-design-vue',
                     '@ant-design/icons-vue',
+                    'ant-design-vue/es/config-provider/hooks/useConfigInject',
+                    'ant-design-vue/es/theme/internal'
                 ],
                 output: [
                     {
                         entryFileNames: 'index.esm.js',
-                        format: 'es'
+                        format: 'es',
+                        paths: {
+                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/es/config-provider/hooks/useConfigInject',
+                            'ant-design-vue/es/theme/internal': 'ant-design-vue/es/theme/internal'
+                        }
                     },
                     {
                         entryFileNames: 'index.cjs.js',
-                        format: 'cjs'
+                        format: 'cjs',
+                        paths: {
+                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/lib/config-provider/hooks/useConfigInject',
+                            'ant-design-vue/es/theme/internal': 'ant-design-vue/lib/theme/internal'
+                        }
                     }
                 ],
                 plugins: [

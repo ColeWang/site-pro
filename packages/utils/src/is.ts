@@ -19,7 +19,7 @@ export function isEmpty (value: unknown): value is '' | null | undefined | numbe
     return isEqual(value, '') || isNil(value) || isNaN(value)
 }
 
-export function isEmptyObject (object: Record<any, any> = {}) {
+export function isEmptyObject (object: Record<string, unknown> = {}): boolean {
     for (const key in object) {
         if (Object.prototype.hasOwnProperty.call(object, key)) {
             return false

@@ -1,6 +1,6 @@
 import { ComponentPublicInstance, Ref, unref } from 'vue'
 
-export function hasClass (node: Element, className: string) {
+export function hasClass (node: Element, className: string): boolean {
     if (node.classList) {
         return node.classList.contains(className)
     }
@@ -8,7 +8,7 @@ export function hasClass (node: Element, className: string) {
     return ` ${originClass} `.indexOf(` ${className} `) > -1
 }
 
-export function addClass (node: Element, className: string) {
+export function addClass (node: Element, className: string): void {
     if (node.classList) {
         node.classList.add(className)
     } else {
@@ -18,7 +18,7 @@ export function addClass (node: Element, className: string) {
     }
 }
 
-export function removeClass (node: Element, className: string) {
+export function removeClass (node: Element, className: string): void {
     if (node.classList) {
         node.classList.remove(className)
     } else {
@@ -29,7 +29,7 @@ export function removeClass (node: Element, className: string) {
     }
 }
 
-export function getElement (el: Ref<Element | ComponentPublicInstance | null>) {
+export function getElement (el: Ref<Element | ComponentPublicInstance | null>): Element | undefined {
     const target = unref(el)
     if (target) {
         return (target as ComponentPublicInstance).$el || target
@@ -37,7 +37,7 @@ export function getElement (el: Ref<Element | ComponentPublicInstance | null>) {
     return undefined
 }
 
-export function getWindowSize () {
+export function getWindowSize (): number[] {
     // @todo visualViewport
     return [window.innerWidth, window.innerHeight]
 }

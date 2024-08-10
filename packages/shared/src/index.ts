@@ -1,2 +1,2 @@
-export * from './antd'
+export * from './extend'
 export * from './version'
