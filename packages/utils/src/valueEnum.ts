@@ -1,10 +1,10 @@
-import type { ValueEnum } from './typings'
+import type { BaseValueEnum } from './typings'
 import { h } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
 import { isEmpty } from './is'
 
-export function valueEnumToOptions (valueEnum: ValueEnum = {}) {
+export function valueEnumToOptions (valueEnum: BaseValueEnum = {}) {
     const options = map(valueEnum, (value, key) => {
         if (isEmpty(value)) return value
         if (isObject(value) && value.text) {
@@ -34,7 +34,7 @@ export function optionsToValueEnum (options = [], fieldNames) {
     return traverseOptions(options, {})
 }
 
-export function valueEnumToText (text: any, valueEnum: ValueEnum = {}) {
+export function valueEnumToText (text: any, valueEnum: BaseValueEnum = {}) {
     if (isEmpty(text)) return text
     if (isArray(text)) {
         const children = compact(text).map((value) => {

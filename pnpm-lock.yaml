@@ -76,13 +76,19 @@ importers:
         specifier: ^2.0.29
         version: 2.0.29(typescript@5.5.4)
 
-  packages/components: {}
+  packages/components:
+    dependencies:
+      '@site-pro/utils':
+        specifier: workspace:*
+        version: link:../utils
 
-  packages/hooks: {}
+  packages/hooks:
+    dependencies:
+      '@site-pro/utils':
+        specifier: workspace:*
+        version: link:../utils
 
   packages/plugins: {}
-
-  packages/shared: {}
 
   packages/utils: {}
 

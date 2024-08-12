@@ -1,4 +1,4 @@
-import type { Dictionary } from './typings'
+import type { BaseNamePath, Dictionary } from './typings'
 import { isProxy, toRaw } from 'vue'
 import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, toString } from 'lodash-es'
 import { isEmpty } from './is'
@@ -22,7 +22,7 @@ export function omitUndefined<T = unknown> (object: Dictionary<T> | null | undef
     return omitBy(object, isUndefined)
 }
 
-export function namePathToString (namePath: string | Array<string | number[]>): string {
+export function namePathToString (namePath: BaseNamePath): string {
     if (namePath && isArray(namePath)) {
         const pathString = reduce(namePath, (total, value, index) => {
             const result = isNumber(value) && index > 0 ? `[${value}]` : `.${value}`

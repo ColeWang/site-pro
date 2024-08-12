@@ -1,5 +1,4 @@
-import type { BasicTarget, TargetType } from './typings'
-import type { ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, MaybeRef } from 'vue'
 import { unref } from 'vue'
 
 export function hasClass (node: Element, className: string): boolean {
@@ -31,8 +30,8 @@ export function removeClass (node: Element, className: string): void {
     }
 }
 
-export function getElement (el: BasicTarget): Element | null {
-    const target: TargetType = unref(el)
+export function getElement (el: MaybeRef<ComponentPublicInstance | Element | null>): Element | null {
+    const target = unref(el)
     if (target && (target as ComponentPublicInstance).$el) {
         return (target as ComponentPublicInstance).$el
     }
