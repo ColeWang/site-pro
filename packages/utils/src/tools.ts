@@ -1,10 +1,7 @@
+import type { Dictionary } from './typings'
 import { isProxy, toRaw } from 'vue'
 import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, toString } from 'lodash-es'
 import { isEmpty } from './is'
-
-export interface Dictionary<T> {
-    [key: string]: T;
-}
 
 export function cloneProxyToRaw<T = unknown> (proxy: Dictionary<T>): Dictionary<T> {
     return cloneWith(proxy, (value) => {
@@ -17,6 +14,14 @@ export function cloneProxyToRaw<T = unknown> (proxy: Dictionary<T>): Dictionary<
     })
 }
 
+export function omitNil<T = unknown> (object: Dictionary<T> | null | undefined): Dictionary<T> {
+    return omitBy(object, isEmpty)
+}
+
+export function omitUndefined<T = unknown> (object: Dictionary<T> | null | undefined): Dictionary<T> {
+    return omitBy(object, isUndefined)
+}
+
 export function namePathToString (namePath: string | Array<string | number[]>): string {
     if (namePath && isArray(namePath)) {
         const pathString = reduce(namePath, (total, value, index) => {
@@ -26,14 +31,6 @@ export function namePathToString (namePath: string | Array<string | number[]>): 
         return pathString.replace(/^\./, '')
     }
     return toString(namePath)
-}
-
-export function omitNil<T = unknown> (object: Dictionary<T> | null | undefined): Dictionary<T> {
-    return omitBy(object, isEmpty)
-}
-
-export function omitUndefined<T = unknown> (object: Dictionary<T> | null | undefined): Dictionary<T> {
-    return omitBy(object, isUndefined)
 }
 
 export function toPx (value: number | string): string {

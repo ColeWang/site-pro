@@ -1,4 +1,6 @@
-import { ComponentPublicInstance, Ref, unref } from 'vue'
+import type { BasicTarget, TargetType } from './typings'
+import type { ComponentPublicInstance } from 'vue'
+import { unref } from 'vue'
 
 export function hasClass (node: Element, className: string): boolean {
     if (node.classList) {
@@ -29,12 +31,12 @@ export function removeClass (node: Element, className: string): void {
     }
 }
 
-export function getElement (el: Ref<Element | ComponentPublicInstance | null>): Element | undefined {
-    const target = unref(el)
-    if (target) {
-        return (target as ComponentPublicInstance).$el || target
+export function getElement (el: BasicTarget): Element | null {
+    const target: TargetType = unref(el)
+    if (target && (target as ComponentPublicInstance).$el) {
+        return (target as ComponentPublicInstance).$el
     }
-    return undefined
+    return target as (Element | null)
 }
 
 export function getWindowSize (): number[] {

@@ -1,8 +1,13 @@
+import type { ComponentPublicInstance, Ref } from 'vue'
 import { computed, watch } from 'vue'
-import { getElement } from '../utils/dom'
+import { getElement } from '@site-pro/utils'
 import tryOnScopeDispose from './tryOnScopeDispose'
 
-function useResizeObserver (target, callback, options) {
+function useResizeObserver (
+    target: Element | Ref<Element | ComponentPublicInstance | null>,
+    callback: ResizeObserverCallback,
+    options?: ResizeObserverOptions
+): void {
     let observer: ResizeObserver | null = null
 
     function cleanup () {
@@ -20,14 +25,12 @@ function useResizeObserver (target, callback, options) {
         }
     }, { immediate: true, flush: 'post', deep: true })
 
-    function onStop () {
-        cleanup()
+    function onStopHandle () {
         stopWatch && stopWatch()
+        cleanup()
     }
 
-    tryOnScopeDispose(onStop)
-
-    return { onStop }
+    tryOnScopeDispose(onStopHandle)
 }
 
 export default useResizeObserver

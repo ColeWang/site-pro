@@ -47,6 +47,7 @@ export default defineConfig((config) => {
                     'dayjs',
                     'ant-design-vue',
                     '@ant-design/icons-vue',
+                    '@site-pro/utils',
                 ],
                 output: [
                     {

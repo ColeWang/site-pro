@@ -6,6 +6,9 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build"
   },
+  "dependencies": {
+    "@site-pro/utils": "workspace:*"
+  },
   "types": "./dist/index.d.ts",
   "module": "./dist/index.esm.js",
   "main": "./dist/index.cjs.js",

@@ -1,4 +1,5 @@
-import { Fragment, Slots, VNode } from 'vue'
+import type { Slots, VNode } from 'vue'
+import { Fragment } from 'vue'
 import { isArray, isFunction } from 'lodash-es'
 import { isEmptyElement } from './is'
 
@@ -21,7 +22,7 @@ export function flattenChildren (children: VNode[]): VNode[] {
 export function getSlot<T> (
     slots: Slots,
     props: Record<string, unknown>,
-    name = 'default'
+    name: string = 'default'
 ): T | false {
     const result: any = props[name] || slots[name]
     return isFunction(result) ? result as T : false
@@ -30,7 +31,7 @@ export function getSlot<T> (
 export function getSlotVNode<T> (
     slots: Slots,
     props: Record<string, unknown>,
-    name = 'default',
+    name: string = 'default',
     slotScope: Record<string, unknown>
 ): T | false {
     const result: any = props[name] || slots[name]

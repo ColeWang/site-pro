@@ -1,14 +1,14 @@
 import { Comment, Fragment } from 'vue'
 import { isEqual, isFunction, isNaN, isNil, isObject, isSymbol } from 'lodash-es'
 
-export function isValidElement (c: any) {
-    return c && c.__v_isVNode && !isSymbol(c.type)
+export function isValidElement (value: any): boolean {
+    return value && value.__v_isVNode && !isSymbol(value.type)
 }
 
-export function isEmptyElement (c: any) {
-    const isEmptyText = c && c.type === Text && c.children.trim() === ''
-    const isEmptyFragment = c && c.type === Fragment && c.children.length === 0
-    return c && (c.type === Comment || isEmptyText || isEmptyFragment)
+export function isEmptyElement (value: any): boolean {
+    const isEmptyText = value && value.type === Text && value.children.trim() === ''
+    const isEmptyFragment = value && value.type === Fragment && value.children.length === 0
+    return value && (value.type === Comment || isEmptyText || isEmptyFragment)
 }
 
 export function isPromise<T = any> (value: unknown): value is Promise<T> {
