@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import 'vue/jsx'
 
 declare const __VERSION__: string
 

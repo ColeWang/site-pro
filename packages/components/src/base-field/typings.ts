@@ -89,3 +89,6 @@ export const baseFieldProps = {
         default: undefined
     }
 }
+
+export type BaseFieldProps = Partial<ExtractPropTypes<typeof baseFieldProps>>;
+
