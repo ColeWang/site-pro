@@ -11,8 +11,8 @@ const customFieldsProps = {
 }
 
 export type CustomFieldsProps = Partial<ExtractPropTypes<typeof customFieldsProps>>;
-export type CustomFieldsExpose = {};
-export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps, CustomFieldsExpose>;
+// export type CustomFieldsExpose = {};
+export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps>;
 
 export default defineComponent({
     inheritAttrs: false,
