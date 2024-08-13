@@ -16,6 +16,7 @@ export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps, Cu
 
 export default defineComponent({
     inheritAttrs: false,
+    name: 'SCustomFields',
     props: customFieldsProps,
     setup (props, { slots }) {
         const valueTypeMap = computed(() => {
