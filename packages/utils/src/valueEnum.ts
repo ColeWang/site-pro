@@ -1,10 +1,10 @@
 import { h } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
-import type { DefaultOptionType, DefaultValueEnum } from './typings'
+import type { BaseFieldNames, BaseOption, BaseValueEnum, BaseVueNode } from './typings'
 import { isEmpty } from './is'
 
-export function valueEnumToOptions (valueEnum: DefaultValueEnum = {}): DefaultOptionType[] {
+export function valueEnumToOptions (valueEnum: BaseValueEnum = {}): BaseOption[] {
     const options = map(valueEnum, (value, key) => {
         if (isEmpty(value)) return value
         if (isObject(value) && value.text) {
@@ -17,11 +17,12 @@ export function valueEnumToOptions (valueEnum: DefaultValueEnum = {}): DefaultOp
 }
 
 export function optionsToValueEnum (
-    options: DefaultOptionType[] = [],
-    fieldNames: Record<keyof DefaultOptionType, string>
-): DefaultValueEnum {
+    options: BaseOption[] = [],
+    fieldNames?: BaseFieldNames
+): BaseValueEnum {
     const { value = 'value', label = 'label', children = 'children' } = fieldNames || {}
-    const traverseOptions = (values: DefaultOptionType[] = [], result: DefaultValueEnum) => {
+
+    const traverseOptions = (values: BaseOption[] = [], result: BaseValueEnum) => {
         return reduce(values, (_, option = {}) => {
             const key = option[value], text = option[label]
             if (!(isEmpty(key) || isEmpty(text))) {
@@ -34,15 +35,16 @@ export function optionsToValueEnum (
             return result
         }, result)
     }
+
     return traverseOptions(options, {})
 }
 
-export type BaseTextType = string | number | DefaultOptionType | null | undefined;
+export type BaseTextType = BaseOption | string | number | null | undefined;
 
 export function valueEnumToText (
-    text?: BaseTextType | BaseTextType[],
-    valueEnum: DefaultValueEnum = {}
-) {
+    text: BaseTextType | BaseTextType[],
+    valueEnum: BaseValueEnum = {}
+): BaseVueNode {
     if (isEmpty(text)) return text
     if (isArray(text)) {
         const children = compact(text).map((value) => {

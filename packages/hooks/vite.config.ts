@@ -30,7 +30,7 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@site-pro/utils': resolve(__dirname, 'src'),
+                '@site-pro/hooks': resolve(__dirname, 'src'),
                 '@': resolve(__dirname, 'examples')
             }
         },
@@ -48,15 +48,22 @@ export default defineConfig((config) => {
                     'ant-design-vue',
                     '@ant-design/icons-vue',
                     '@site-pro/utils',
+                    'ant-design-vue/es/config-provider/hooks/useConfigInject'
                 ],
                 output: [
                     {
                         entryFileNames: 'index.esm.js',
-                        format: 'es'
+                        format: 'es',
+                        paths: {
+                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/es/config-provider/hooks/useConfigInject'
+                        }
                     },
                     {
                         entryFileNames: 'index.cjs.js',
-                        format: 'cjs'
+                        format: 'cjs',
+                        paths: {
+                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/lib/config-provider/hooks/useConfigInject'
+                        }
                     }
                 ],
                 plugins: [

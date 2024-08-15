@@ -18,10 +18,11 @@ import type {
 import type { RangePickerProps } from 'ant-design-vue/es/date-picker'
 import type { TextAreaProps } from 'ant-design-vue/es/input'
 import passwordProps from 'ant-design-vue/es/input/Password'
+import type { BaseVueNode, Recordable } from '@site-pro/utils'
 
 export type PasswordProps = Partial<ExtractPropTypes<typeof passwordProps>>;
 
-export interface BaseValueTypeWithFieldProps {
+export interface BaseFieldValueTypeWithFieldProps {
     date: DatePickerProps;
     dateRange: RangePickerProps;
     dateWeek: DatePickerProps;
@@ -49,11 +50,17 @@ export interface BaseValueTypeWithFieldProps {
     text: InputProps;
 }
 
-export type BaseValueType = Extract<keyof BaseValueTypeWithFieldProps, any>;
+export type BaseFieldText = BaseVueNode | BaseVueNode[] | Recordable | Recordable[];
+
+export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
+
+export interface BaseFieldRenderField {
+    (text: BaseFieldText, props: any, dom: BaseVueNode): BaseVueNode;
+}
 
 export const baseFieldProps = {
     text: {
-        type: [String, Number, Boolean, Array, Object] as PropType<any>,
+        type: [String, Number, Array, Object] as PropType<BaseFieldText>,
         default: undefined
     },
     mode: {
@@ -65,7 +72,7 @@ export const baseFieldProps = {
         default: undefined
     },
     valueType: {
-        type: String as PropType<BaseValueType | string>,
+        type: String as PropType<BaseFieldValueType | string>,
         default: 'text'
     },
     valueEnum: {
@@ -85,7 +92,7 @@ export const baseFieldProps = {
         default: '-'
     },
     renderField: {
-        type: Function as PropType<any>,
+        type: Function as PropType<BaseFieldRenderField>,
         default: undefined
     }
 }

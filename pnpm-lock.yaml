@@ -78,6 +78,9 @@ importers:
 
   packages/components:
     dependencies:
+      '@site-pro/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@site-pro/utils':
         specifier: workspace:*
         version: link:../utils

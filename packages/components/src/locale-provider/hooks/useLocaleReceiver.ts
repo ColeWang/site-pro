@@ -21,7 +21,7 @@ function useLocaleReceiver (
         return { ...baseLocale, ...providerLocale, ...needPropsLocale }
     })
 
-    function translate (path: BaseNamePath): string | BaseLocale {
+    function translate (path: BaseNamePath): string {
         return get(unref(locale), path, path)
     }
 

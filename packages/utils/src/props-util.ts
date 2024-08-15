@@ -41,9 +41,9 @@ export function getSlotVNode<T> (
 export function getPropsSlot<T> (
     slots: Slots,
     props: Record<string, unknown>,
-    name = 'default',
+    name: string = 'default',
     slotScope?: Record<string, unknown>
-): T | string | false {
+): T | false {
     const result: any = props[name] ?? slots[name]
     return isFunction(result) ? result(slotScope) as T : (result || false)
 }

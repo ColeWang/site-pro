@@ -1,23 +1,33 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../locale'
+import { useLocaleReceiver } from '../../locale-provider'
+import type { BaseFieldValueTypeWithFieldProps } from '../typings'
 import { baseFieldProps } from '../typings'
+
+type FieldProps = BaseFieldValueTypeWithFieldProps['text']
+
+const fieldTextProps = {
+    ...baseFieldProps,
+    fieldProps: {
+        type: Object as PropType<FieldProps>,
+        default: () => ({})
+    }
+}
+
+export type FieldTextProps = Partial<ExtractPropTypes<typeof fieldTextProps>>;
+export type FieldTextInstance = ComponentPublicInstance<FieldTextProps>;
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        ...baseFieldProps,
-        type: {
-            type: String,
-            default: 'text'
-        }
-    },
+    name: 'SFieldText',
+    props: fieldTextProps,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
         return () => {
-            const { type, mode, text, emptyText, fieldProps } = props
+            const { mode, text, emptyText, fieldProps } = props
             const placeholder = fieldProps.placeholder || t('inputPlaceholder')
 
             if (mode === 'read') {
@@ -31,8 +41,7 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps = {
-                type: type,
+            const needFieldProps: FieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder

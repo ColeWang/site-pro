@@ -30,7 +30,7 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@site-pro/utils': resolve(__dirname, 'src'),
+                '@site-pro/plugins': resolve(__dirname, 'src'),
                 '@': resolve(__dirname, 'examples')
             }
         },
