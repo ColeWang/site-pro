@@ -1,6 +1,12 @@
+import type { FullToken, GenerateStyle } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
-function genBaseStyle (token) {
+interface ProDescriptionsToken extends FullToken<'ProDescriptions'> {
+    fieldTextareaReadCls: string;
+    descsHeaderMargin: number;
+}
+
+const genBaseStyle: GenerateStyle<ProDescriptionsToken> = (token) => {
     const { componentCls, fieldTextareaReadCls, descsHeaderMargin } = token
     return {
         [componentCls]: {
@@ -43,7 +49,7 @@ export default genComponentStyleHook('ProDescriptions', (token) => {
     const descsHeaderMargin = token.sizeMS
     const fieldTextareaReadCls = `${antCls}-pro-field-textarea__read`
 
-    const descriptionsToken = mergeToken(token, {
+    const descriptionsToken = mergeToken<ProDescriptionsToken>(token, {
         descsHeaderMargin,
         fieldTextareaReadCls
     })
