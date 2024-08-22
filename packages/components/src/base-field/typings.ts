@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type {
     CascaderProps,
     CheckboxProps,
@@ -18,7 +18,7 @@ import type {
 import type { RangePickerProps } from 'ant-design-vue/es/date-picker'
 import type { TextAreaProps } from 'ant-design-vue/es/input'
 import passwordProps from 'ant-design-vue/es/input/Password'
-import type { BaseVueNode, Recordable } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
 
 export type PasswordProps = Partial<ExtractPropTypes<typeof passwordProps>>;
 
@@ -50,15 +50,15 @@ export interface BaseFieldValueTypeWithFieldProps {
     text: InputProps;
 }
 
-export type BaseFieldText = BaseVueNode | BaseVueNode[] | Recordable | Recordable[];
+export type BaseFieldText = VNodeChild | Recordable | Recordable[];
 
 export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
 
 export interface BaseFieldRenderField {
-    (text: BaseFieldText, props: any, dom: BaseVueNode): BaseVueNode;
+    (text: BaseFieldText, props: any, dom: VNodeChild): VNodeChild;
 }
 
-export const baseFieldProps = {
+export const baseFieldProps = () => ({
     text: {
         type: [String, Number, Array, Object] as PropType<BaseFieldText>,
         default: undefined
@@ -95,7 +95,7 @@ export const baseFieldProps = {
         type: Function as PropType<BaseFieldRenderField>,
         default: undefined
     }
-}
+})
 
-export type BaseFieldProps = Partial<ExtractPropTypes<typeof baseFieldProps>>;
+export type BaseFieldProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProps>>>;
 

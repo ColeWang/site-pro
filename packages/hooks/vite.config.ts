@@ -48,22 +48,23 @@ export default defineConfig((config) => {
                     'ant-design-vue',
                     '@ant-design/icons-vue',
                     '@site-pro/utils',
-                    'ant-design-vue/es/config-provider/hooks/useConfigInject'
+                    '@types/lodash-es',
+                    // 'ant-design-vue/es/config-provider/hooks/useConfigInject'
                 ],
                 output: [
                     {
                         entryFileNames: 'index.esm.js',
                         format: 'es',
-                        paths: {
-                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/es/config-provider/hooks/useConfigInject'
-                        }
+                        // paths: {
+                        //     'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/es/config-provider/hooks/useConfigInject'
+                        // }
                     },
                     {
                         entryFileNames: 'index.cjs.js',
                         format: 'cjs',
-                        paths: {
-                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/lib/config-provider/hooks/useConfigInject'
-                        }
+                        // paths: {
+                        //     'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/lib/config-provider/hooks/useConfigInject'
+                        // }
                     }
                 ],
                 plugins: [

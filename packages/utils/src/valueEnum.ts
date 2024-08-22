@@ -1,7 +1,8 @@
+import type { VNodeChild } from 'vue'
 import { h } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
-import type { BaseFieldNames, BaseOption, BaseValueEnum, BaseVueNode } from './typings'
+import type { BaseOption, BaseOptionFieldNames, BaseOptionTextValue, BaseValueEnum } from './typings'
 import { isEmpty } from './is'
 
 export function valueEnumToOptions (valueEnum: BaseValueEnum = {}): BaseOption[] {
@@ -18,7 +19,7 @@ export function valueEnumToOptions (valueEnum: BaseValueEnum = {}): BaseOption[]
 
 export function optionsToValueEnum (
     options: BaseOption[] = [],
-    fieldNames?: BaseFieldNames
+    fieldNames?: BaseOptionFieldNames
 ): BaseValueEnum {
     const { value = 'value', label = 'label', children = 'children' } = fieldNames || {}
 
@@ -39,12 +40,10 @@ export function optionsToValueEnum (
     return traverseOptions(options, {})
 }
 
-export type BaseTextType = BaseOption | string | number | null | undefined;
-
 export function valueEnumToText (
-    text: BaseTextType | BaseTextType[],
+    text: BaseOptionTextValue | BaseOptionTextValue[],
     valueEnum: BaseValueEnum = {}
-): BaseVueNode {
+): VNodeChild {
     if (isEmpty(text)) return text
     if (isArray(text)) {
         const children = compact(text).map((value) => {

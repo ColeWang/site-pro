@@ -1,6 +1,6 @@
 import { defineComponent, Fragment } from 'vue'
-import { RangePicker } from 'ant-design-vue'
-import { useLocaleReceiver } from '../../locale-provider'
+import { TimeRangePicker } from 'ant-design-vue'
+import { useLocaleReceiver } from '../../../locale-provider'
 import baseFieldProps from '../props'
 import { getSlotVNode } from '../../../utils/props-util'
 import { formatDate } from '../utils'
@@ -33,7 +33,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const dom = <RangePicker {...needFieldProps} v-slots={slots}/>
+            const dom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
             const slotScope = { text, props: { mode, ...fieldProps }, dom }
             const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
             return renderDom || dom

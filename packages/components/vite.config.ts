@@ -48,7 +48,8 @@ export default defineConfig((config) => {
                     'ant-design-vue',
                     '@ant-design/icons-vue',
                     '@site-pro/utils',
-                    'ant-design-vue/es/theme/internal'
+                    'ant-design-vue/es/theme/internal',
+                    '@types/lodash-es'
                 ],
                 output: [
                     {

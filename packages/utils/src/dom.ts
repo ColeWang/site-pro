@@ -31,7 +31,7 @@ export function removeClass (node: Element, className: string): void {
 }
 
 export function getElement (el: MaybeRef<ComponentPublicInstance | Element | null>): Element | null {
-    const target = unref(el)
+    const target: ComponentPublicInstance | Element | null = unref(el)
     if (target && (target as ComponentPublicInstance).$el) {
         return (target as ComponentPublicInstance).$el
     }

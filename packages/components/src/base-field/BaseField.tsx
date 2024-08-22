@@ -1,30 +1,33 @@
 import { defineComponent, unref } from 'vue'
+import type { BaseFieldProps, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
 import { useCustomFields } from './custom-fields'
 import { get, isFunction, isObject } from 'lodash-es'
 // ---
-import FieldDatePicker from './components/DatePicker'
-import FieldRangePicker from './components/RangePicker'
-import FieldTimePicker from './components/TimePicker'
-import FieldTimeRangePicker from './components/TimeRangePicker'
-import FieldSelect from './components/Select'
-import FieldTreeSelect from './components/TreeSelect'
-import FieldCascader from './components/Cascader'
-import FieldRadio from './components/Radio'
-import FieldCheckbox from './components/Checkbox'
-import FieldSwitch from './components/Switch'
-import FieldSlider from './components/Slider'
-import FieldNumber from './components/Number'
-import FieldTextArea from './components/TextArea'
-import FieldText from './components/Text'
-import FieldPassword from './components/Password'
+import {
+    FieldDatePicker,
+    FieldRangePicker,
+    FieldTimePicker,
+    FieldTimeRangePicker,
+    FieldSelect,
+    FieldTreeSelect,
+    FieldCascader,
+    FieldRadio,
+    FieldCheckbox,
+    FieldSwitch,
+    FieldSlider,
+    FieldText,
+    FieldNumber,
+    FieldTextArea,
+    FieldPassword
+} from './components'
 
-function mergeFieldProps (props, extraFieldProps) {
+function mergeFieldProps (props: BaseFieldProps, extraFieldProps: BaseFieldProps['fieldProps']) {
     const fieldProps = { ...props.fieldProps, ...extraFieldProps }
     return { ...props, fieldProps }
 }
 
-function defaultRenderText (valueType, props, slots) {
+function defaultRenderText (valueType: BaseFieldValueType, props: BaseFieldProps, slots: Record<string, any>) {
     if (valueType === 'date') {
         const dateProps = mergeFieldProps(props, {
             picker: 'date',
@@ -144,6 +147,9 @@ function defaultRenderText (valueType, props, slots) {
     if (valueType === 'slider') {
         return <FieldSlider {...props} v-slots={slots}/>
     }
+    if (valueType === 'text') {
+        return <FieldText {...props} v-slots={slots}/>
+    }
     if (valueType === 'number') {
         return <FieldNumber {...props} v-slots={slots}/>
     }
@@ -162,7 +168,7 @@ export default defineComponent({
     setup (props, { slots }) {
         const { valueTypeMap } = useCustomFields()
 
-        function onUpdateValue (value) {
+        function onUpdateValue (value: any) {
             const { fieldProps } = props
             if (isFunction(fieldProps['onUpdate:value'])) {
                 fieldProps['onUpdate:value'](value)
@@ -174,7 +180,7 @@ export default defineComponent({
             const placeholder = fieldProps.placeholder || props.placeholder
             const { model = {}, name: namePath } = formItemProps
 
-            const inputValue = get(model, namePath, undefined)
+            const inputValue = namePath ? get(model, namePath) : undefined
 
             const needFieldProps = {
                 ...fieldProps,
@@ -194,7 +200,7 @@ export default defineComponent({
                 // valueType: ({ props, slots }) => {}
                 return customRenderText({ props: fieldRenderProps, slots })
             }
-            return defaultRenderText(valueType, fieldRenderProps, slots)
+            return defaultRenderText(valueType as BaseFieldValueType, fieldRenderProps, slots)
         }
     }
 })

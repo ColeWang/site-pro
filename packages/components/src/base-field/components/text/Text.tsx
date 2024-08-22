@@ -2,9 +2,9 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../locale-provider'
-import type { BaseFieldValueTypeWithFieldProps } from '../typings'
-import { baseFieldProps } from '../typings'
+import { useLocaleReceiver } from '../../../locale-provider'
+import type { BaseFieldValueTypeWithFieldProps } from '../../typings.ts'
+import { baseFieldProps } from '../../typings.ts'
 
 type FieldProps = BaseFieldValueTypeWithFieldProps['text']
 

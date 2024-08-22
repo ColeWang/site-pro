@@ -1,8 +1,7 @@
 import { computed, defineComponent, unref } from 'vue'
-import { Checkbox } from 'ant-design-vue'
-import type { BaseTextType } from '@site-pro/utils'
-import { optionsToValueEnum, valueEnumToOptions, valueEnumToText, getSlotVNode } from '@site-pro/utils'
-import { baseFieldProps } from '../typings'
+import { Radio } from 'ant-design-vue'
+import baseFieldProps from '../props'
+import { getSlotVNode, optionsToValueEnum, valueEnumToOptions, valueEnumToText } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 
 export default defineComponent({
@@ -22,14 +21,14 @@ export default defineComponent({
             if (mode === 'read') {
                 const { options: propsOptions, fieldNames } = fieldProps
                 const optionsValueEnum = optionsToValueEnum(propsOptions, fieldNames)
-                const valueText = valueEnumToText(text as BaseTextType, valueEnum || optionsValueEnum)
+                const valueText = valueEnumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
             const needFieldProps = {
                 options: unref(options),
                 ...fieldProps
             }
-            const dom = <Checkbox.Group {...needFieldProps} v-slots={slots}/>
+            const dom = <Radio.Group {...needFieldProps} v-slots={slots}/>
             const slotScope = { text, props: { mode, ...fieldProps }, dom }
             const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
             return renderDom || dom

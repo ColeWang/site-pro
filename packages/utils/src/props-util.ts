@@ -1,16 +1,16 @@
-import type { Slots, VNode } from 'vue'
+import type { VNode } from 'vue'
 import { Fragment } from 'vue'
 import { isArray, isFunction } from 'lodash-es'
 import { isEmptyElement } from './is'
 
-export function flattenChildren (children: VNode[]): VNode[] {
-    const result: VNode[] = []
+export function flattenChildren (children: Array<VNode | VNode[]>): Array<VNode> {
+    const result: Array<VNode> = []
     if (isArray(children) && children.length !== 0) {
         children.forEach((child) => {
-            if (isArray(child)) {
+            if (child && isArray(child)) {
                 result.push(...child)
             } else if (child && child.type === Fragment && isArray(child.children)) {
-                result.push(...flattenChildren(child.children as VNode[]))
+                result.push(...flattenChildren(child.children as Array<VNode>))
             } else if (child) {
                 result.push(child)
             }
@@ -20,7 +20,7 @@ export function flattenChildren (children: VNode[]): VNode[] {
 }
 
 export function getSlot<T> (
-    slots: Slots,
+    slots: Record<string, unknown>,
     props: Record<string, unknown>,
     name: string = 'default'
 ): T | false {
@@ -29,7 +29,7 @@ export function getSlot<T> (
 }
 
 export function getSlotVNode<T> (
-    slots: Slots,
+    slots: Record<string, unknown>,
     props: Record<string, unknown>,
     name: string = 'default',
     slotScope?: Record<string, unknown>
@@ -39,7 +39,7 @@ export function getSlotVNode<T> (
 }
 
 export function getPropsSlot<T> (
-    slots: Slots,
+    slots: Record<string, unknown>,
     props: Record<string, unknown>,
     name: string = 'default',
     slotScope?: Record<string, unknown>

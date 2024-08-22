@@ -1,5 +1,5 @@
 import { defineComponent, unref } from 'vue'
-import { Form } from 'ant-design-vue'
+import { formItemProps } from 'ant-design-vue/es/form'
 import ColWrap from '../helpers/ColWrap'
 import { useFormInstance } from '../base-form'
 import { pick } from 'lodash-es'
@@ -7,7 +7,7 @@ import { pick } from 'lodash-es'
 export default defineComponent({
     inheritAttrs: false,
     props: {
-        ...Form.Item.props,
+        ...formItemProps(),
         colProps: {
             type: Object,
             default: () => ({})

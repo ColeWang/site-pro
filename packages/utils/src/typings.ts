@@ -1,4 +1,3 @@
-import type { VNode, VNodeChild } from 'vue'
 import type { BadgeProps } from 'ant-design-vue'
 
 export interface Dictionary<T> {
@@ -15,9 +14,7 @@ export interface ExtraDisabled {
 
 export type BaseNamePath = string | number | (string | number)[];
 
-export type BaseVueNode = VNode | VNodeChild | JSX.Element | string | number | null | undefined;
-
-export interface BaseFieldNames {
+export interface BaseOptionFieldNames {
     label?: string;
     value?: string;
     children?: string;
@@ -26,8 +23,14 @@ export interface BaseFieldNames {
 export interface BaseOption extends ExtraDisabled {
     label?: any;
     value?: string | number | null;
-    children?: Omit<BaseOption, 'children'>[];
+    children?: BaseOption[];
 }
+
+export type BaseOptionTextValue = Omit<BaseOption, 'children'>
+    | string
+    | number
+    | null
+    | undefined;
 
 export interface BaseValueEnum {
     [key: string]: string | BadgeProps & ExtraDisabled;

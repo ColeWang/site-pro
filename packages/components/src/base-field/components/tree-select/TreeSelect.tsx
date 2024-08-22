@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
-import { useLocaleReceiver } from '../../locale-provider'
+import { useLocaleReceiver } from '../../../locale-provider'
 import baseFieldProps from '../props'
 import { optionsToValueEnum, valueEnumToText } from '../../../utils/valueEnum'
 import { getSlotVNode } from '../../../utils/props-util'
