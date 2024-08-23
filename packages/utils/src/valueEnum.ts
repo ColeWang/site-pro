@@ -1,30 +1,27 @@
 import type { VNodeChild } from 'vue'
-import { h } from 'vue'
+import { h, isVNode } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
-import type { BaseOption, BaseOptionFieldNames, BaseOptionTextValue, BaseValueEnum } from './typings'
 import { isEmpty } from './is'
+import type { BaseEnumType, BaseFieldNames, BaseOptionType } from './typings'
 
-export function valueEnumToOptions (valueEnum: BaseValueEnum = {}): BaseOption[] {
-    const options = map(valueEnum, (value, key) => {
-        if (isEmpty(value)) return value
-        if (isObject(value) && value.text) {
-            const { text, disabled } = value
+export function enumToOptions<E extends BaseEnumType, O extends BaseOptionType> (valueEnum?: E): Array<O> {
+    const result = map(valueEnum || ({} as E), (item, key) => {
+        if (isEmpty(item)) return item
+        if (isObject(item) && item.text) {
+            const { text, disabled } = item
             return { value: key, label: text, disabled }
         }
-        return { value: key, label: value }
+        return { value: key, label: item }
     })
-    return compact(options)
+    return compact(result) as Array<O>
 }
 
-export function optionsToValueEnum (
-    options: BaseOption[] = [],
-    fieldNames?: BaseOptionFieldNames
-): BaseValueEnum {
+export function optionsToEnum<O extends BaseOptionType, E extends BaseEnumType> (options?: Array<O>, fieldNames?: BaseFieldNames): E {
     const { value = 'value', label = 'label', children = 'children' } = fieldNames || {}
 
-    const traverseOptions = (values: BaseOption[] = [], result: BaseValueEnum) => {
-        return reduce(values, (_, option = {}) => {
+    const traverseOptions = (values: Array<O> = [], result: E) => {
+        return reduce(values, (_, option) => {
             const key = option[value], text = option[label]
             if (!(isEmpty(key) || isEmpty(text))) {
                 set(result, key, text)
@@ -37,17 +34,15 @@ export function optionsToValueEnum (
         }, result)
     }
 
-    return traverseOptions(options, {})
+    return traverseOptions(options || [], {} as E)
 }
 
-export function valueEnumToText (
-    text: BaseOptionTextValue | BaseOptionTextValue[],
-    valueEnum: BaseValueEnum = {}
-): VNodeChild {
-    if (isEmpty(text)) return text
+export function enumToText<T extends BaseOptionType | VNodeChild> (text: T, valueEnum: BaseEnumType): VNodeChild {
+    if (isEmpty(text) || isVNode(text)) return text
+    if (isObject(text) && (text as BaseOptionType).label) return (text as BaseOptionType).label
     if (isArray(text)) {
         const children = compact(text).map((value) => {
-            return valueEnumToText(value, valueEnum)
+            return enumToText(value, valueEnum)
         })
         return h(Space, { size: 2, wrap: true }, {
             default: () => children,
@@ -61,5 +56,5 @@ export function valueEnumToText (
         }
         return isEmpty(plain) ? text : plain
     }
-    return isObject(text) ? text.label : text
+    return text as VNodeChild
 }

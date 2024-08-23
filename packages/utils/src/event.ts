@@ -36,7 +36,7 @@ export function stopPropagation (evt: Event): void {
     evt.stopPropagation()
 }
 
-export function preventDefault (evt: Event, isStopPropagation: boolean): void {
+export function preventDefault (evt: Event, isStopPropagation?: boolean): void {
     if (!isBoolean(evt.cancelable) || evt.cancelable) {
         evt.preventDefault()
     }

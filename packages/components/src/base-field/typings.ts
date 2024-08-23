@@ -1,26 +1,23 @@
-import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ExtractPropTypes, PropType, Slot } from 'vue'
 import type {
     CascaderProps,
-    CheckboxProps,
+    CheckboxGroupProps,
     DatePickerProps,
     FormItemProps,
     FormProps,
     InputNumberProps,
+    InputPasswordProps,
     InputProps,
+    InputTextAreaProps,
     RadioProps,
+    RangePickerProps,
     SelectProps,
     SliderProps,
     SwitchProps,
     TimePickerProps,
     TimeRangePickerProps,
     TreeSelectProps
-} from 'ant-design-vue'
-import type { RangePickerProps } from 'ant-design-vue/es/date-picker'
-import type { TextAreaProps } from 'ant-design-vue/es/input'
-import passwordProps from 'ant-design-vue/es/input/Password'
-import type { Recordable } from '@site-pro/utils'
-
-export type PasswordProps = Partial<ExtractPropTypes<typeof passwordProps>>;
+} from '../ant-type'
 
 export interface BaseFieldValueTypeWithFieldProps {
     date: DatePickerProps;
@@ -41,26 +38,20 @@ export interface BaseFieldValueTypeWithFieldProps {
     treeSelect: TreeSelectProps;
     cascader: CascaderProps;
     radio: RadioProps;
-    checkbox: CheckboxProps;
+    checkbox: CheckboxGroupProps;
     switch: SwitchProps;
     slider: SliderProps;
     number: InputNumberProps;
-    textarea: TextAreaProps;
-    password: PasswordProps;
+    textarea: InputTextAreaProps;
+    password: InputPasswordProps;
     text: InputProps;
 }
 
-export type BaseFieldText = VNodeChild | Recordable | Recordable[];
-
 export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
-
-export interface BaseFieldRenderField {
-    (text: BaseFieldText, props: any, dom: VNodeChild): VNodeChild;
-}
 
 export const baseFieldProps = () => ({
     text: {
-        type: [String, Number, Array, Object] as PropType<BaseFieldText>,
+        type: [String, Number, Array, Object] as PropType<any>,
         default: undefined
     },
     mode: {
@@ -92,7 +83,7 @@ export const baseFieldProps = () => ({
         default: '-'
     },
     renderField: {
-        type: Function as PropType<BaseFieldRenderField>,
+        type: Function as PropType<Slot>,
         default: undefined
     }
 })

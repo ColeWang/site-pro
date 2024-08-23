@@ -1,37 +1,28 @@
-import type { BadgeProps } from 'ant-design-vue'
-
-export interface Dictionary<T> {
+export interface Dictionary<T = any> {
     [key: string]: T;
 }
 
 export type Recordable<T = any> = Record<string, T>;
 
-export interface ExtraDisabled {
-    disabled?: boolean;
-
-    [name: string]: any;
-}
-
 export type BaseNamePath = string | number | (string | number)[];
 
-export interface BaseOptionFieldNames {
-    label?: string;
+export interface BaseFieldNames extends Dictionary {
     value?: string;
+    label?: string;
     children?: string;
 }
 
-export interface BaseOption extends ExtraDisabled {
-    label?: any;
-    value?: string | number | null;
-    children?: BaseOption[];
+export interface BaseEnumType {
+    [key: string]: string | number | {
+        text?: any;
+        value?: string | number;
+        disabled?: boolean;
+    } & Dictionary;
 }
 
-export type BaseOptionTextValue = Omit<BaseOption, 'children'>
-    | string
-    | number
-    | null
-    | undefined;
-
-export interface BaseValueEnum {
-    [key: string]: string | BadgeProps & ExtraDisabled;
+export interface BaseOptionType extends Dictionary {
+    label?: any;
+    value?: string | number;
+    disabled?: boolean;
+    children?: BaseOptionType[];
 }

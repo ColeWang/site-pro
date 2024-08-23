@@ -1,15 +1,14 @@
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
+import { getSlotVNode, preventDefault, isEmpty } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { getSlotVNode } from '../../../utils/props-util'
-import { preventDefault } from '../../../utils/event'
-import { isEmpty } from '../../../utils/is'
+import type { PasswordProps } from '../../typings'
+import { fieldPasswordProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    props: fieldPasswordProps,
     setup (props, { slots }) {
         const { token } = theme.useToken()
         const { t } = useLocaleReceiver(['global'])
@@ -17,7 +16,7 @@ export default defineComponent({
         const { fieldProps } = props
         const visible = ref(fieldProps.visible || false)
 
-        function onVisibleClick (evt) {
+        function onVisibleClick (evt: Event) {
             preventDefault(evt)
             visible.value = !unref(visible)
         }
@@ -39,7 +38,7 @@ export default defineComponent({
                     </Space>
                 )
             }
-            const needFieldProps = {
+            const needFieldProps: PasswordProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder

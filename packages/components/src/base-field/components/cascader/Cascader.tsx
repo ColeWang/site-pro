@@ -1,9 +1,9 @@
-import type { SlotsType } from 'vue'
+import type { Slot, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Cascader } from 'ant-design-vue'
-import { getSlot, optionsToValueEnum, valueEnumToText } from '@site-pro/utils'
+import { enumToText, getSlot, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { CascaderProps } from './typings'
+import type { FieldProps } from './typings'
 import { fieldCascaderProps } from './typings'
 
 export default defineComponent({
@@ -11,7 +11,7 @@ export default defineComponent({
     name: 'SFieldCascader',
     props: fieldCascaderProps(),
     slots: Object as SlotsType<{
-        renderField?: any;
+        renderField?: Slot;
     }>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
@@ -22,17 +22,17 @@ export default defineComponent({
 
             if (mode === 'read') {
                 const { options: propsOptions, fieldNames } = fieldProps
-                const optionsValueEnum = optionsToValueEnum(propsOptions, fieldNames)
-                const valueText = valueEnumToText(text, optionsValueEnum)
+                const optionsValueEnum = optionsToEnum(propsOptions as any, fieldNames)
+                const valueText = enumToText(text, optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps: CascaderProps = {
+            const needFieldProps: FieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
             const fieldDom = <Cascader {...needFieldProps} v-slots={slots}/>
-            const renderField = getSlot(slots, props, 'renderField')
+            const renderField = getSlot<Slot>(slots, props, 'renderField')
             if (renderField) {
                 return renderField({ props: props, slots: slots, dom: fieldDom })
             }

@@ -1,13 +1,14 @@
 import { defineComponent } from 'vue'
 import { DatePicker } from 'ant-design-vue'
+import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { getSlotVNode } from '../../../utils/props-util'
+import type { FieldProps } from './typings'
+import { fieldDatePickerProps } from './typings'
 import { formatDate } from '../utils'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    props: fieldDatePickerProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -16,10 +17,10 @@ export default defineComponent({
             const placeholder = fieldProps.placeholder || t('selectPlaceholder')
 
             if (mode === 'read') {
-                const valueText = formatDate(text, fieldProps.format)
+                const valueText = formatDate(text, fieldProps.format as Function | string)
                 return valueText ?? emptyText
             }
-            const needFieldProps = {
+            const needFieldProps: FieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder

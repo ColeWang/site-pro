@@ -1,14 +1,15 @@
 import { defineComponent, Fragment } from 'vue'
 import { RangePicker } from 'ant-design-vue'
 import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { getSlotVNode } from '../../../utils/props-util'
-import { formatDate } from '../utils'
+import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
+import { fieldRangePickerProps } from './typings'
+import type { RangePickerProps } from '../../typings'
+import { formatDate } from '../utils'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    props: fieldRangePickerProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -28,9 +29,10 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps = {
+            const needFieldProps: RangePickerProps & any = {
                 allowClear: true,
                 ...fieldProps,
+                // -- placeholder 类型有问题 string | [string, string]
                 placeholder: placeholder
             }
             const dom = <RangePicker {...needFieldProps} v-slots={slots}/>
