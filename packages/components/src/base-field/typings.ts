@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { BaseEnumType, BaseSlot } from '@site-pro/utils'
 import type {
     CascaderProps,
@@ -95,3 +95,4 @@ export const baseFieldProps = () => ({
 })
 
 export type BaseFieldProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProps>>>;
+export type BaseFieldInstance = ComponentPublicInstance<BaseFieldProps>;

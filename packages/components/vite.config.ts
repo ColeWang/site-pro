@@ -48,22 +48,32 @@ export default defineConfig((config) => {
                     'ant-design-vue',
                     '@ant-design/icons-vue',
                     '@site-pro/utils',
+                    '@site-pro/hooks',
+                    '@types/lodash-es',
                     'ant-design-vue/es/theme/internal',
-                    '@types/lodash-es'
+                    'ant-design-vue/es/date-picker/generatePicker/props',
+                    'ant-design-vue/es/time-picker/time-picker',
+                    'ant-design-vue/es/input',
                 ],
                 output: [
                     {
                         entryFileNames: 'index.esm.js',
                         format: 'es',
                         paths: {
-                            'ant-design-vue/es/theme/internal': 'ant-design-vue/es/theme/internal'
+                            'ant-design-vue/es/theme/internal': 'ant-design-vue/es/theme/internal',
+                            'ant-design-vue/es/date-picker/generatePicker/props': 'ant-design-vue/es/date-picker/generatePicker/props',
+                            'ant-design-vue/es/time-picker/time-picker': 'ant-design-vue/es/time-picker/time-picker',
+                            'ant-design-vue/es/input': 'ant-design-vue/es/input'
                         }
                     },
                     {
                         entryFileNames: 'index.cjs.js',
                         format: 'cjs',
                         paths: {
-                            'ant-design-vue/es/theme/internal': 'ant-design-vue/lib/theme/internal'
+                            'ant-design-vue/es/theme/internal': 'ant-design-vue/lib/theme/internal',
+                            'ant-design-vue/es/date-picker/generatePicker/props': 'ant-design-vue/lib/date-picker/generatePicker/props',
+                            'ant-design-vue/es/time-picker/time-picker': 'ant-design-vue/lib/time-picker/time-picker',
+                            'ant-design-vue/es/input': 'ant-design-vue/lib/input'
                         }
                     }
                 ],
