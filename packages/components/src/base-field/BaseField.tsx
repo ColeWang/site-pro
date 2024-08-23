@@ -1,8 +1,9 @@
 import { defineComponent, unref } from 'vue'
+import type { BaseSlot, Recordable } from '@site-pro/utils'
+import { get, isFunction, isObject } from 'lodash-es'
 import type { BaseFieldProps, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
 import { useCustomFields } from './custom-fields'
-import { get, isFunction, isObject } from 'lodash-es'
 // ---
 import {
     FieldCascader,
@@ -22,19 +23,12 @@ import {
     FieldTreeSelect
 } from './components'
 
-function mergeFieldProps (
-    props: BaseFieldProps,
-    extraFieldProps: BaseFieldProps['fieldProps']
-): BaseFieldProps {
+function mergeFieldProps (props: BaseFieldProps, extraFieldProps: BaseFieldProps['fieldProps']): BaseFieldProps {
     const fieldProps = { ...props.fieldProps, ...extraFieldProps }
     return { ...props, fieldProps }
 }
 
-function defaultRenderText (
-    valueType: BaseFieldValueType,
-    props: BaseFieldProps,
-    slots: Record<string, any>
-) {
+function defaultRenderText (valueType: BaseFieldValueType, props: BaseFieldProps, slots: Recordable<BaseSlot>) {
     if (valueType === 'date') {
         const dateProps = mergeFieldProps(props, {
             picker: 'date',
@@ -206,9 +200,9 @@ export default defineComponent({
             const customRenderText = isObject(types) && types[valueType]
             if (customRenderText && isFunction(customRenderText)) {
                 // valueType: ({ props, slots }) => {}
-                return customRenderText({ props: fieldRenderProps, slots })
+                return customRenderText({ props: fieldRenderProps, slots: slots as Recordable<BaseSlot> })
             }
-            return defaultRenderText(valueType as BaseFieldValueType, fieldRenderProps, slots)
+            return defaultRenderText(valueType as BaseFieldValueType, fieldRenderProps, slots as Recordable<BaseSlot>)
         }
     }
 })
