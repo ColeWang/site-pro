@@ -2,12 +2,11 @@ import { computed, defineComponent, unref } from 'vue'
 import { Checkbox } from 'ant-design-vue'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
-import type { FieldProps } from './typings'
 import { fieldCheckboxProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'SFieldCheckbox',
+    name: 'ProFieldCheckbox',
     props: fieldCheckboxProps(),
     setup (props, { slots }) {
         const options = computed(() => {
@@ -26,14 +25,16 @@ export default defineComponent({
                 const valueText = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps: FieldProps = {
+            const needFieldProps = {
                 options: unref(options) as any,
                 ...fieldProps
             }
-            const dom = <Checkbox.Group {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <Checkbox.Group {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

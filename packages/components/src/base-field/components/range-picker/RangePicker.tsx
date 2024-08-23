@@ -1,14 +1,14 @@
 import { defineComponent, Fragment } from 'vue'
 import { RangePicker } from 'ant-design-vue'
-import { useLocaleReceiver } from '../../../locale-provider'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
+import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldRangePickerProps } from './typings'
-import type { RangePickerProps } from '../../typings'
 import { formatDate } from '../utils'
 
 export default defineComponent({
     inheritAttrs: false,
+    name: 'ProFieldRangePicker',
     props: fieldRangePickerProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
@@ -29,16 +29,18 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps: RangePickerProps & any = {
+            const needFieldProps: any = {
                 allowClear: true,
                 ...fieldProps,
                 // -- placeholder 类型有问题 string | [string, string]
                 placeholder: placeholder
             }
-            const dom = <RangePicker {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <RangePicker {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

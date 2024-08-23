@@ -1,17 +1,18 @@
 import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
-import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { getSlotVNode } from '../../../utils/props-util'
+import { getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
+import { useLocaleReceiver } from '../../../locale-provider'
+import { fieldSwitchProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    name: 'ProFieldSwitch',
+    props: fieldSwitchProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
-        function onUpdateChecked (value) {
+        function onUpdateChecked (value: boolean | string | number) {
             const { fieldProps } = props
             if (isFunction(fieldProps['onUpdate:value'])) {
                 fieldProps['onUpdate:value'](value)
@@ -32,14 +33,16 @@ export default defineComponent({
                 checked: checked || value,
                 ['onUpdate:checked']: onUpdateChecked
             }
-            const dom = (
+            const fieldDom = (
                 <div style={style}>
                     <Switch {...needFieldProps} v-slots={slots}/>
                 </div>
             )
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

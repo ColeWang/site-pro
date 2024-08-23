@@ -5,21 +5,21 @@ import { useCustomFields } from './custom-fields'
 import { get, isFunction, isObject } from 'lodash-es'
 // ---
 import {
+    FieldCascader,
+    FieldCheckbox,
     FieldDatePicker,
+    FieldNumber,
+    FieldPassword,
+    FieldRadio,
     FieldRangePicker,
+    FieldSelect,
+    FieldSlider,
+    FieldSwitch,
+    FieldText,
+    FieldTextArea,
     FieldTimePicker,
     FieldTimeRangePicker,
-    FieldSelect,
-    FieldTreeSelect,
-    FieldCascader,
-    FieldRadio,
-    FieldCheckbox,
-    FieldSwitch,
-    FieldSlider,
-    FieldText,
-    FieldNumber,
-    FieldTextArea,
-    FieldPassword
+    FieldTreeSelect
 } from './components'
 
 function mergeFieldProps (props: BaseFieldProps, extraFieldProps: BaseFieldProps['fieldProps']) {
@@ -164,7 +164,8 @@ function defaultRenderText (valueType: BaseFieldValueType, props: BaseFieldProps
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    name: 'ProBaseField',
+    props: baseFieldProps(),
     setup (props, { slots }) {
         const { valueTypeMap } = useCustomFields()
 

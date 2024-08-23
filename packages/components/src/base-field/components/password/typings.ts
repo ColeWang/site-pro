@@ -1,19 +1,14 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseOptionTextValue } from '@site-pro/utils'
-import type { PasswordProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
+import type { InputPasswordProps } from '../../../ant-typings'
 
-export const fieldPasswordProps = {
-    ...baseFieldProps,
-    text: {
-        type: [String, Number, Array, Object] as PropType<BaseOptionTextValue | BaseOptionTextValue[]>,
-        default: undefined
-    },
+export const fieldPasswordProps = () => ({
+    ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<PasswordProps>,
+        type: Object as PropType<InputPasswordProps>,
         default: () => ({})
     }
-}
+})
 
-export type FieldPasswordProps = Partial<ExtractPropTypes<typeof fieldPasswordProps>>;
+export type FieldPasswordProps = Partial<ExtractPropTypes<ReturnType<typeof fieldPasswordProps>>>;
 export type FieldPasswordInstance = ComponentPublicInstance<FieldPasswordProps>;

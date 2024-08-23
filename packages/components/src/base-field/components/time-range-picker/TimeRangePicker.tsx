@@ -1,14 +1,15 @@
 import { defineComponent, Fragment } from 'vue'
 import { TimeRangePicker } from 'ant-design-vue'
-import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { getSlotVNode } from '../../../utils/props-util'
-import { formatDate } from '../utils'
+import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
+import { useLocaleReceiver } from '../../../locale-provider'
+import { fieldTimeRangePickerProps } from './typings'
+import { formatDate } from '../utils'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    name: 'ProFieldTimeRangePicker',
+    props: fieldTimeRangePickerProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -33,10 +34,12 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const dom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

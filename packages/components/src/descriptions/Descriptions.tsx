@@ -25,6 +25,7 @@ const extraProps = {
 
 export default defineComponent({
     inheritAttrs: false,
+    name: 'ProDescriptions',
     props: {
         ...descriptionsProps(),
         ...extraProps,

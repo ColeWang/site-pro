@@ -1,13 +1,13 @@
 import { defineComponent } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
+import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { optionsToValueEnum, valueEnumToText } from '../../../utils/valueEnum'
-import { getSlotVNode } from '../../../utils/props-util'
+import { fieldTreeSelectProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    name: 'ProFieldTreeSelect',
+    props: fieldTreeSelectProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -18,8 +18,8 @@ export default defineComponent({
 
             if (mode === 'read') {
                 const { options: propsOptions, fieldNames } = fieldProps
-                const optionsValueEnum = optionsToValueEnum(propsOptions, fieldNames)
-                const valueText = valueEnumToText(text, optionsValueEnum)
+                const optionsValueEnum = optionsToEnum(propsOptions as any, fieldNames)
+                const valueText = enumToText(text, optionsValueEnum)
                 return valueText ?? emptyText
             }
             const needFieldProps = {
@@ -28,10 +28,12 @@ export default defineComponent({
                 ...restFieldProps,
                 placeholder: placeholder
             }
-            const dom = <TreeSelect {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <TreeSelect {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

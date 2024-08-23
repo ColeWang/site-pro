@@ -1,28 +1,13 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { BaseFieldValueTypeWithFieldProps } from '../../typings.ts'
-import { baseFieldProps } from '../../typings.ts'
-
-type FieldProps = BaseFieldValueTypeWithFieldProps['text']
-
-const fieldTextProps = {
-    ...baseFieldProps,
-    fieldProps: {
-        type: Object as PropType<FieldProps>,
-        default: () => ({})
-    }
-}
-
-export type FieldTextProps = Partial<ExtractPropTypes<typeof fieldTextProps>>;
-export type FieldTextInstance = ComponentPublicInstance<FieldTextProps>;
+import { fieldTextProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'SFieldText',
-    props: fieldTextProps,
+    name: 'ProFieldText',
+    props: fieldTextProps(),
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -41,15 +26,17 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps: FieldProps = {
+            const needFieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const dom = <Input {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <Input {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

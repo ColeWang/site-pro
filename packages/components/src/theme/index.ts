@@ -6,6 +6,7 @@ export type { FullToken, GenerateStyle } from 'ant-design-vue/es/theme/internal'
 
 declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
-        ProDescriptions?: {}
+        ProDescriptions?: {},
+        ProFieldTextarea?: {},
     }
 }

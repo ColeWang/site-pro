@@ -1,4 +1,5 @@
-import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
+import type { BaseEnumType, BaseSlot } from '@site-pro/utils'
 import type {
     CascaderProps,
     CheckboxGroupProps,
@@ -9,7 +10,7 @@ import type {
     InputPasswordProps,
     InputProps,
     InputTextAreaProps,
-    RadioProps,
+    RadioGroupProps,
     RangePickerProps,
     SelectProps,
     SliderProps,
@@ -17,7 +18,7 @@ import type {
     TimePickerProps,
     TimeRangePickerProps,
     TreeSelectProps
-} from '../ant-type'
+} from '../ant-typings'
 
 export interface BaseFieldValueTypeWithFieldProps {
     date: DatePickerProps;
@@ -37,7 +38,7 @@ export interface BaseFieldValueTypeWithFieldProps {
     select: SelectProps;
     treeSelect: TreeSelectProps;
     cascader: CascaderProps;
-    radio: RadioProps;
+    radio: RadioGroupProps;
     checkbox: CheckboxGroupProps;
     switch: SwitchProps;
     slider: SliderProps;
@@ -48,7 +49,6 @@ export interface BaseFieldValueTypeWithFieldProps {
 }
 
 export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
-export type BaseFieldFenderField = (...args: any[]) => VNodeChild;
 
 export const baseFieldProps = () => ({
     text: {
@@ -68,7 +68,7 @@ export const baseFieldProps = () => ({
         default: 'text'
     },
     valueEnum: {
-        type: Object as PropType<any>,
+        type: Object as PropType<BaseEnumType>,
         default: undefined
     },
     fieldProps: {
@@ -84,7 +84,7 @@ export const baseFieldProps = () => ({
         default: '-'
     },
     renderField: {
-        type: Function as PropType<BaseFieldFenderField>,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     }
 })

@@ -2,6 +2,7 @@ import type { VNode } from 'vue'
 import { Fragment } from 'vue'
 import { isArray, isFunction } from 'lodash-es'
 import { isEmptyElement } from './is'
+import type { BaseSlot } from './typings'
 
 export function flattenChildren (children: Array<VNode | VNode[]>): Array<VNode> {
     const result: Array<VNode> = []
@@ -19,30 +20,30 @@ export function flattenChildren (children: Array<VNode | VNode[]>): Array<VNode>
     return result.filter((c) => !isEmptyElement(c))
 }
 
-export function getSlot<T> (
-    slots: Record<string, unknown>,
-    props: Record<string, unknown>,
+export function getSlot<T = BaseSlot> (
+    slots: Record<string, any>,
+    props: Record<string, any>,
     name: string = 'default'
 ): T | false {
     const result: any = props[name] || slots[name]
     return isFunction(result) ? result as T : false
 }
 
-export function getSlotVNode<T> (
-    slots: Record<string, unknown>,
-    props: Record<string, unknown>,
+export function getSlotVNode<T = ReturnType<BaseSlot>> (
+    slots: Record<string, any>,
+    props: Record<string, any>,
     name: string = 'default',
-    slotScope?: Record<string, unknown>
+    slotScope?: Record<string, any>
 ): T | false {
     const result: any = props[name] || slots[name]
     return isFunction(result) ? result(slotScope) as T : false
 }
 
-export function getPropsSlot<T> (
-    slots: Record<string, unknown>,
-    props: Record<string, unknown>,
+export function getPropsSlot<T = ReturnType<BaseSlot>> (
+    slots: Record<string, any>,
+    props: Record<string, any>,
     name: string = 'default',
-    slotScope?: Record<string, unknown>
+    slotScope?: Record<string, any>
 ): T | false {
     const result: any = props[name] ?? slots[name]
     return isFunction(result) ? result(slotScope) as T : (result || false)

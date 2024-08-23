@@ -1,37 +1,40 @@
 import { computed, defineComponent, unref } from 'vue'
 import { Radio } from 'ant-design-vue'
-import baseFieldProps from '../props'
-import { getSlotVNode, optionsToValueEnum, valueEnumToOptions, valueEnumToText } from '@site-pro/utils'
+import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
+import { fieldRadioProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    name: 'ProFieldRadio',
+    props: fieldRadioProps(),
     setup (props, { slots }) {
         const options = computed(() => {
             if (isUndefined(props.valueEnum)) {
                 return props.fieldProps.options || []
             }
-            return valueEnumToOptions(props.valueEnum)
+            return enumToOptions(props.valueEnum)
         })
 
         return () => {
             const { mode, text, emptyText, valueEnum, fieldProps } = props
 
             if (mode === 'read') {
-                const { options: propsOptions, fieldNames } = fieldProps
-                const optionsValueEnum = optionsToValueEnum(propsOptions, fieldNames)
-                const valueText = valueEnumToText(text, valueEnum || optionsValueEnum)
+                const { options: propsOptions } = fieldProps
+                const optionsValueEnum = optionsToEnum(propsOptions as any)
+                const valueText = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
             const needFieldProps = {
-                options: unref(options),
+                options: unref(options) as any,
                 ...fieldProps
             }
-            const dom = <Radio.Group {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <Radio.Group {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

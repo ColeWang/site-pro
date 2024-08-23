@@ -5,7 +5,7 @@ import { BaseLocaleKey } from './hooks/useLocaleReceiver'
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'SLocaleProvider',
+    name: 'ProLocaleProvider',
     props: {
         locale: {
             type: Object as PropType<BaseLocale>,

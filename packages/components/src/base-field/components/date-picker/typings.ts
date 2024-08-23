@@ -1,8 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseFieldProps } from '../../typings'
-import type { DatePickerProps } from '../../../ant-type'
-
-export type FieldProps = DatePickerProps;
+import type { DatePickerProps } from '../../../ant-typings'
 
 export const fieldDatePickerProps = () => ({
     ...baseFieldProps(),

@@ -1,13 +1,11 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { baseFieldProps } from '../../typings'
-import type { CheckboxGroupProps } from '../../../ant-type'
-
-export type FieldProps = CheckboxGroupProps;
+import type { CheckboxGroupProps } from '../../../ant-typings'
 
 export const fieldCheckboxProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<FieldProps>,
+        type: Object as PropType<CheckboxGroupProps>,
         default: () => ({})
     }
 })

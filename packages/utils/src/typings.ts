@@ -1,4 +1,5 @@
-// --- 公用类型 ---
+import type { VNodeChild } from 'vue'
+
 export interface Dictionary<T = any> {
     [key: string]: T;
 }
@@ -6,6 +7,12 @@ export interface Dictionary<T = any> {
 export type Recordable<T = any> = Record<string, T>;
 
 export type BaseNamePath = string | number | (string | number)[];
+
+export type IfAny<T, Y, N> = 0 extends 1 & T ? Y : N;
+
+export interface BaseSlot<T extends any = any> {
+    (...args: IfAny<T, any[], [T] | (T extends undefined ? [] : never)>): VNodeChild | JSX.Element;
+}
 
 export interface BaseFieldNames extends Dictionary {
     value?: string;

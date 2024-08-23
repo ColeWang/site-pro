@@ -1,13 +1,14 @@
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
+import { getSlotVNode } from '@site-pro/utils'
+import { useConfigInject } from '@site-pro/hooks'
 import { useLocaleReceiver } from '../../../locale-provider'
-import baseFieldProps from '../props'
-import { getSlotVNode } from '../../../utils/props-util'
-import { useConfigInject } from '../../../utils/extend'
+import { fieldTextAreaProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...baseFieldProps },
+    name: 'ProFieldTextArea',
+    props: fieldTextAreaProps(),
     setup (props, { slots }) {
         const { prefixCls } = useConfigInject('pro-field-textarea', props)
         const { token } = theme.useToken()
@@ -40,10 +41,12 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const dom = <Input.TextArea {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <Input.TextArea {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })

@@ -1,20 +1,19 @@
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
-import { getSlotVNode, preventDefault, isEmpty } from '@site-pro/utils'
+import { getSlotVNode, isEmpty, preventDefault } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { PasswordProps } from '../../typings'
 import { fieldPasswordProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: fieldPasswordProps,
+    name: 'ProFieldPassword',
+    props: fieldPasswordProps(),
     setup (props, { slots }) {
         const { token } = theme.useToken()
         const { t } = useLocaleReceiver(['global'])
 
-        const { fieldProps } = props
-        const visible = ref(fieldProps.visible || false)
+        const visible = ref(props.fieldProps.visible || false)
 
         function onVisibleClick (evt: Event) {
             preventDefault(evt)
@@ -27,9 +26,8 @@ export default defineComponent({
             const placeholder = fieldProps.placeholder || t('inputPlaceholder')
 
             if (mode === 'read') {
-                if (isEmpty(text)) {
-                    return emptyText
-                }
+                if (isEmpty(text)) return emptyText
+                // --
                 const eyeIcon = unref(visible) ? <EyeOutlined/> : <EyeInvisibleOutlined/>
                 return (
                     <Space size={sizeXXS}>
@@ -38,15 +36,17 @@ export default defineComponent({
                     </Space>
                 )
             }
-            const needFieldProps: PasswordProps = {
+            const needFieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const dom = <Input.Password {...needFieldProps} v-slots={slots}/>
-            const slotScope = { text, props: { mode, ...fieldProps }, dom }
-            const renderDom = getSlotVNode(slots, props, 'renderField', slotScope)
-            return renderDom || dom
+            const fieldDom = <Input.Password {...needFieldProps} v-slots={slots}/>
+            // ----
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })
