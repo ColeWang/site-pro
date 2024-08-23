@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType, Slot } from 'vue'
+import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type {
     CascaderProps,
     CheckboxGroupProps,
@@ -48,6 +48,7 @@ export interface BaseFieldValueTypeWithFieldProps {
 }
 
 export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
+export type BaseFieldFenderField = (...args: any[]) => VNodeChild;
 
 export const baseFieldProps = () => ({
     text: {
@@ -83,7 +84,7 @@ export const baseFieldProps = () => ({
         default: '-'
     },
     renderField: {
-        type: Function as PropType<Slot>,
+        type: Function as PropType<BaseFieldFenderField>,
         default: undefined
     }
 })

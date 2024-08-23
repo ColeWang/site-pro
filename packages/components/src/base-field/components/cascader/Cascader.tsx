@@ -1,17 +1,18 @@
-import type { Slot, SlotsType } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Cascader } from 'ant-design-vue'
-import { enumToText, getSlot, optionsToEnum } from '@site-pro/utils'
+import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldProps } from './typings'
 import { fieldCascaderProps } from './typings'
+import type { BaseFieldFenderField } from '../../typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'SFieldCascader',
     props: fieldCascaderProps(),
     slots: Object as SlotsType<{
-        renderField?: Slot;
+        renderField?: BaseFieldFenderField;
     }>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
@@ -32,11 +33,11 @@ export default defineComponent({
                 placeholder: placeholder
             }
             const fieldDom = <Cascader {...needFieldProps} v-slots={slots}/>
-            const renderField = getSlot<Slot>(slots, props, 'renderField')
-            if (renderField) {
-                return renderField({ props: props, slots: slots, dom: fieldDom })
-            }
-            return fieldDom
+            // --
+            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const renderFieldDom = getSlotVNode<VNodeChild>(slots, props, 'renderField', slotScope)
+
+            return renderFieldDom || fieldDom
         }
     }
 })
