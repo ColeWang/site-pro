@@ -39,7 +39,7 @@ export default defineComponent({
                 </div>
             )
             // ----
-            const slotScope = { props: props, slots: slots, dom: fieldDom }
+            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

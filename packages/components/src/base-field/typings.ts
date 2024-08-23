@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type { BaseEnumType, BaseSlot } from '@site-pro/utils'
 import type {
     CascaderProps,
@@ -84,10 +84,14 @@ export const baseFieldProps = () => ({
         default: '-'
     },
     renderField: {
-        type: Function as PropType<BaseSlot>,
+        type: Function as PropType<BaseSlot<{
+            text: any;
+            props: any;
+            slots: BaseSlot;
+            dom: VNodeChild | JSX.Element;
+        }>>,
         default: undefined
     }
 })
 
 export type BaseFieldProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProps>>>;
-

@@ -1,22 +1,22 @@
-import type { Slot, VNode, VNodeChild } from 'vue'
-import type { BaseFieldProps } from '../typings.ts'
-
-export interface CustomFieldsParams {
-    props: BaseFieldProps;
-    slots: Record<string, Slot | undefined>;
-}
-
-export type CustomRenderNode = VNode
-    | VNodeChild
-    | VNode[]
-    | Slot
-    | ((...props: any[]) => Slot)
-    | ((...props: any[]) => VNode)
-    | JSX.Element
-    | string
-    | null
-    | undefined;
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
+import type { BaseFieldProps } from '../typings'
 
 export interface BaseValueTypeMap {
-    [key: string]: (params: CustomFieldsParams) => CustomRenderNode;
+    [key: string]: BaseSlot<{
+        props: BaseFieldProps;
+        slots: BaseSlot;
+    }>;
 }
+
+export const customFieldsProps = () => ({
+    valueTypeMap: {
+        type: Object as PropType<BaseValueTypeMap>,
+        default: () => ({})
+    }
+})
+
+export type CustomFieldsProps = Partial<ExtractPropTypes<typeof customFieldsProps>>;
+// export type CustomFieldsExpose = {};
+export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps>;
+
