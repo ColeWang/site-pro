@@ -3,9 +3,9 @@ import { isFunction } from 'lodash-es'
 import type { ConfigType, Dayjs } from 'dayjs'
 import dayjs from 'dayjs'
 
-export type FormatType = string | ((value: Dayjs) => string);
+export type CustomFormat = string | ((value: Dayjs) => string);
 
-export function formatDate (text: ConfigType, format?: FormatType) {
+export function formatDate (text: ConfigType, format?: CustomFormat) {
     // 可设置时区
     if (isEmpty(text)) return text
     if (isFunction(format)) return format(dayjs(text))

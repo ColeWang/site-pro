@@ -4,6 +4,7 @@ import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldTimeRangePickerProps } from './typings'
+import type { CustomFormat } from '../utils'
 import { formatDate } from '../utils'
 
 export default defineComponent({
@@ -19,8 +20,8 @@ export default defineComponent({
 
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : []
-                const valueStartText = formatDate(startText, fieldProps.format)
-                const valueEndText = formatDate(endText, fieldProps.format)
+                const valueStartText = formatDate(startText, fieldProps.format as CustomFormat)
+                const valueEndText = formatDate(endText, fieldProps.format as CustomFormat)
                 return (
                     <Fragment>
                         {valueStartText ?? emptyText}

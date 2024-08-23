@@ -23,7 +23,7 @@ export default defineComponent({
                 return valueText ?? emptyText
             }
             const needFieldProps = {
-                treeData: options,
+                treeData: options as any,
                 allowClear: true,
                 ...restFieldProps,
                 placeholder: placeholder

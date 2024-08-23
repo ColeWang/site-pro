@@ -22,12 +22,19 @@ import {
     FieldTreeSelect
 } from './components'
 
-function mergeFieldProps (props: BaseFieldProps, extraFieldProps: BaseFieldProps['fieldProps']) {
+function mergeFieldProps (
+    props: BaseFieldProps,
+    extraFieldProps: BaseFieldProps['fieldProps']
+): BaseFieldProps {
     const fieldProps = { ...props.fieldProps, ...extraFieldProps }
     return { ...props, fieldProps }
 }
 
-function defaultRenderText (valueType: BaseFieldValueType, props: BaseFieldProps, slots: Record<string, any>) {
+function defaultRenderText (
+    valueType: BaseFieldValueType,
+    props: BaseFieldProps,
+    slots: Record<string, any>
+) {
     if (valueType === 'date') {
         const dateProps = mergeFieldProps(props, {
             picker: 'date',

@@ -3,6 +3,7 @@ import { TimePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldTimePickerProps } from './typings'
+import type { CustomFormat } from '../utils'
 import { formatDate } from '../utils'
 
 export default defineComponent({
@@ -17,7 +18,7 @@ export default defineComponent({
             const placeholder = fieldProps.placeholder || t('selectPlaceholder')
 
             if (mode === 'read') {
-                const valueText = formatDate(text, fieldProps.format)
+                const valueText = formatDate(text, fieldProps.format as CustomFormat)
                 return valueText ?? emptyText
             }
             const needFieldProps = {

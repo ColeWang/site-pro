@@ -10,8 +10,6 @@ import type {
     SelectProps,
     SliderProps,
     SwitchProps,
-    TimePickerProps,
-    TimeRangePickerProps,
     TreeSelectProps,
 } from 'ant-design-vue'
 import type {
@@ -19,6 +17,10 @@ import type {
     DatePickerProps as BaseDatePickerProps,
     RangePickerProps as BaseRangePickerProps
 } from 'ant-design-vue/es/date-picker/generatePicker/props'
+import type {
+    TimePickerProps as BaseTimePickerProps,
+    TimeRangePickerProps as BaseTimeRangePickerProps
+} from 'ant-design-vue/es/time-picker/time-picker'
 import type { TextAreaProps as InputTextAreaProps } from 'ant-design-vue/es/input'
 import type { Dayjs } from 'dayjs'
 
@@ -36,6 +38,8 @@ type InputPasswordProps = InputProps & Partial<ExtractPropTypes<typeof passwordP
 
 type DatePickerProps = CommonProps<Dayjs> & BaseDatePickerProps<Dayjs>;
 type RangePickerProps = CommonProps<Dayjs> & BaseRangePickerProps<Dayjs>;
+type TimePickerProps = BaseTimePickerProps<Dayjs>;
+type TimeRangePickerProps = BaseTimeRangePickerProps<Dayjs>;
 
 export type {
     InputProps,
