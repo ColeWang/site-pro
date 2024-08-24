@@ -4,6 +4,7 @@ import { getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldSwitchProps } from './typings'
+import type { SwitchProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -28,7 +29,7 @@ export default defineComponent({
                 const close = fieldProps.unCheckedChildren ?? t('close')
                 return text ? open : close
             }
-            const needFieldProps = {
+            const needFieldProps: SwitchProps = {
                 ...restFieldProps,
                 checked: checked || value,
                 ['onUpdate:checked']: onUpdateChecked
@@ -39,7 +40,7 @@ export default defineComponent({
                 </div>
             )
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

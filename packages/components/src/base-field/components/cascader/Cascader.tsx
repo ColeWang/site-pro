@@ -3,6 +3,7 @@ import { Cascader } from 'ant-design-vue'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldCascaderProps } from './typings'
+import type { CascaderProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -21,14 +22,14 @@ export default defineComponent({
                 const valueText = enumToText(text, optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps = {
+            const needFieldProps: CascaderProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
             const fieldDom = <Cascader {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

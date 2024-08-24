@@ -4,6 +4,7 @@ import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldTextareaProps } from './typings'
+import type { InputTextareaProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -36,14 +37,14 @@ export default defineComponent({
                     </span>
                 )
             }
-            const needFieldProps = {
+            const needFieldProps: InputTextareaProps = {
                 rows: 3,
                 ...fieldProps,
                 placeholder: placeholder
             }
             const fieldDom = <Input.TextArea {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

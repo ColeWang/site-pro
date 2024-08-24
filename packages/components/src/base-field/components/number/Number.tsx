@@ -3,6 +3,7 @@ import { InputNumber } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldNumberProps } from './typings'
+import type { InputNumberProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -26,14 +27,14 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps = {
+            const needFieldProps: InputNumberProps = {
                 min: 0,
                 ...fieldProps,
                 placeholder: placeholder
             }
             const fieldDom = <InputNumber {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

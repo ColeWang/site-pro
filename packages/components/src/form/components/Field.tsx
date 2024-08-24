@@ -1,13 +1,19 @@
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import ColWrap from '../helpers/ColWrap'
-import { BaseField } from '../../base-field'
-import { useFormInstance } from '../base-form'
-import { namePathToString, toPx } from '../../../utils/util'
-import { genFormItemFixStyle } from '../utils'
+import type { BaseNamePath } from '@site-pro/utils'
+import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isNumber, isString, merge, pick } from 'lodash-es'
+import type { ColWrapProps } from '../helpers/ColWrap'
+import ColWrap from '../helpers/ColWrap'
+import type { BaseFieldProps } from '../../base-field'
+import { BaseField, baseFieldProps as proBaseFieldProps } from '../../base-field'
+import { useFormInstance } from '../base-form'
+import { genFormItemFixStyle } from '../utils'
 
-const sizeEnum = {
+type BaseFieldFormItemProps = BaseFieldProps['formItemProps'];
+
+const sizeEnum: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,
     sm: 216,
     md: 328,
@@ -15,9 +21,36 @@ const sizeEnum = {
     xl: 552
 }
 
-function fieldStyle (style, fieldWidth) {
+export type FieldSizeType = Extract<keyof typeof sizeEnum, any> | number;
+
+const baseFieldProps = proBaseFieldProps()
+
+export const fieldProps = () => ({
+    ...baseFieldProps,
+    width: {
+        type: [String, Number] as PropType<FieldSizeType>,
+        default: undefined
+    },
+    labelWidth: {
+        type: [String, Number] as PropType<'auto' | number>,
+        default: 'auto'
+    },
+    hidden: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
+    colProps: {
+        type: Object as PropType<ColWrapProps>,
+        default: () => ({})
+    }
+})
+
+export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>>;
+export type FieldInstance = ComponentPublicInstance<FieldProps>;
+
+function fieldStyle (style: CSSProperties | undefined, fieldWidth: FieldSizeType): CSSProperties {
     const { maxWidth, minWidth, width, ...restStyle } = style || {}
-    const fieldSize = isNumber(fieldWidth) ? toPx(fieldWidth) : toPx(sizeEnum[fieldWidth])
+    const fieldSize: string | undefined = isNumber(fieldWidth) ? toPx(fieldWidth) : toPx(sizeEnum[fieldWidth])
     return {
         ...restStyle,
         maxWidth: maxWidth || '100%',
@@ -28,37 +61,21 @@ function fieldStyle (style, fieldWidth) {
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        ...BaseField.props,
-        width: {
-            type: [String, Number],
-            default: undefined
-        },
-        labelWidth: {
-            type: [String, Number],
-            default: 'auto'
-        },
-        hidden: {
-            type: Boolean,
-            default: false
-        },
-        colProps: {
-            type: Object,
-            default: () => ({})
-        }
-    },
+    name: 'ProField',
+    props: fieldProps(),
     setup (props, { slots: fieldSlots }) {
-        const { model = {}, formProps = {}, setModelValue } = useFormInstance()
+        const { model, formProps, setModelValue } = useFormInstance()
 
         // 初始化值 防止 form 报错
-        setDefaultValue(props.formItemProps.name)
+        const { name: fieldNamePath } = props.formItemProps
+        fieldNamePath && setDefaultValue(fieldNamePath)
 
-        function setDefaultValue (namePath) {
+        function setDefaultValue (namePath: BaseNamePath): void {
             const hasValue = has(unref(model), namePath)
             !hasValue && onUpdateValue(namePath, undefined)
         }
 
-        function onUpdateValue (namePath, value) {
+        function onUpdateValue (namePath: BaseNamePath, value: any): void {
             if (isString(namePath) || isArray(namePath)) {
                 setModelValue && setModelValue(namePath, value)
             }
@@ -66,36 +83,39 @@ export default defineComponent({
 
         return () => {
             const { fieldProps, formItemProps, width: fieldWidth, labelWidth, hidden, colProps } = props
-            const { layout = 'vertical', grid } = unref(formProps)
+            const { layout, grid } = unref(formProps) || {}
 
-            const extraFormItemProps = genFormItemFixStyle(labelWidth, layout)
-            const key = namePathToString(formItemProps.name)
+            const extraFormItemProps: any = genFormItemFixStyle(labelWidth, layout || 'vertical')
+            const key: string = namePathToString(formItemProps.name!)
 
-            const needFieldProps = {
+            const needFieldProps: any = {
                 ...fieldProps,
-                style: fieldStyle(fieldProps.style, fieldWidth),
-                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name)
+                style: fieldStyle(fieldProps.style, fieldWidth!),
+                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
             }
-            const needFormItemProps = merge({
+
+            const needFormItemProps: BaseFieldFormItemProps = merge({
                 ...formItemProps,
                 key: key,
                 model: unref(model)
             }, extraFormItemProps)
 
-            const baseFieldProps = {
-                ...pick(props, Object.keys(BaseField.props)),
+            const needBaseFieldProps: BaseFieldProps = {
+                ...pick(props, Object.keys(baseFieldProps)),
                 fieldProps: needFieldProps,
                 formItemProps: needFormItemProps
             }
-            const colWrapProps = {
+
+            const needColWrapProps: ColWrapProps = {
                 ...colProps,
                 hidden: hidden,
-                grid: !!grid,
+                grid: grid,
             }
+
             return (
-                <ColWrap {...colWrapProps} key={key}>
+                <ColWrap {...needColWrapProps} key={key}>
                     <Form.Item {...needFormItemProps}>
-                        <BaseField {...baseFieldProps} v-slots={fieldSlots}/>
+                        <BaseField {...needBaseFieldProps} v-slots={fieldSlots}/>
                     </Form.Item>
                 </ColWrap>
             )

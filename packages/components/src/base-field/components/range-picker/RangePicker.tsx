@@ -6,6 +6,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldRangePickerProps } from './typings'
 import type { CustomFormat } from '../utils'
 import { formatDate } from '../utils'
+import type { RangePickerProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -30,7 +31,7 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps: any = {
+            const needFieldProps: RangePickerProps & any = {
                 allowClear: true,
                 ...fieldProps,
                 // -- placeholder 类型有问题 string | [string, string]
@@ -38,7 +39,7 @@ export default defineComponent({
             }
             const fieldDom = <RangePicker {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

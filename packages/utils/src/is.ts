@@ -11,11 +11,11 @@ export function isEmptyElement (value: any): boolean {
     return value && (value.type === Comment || isEmptyText || isEmptyFragment)
 }
 
-export function isPromise<T = any> (value: unknown): value is Promise<T> {
+export function isPromise<T = any> (value: any): value is Promise<T> {
     return isObject(value) && isFunction((value as Record<any, any>).then) && isFunction((value as Record<any, any>).catch)
 }
 
-export function isEmpty (value: unknown): value is '' | null | undefined | number {
+export function isEmpty (value: any): value is '' | null | undefined | number {
     return isEqual(value, '') || isNil(value) || isNaN(value)
 }
 

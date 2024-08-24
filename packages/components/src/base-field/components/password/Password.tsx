@@ -5,6 +5,7 @@ import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
 import { getSlotVNode, isEmpty, preventDefault } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldPasswordProps } from './typings'
+import type { InputPasswordProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -37,14 +38,14 @@ export default defineComponent({
                     </Space>
                 )
             }
-            const needFieldProps = {
+            const needFieldProps: InputPasswordProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
             const fieldDom = <Input.Password {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

@@ -1,27 +1,42 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Col } from 'ant-design-vue'
 import { pick } from 'lodash-es'
+import type { ColProps } from '../../ant-typings'
+import { colProps as antColProps } from '../../ant-typings'
+
+const colProps = antColProps()
+
+export const colWrapProps = () => ({
+    ...colProps,
+    hidden: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
+    grid: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    }
+})
+
+export type ColWrapProps = Partial<ExtractPropTypes<ReturnType<typeof colWrapProps>>>;
+export type ColWrapInstance = ComponentPublicInstance<ColWrapProps>;
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        ...Col.props,
-        grid: {
-            type: Boolean,
-            default: false
-        }
-    },
+    name: 'ProColWrap',
+    props: colWrapProps(),
     setup (props, { slots }) {
         return () => {
             const { grid } = props
-            const children = slots.default && slots.default()
+            const children: VNodeChild = slots.default && slots.default()
 
             if (grid) {
-                const colProps = pick(props, Object.keys(Col.props))
-                if (!colProps.span && !colProps.xs) {
-                    colProps.xs = 24
+                const needColProps: ColProps = pick(props, Object.keys(colProps))
+                if (!needColProps.span && !needColProps.xs) {
+                    needColProps.xs = 24
                 }
-                return <Col {...colProps}>{children}</Col>
+                return <Col {...needColProps}>{children}</Col>
             }
             return children
         }

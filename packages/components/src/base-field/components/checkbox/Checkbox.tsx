@@ -5,6 +5,7 @@ import type { BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import { fieldCheckboxProps } from './typings'
+import type { CheckboxGroupProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -27,13 +28,13 @@ export default defineComponent({
                 const valueText = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps = {
+            const needFieldProps: CheckboxGroupProps = {
                 options: unref(options) as any,
                 ...fieldProps
             }
             const fieldDom = <Checkbox.Group {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

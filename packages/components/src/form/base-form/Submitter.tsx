@@ -1,59 +1,64 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button, Space, theme } from 'ant-design-vue'
+import { preventDefault } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../locale-provider'
-import { preventDefault } from '../../../utils/event'
-import { toPlainObject } from 'lodash-es'
+import type { ButtonProps } from '../../ant-typings'
 
-const submitterProps = {
+export const submitterProps = () => ({
     size: {
-        type: Number,
+        type: Number as PropType<number>,
         default: undefined
     },
     loading: {
-        type: Boolean,
+        type: Boolean as PropType<boolean>,
         default: false
     },
     submitText: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     resetText: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     submitButtonProps: {
-        type: [Object, Boolean],
+        type: [Object, Boolean] as PropType<ButtonProps | false>,
         default: undefined
     },
     resetButtonProps: {
-        type: [Object, Boolean],
+        type: [Object, Boolean] as PropType<ButtonProps | false>,
         default: undefined
     },
     onReset: {
-        type: Function,
+        type: Function as PropType<(evt: Event) => void>,
         default: undefined
     },
     onSubmit: {
-        type: Function,
+        type: Function as PropType<(evt: Event) => void>,
         default: undefined
     }
-}
+})
+
+export type SubmitterProps = Partial<ExtractPropTypes<ReturnType<typeof submitterProps>>>;
+export type SubmitterInstance = ComponentPublicInstance<SubmitterProps>;
 
 export default defineComponent({
     inheritAttrs: false,
-    props: submitterProps,
+    name: 'ProSubmitter',
+    props: submitterProps(),
     emits: ['reset', 'submit'],
     setup (props, { emit, attrs }) {
         const { token } = theme.useToken()
 
         const { t } = useLocaleReceiver(['Form'])
 
-        function onReset (evt) {
+        function onReset (evt: Event): void {
             preventDefault(evt)
             emit('reset', evt)
         }
 
-        function onSubmit (evt) {
+        function onSubmit (evt: Event): void {
             preventDefault(evt)
             emit('submit', evt)
         }
@@ -62,25 +67,25 @@ export default defineComponent({
             const { size: propsSize, loading, submitText, resetText, submitButtonProps, resetButtonProps } = props
             const { sizeMS } = unref(token)
 
-            const needSubmitButtonProps = {
-                ...toPlainObject(submitButtonProps),
+            const needSubmitButtonProps: ButtonProps = {
+                ...submitButtonProps,
                 type: 'primary',
                 loading: loading,
                 onClick: onSubmit
             }
-            const resetButtonDom = resetButtonProps !== false && (
-                <Button {...toPlainObject(resetButtonProps)} onClick={onReset}>
-                    {resetText || t('reset')}
-                </Button>
-            )
-            const submitButtonDom = submitButtonProps !== false && (
-                <Button {...needSubmitButtonProps} html-type={'submit'}>
-                    {submitText || t('submit')}
-                </Button>
-            )
+
             return (
                 <Space size={propsSize || sizeMS / 2} {...attrs}>
-                    {[resetButtonDom, submitButtonDom]}
+                    {resetButtonProps !== false && (
+                        <Button {...resetButtonProps} onClick={onReset}>
+                            {resetText || t('reset')}
+                        </Button>
+                    )}
+                    {submitButtonProps !== false && (
+                        <Button {...needSubmitButtonProps} html-type={'submit'}>
+                            {submitText || t('submit')}
+                        </Button>
+                    )}
                 </Space>
             )
         }

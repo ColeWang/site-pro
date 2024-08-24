@@ -3,7 +3,7 @@ import { isProxy, toRaw } from 'vue'
 import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, toString } from 'lodash-es'
 import { isEmpty } from './is'
 
-export function cloneProxyToRaw<T = unknown> (proxy: Dictionary<T>): Dictionary<T> {
+export function cloneProxyToRaw<T = any> (proxy: Dictionary<T>): Dictionary<T> {
     return cloneWith(proxy, (value) => {
         if (isProxy(value)) {
             const nextValue = toRaw(value)
@@ -14,11 +14,11 @@ export function cloneProxyToRaw<T = unknown> (proxy: Dictionary<T>): Dictionary<
     })
 }
 
-export function omitNil<T = unknown> (object: Dictionary<T> | null | undefined): Dictionary<T> {
+export function omitNil<T = any> (object: Dictionary<T> | null | undefined): Dictionary<T> {
     return omitBy(object, isEmpty)
 }
 
-export function omitUndefined<T = unknown> (object: Dictionary<T> | null | undefined): Dictionary<T> {
+export function omitUndefined<T = any> (object: Dictionary<T> | null | undefined): Dictionary<T> {
     return omitBy(object, isUndefined)
 }
 
@@ -33,9 +33,6 @@ export function namePathToString (namePath: BaseNamePath): string {
     return toString(namePath)
 }
 
-export function toPx (value: number | string): string {
-    if (value && isNumber(value)) {
-        return `${value}px`
-    }
-    return value as string
+export function toPx (value?: number | string): string | undefined {
+    return isNumber(value) ? `${value}px` : value
 }

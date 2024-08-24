@@ -1,7 +1,9 @@
 import type { ExtractPropTypes, PropType } from 'vue'
 import type {
+    ButtonProps,
     CascaderProps,
     CheckboxGroupProps,
+    ColProps,
     FormInstance,
     FormItemProps,
     FormProps,
@@ -27,6 +29,8 @@ import type { TextAreaProps as InputTextareaProps } from 'ant-design-vue/es/inpu
 import type { Dayjs } from 'dayjs'
 // -- props --
 import { formItemProps, formProps } from 'ant-design-vue/es/form'
+import { rowProps } from 'ant-design-vue/es/grid/Row'
+import { colProps } from 'ant-design-vue/es/grid/Col'
 
 const passwordProps = {
     prefixCls: String,
@@ -62,10 +66,12 @@ export type {
     SwitchProps,
     TreeSelectProps,
     // --
+    ButtonProps,
     FormProps,
     FormInstance,
     FormItemProps,
-    RowProps
+    RowProps,
+    ColProps
 }
 
-export { formProps, formItemProps }
+export { formProps, formItemProps, rowProps, colProps }

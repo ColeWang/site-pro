@@ -3,6 +3,7 @@ import { Slider } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { fieldSliderProps } from './typings'
+import type { SliderProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -25,13 +26,13 @@ export default defineComponent({
                 }
                 return text ?? emptyText
             }
-            const needFieldProps = {
+            const needFieldProps: SliderProps = {
                 style: { minWidth: 120, ...fieldProps.style },
                 ...fieldProps
             }
             const fieldDom = <Slider {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

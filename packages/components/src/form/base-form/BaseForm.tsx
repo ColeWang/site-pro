@@ -5,11 +5,12 @@ import type { BaseNamePath } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
+import type { RowWrapProps } from '../helpers/RowWrap'
 import RowWrap from '../helpers/RowWrap'
 import { createFromInstance } from './hooks/useFormInstance'
 import type { BaseFormExpose, BaseFormModel, BaseFormProps, Updater } from './typings'
 import { antFormProps, baseFormProps } from './typings'
-import type { FormInstance, RowProps } from '../../ant-typings'
+import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import useStyle from './style'
 
 function resetLayoutOfGrid (props: BaseFormProps): BaseFormProps['layout'] {
@@ -124,7 +125,7 @@ export default defineComponent({
             return getElement(popupContainer) || document.body
         }
 
-        const fromExpose: BaseFormExpose = {
+        const baseFromExpose: BaseFormExpose = {
             formInstanceRef,
             model,
             formProps,
@@ -137,20 +138,20 @@ export default defineComponent({
             resetFields
         }
 
-        createFromInstance(fromExpose)
-        expose(fromExpose)
+        createFromInstance(baseFromExpose)
+        expose(baseFromExpose)
 
         return () => {
             const { layout, grid, rowProps } = unref(formProps)
 
-            const needFormProps = {
+            const needFormProps: FormProps = {
                 ...pick(props, Object.keys(antFormProps)),
                 layout: layout,
                 model: unref(model),
                 onFinish: onFinish
             }
 
-            const rowWrapProps = { ...rowProps, grid: grid }
+            const rowWrapProps: RowWrapProps = { ...rowProps, grid: grid }
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>

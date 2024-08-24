@@ -3,7 +3,7 @@ import type { BaseNamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import { formProps } from '../../ant-typings'
 
-export type BaseFormModel = Recordable<any>;
+export type BaseFormModel = Recordable;
 
 export interface Updater {
     (value: any): any;
@@ -63,7 +63,7 @@ export type BaseFormProps = Partial<ExtractPropTypes<ReturnType<typeof baseFormP
 
 export interface BaseFormExpose {
     formInstanceRef: Ref<FormInstance | null>;
-    model: BaseFormModel;
+    model: Ref<BaseFormModel>;
     formProps: ComputedRef<BaseFormProps>;
     setModelValue: (namePath: BaseNamePath, value: any) => BaseFormModel;
     getModelValue: (namePath: BaseNamePath) => BaseFormModel;

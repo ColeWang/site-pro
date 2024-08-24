@@ -6,6 +6,7 @@ import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pr
 import { isUndefined } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldSelectProps } from './typings'
+import type { SelectProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -31,7 +32,7 @@ export default defineComponent({
                 const valueText = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps = {
+            const needFieldProps: SelectProps = {
                 options: unref(options),
                 allowClear: true,
                 ...fieldProps,
@@ -39,7 +40,7 @@ export default defineComponent({
             }
             const fieldDom = <Select {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

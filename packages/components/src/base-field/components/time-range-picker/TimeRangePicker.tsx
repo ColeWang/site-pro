@@ -6,6 +6,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldTimeRangePickerProps } from './typings'
 import type { CustomFormat } from '../utils'
 import { formatDate } from '../utils'
+import type { TimeRangePickerProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -30,14 +31,14 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps = {
+            const needFieldProps: TimeRangePickerProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
             const fieldDom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom

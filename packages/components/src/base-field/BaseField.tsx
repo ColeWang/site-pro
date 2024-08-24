@@ -24,7 +24,12 @@ import {
     FieldTreeSelect
 } from './components'
 
-function mergeFieldProps (props: BaseFieldProps, extraFieldProps: BaseFieldProps['fieldProps']): BaseFieldProps {
+type BaseFieldFieldProps = BaseFieldProps['fieldProps'];
+
+function mergeFieldProps (
+    props: BaseFieldProps,
+    extraFieldProps: BaseFieldFieldProps
+): BaseFieldProps {
     const fieldProps = { ...props.fieldProps, ...extraFieldProps }
     return { ...props, fieldProps }
 }
@@ -185,17 +190,17 @@ export default defineComponent({
         return () => {
             const { mode, text, valueType, fieldProps, formItemProps } = props
             const placeholder = fieldProps.placeholder || props.placeholder
-            const { model = {}, name: namePath } = formItemProps
+            const { model, name: namePath } = formItemProps
 
-            const inputValue = namePath ? get(model, namePath) : undefined
+            const inputValue: any = namePath ? get(model || {}, namePath) : undefined
 
-            const needFieldProps = {
+            const needFieldProps: BaseFieldFieldProps = {
                 ...fieldProps,
                 value: inputValue,
                 placeholder: placeholder,
                 ['onUpdate:value']: onUpdateValue
             }
-            const fieldRenderProps = {
+            const needBaseFieldProps: BaseFieldProps = {
                 ...props,
                 text: mode === 'edit' ? (inputValue ?? text) : (text ?? inputValue),
                 fieldProps: needFieldProps
@@ -205,9 +210,9 @@ export default defineComponent({
             const customRenderText = isObject(types) && types[valueType]
             if (customRenderText && isFunction(customRenderText)) {
                 // valueType: ({ props, slots }) => {}
-                return customRenderText({ props: fieldRenderProps, slots: slots as Recordable<BaseSlot> })
+                return customRenderText({ props: needBaseFieldProps, slots: slots as Recordable<BaseSlot> })
             }
-            return defaultRenderText(valueType as BaseFieldValueType, fieldRenderProps, slots as Recordable<BaseSlot>)
+            return defaultRenderText(valueType as BaseFieldValueType, needBaseFieldProps, slots as Recordable<BaseSlot>)
         }
     }
 })

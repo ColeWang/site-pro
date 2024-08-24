@@ -3,6 +3,7 @@ import { TreeSelect } from 'ant-design-vue'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldTreeSelectProps } from './typings'
+import type { TreeSelectProps } from '../../../ant-typings'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -22,7 +23,7 @@ export default defineComponent({
                 const valueText = enumToText(text, optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps = {
+            const needFieldProps: TreeSelectProps = {
                 treeData: options as any,
                 allowClear: true,
                 ...restFieldProps,
@@ -30,7 +31,7 @@ export default defineComponent({
             }
             const fieldDom = <TreeSelect {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
             const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
