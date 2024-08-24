@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import type { BaseNamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
-import { formProps as antFormProps } from '../../ant-typings'
+import { formProps } from '../../ant-typings'
 
 export type BaseFormModel = Recordable<any>;
 
@@ -13,8 +13,10 @@ type BaseFormTransform = (values: BaseFormModel) => BaseFormModel;
 type BaseFormOnReset = (values: BaseFormModel) => void;
 type BaseFormOnValuesChange = (values: BaseFormModel) => void;
 
+export const antFormProps = formProps()
+
 export const baseFormProps = () => ({
-    ...antFormProps(),
+    ...antFormProps,
     initialValues: {
         type: Object as PropType<Recordable>,
         default: () => ({})

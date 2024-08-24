@@ -8,9 +8,8 @@ import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodas
 import RowWrap from '../helpers/RowWrap'
 import { createFromInstance } from './hooks/useFormInstance'
 import type { BaseFormExpose, BaseFormModel, BaseFormProps, Updater } from './typings'
-import { baseFormProps } from './typings'
+import { antFormProps, baseFormProps } from './typings'
 import type { FormInstance, RowProps } from '../../ant-typings'
-import { formProps as antFormProps } from '../../ant-typings'
 import useStyle from './style'
 
 function resetLayoutOfGrid (props: BaseFormProps): BaseFormProps['layout'] {
