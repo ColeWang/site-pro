@@ -1,23 +1,3 @@
-import type {
-    BaseFormExpose,
-    BaseFormInstance,
-    BaseFormModel,
-    BaseFormProps,
-    InjectFormInstance,
-    SubmitterInstance,
-    SubmitterProps,
-    Updater
-} from './base-form'
-import {
-    BaseForm,
-    baseFormProps,
-    createFromInstance,
-    FormInstanceKey,
-    Submitter,
-    submitterProps,
-    useFormInstance
-} from './base-form'
-
 export {
     BaseForm,
     baseFormProps,
@@ -26,7 +6,38 @@ export {
     FormInstanceKey,
     createFromInstance,
     useFormInstance
-}
+} from './base-form'
+
+export {
+    Field,
+    fieldProps,
+    withFieldType,
+    Date,
+    DateRange,
+    DateWeek,
+    DateWeekRange,
+    DateMonth,
+    DateMonthRange,
+    DateQuarter,
+    DateQuarterRange,
+    DateYear,
+    DateYearRange,
+    DateTime,
+    DateTimeRange,
+    Time,
+    TimeRange,
+    Select,
+    TreeSelect,
+    Cascader,
+    Radio,
+    Checkbox,
+    Switch,
+    Slider,
+    Number,
+    Textarea,
+    Password,
+    Text
+} from './components'
 
 export type {
     Updater,
@@ -37,5 +48,10 @@ export type {
     SubmitterProps,
     SubmitterInstance,
     InjectFormInstance
-}
+} from './base-form'
+export type {
+    FieldSizeType,
+    FieldProps,
+    FieldInstance
+} from './components'
 

@@ -1,10 +1,9 @@
 import type { App } from 'vue'
-import type { FieldInstance, FieldProps, FieldSizeType } from './Field'
 import Field, { fieldProps } from './Field'
 import withFieldType from './withFieldType'
 
 export { Field, fieldProps, withFieldType }
-export type { FieldSizeType, FieldProps, FieldInstance }
+export type { FieldSizeType, FieldProps, FieldInstance } from './Field'
 
 export const Date = withFieldType('date', 'ProDate')
 Date.install = (app: App) => {

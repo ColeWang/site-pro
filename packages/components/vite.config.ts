@@ -54,6 +54,9 @@ export default defineConfig((config) => {
                     'ant-design-vue/es/date-picker/generatePicker/props',
                     'ant-design-vue/es/time-picker/time-picker',
                     'ant-design-vue/es/input',
+                    'ant-design-vue/es/form',
+                    'ant-design-vue/es/grid/Row',
+                    'ant-design-vue/es/grid/Col'
                 ],
                 output: [
                     {
@@ -63,7 +66,10 @@ export default defineConfig((config) => {
                             'ant-design-vue/es/theme/internal': 'ant-design-vue/es/theme/internal',
                             'ant-design-vue/es/date-picker/generatePicker/props': 'ant-design-vue/es/date-picker/generatePicker/props',
                             'ant-design-vue/es/time-picker/time-picker': 'ant-design-vue/es/time-picker/time-picker',
-                            'ant-design-vue/es/input': 'ant-design-vue/es/input'
+                            'ant-design-vue/es/input': 'ant-design-vue/es/input',
+                            'ant-design-vue/es/form': 'ant-design-vue/es/form',
+                            'ant-design-vue/es/grid/Row': 'ant-design-vue/es/grid/Row',
+                            'ant-design-vue/es/grid/Col': 'ant-design-vue/es/grid/Col'
                         }
                     },
                     {
@@ -73,7 +79,10 @@ export default defineConfig((config) => {
                             'ant-design-vue/es/theme/internal': 'ant-design-vue/lib/theme/internal',
                             'ant-design-vue/es/date-picker/generatePicker/props': 'ant-design-vue/lib/date-picker/generatePicker/props',
                             'ant-design-vue/es/time-picker/time-picker': 'ant-design-vue/lib/time-picker/time-picker',
-                            'ant-design-vue/es/input': 'ant-design-vue/lib/input'
+                            'ant-design-vue/es/input': 'ant-design-vue/lib/input',
+                            'ant-design-vue/es/form': 'ant-design-vue/lib/form',
+                            'ant-design-vue/es/grid/Row': 'ant-design-vue/lib/grid/Row',
+                            'ant-design-vue/es/grid/Col': 'ant-design-vue/lib/grid/Col'
                         }
                     }
                 ],
