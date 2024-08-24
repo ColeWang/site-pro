@@ -3,12 +3,10 @@ import { defineComponent } from 'vue'
 import { Col } from 'ant-design-vue'
 import { pick } from 'lodash-es'
 import type { ColProps } from '../../ant-typings'
-import { colProps as antColProps } from '../../ant-typings'
-
-const colProps = antColProps()
+import { colProps } from '../../ant-typings'
 
 export const colWrapProps = () => ({
-    ...colProps,
+    ...colProps(),
     hidden: {
         type: Boolean as PropType<boolean>,
         default: false
@@ -32,7 +30,7 @@ export default defineComponent({
             const children: VNodeChild = slots.default && slots.default()
 
             if (grid) {
-                const needColProps: ColProps = pick(props, Object.keys(colProps))
+                const needColProps: ColProps = pick(props, Object.keys(Col.props)) as ColProps
                 if (!needColProps.span && !needColProps.xs) {
                     needColProps.xs = 24
                 }

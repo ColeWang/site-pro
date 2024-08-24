@@ -13,10 +13,8 @@ type BaseFormTransform = (values: BaseFormModel) => BaseFormModel;
 type BaseFormOnReset = (values: BaseFormModel) => void;
 type BaseFormOnValuesChange = (values: BaseFormModel) => void;
 
-export const antFormProps = formProps()
-
 export const baseFormProps = () => ({
-    ...antFormProps,
+    ...formProps(),
     initialValues: {
         type: Object as PropType<Recordable>,
         default: () => ({})

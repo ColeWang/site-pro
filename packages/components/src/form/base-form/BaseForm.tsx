@@ -9,7 +9,7 @@ import type { RowWrapProps } from '../helpers/RowWrap'
 import RowWrap from '../helpers/RowWrap'
 import { createFromInstance } from './hooks/useFormInstance'
 import type { BaseFormExpose, BaseFormModel, BaseFormProps, Updater } from './typings'
-import { antFormProps, baseFormProps } from './typings'
+import { baseFormProps } from './typings'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import useStyle from './style'
 
@@ -145,7 +145,7 @@ export default defineComponent({
             const { layout, grid, rowProps } = unref(formProps)
 
             const needFormProps: FormProps = {
-                ...pick(props, Object.keys(antFormProps)),
+                ...(pick(props, Object.keys(Form.props)) as FormProps),
                 layout: layout,
                 model: unref(model),
                 onFinish: onFinish

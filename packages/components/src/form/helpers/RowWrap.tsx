@@ -3,12 +3,10 @@ import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { pick } from 'lodash-es'
 import type { RowProps } from '../../ant-typings'
-import { rowProps as antRowProps } from '../../ant-typings'
-
-const rowProps = antRowProps()
+import { rowProps } from '../../ant-typings'
 
 const rowWarpProps = () => ({
-    ...rowProps,
+    ...rowProps(),
     grid: {
         type: Boolean as PropType<boolean>,
         default: false
@@ -28,7 +26,7 @@ export default defineComponent({
             const children: VNodeChild = slots.default && slots.default()
 
             if (grid) {
-                const needRowProps: RowProps = pick(props, Object.keys(rowProps))
+                const needRowProps: RowProps = pick(props, Object.keys(Row.props)) as RowProps
                 return <Row {...needRowProps}>{children}</Row>
             }
             return children

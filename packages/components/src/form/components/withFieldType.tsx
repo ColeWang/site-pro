@@ -1,15 +1,14 @@
 import type { PropType } from 'vue'
 import { defineComponent } from 'vue'
+import { Form } from 'ant-design-vue'
 import { pick } from 'lodash-es'
 import type { FieldProps } from './Field'
 import Field, { fieldProps } from './Field'
-import { formItemProps as antFormItemProps } from '../../ant-typings'
+import { formItemProps } from '../../ant-typings'
 import type { BaseFieldValueType, BaseFieldValueTypeWithFieldProps } from '../../base-field/typings'
 
 type FieldFormItemProps = FieldProps['formItemProps'];
 type FieldType = BaseFieldValueTypeWithFieldProps;
-
-const formItemProps = antFormItemProps()
 
 function withFieldType<T extends BaseFieldValueType, F = FieldType[T]> (valueType: T, fieldName: string) {
     return defineComponent({
@@ -17,7 +16,7 @@ function withFieldType<T extends BaseFieldValueType, F = FieldType[T]> (valueTyp
         name: fieldName,
         props: {
             ...fieldProps(),
-            ...formItemProps,
+            ...formItemProps(),
             fieldProps: {
                 type: Object as PropType<F>,
                 default: () => ({})
@@ -27,7 +26,7 @@ function withFieldType<T extends BaseFieldValueType, F = FieldType[T]> (valueTyp
             return () => {
                 const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
                 const needFormItemProps: FieldFormItemProps = {
-                    ...pick(props, Object.keys(formItemProps)),
+                    ...(pick(props, Object.keys(Form.Item.props)) as FieldFormItemProps),
                     ...propsFormItemProps,
                 }
                 const needFieldProps: FieldProps = {
