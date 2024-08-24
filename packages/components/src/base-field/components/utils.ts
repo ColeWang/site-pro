@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 
 export type CustomFormat = string | ((value: Dayjs) => string);
 
-export function formatDate (text: ConfigType, format?: CustomFormat) {
+export function formatDate (text: ConfigType, format?: CustomFormat): string | number | null | undefined {
     // 可设置时区
     if (isEmpty(text)) return text
     if (isFunction(format)) return format(dayjs(text))

@@ -1,3 +1,4 @@
+import type { VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction, isObject } from 'lodash-es'
@@ -17,7 +18,7 @@ import {
     FieldSlider,
     FieldSwitch,
     FieldText,
-    FieldTextArea,
+    FieldTextarea,
     FieldTimePicker,
     FieldTimeRangePicker,
     FieldTreeSelect
@@ -28,7 +29,11 @@ function mergeFieldProps (props: BaseFieldProps, extraFieldProps: BaseFieldProps
     return { ...props, fieldProps }
 }
 
-function defaultRenderText (valueType: BaseFieldValueType, props: BaseFieldProps, slots: Recordable<BaseSlot>) {
+function defaultRenderText (
+    valueType: BaseFieldValueType,
+    props: BaseFieldProps,
+    slots: Recordable<BaseSlot>
+): VNode {
     if (valueType === 'date') {
         const dateProps = mergeFieldProps(props, {
             picker: 'date',
@@ -155,7 +160,7 @@ function defaultRenderText (valueType: BaseFieldValueType, props: BaseFieldProps
         return <FieldNumber {...props} v-slots={slots}/>
     }
     if (valueType === 'textarea') {
-        return <FieldTextArea {...props} v-slots={slots}/>
+        return <FieldTextarea {...props} v-slots={slots}/>
     }
     if (valueType === 'password') {
         return <FieldPassword {...props} v-slots={slots}/>
@@ -170,7 +175,7 @@ export default defineComponent({
     setup (props, { slots }) {
         const { valueTypeMap } = useCustomFields()
 
-        function onUpdateValue (value: any) {
+        function onUpdateValue (value: any): void {
             const { fieldProps } = props
             if (isFunction(fieldProps['onUpdate:value'])) {
                 fieldProps['onUpdate:value'](value)

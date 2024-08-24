@@ -1,14 +1,14 @@
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
-import { getSlotVNode } from '@site-pro/utils'
+import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldTextAreaProps } from './typings'
+import { fieldTextareaProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'ProFieldTextArea',
-    props: fieldTextAreaProps(),
+    name: 'ProFieldTextarea',
+    props: fieldTextareaProps(),
     setup (props, { slots }) {
         const { prefixCls } = useConfigInject('pro-field-textarea', props)
         const { token } = theme.useToken()
@@ -22,11 +22,11 @@ export default defineComponent({
             if (mode === 'read') {
                 const styles = {
                     display: 'inline-block',
-                    fontSize: `${fontSize}px`,
+                    fontSize: toPx(fontSize),
                     color: colorText,
                     lineHeight: lineHeight,
-                    paddingBlock: `${sizeXXS}px`,
-                    paddingInline: `${sizeSM}px`,
+                    paddingBlock: toPx(sizeXXS),
+                    paddingInline: toPx(sizeSM),
                     maxWidth: '100%',
                     whiteSpace: 'pre-wrap',
                 }

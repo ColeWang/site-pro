@@ -1,3 +1,4 @@
+import type { Ref } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
@@ -13,9 +14,9 @@ export default defineComponent({
         const { token } = theme.useToken()
         const { t } = useLocaleReceiver(['global'])
 
-        const visible = ref(props.fieldProps.visible || false)
+        const visible: Ref<boolean> = ref(props.fieldProps.visible || false)
 
-        function onVisibleClick (evt: Event) {
+        function onVisibleClick (evt: Event): void {
             preventDefault(evt)
             visible.value = !unref(visible)
         }

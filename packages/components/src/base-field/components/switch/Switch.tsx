@@ -12,7 +12,7 @@ export default defineComponent({
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
-        function onUpdateChecked (value: boolean | string | number) {
+        function onUpdateChecked (value: boolean | string | number): void {
             const { fieldProps } = props
             if (isFunction(fieldProps['onUpdate:value'])) {
                 fieldProps['onUpdate:value'](value)

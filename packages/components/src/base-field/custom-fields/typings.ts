@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import type { BaseFieldProps } from '../typings'
 
@@ -16,7 +16,11 @@ export const customFieldsProps = () => ({
     }
 })
 
-export type CustomFieldsProps = Partial<ExtractPropTypes<typeof customFieldsProps>>;
-// export type CustomFieldsExpose = {};
-export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps>;
+export type CustomFieldsProps = Partial<ExtractPropTypes<ReturnType<typeof customFieldsProps>>>;
+
+export interface CustomFieldsExpose {
+    valueTypeMap: ComputedRef<BaseValueTypeMap>;
+}
+
+export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps, CustomFieldsExpose>;
 

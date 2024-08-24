@@ -8,5 +8,6 @@ declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
         ProDescriptions?: {},
         ProFieldTextarea?: {},
+        ProBaseForm?: {}
     }
 }

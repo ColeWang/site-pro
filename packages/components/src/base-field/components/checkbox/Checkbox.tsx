@@ -1,5 +1,7 @@
+import type { ComputedRef } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Checkbox } from 'ant-design-vue'
+import type { BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import { fieldCheckboxProps } from './typings'
@@ -9,9 +11,9 @@ export default defineComponent({
     name: 'ProFieldCheckbox',
     props: fieldCheckboxProps(),
     setup (props, { slots }) {
-        const options = computed(() => {
+        const options: ComputedRef<BaseOptionType[]> = computed(() => {
             if (isUndefined(props.valueEnum)) {
-                return props.fieldProps.options || []
+                return (props.fieldProps.options || []) as BaseOptionType[]
             }
             return enumToOptions(props.valueEnum)
         })

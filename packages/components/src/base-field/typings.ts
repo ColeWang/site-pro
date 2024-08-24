@@ -9,7 +9,7 @@ import type {
     InputNumberProps,
     InputPasswordProps,
     InputProps,
-    InputTextAreaProps,
+    InputTextareaProps,
     RadioGroupProps,
     RangePickerProps,
     SelectProps,
@@ -43,7 +43,7 @@ export interface BaseFieldValueTypeWithFieldProps {
     switch: SwitchProps;
     slider: SliderProps;
     number: InputNumberProps;
-    textarea: InputTextAreaProps;
+    textarea: InputTextareaProps;
     password: InputPasswordProps;
     text: InputProps;
 }

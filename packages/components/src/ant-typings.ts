@@ -2,27 +2,31 @@ import type { ExtractPropTypes, PropType } from 'vue'
 import type {
     CascaderProps,
     CheckboxGroupProps,
+    FormInstance,
     FormItemProps,
     FormProps,
     InputNumberProps,
     InputProps,
     RadioGroupProps,
+    RowProps,
     SelectProps,
     SliderProps,
     SwitchProps,
-    TreeSelectProps,
+    TreeSelectProps
 } from 'ant-design-vue'
 import type {
     CommonProps,
-    DatePickerProps as BaseDatePickerProps,
-    RangePickerProps as BaseRangePickerProps
+    DatePickerProps as AntDatePickerProps,
+    RangePickerProps as AntRangePickerProps
 } from 'ant-design-vue/es/date-picker/generatePicker/props'
 import type {
-    TimePickerProps as BaseTimePickerProps,
-    TimeRangePickerProps as BaseTimeRangePickerProps
+    TimePickerProps as AntTimePickerProps,
+    TimeRangePickerProps as AntTimeRangePickerProps
 } from 'ant-design-vue/es/time-picker/time-picker'
-import type { TextAreaProps as InputTextAreaProps } from 'ant-design-vue/es/input'
+import type { TextAreaProps as InputTextareaProps } from 'ant-design-vue/es/input'
 import type { Dayjs } from 'dayjs'
+// -- props --
+import { formItemProps, formProps } from 'ant-design-vue/es/form'
 
 const passwordProps = {
     prefixCls: String,
@@ -36,16 +40,16 @@ const passwordProps = {
 
 type InputPasswordProps = InputProps & Partial<ExtractPropTypes<typeof passwordProps>>
 
-type DatePickerProps = CommonProps<Dayjs> & BaseDatePickerProps<Dayjs>;
-type RangePickerProps = CommonProps<Dayjs> & BaseRangePickerProps<Dayjs>;
-type TimePickerProps = BaseTimePickerProps<Dayjs>;
-type TimeRangePickerProps = BaseTimeRangePickerProps<Dayjs>;
+type DatePickerProps = CommonProps<Dayjs> & AntDatePickerProps<Dayjs>;
+type RangePickerProps = CommonProps<Dayjs> & AntRangePickerProps<Dayjs>;
+type TimePickerProps = AntTimePickerProps<Dayjs>;
+type TimeRangePickerProps = AntTimeRangePickerProps<Dayjs>;
 
 export type {
     InputProps,
     InputNumberProps,
     InputPasswordProps,
-    InputTextAreaProps,
+    InputTextareaProps,
     DatePickerProps,
     RangePickerProps,
     TimePickerProps,
@@ -57,6 +61,11 @@ export type {
     SliderProps,
     SwitchProps,
     TreeSelectProps,
-    FormItemProps,
+    // --
     FormProps,
+    FormInstance,
+    FormItemProps,
+    RowProps
 }
+
+export { formProps, formItemProps }

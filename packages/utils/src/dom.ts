@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, MaybeRef } from 'vue'
 import { unref } from 'vue'
 
-export function hasClass (node: Element, className: string): boolean {
+export function hasClass<T extends Element | HTMLElement> (node: T, className: string): boolean {
     if (node.classList) {
         return node.classList.contains(className)
     }
@@ -9,7 +9,7 @@ export function hasClass (node: Element, className: string): boolean {
     return ` ${originClass} `.indexOf(` ${className} `) > -1
 }
 
-export function addClass (node: Element, className: string): void {
+export function addClass<T extends Element | HTMLElement> (node: T, className: string): void {
     if (node.classList) {
         node.classList.add(className)
     } else {
@@ -19,7 +19,7 @@ export function addClass (node: Element, className: string): void {
     }
 }
 
-export function removeClass (node: Element, className: string): void {
+export function removeClass<T extends Element | HTMLElement> (node: T, className: string): void {
     if (node.classList) {
         node.classList.remove(className)
     } else {
@@ -30,12 +30,12 @@ export function removeClass (node: Element, className: string): void {
     }
 }
 
-export function getElement (el: MaybeRef<ComponentPublicInstance | Element | null>): Element | null {
-    const target: ComponentPublicInstance | Element | null = unref(el)
+export function getElement<E extends ComponentPublicInstance | Element | HTMLElement, T = MaybeRef<E | null>> (el: T): E {
+    const target = unref(el) as E | null
     if (target && (target as ComponentPublicInstance).$el) {
         return (target as ComponentPublicInstance).$el
     }
-    return target as (Element | null)
+    return target as E
 }
 
 export function getWindowSize (): number[] {

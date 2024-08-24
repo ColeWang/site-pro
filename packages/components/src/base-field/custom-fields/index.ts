@@ -1,8 +1,8 @@
 import CustomFields from './CustomFields'
-import type { InjectValueTypeMap } from './hooks/useCustomFields'
+import type { InjectCustomFields } from './hooks/useCustomFields'
 import useCustomFields from './hooks/useCustomFields'
-import type { BaseValueTypeMap, CustomFieldsInstance, CustomFieldsProps } from './typings'
+import type { BaseValueTypeMap, CustomFieldsExpose, CustomFieldsInstance, CustomFieldsProps } from './typings'
 import { customFieldsProps } from './typings'
 
 export { CustomFields, useCustomFields, customFieldsProps }
-export type { InjectValueTypeMap, BaseValueTypeMap, CustomFieldsProps, CustomFieldsInstance }
+export type { InjectCustomFields, BaseValueTypeMap, CustomFieldsProps, CustomFieldsExpose, CustomFieldsInstance }

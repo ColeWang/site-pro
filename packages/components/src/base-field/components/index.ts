@@ -11,6 +11,6 @@ export * from './switch'
 export * from './slider'
 export * from './text'
 export * from './number'
-export * from './text-area'
+export * from './textarea'
 export * from './password'
 

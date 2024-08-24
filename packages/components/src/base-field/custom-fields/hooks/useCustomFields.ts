@@ -1,15 +1,13 @@
-import type { ComputedRef, InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue'
 import { inject } from 'vue'
-import type { BaseValueTypeMap } from '../typings'
+import type { CustomFieldsExpose } from '../typings'
 
-export interface InjectValueTypeMap {
-    valueTypeMap?: ComputedRef<BaseValueTypeMap>;
-}
+export type InjectCustomFields = Partial<CustomFieldsExpose>;
 
-export const BaseCustomFieldsKey: InjectionKey<InjectValueTypeMap> = Symbol('CustomFields')
+export const CustomFieldsKey: InjectionKey<InjectCustomFields> = Symbol('CustomFields')
 
-function useCustomFields () {
-    return inject(BaseCustomFieldsKey, {})
+function useCustomFields (): InjectCustomFields {
+    return inject(CustomFieldsKey, {})
 }
 
 export default useCustomFields
