@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Number from './Number'
-import type { FieldNumberInstance, FieldNumberProps } from './typings'
 import { fieldNumberProps } from './typings'
 
 Number.install = (app: App) => {
@@ -9,4 +8,4 @@ Number.install = (app: App) => {
 
 export { Number as FieldNumber, fieldNumberProps }
 
-export type { FieldNumberProps, FieldNumberInstance }
+export type { FieldNumberProps, FieldNumberInstance } from './typings'

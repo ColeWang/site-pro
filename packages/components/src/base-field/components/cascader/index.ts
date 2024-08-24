@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Cascader from './Cascader'
-import type { FieldCascaderInstance, FieldCascaderProps } from './typings'
 import { fieldCascaderProps } from './typings'
 
 Cascader.install = (app: App) => {
@@ -9,4 +8,4 @@ Cascader.install = (app: App) => {
 
 export { Cascader as FieldCascader, fieldCascaderProps }
 
-export type { FieldCascaderProps, FieldCascaderInstance }
+export type { FieldCascaderProps, FieldCascaderInstance } from './typings'

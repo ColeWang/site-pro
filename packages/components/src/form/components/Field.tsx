@@ -7,7 +7,7 @@ import { has, isArray, isNumber, isString, merge, pick } from 'lodash-es'
 import type { ColWrapProps } from '../helpers/ColWrap'
 import ColWrap from '../helpers/ColWrap'
 import type { BaseFieldProps } from '../../base-field'
-import { BaseField, baseFieldProps as proBaseFieldProps } from '../../base-field'
+import { BaseField, baseFieldProps } from '../../base-field'
 import { useFormInstance } from '../base-form'
 import { genFormItemFixStyle } from '../utils'
 
@@ -23,10 +23,8 @@ const sizeEnum: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
 
 export type FieldSizeType = Extract<keyof typeof sizeEnum, any> | number;
 
-const baseFieldProps = proBaseFieldProps()
-
 export const fieldProps = () => ({
-    ...baseFieldProps,
+    ...baseFieldProps(),
     width: {
         type: [String, Number] as PropType<FieldSizeType>,
         default: undefined
@@ -101,7 +99,7 @@ export default defineComponent({
             }, extraFormItemProps)
 
             const needBaseFieldProps: BaseFieldProps = {
-                ...pick(props, Object.keys(baseFieldProps)),
+                ...(pick(props, Object.keys(BaseField.props)) as BaseFieldProps),
                 fieldProps: needFieldProps,
                 formItemProps: needFormItemProps
             }

@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import TimeRangePicker from './TimeRangePicker'
-import type { FieldTimeRangePickerInstance, FieldTimeRangePickerProps } from './typings'
 import { fieldTimeRangePickerProps } from './typings'
 
 TimeRangePicker.install = (app: App) => {
@@ -9,4 +8,4 @@ TimeRangePicker.install = (app: App) => {
 
 export { TimeRangePicker as FieldTimeRangePicker, fieldTimeRangePickerProps }
 
-export type { FieldTimeRangePickerProps, FieldTimeRangePickerInstance }
+export type { FieldTimeRangePickerProps, FieldTimeRangePickerInstance } from './typings'

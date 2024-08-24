@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import DatePicker from './DatePicker'
-import type { FieldDatePickerInstance, FieldDatePickerProps } from './typings'
 import { fieldDatePickerProps } from './typings'
 
 DatePicker.install = (app: App) => {
@@ -9,4 +8,4 @@ DatePicker.install = (app: App) => {
 
 export { DatePicker as FieldDatePicker, fieldDatePickerProps }
 
-export type { FieldDatePickerProps, FieldDatePickerInstance }
+export type { FieldDatePickerProps, FieldDatePickerInstance } from './typings'

@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import TreeSelect from './TreeSelect'
-import type { FieldTreeSelectInstance, FieldTreeSelectProps } from './typings'
 import { fieldTreeSelectProps } from './typings'
 
 TreeSelect.install = (app: App) => {
@@ -9,4 +8,4 @@ TreeSelect.install = (app: App) => {
 
 export { TreeSelect as FieldTreeSelect, fieldTreeSelectProps }
 
-export type { FieldTreeSelectProps, FieldTreeSelectInstance }
+export type { FieldTreeSelectProps, FieldTreeSelectInstance } from './typings'

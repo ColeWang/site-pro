@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Radio from './Radio'
-import type { FieldRadioInstance, FieldRadioProps } from './typings'
 import { fieldRadioProps } from './typings'
 
 Radio.install = (app: App) => {
@@ -9,4 +8,4 @@ Radio.install = (app: App) => {
 
 export { Radio as FieldRadio, fieldRadioProps }
 
-export type { FieldRadioProps, FieldRadioInstance }
+export type { FieldRadioProps, FieldRadioInstance } from './typings'

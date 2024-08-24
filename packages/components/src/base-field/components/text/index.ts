@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Text from './Text'
-import type { FieldTextInstance, FieldTextProps } from './typings'
 import { fieldTextProps } from './typings'
 
 Text.install = (app: App) => {
@@ -9,4 +8,4 @@ Text.install = (app: App) => {
 
 export { Text as FieldText, fieldTextProps }
 
-export type { FieldTextProps, FieldTextInstance }
+export type { FieldTextProps, FieldTextInstance } from './typings'

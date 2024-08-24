@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Slider from './Slider'
-import type { FieldSliderInstance, FieldSliderProps } from './typings'
 import { fieldSliderProps } from './typings'
 
 Slider.install = (app: App) => {
@@ -9,4 +8,4 @@ Slider.install = (app: App) => {
 
 export { Slider as FieldSlider, fieldSliderProps }
 
-export type { FieldSliderProps, FieldSliderInstance }
+export type { FieldSliderProps, FieldSliderInstance } from './typings'

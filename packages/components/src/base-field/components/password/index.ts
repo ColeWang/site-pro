@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Password from './Password'
-import type { FieldPasswordInstance, FieldPasswordProps } from './typings'
 import { fieldPasswordProps } from './typings'
 
 Password.install = (app: App) => {
@@ -9,4 +8,4 @@ Password.install = (app: App) => {
 
 export { Password as FieldPassword, fieldPasswordProps }
 
-export type { FieldPasswordProps, FieldPasswordInstance }
+export type { FieldPasswordProps, FieldPasswordInstance } from './typings'

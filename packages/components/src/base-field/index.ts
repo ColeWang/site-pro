@@ -1,8 +1,6 @@
 import type { App } from 'vue'
 import BaseField from './BaseField'
-import type { BaseFieldInstance, BaseFieldProps, BaseFieldValueType, BaseFieldValueTypeWithFieldProps } from './typings'
 import { baseFieldProps } from './typings'
-import type { BaseValueTypeMap, CustomFieldsExpose, CustomFieldsInstance, CustomFieldsProps } from './custom-fields'
 import { CustomFields, customFieldsProps, useCustomFields } from './custom-fields'
 
 BaseField.install = (app: App) => {
@@ -11,5 +9,16 @@ BaseField.install = (app: App) => {
 
 export { BaseField, baseFieldProps }
 export { CustomFields, customFieldsProps, useCustomFields }
-export type { BaseFieldValueTypeWithFieldProps, BaseFieldValueType, BaseFieldProps, BaseFieldInstance }
-export type { BaseValueTypeMap, CustomFieldsProps, CustomFieldsExpose, CustomFieldsInstance }
+
+export type {
+    BaseFieldValueTypeWithFieldProps,
+    BaseFieldValueType,
+    BaseFieldProps,
+    BaseFieldInstance
+} from './typings'
+export type {
+    BaseValueTypeMap,
+    CustomFieldsProps,
+    CustomFieldsExpose,
+    CustomFieldsInstance
+} from './custom-fields'

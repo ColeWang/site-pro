@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Select from './Select'
-import type { FieldSelectInstance, FieldSelectProps } from './typings'
 import { fieldSelectProps } from './typings'
 
 Select.install = (app: App) => {
@@ -9,4 +8,4 @@ Select.install = (app: App) => {
 
 export { Select as FieldSelect, fieldSelectProps }
 
-export type { FieldSelectProps, FieldSelectInstance }
+export type { FieldSelectProps, FieldSelectInstance } from './typings'

@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import Checkbox from './Checkbox'
-import type { FieldCheckboxInstance, FieldCheckboxProps } from './typings'
 import { fieldCheckboxProps } from './typings'
 
 Checkbox.install = (app: App) => {
@@ -8,4 +7,5 @@ Checkbox.install = (app: App) => {
 }
 
 export { Checkbox as FieldCheckbox, fieldCheckboxProps }
-export type { FieldCheckboxProps, FieldCheckboxInstance }
+
+export type { FieldCheckboxProps, FieldCheckboxInstance } from './typings'
