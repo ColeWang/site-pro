@@ -50,6 +50,7 @@ export default defineConfig((config) => {
                     '@types/lodash-es',
                     '@site-pro/utils',
                     '@site-pro/hooks',
+                    '@site-pro/locale/zh-CN',
                     'ant-design-vue/es/theme/internal',
                     'ant-design-vue/es/_util/cssinjs',
                     'ant-design-vue/es/date-picker/generatePicker/props',

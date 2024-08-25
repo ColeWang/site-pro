@@ -38,7 +38,7 @@ export default defineConfig((config) => {
             minify: false,
             lib: {
                 entry: {
-                    'index': resolve(__dirname, 'src'),
+                    'index': resolve(__dirname, 'src/index'),
                     'en-US': resolve(__dirname, 'src/en-US'),
                     'zh-CN': resolve(__dirname, 'src/zh-CN'),
                 }

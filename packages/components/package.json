@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@site-pro/hooks": "workspace:*",
+    "@site-pro/locale": "workspace:*",
     "@site-pro/utils": "workspace:*"
   },
   "types": "./dist/index.d.ts",
