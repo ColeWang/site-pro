@@ -1,9 +1,9 @@
 <template>
-  <RouterView></RouterView>
+  <div>Hooks</div>
 </template>
 
 <script setup lang="ts">
-  import { RouterView } from 'vue-router'
+
 </script>
 
 <style scoped>

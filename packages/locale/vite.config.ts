@@ -30,7 +30,7 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@site-pro/hooks': resolve(__dirname, 'src'),
+                '@site-pro/locale': resolve(__dirname, 'src'),
                 '@': resolve(__dirname, 'examples')
             }
         },
