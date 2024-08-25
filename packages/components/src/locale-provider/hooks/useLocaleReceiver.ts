@@ -1,8 +1,7 @@
 import type { ComputedRef, InjectionKey } from 'vue'
 import { computed, inject, unref } from 'vue'
-import zhCN from '@site-pro/locale/zh-CN'
 import type { NamePath } from '@site-pro/utils'
-import { get } from 'lodash-es'
+import { get, has } from 'lodash-es'
 import type { LocaleProviderExpose, LocaleType } from '../typings'
 
 export type InjectLocaleReceiver = Partial<LocaleProviderExpose>;
@@ -18,8 +17,8 @@ function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseL
     const { locale } = inject(LocaleReceiverKey, {})
 
     const mergeLocale: ComputedRef<LocaleType> = computed(() => {
-        const needLocale: LocaleType = { ...(zhCN as LocaleType), ...unref(locale) }
-        if (namePath) {
+        const needLocale: LocaleType = unref(locale) || {}
+        if (namePath && has(needLocale, namePath)) {
             const stateLocale: LocaleType = get(needLocale, namePath, {})
             return { ...stateLocale, ...unref(propsLocale) }
         }

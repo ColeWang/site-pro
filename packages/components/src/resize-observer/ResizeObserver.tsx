@@ -1,40 +1,40 @@
+import type { Ref, SlotsType } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
+import type { RectSizeType } from './typings'
+import { resizeObserverProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        debounce: {
-            type: Number,
-            default: 100
-        },
-        onResize: {
-            type: Function,
-            default: undefined
-        }
-    },
+    name: 'ProResizeObserver',
+    props: resizeObserverProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+    }>,
     emits: ['resize'],
     setup (props, { emit, slots, attrs }) {
-        const elRef = ref(null)
+        const elRef: Ref<Element | null> = ref(null)
 
-        const size = ref({ width: 0, height: 0 })
+        const rectSize: Ref<RectSizeType> = ref({ width: 0, height: 0 })
 
-        function setSize (value) {
-            size.value = value
-            emit('resize', value)
+        function setRectSize (size: RectSizeType) {
+            rectSize.value = size
+            emit('resize', size)
         }
 
-        const debounceCallback = debounce((entries) => {
-            const { contentRect = {} } = head(entries) || {}
-            const { width, height, ...restRect } = contentRect
-            setSize({ width, height, ...restRect })
-        }, props.debounce, { leading: true })
+        function onResizeCallback (entries: ResizeObserverEntry[]): void {
+            const { contentRect } = head(entries) || {}
+            setRectSize(contentRect || { width: 0, height: 0 })
+        }
+
+        const debounceCallback = debounce(onResizeCallback, props.debounce, { leading: true })
 
         useResizeObserver(elRef, debounceCallback)
 
         return () => {
-            const slotScope = { size: unref(size) }
+            const slotScope: any = { size: unref(rectSize) }
             const children = slots.default && slots.default(slotScope)
 
             return (

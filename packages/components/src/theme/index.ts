@@ -7,8 +7,8 @@ export type { CSSInterpolation } from 'ant-design-vue/es/_util/cssinjs'
 
 declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
-        ProDescriptions?: {},
         ProFieldTextarea?: {},
-        ProBaseForm?: {}
+        ProBaseForm?: {},
+        ProDescriptions?: {},
     }
 }
