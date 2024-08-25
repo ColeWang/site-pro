@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, Ref } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue'
 import { computed, watch } from 'vue'
 import { getElement } from '@site-pro/utils'
 import tryOnScopeDispose from './tryOnScopeDispose'
@@ -10,12 +10,12 @@ function useResizeObserver (
 ): void {
     let observer: ResizeObserver | null = null
 
-    function cleanup () {
+    function cleanup (): void {
         observer && observer.disconnect()
         observer = null
     }
 
-    const elTarget = computed(() => getElement(target))
+    const elTarget: ComputedRef<HTMLElement> = computed(() => getElement(target))
 
     const stopWatch = watch(elTarget, (el) => {
         cleanup()
@@ -25,7 +25,7 @@ function useResizeObserver (
         }
     }, { immediate: true, flush: 'post', deep: true })
 
-    function onStopHandle () {
+    function onStopHandle (): void {
         stopWatch && stopWatch()
         cleanup()
     }

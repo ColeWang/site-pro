@@ -3,12 +3,6 @@ import tryOnScopeDispose from './tryOnScopeDispose'
 import useGlobalProperties from './useGlobalProperties'
 import useResizeObserver from './useResizeObserver'
 
-const version: string = __VERSION__
+export const version: string = __VERSION__
 
-export {
-    version,
-    useConfigInject,
-    tryOnScopeDispose,
-    useGlobalProperties,
-    useResizeObserver
-}
+export { tryOnScopeDispose, useConfigInject, useGlobalProperties, useResizeObserver }
