@@ -3,6 +3,10 @@ import type { BaseNamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import { formProps } from '../../ant-typings'
 
+export interface Updater {
+    (value: any): any;
+}
+
 export type BaseFormModel = Recordable;
 
 type BaseFormTransform = (values: BaseFormModel) => BaseFormModel;
@@ -61,7 +65,7 @@ export interface BaseFormExpose {
     formProps: ComputedRef<BaseFormProps>;
     setModelValue: (namePath: BaseNamePath, value: any) => BaseFormModel;
     getModelValue: (namePath: BaseNamePath) => BaseFormModel;
-    updateModelValue: (namePath: BaseNamePath, updater: (value: any) => any) => BaseFormModel;
+    updateModelValue: (namePath: BaseNamePath, updater: Updater) => BaseFormModel;
     deleteModelValue: (namePath: BaseNamePath) => boolean;
     submit: () => void;
     validate: (names?: BaseNamePath[]) => Promise<BaseFormModel>;
