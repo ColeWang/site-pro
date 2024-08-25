@@ -1,7 +1,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
-import type { BaseNamePath } from '@site-pro/utils'
+import type { NamePath } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
@@ -52,23 +52,23 @@ export default defineComponent({
             emit('valuesChange', curr)
         }, { immediate: true, deep: true })
 
-        function setModelValue (namePath: BaseNamePath, value: any): BaseFormModel {
+        function setModelValue (namePath: NamePath, value: any): BaseFormModel {
             return set(model.value, namePath, value)
         }
 
-        function getModelValue (namePath: BaseNamePath): any {
+        function getModelValue (namePath: NamePath): any {
             return get(model.value, namePath, undefined)
         }
 
-        function updateModelValue (namePath: BaseNamePath, updater: Updater): BaseFormModel {
+        function updateModelValue (namePath: NamePath, updater: Updater): BaseFormModel {
             return update(model.value, namePath, updater)
         }
 
-        function deleteModelValue (namePath: BaseNamePath): boolean {
+        function deleteModelValue (namePath: NamePath): boolean {
             return unset(model.value, namePath)
         }
 
-        async function validate (names?: BaseNamePath[]): Promise<BaseFormModel> {
+        async function validate (names?: NamePath[]): Promise<BaseFormModel> {
             const context = unref(formInstanceRef)
             if (context && context.validate) {
                 return context.validate(names)
@@ -89,7 +89,7 @@ export default defineComponent({
             }
         }
 
-        function onScrollToField (namePath: BaseNamePath, options: any): void {
+        function onScrollToField (namePath: NamePath, options: any): void {
             const context = unref(formInstanceRef)
             context && context.scrollToField(namePath, options)
         }
@@ -114,7 +114,7 @@ export default defineComponent({
             })
         }
 
-        function resetFields (names?: BaseNamePath[]): void {
+        function resetFields (names?: NamePath[]): void {
             const context: FormInstance | null = unref(formInstanceRef)
             context && context.resetFields(names as any)
             emit('reset', unref(model))

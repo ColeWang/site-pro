@@ -1,6 +1,4 @@
-import type { BaseLocale } from './typings'
-
-const locale: BaseLocale = {
+export default {
     locale: 'zh-CN',
     global: {
         inputPlaceholder: '请输入',
@@ -44,5 +42,3 @@ const locale: BaseLocale = {
         }
     }
 }
-
-export default locale

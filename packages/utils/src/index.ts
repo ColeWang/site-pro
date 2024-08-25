@@ -44,11 +44,11 @@ export type {
     Dictionary,
     Recordable,
     IfAny,
-    BaseNamePath,
+    NamePath,
+    FieldNames,
+    LiteralUnion,
     BaseSlot,
     BaseOptionType,
     BaseBadgeType,
-    BaseEnumType,
-    BaseFieldNames,
-    LiteralUnion
+    BaseEnumType
 } from './typings'

@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import type { BaseNamePath } from '@site-pro/utils'
+import type { NamePath } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isNumber, isString, merge, pick } from 'lodash-es'
 import type { ColWrapProps } from '../helpers/ColWrap'
@@ -66,12 +66,12 @@ export default defineComponent({
         const { name: fieldNamePath } = props.formItemProps
         fieldNamePath && setDefaultValue(fieldNamePath)
 
-        function setDefaultValue (namePath: BaseNamePath): void {
+        function setDefaultValue (namePath: NamePath): void {
             const hasValue = has(unref(model), namePath)
             !hasValue && onUpdateValue(namePath, undefined)
         }
 
-        function onUpdateValue (namePath: BaseNamePath, value: any): void {
+        function onUpdateValue (namePath: NamePath, value: any): void {
             if (isString(namePath) || isArray(namePath)) {
                 setModelValue && setModelValue(namePath, value)
             }

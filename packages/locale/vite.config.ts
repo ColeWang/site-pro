@@ -37,7 +37,11 @@ export default defineConfig((config) => {
         build: {
             minify: false,
             lib: {
-                entry: resolve(__dirname, 'src')
+                entry: {
+                    'index': resolve(__dirname, 'src'),
+                    'en-US': resolve(__dirname, 'src/en-US'),
+                    'zh-CN': resolve(__dirname, 'src/zh-CN'),
+                }
             },
             rollupOptions: {
                 external: [
@@ -47,24 +51,20 @@ export default defineConfig((config) => {
                     'dayjs',
                     'ant-design-vue',
                     '@ant-design/icons-vue',
-                    '@types/lodash-es',
-                    '@site-pro/utils',
-                    'ant-design-vue/es/config-provider/hooks/useConfigInject'
+                    '@types/lodash-es'
                 ],
                 output: [
                     {
-                        entryFileNames: 'index.esm.js',
+                        entryFileNames: (chunkInfo) => {
+                            return chunkInfo.name + '.esm.js'
+                        },
                         format: 'es',
-                        paths: {
-                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/es/config-provider/hooks/useConfigInject'
-                        }
                     },
                     {
-                        entryFileNames: 'index.cjs.js',
+                        entryFileNames: (chunkInfo) => {
+                            return chunkInfo.name + '.cjs.js'
+                        },
                         format: 'cjs',
-                        paths: {
-                            'ant-design-vue/es/config-provider/hooks/useConfigInject': 'ant-design-vue/lib/config-provider/hooks/useConfigInject'
-                        }
                     }
                 ],
                 plugins: [

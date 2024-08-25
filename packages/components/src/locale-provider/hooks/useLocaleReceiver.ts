@@ -1,31 +1,36 @@
 import type { ComputedRef, InjectionKey } from 'vue'
 import { computed, inject, unref } from 'vue'
-import type { BaseNamePath } from '@site-pro/utils'
-import type { BaseLocale, BaseStateLocale } from '../typings'
+import type { NamePath } from '@site-pro/utils'
 import { get } from 'lodash-es'
-import zhCN from '../zhCN'
+import type { LocaleProviderExpose, LocaleType } from '../typings'
+import zhCN from '../../../../locale/src/zhCN.ts'
 
-export const BaseLocaleKey: InjectionKey<BaseStateLocale> = Symbol('Locale')
+export type InjectLocaleReceiver = Partial<LocaleProviderExpose>;
 
-function useLocaleReceiver (
-    path: BaseNamePath,
-    defaultLocale?: BaseLocale,
-    propsLocale?: BaseLocale
-) {
-    const state: BaseStateLocale = inject(BaseLocaleKey, {})
+interface UseLocaleReceiverReturnType {
+    locale: ComputedRef<LocaleType>;
+    t: (namePath: NamePath) => string | number | undefined;
+}
 
-    const locale: ComputedRef<BaseLocale> = computed(() => {
-        const baseLocale = unref(defaultLocale) || get(zhCN, (path || ['global']), {})
-        const providerLocale = (path && state.locale) ? get(state.locale, path, {}) : {}
-        const needPropsLocale = unref(propsLocale) || {}
-        return { ...baseLocale, ...providerLocale, ...needPropsLocale }
+export const LocaleReceiverKey: InjectionKey<InjectLocaleReceiver> = Symbol('LocaleReceiver')
+
+function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverReturnType {
+    const { locale } = inject(LocaleReceiverKey, {})
+
+    const mergeLocale: ComputedRef<LocaleType> = computed(() => {
+        const needLocale = unref(locale) || zhCN as LocaleType
+        if (namePath) {
+            const stateLocale: LocaleType = get(needLocale, namePath, {})
+            return { ...stateLocale, ...unref(propsLocale) }
+        }
+        return { ...needLocale, ...unref(propsLocale) }
     })
 
-    function translate (path: BaseNamePath): string {
-        return get(unref(locale), path, path)
+    function translate (namePath: NamePath): string | number | undefined {
+        return get(unref(locale), namePath, namePath)
     }
 
-    return { locale, t: translate }
+    return { locale: mergeLocale, t: translate }
 }
 
 export default useLocaleReceiver

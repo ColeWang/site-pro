@@ -3,24 +3,24 @@ import { h, isVNode } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
 import { isEmpty } from './is'
-import type { BaseEnumType, BaseFieldNames, BaseOptionType } from './typings'
+import type { BaseEnumType, BaseOptionType, FieldNames } from './typings'
 
-export function enumToOptions<E extends BaseEnumType, O extends BaseOptionType> (valueEnum?: E): Array<O> {
+export function enumToOptions<E extends BaseEnumType, Option extends BaseOptionType> (valueEnum?: E): Array<Option> {
     const result = map(valueEnum || ({} as E), (item, key) => {
-        if (isEmpty(item)) return item
+        if (isEmpty(item)) return undefined
         if (isObject(item) && item.text) {
             const { text, disabled } = item
             return { value: key, label: text, disabled }
         }
         return { value: key, label: item }
     })
-    return compact(result) as Array<O>
+    return compact(result) as Array<Option>
 }
 
-export function optionsToEnum<O extends BaseOptionType, E extends BaseEnumType> (options?: Array<O>, fieldNames?: BaseFieldNames): E {
+export function optionsToEnum<Option extends BaseOptionType, E extends BaseEnumType> (options?: Array<Option>, fieldNames?: FieldNames): E {
     const { value = 'value', label = 'label', children = 'children' } = fieldNames || {}
 
-    const traverseOptions = (values: Array<O> = [], result: E) => {
+    const traverseOptions = (values: Array<Option> = [], result: E) => {
         return reduce(values, (_, option) => {
             const key = option[value], text = option[label]
             if (!(isEmpty(key) || isEmpty(text))) {

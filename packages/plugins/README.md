@@ -1,1 +1,1 @@
-# Components
+# Plugins

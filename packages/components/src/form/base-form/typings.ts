@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
-import type { BaseNamePath, Recordable } from '@site-pro/utils'
+import type { NamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import { formProps } from '../../ant-typings'
 
@@ -63,13 +63,13 @@ export interface BaseFormExpose {
     formInstanceRef: Ref<FormInstance | null>;
     model: Ref<BaseFormModel>;
     formProps: ComputedRef<BaseFormProps>;
-    setModelValue: (namePath: BaseNamePath, value: any) => BaseFormModel;
-    getModelValue: (namePath: BaseNamePath) => BaseFormModel;
-    updateModelValue: (namePath: BaseNamePath, updater: Updater) => BaseFormModel;
-    deleteModelValue: (namePath: BaseNamePath) => boolean;
+    setModelValue: (namePath: NamePath, value: any) => BaseFormModel;
+    getModelValue: (namePath: NamePath) => BaseFormModel;
+    updateModelValue: (namePath: NamePath, updater: Updater) => BaseFormModel;
+    deleteModelValue: (namePath: NamePath) => boolean;
     submit: () => void;
-    validate: (names?: BaseNamePath[]) => Promise<BaseFormModel>;
-    resetFields: (names?: BaseNamePath[]) => void;
+    validate: (names?: NamePath[]) => Promise<BaseFormModel>;
+    resetFields: (names?: NamePath[]) => void;
 }
 
 export type BaseFormInstance = ComponentPublicInstance<BaseFormProps, BaseFormExpose>;

@@ -1,6 +1,4 @@
-import type { BaseLocale } from './typings'
-
-const locale: BaseLocale = {
+export default {
     locale: 'en-US',
     global: {
         inputPlaceholder: 'Please enter',
@@ -44,5 +42,3 @@ const locale: BaseLocale = {
         }
     }
 }
-
-export default locale
