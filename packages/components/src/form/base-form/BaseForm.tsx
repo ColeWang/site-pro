@@ -13,8 +13,8 @@ import { baseFormProps } from './typings'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import useStyle from './style'
 
-function resetLayoutOfGrid (props: BaseFormProps): BaseFormProps['layout'] {
-    // 当 grid = true 时 layout 不支持 inline
+function resetLayoutOfGrid (props: BaseFormProps): string | undefined {
+    // 当 grid = true 时 layout 不支持 inlinex
     const { layout, grid } = props || {}
     return (grid && layout === 'inline') ? 'vertical' : layout
 }
