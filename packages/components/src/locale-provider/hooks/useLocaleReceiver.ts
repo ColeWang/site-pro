@@ -18,7 +18,7 @@ function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseL
     const { locale } = inject(LocaleReceiverKey, {})
 
     const mergeLocale: ComputedRef<LocaleType> = computed(() => {
-        const needLocale = unref(locale) || zhCN as LocaleType
+        const needLocale: LocaleType = { ...(zhCN as LocaleType), ...unref(locale) }
         if (namePath) {
             const stateLocale: LocaleType = get(needLocale, namePath, {})
             return { ...stateLocale, ...unref(propsLocale) }
@@ -27,7 +27,7 @@ function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseL
     })
 
     function translate (namePath: NamePath): string | number | undefined {
-        return get(unref(locale), namePath, namePath)
+        return get(unref(mergeLocale), namePath, namePath)
     }
 
     return { locale: mergeLocale, t: translate }

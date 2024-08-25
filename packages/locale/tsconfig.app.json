@@ -27,6 +27,9 @@
     "vite-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "examples/**/*.ts",
+    "examples/**/*.tsx",
+    "examples/**/*.vue"
   ]
 }
