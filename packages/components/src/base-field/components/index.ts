@@ -29,5 +29,3 @@ export type { FieldTextProps, FieldTextInstance } from './text'
 export type { FieldNumberProps, FieldNumberInstance } from './number'
 export type { FieldTextareaProps, FieldTextareaInstance } from './textarea'
 export type { FieldPasswordProps, FieldPasswordInstance } from './password'
-
-export type { CustomFormat } from './utils'

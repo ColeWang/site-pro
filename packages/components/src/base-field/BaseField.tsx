@@ -24,7 +24,7 @@ import {
     FieldTreeSelect
 } from './components'
 
-type BaseFieldFieldProps = BaseFieldProps['fieldProps'];
+type BaseFieldFieldProps = BaseFieldProps['fieldProps'] & any;
 
 function mergeFieldProps (
     props: BaseFieldProps,

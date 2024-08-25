@@ -5,10 +5,6 @@ import { formProps } from '../../ant-typings'
 
 export type BaseFormModel = Recordable;
 
-export interface Updater {
-    (value: any): any;
-}
-
 type BaseFormTransform = (values: BaseFormModel) => BaseFormModel;
 type BaseFormOnReset = (values: BaseFormModel) => void;
 type BaseFormOnValuesChange = (values: BaseFormModel) => void;
@@ -65,7 +61,7 @@ export interface BaseFormExpose {
     formProps: ComputedRef<BaseFormProps>;
     setModelValue: (namePath: BaseNamePath, value: any) => BaseFormModel;
     getModelValue: (namePath: BaseNamePath) => BaseFormModel;
-    updateModelValue: (namePath: BaseNamePath, updater: Updater) => BaseFormModel;
+    updateModelValue: (namePath: BaseNamePath, updater: (value: any) => any) => BaseFormModel;
     deleteModelValue: (namePath: BaseNamePath) => boolean;
     submit: () => void;
     validate: (names?: BaseNamePath[]) => Promise<BaseFormModel>;

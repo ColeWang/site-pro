@@ -5,6 +5,7 @@ import { customFieldsProps } from './typings'
 
 CustomFields.install = (app: App) => {
     app.component(CustomFields.name as string, CustomFields)
+    return app
 }
 
 export { CustomFields, useCustomFields, customFieldsProps }

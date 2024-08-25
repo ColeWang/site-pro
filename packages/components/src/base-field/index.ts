@@ -5,6 +5,7 @@ import { CustomFields, customFieldsProps, useCustomFields } from './custom-field
 
 BaseField.install = (app: App) => {
     app.component(BaseField.name as string, BaseField)
+    return app
 }
 
 export { BaseField, baseFieldProps }

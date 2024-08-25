@@ -7,6 +7,6 @@ export { BaseForm, baseFormProps }
 export { Submitter, submitterProps }
 export { useFormInstance, createFromInstance, FormInstanceKey }
 
-export type { Updater, BaseFormModel, BaseFormProps, BaseFormExpose, BaseFormInstance } from './typings'
+export type { BaseFormModel, BaseFormProps, BaseFormExpose, BaseFormInstance } from './typings'
 export type { SubmitterProps, SubmitterInstance } from './Submitter'
 export type { InjectFormInstance } from './hooks/useFormInstance'

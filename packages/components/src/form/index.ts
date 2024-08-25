@@ -38,7 +38,6 @@ export {
 } from './components'
 
 export type {
-    Updater,
     BaseFormModel,
     BaseFormProps,
     BaseFormExpose,
