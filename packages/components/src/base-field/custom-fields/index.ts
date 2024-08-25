@@ -10,4 +10,4 @@ CustomFields.install = (app: App) => {
 export { CustomFields, useCustomFields, customFieldsProps }
 
 export type { InjectCustomFields } from './hooks/useCustomFields'
-export type { BaseValueTypeMap, CustomFieldsProps, CustomFieldsExpose, CustomFieldsInstance } from './typings'
+export type { CustomFieldsValueTypeMap, CustomFieldsProps, CustomFieldsExpose, CustomFieldsInstance } from './typings'

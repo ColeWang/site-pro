@@ -1,7 +1,7 @@
 import type { ComputedRef } from 'vue'
 import { computed, defineComponent, provide } from 'vue'
 import { CustomFieldsKey } from './hooks/useCustomFields'
-import type { BaseValueTypeMap, CustomFieldsExpose } from './typings'
+import type { CustomFieldsExpose, CustomFieldsValueTypeMap } from './typings'
 import { customFieldsProps } from './typings'
 
 export default defineComponent({
@@ -9,7 +9,7 @@ export default defineComponent({
     name: 'ProCustomFields',
     props: customFieldsProps(),
     setup (props, { slots, expose }) {
-        const valueTypeMap: ComputedRef<BaseValueTypeMap> = computed(() => {
+        const valueTypeMap: ComputedRef<CustomFieldsValueTypeMap> = computed(() => {
             return props.valueTypeMap
         })
 

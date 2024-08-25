@@ -1,4 +1,4 @@
-import type { FullToken, GenerateStyle } from '../../theme'
+import type { CSSInterpolation, FullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
 interface ProDescriptionsToken extends FullToken<'ProDescriptions'> {
@@ -6,7 +6,7 @@ interface ProDescriptionsToken extends FullToken<'ProDescriptions'> {
     descsHeaderMargin: number;
 }
 
-const genBaseStyle: GenerateStyle<ProDescriptionsToken> = (token) => {
+function genBaseStyle (token: ProDescriptionsToken): CSSInterpolation {
     const { componentCls, fieldTextareaReadCls, descsHeaderMargin } = token
     return {
         [componentCls]: {
@@ -53,5 +53,5 @@ export default genComponentStyleHook('ProDescriptions', (token) => {
         descsHeaderMargin,
         fieldTextareaReadCls
     })
-    return [genBaseStyle(descriptionsToken)]
+    return genBaseStyle(descriptionsToken)
 })

@@ -2,7 +2,7 @@ import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType }
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import type { BaseFieldProps } from '../typings'
 
-export interface BaseValueTypeMap {
+export interface CustomFieldsValueTypeMap {
     [key: string]: BaseSlot<{
         props: BaseFieldProps;
         slots: Recordable<BaseSlot>;
@@ -11,7 +11,7 @@ export interface BaseValueTypeMap {
 
 export const customFieldsProps = () => ({
     valueTypeMap: {
-        type: Object as PropType<BaseValueTypeMap>,
+        type: Object as PropType<CustomFieldsValueTypeMap>,
         default: () => ({})
     }
 })
@@ -19,7 +19,7 @@ export const customFieldsProps = () => ({
 export type CustomFieldsProps = Partial<ExtractPropTypes<ReturnType<typeof customFieldsProps>>>;
 
 export interface CustomFieldsExpose {
-    valueTypeMap: ComputedRef<BaseValueTypeMap>;
+    valueTypeMap: ComputedRef<CustomFieldsValueTypeMap>;
 }
 
 export type CustomFieldsInstance = ComponentPublicInstance<CustomFieldsProps, CustomFieldsExpose>;

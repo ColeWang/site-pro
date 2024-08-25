@@ -13,11 +13,13 @@ export { CustomFields, customFieldsProps, useCustomFields }
 export type {
     BaseFieldValueTypeWithFieldProps,
     BaseFieldValueType,
+    BaseFieldFieldProps,
+    BaseFieldFormItemProps,
     BaseFieldProps,
     BaseFieldInstance
 } from './typings'
 export type {
-    BaseValueTypeMap,
+    CustomFieldsValueTypeMap,
     CustomFieldsProps,
     CustomFieldsExpose,
     CustomFieldsInstance

@@ -1,11 +1,11 @@
-import type { FullToken, GenerateStyle } from '../../../theme'
+import type { CSSInterpolation, FullToken } from '../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../theme'
 
 interface ProBaseFormToken extends FullToken<'ProBaseForm'> {
     // --
 }
 
-const genBaseStyle: GenerateStyle<ProBaseFormToken> = (token) => {
+function genBaseStyle (token: ProBaseFormToken): CSSInterpolation {
     const { componentCls, antCls } = token
     return {
         [componentCls]: {
@@ -19,5 +19,5 @@ const genBaseStyle: GenerateStyle<ProBaseFormToken> = (token) => {
 
 export default genComponentStyleHook('ProBaseForm', (token) => {
     const proBaseFormToken: ProBaseFormToken = mergeToken(token, {})
-    return [genBaseStyle(proBaseFormToken)]
+    return genBaseStyle(proBaseFormToken)
 })

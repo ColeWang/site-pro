@@ -49,6 +49,8 @@ export interface BaseFieldValueTypeWithFieldProps {
 }
 
 export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
+export type BaseFieldFieldProps<T extends BaseFieldValueType> = BaseFieldValueTypeWithFieldProps[T];
+export type BaseFieldFormItemProps = FormItemProps & { model?: FormProps['model'] };
 
 export const baseFieldProps = () => ({
     text: {
@@ -76,7 +78,7 @@ export const baseFieldProps = () => ({
         default: () => ({})
     },
     formItemProps: {
-        type: Object as PropType<FormItemProps & { model?: FormProps['model'] }>,
+        type: Object as PropType<BaseFieldFormItemProps>,
         default: () => ({})
     },
     emptyText: {

@@ -51,6 +51,7 @@ export default defineConfig((config) => {
                     '@site-pro/hooks',
                     '@types/lodash-es',
                     'ant-design-vue/es/theme/internal',
+                    'ant-design-vue/es/_util/cssinjs',
                     'ant-design-vue/es/date-picker/generatePicker/props',
                     'ant-design-vue/es/time-picker/time-picker',
                     'ant-design-vue/es/input',
@@ -64,6 +65,7 @@ export default defineConfig((config) => {
                         format: 'es',
                         paths: {
                             'ant-design-vue/es/theme/internal': 'ant-design-vue/es/theme/internal',
+                            'ant-design-vue/es/_util/cssinjs': 'ant-design-vue/es/_util/cssinjs',
                             'ant-design-vue/es/date-picker/generatePicker/props': 'ant-design-vue/es/date-picker/generatePicker/props',
                             'ant-design-vue/es/time-picker/time-picker': 'ant-design-vue/es/time-picker/time-picker',
                             'ant-design-vue/es/input': 'ant-design-vue/es/input',
@@ -77,6 +79,7 @@ export default defineConfig((config) => {
                         format: 'cjs',
                         paths: {
                             'ant-design-vue/es/theme/internal': 'ant-design-vue/lib/theme/internal',
+                            'ant-design-vue/es/_util/cssinjs': 'ant-design-vue/lib/_util/cssinjs',
                             'ant-design-vue/es/date-picker/generatePicker/props': 'ant-design-vue/lib/date-picker/generatePicker/props',
                             'ant-design-vue/es/time-picker/time-picker': 'ant-design-vue/lib/time-picker/time-picker',
                             'ant-design-vue/es/input': 'ant-design-vue/lib/input',

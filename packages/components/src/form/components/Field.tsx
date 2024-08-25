@@ -6,12 +6,10 @@ import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isNumber, isString, merge, pick } from 'lodash-es'
 import type { ColWrapProps } from '../helpers/ColWrap'
 import ColWrap from '../helpers/ColWrap'
-import type { BaseFieldProps } from '../../base-field'
+import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
 import { useFormInstance } from '../base-form'
 import { genFormItemFixStyle } from '../utils'
-
-type BaseFieldFormItemProps = BaseFieldProps['formItemProps'];
 
 const sizeEnum: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,

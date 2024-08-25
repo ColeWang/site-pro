@@ -3,8 +3,6 @@ export {
     baseFormProps,
     Submitter,
     submitterProps,
-    FormInstanceKey,
-    createFromInstance,
     useFormInstance
 } from './base-form'
 
