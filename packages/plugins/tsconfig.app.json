@@ -27,12 +27,6 @@
     "paths": {
       "@/*": [
         "./examples/*"
-      ],
-      "vue-types": [
-        "../../node_modules/vue-types"
-      ],
-      "scroll-into-view-if-needed": [
-        "../../node_modules/scroll-into-view-if-needed"
       ]
     }
   },
