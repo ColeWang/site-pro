@@ -1,9 +1,9 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
+import { colProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
 import { pick } from 'lodash-es'
 import type { ColProps } from '../../ant-typings'
-import { colProps } from '../../ant-typings'
 
 export const colWrapProps = () => ({
     ...colProps(),

@@ -27,10 +27,6 @@ import type {
 } from 'ant-design-vue/es/time-picker/time-picker'
 import type { TextAreaProps as InputTextareaProps } from 'ant-design-vue/es/input'
 import type { Dayjs } from 'dayjs'
-// -- props --
-import { formItemProps, formProps } from 'ant-design-vue/es/form'
-import { rowProps } from 'ant-design-vue/es/grid/Row'
-import { colProps } from 'ant-design-vue/es/grid/Col'
 
 declare module 'vue-types' {
     // FIX: TS2742 cannot be named without a reference to `xxx`
@@ -89,5 +85,3 @@ export type {
     RowProps,
     ColProps
 }
-
-export { formProps, formItemProps, rowProps, colProps }

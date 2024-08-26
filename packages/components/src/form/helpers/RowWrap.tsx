@@ -1,9 +1,9 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
+import { rowProps } from 'ant-design-vue/es/grid/Row'
 import { pick } from 'lodash-es'
 import type { RowProps } from '../../ant-typings'
-import { rowProps } from '../../ant-typings'
 
 const rowWarpProps = () => ({
     ...rowProps(),

@@ -1,11 +1,11 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
+import { formItemProps } from 'ant-design-vue/es/form'
 import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { FieldProps } from './Field'
 import Field, { fieldProps } from './Field'
-import { formItemProps } from '../../ant-typings'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../../base-field'
 
 const valueType: BaseFieldValueType = 'text'
