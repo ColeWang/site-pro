@@ -3,8 +3,9 @@ import { computed, defineComponent, provide } from 'vue'
 import { CustomFieldsKey } from './hooks/useCustomFields'
 import type { CustomFieldsExpose, CustomFieldsValueTypeMap } from './typings'
 import { customFieldsProps } from './typings'
+import { withInstall } from '../../tools'
 
-export default defineComponent({
+const CustomFields = defineComponent({
     inheritAttrs: false,
     name: 'ProCustomFields',
     props: customFieldsProps(),
@@ -25,3 +26,5 @@ export default defineComponent({
         }
     }
 })
+
+export default withInstall(CustomFields)

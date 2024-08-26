@@ -11,6 +11,7 @@ import { createFromInstance } from './hooks/useFormInstance'
 import type { BaseFormExpose, BaseFormModel, BaseFormProps, Updater } from './typings'
 import { baseFormProps } from './typings'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
+import { withInstall } from '../../tools'
 import useStyle from './style'
 
 function resetLayoutOfGrid (props: BaseFormProps): string | undefined {
@@ -19,7 +20,7 @@ function resetLayoutOfGrid (props: BaseFormProps): string | undefined {
     return (grid && layout === 'inline') ? 'vertical' : layout
 }
 
-export default defineComponent({
+const BaseForm = defineComponent({
     inheritAttrs: false,
     name: 'ProBaseForm',
     props: baseFormProps(),
@@ -167,3 +168,5 @@ export default defineComponent({
         }
     }
 })
+
+export default withInstall(BaseForm)

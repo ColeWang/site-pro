@@ -32,6 +32,7 @@ import { formItemProps, formProps } from 'ant-design-vue/es/form'
 import { rowProps } from 'ant-design-vue/es/grid/Row'
 import { colProps } from 'ant-design-vue/es/grid/Col'
 
+
 const passwordProps = {
     prefixCls: String,
     inputPrefixCls: String,

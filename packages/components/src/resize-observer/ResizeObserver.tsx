@@ -5,8 +5,9 @@ import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
 import type { RectSizeType } from './typings'
 import { resizeObserverProps } from './typings'
+import { withInstall } from '../tools'
 
-export default defineComponent({
+const ResizeObserver = defineComponent({
     inheritAttrs: false,
     name: 'ProResizeObserver',
     props: resizeObserverProps(),
@@ -45,3 +46,5 @@ export default defineComponent({
         }
     }
 })
+
+export default withInstall(ResizeObserver)

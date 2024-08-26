@@ -3,15 +3,27 @@ import type { NamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import { formProps } from '../../ant-typings'
 
+declare module 'scroll-into-view-if-needed' {
+    // -- fix formProps inferred type --
+}
+
 export interface Updater {
     (value: any): any;
 }
 
 export type BaseFormModel = Recordable;
 
-type BaseFormTransform = (values: BaseFormModel) => BaseFormModel;
-type BaseFormOnReset = (values: BaseFormModel) => void;
-type BaseFormOnValuesChange = (values: BaseFormModel) => void;
+export interface BaseFormTransform {
+    (values: BaseFormModel): BaseFormModel;
+}
+
+export interface BaseFormOnReset {
+    (values: BaseFormModel): void;
+}
+
+export interface BaseFormOnValuesChange {
+    (values: BaseFormModel): void;
+}
 
 export const baseFormProps = () => ({
     ...formProps(),
