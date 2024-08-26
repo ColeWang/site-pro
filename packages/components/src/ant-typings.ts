@@ -32,6 +32,13 @@ import { formItemProps, formProps } from 'ant-design-vue/es/form'
 import { rowProps } from 'ant-design-vue/es/grid/Row'
 import { colProps } from 'ant-design-vue/es/grid/Col'
 
+declare module 'ant-design-vue/es/theme/interface' {
+    interface ComponentTokenMap {
+        ProFieldTextarea?: {},
+        ProBaseForm?: {},
+        ProDescriptions?: {},
+    }
+}
 
 const passwordProps = {
     prefixCls: String,

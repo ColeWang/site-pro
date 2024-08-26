@@ -26,10 +26,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "examples/*"
+        "./examples/*"
       ],
-      "@site-pro/components": [
-        "src/*"
+      "vue-types": [
+        "../../node_modules/vue-types"
+      ],
+      "scroll-into-view-if-needed": [
+        "../../node_modules/scroll-into-view-if-needed"
       ]
     }
   },

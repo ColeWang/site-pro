@@ -5,4 +5,9 @@ import useResizeObserver from './useResizeObserver'
 
 export const version: string = __VERSION__
 
-export { tryOnScopeDispose, useConfigInject, useGlobalProperties, useResizeObserver }
+export {
+    tryOnScopeDispose,
+    useConfigInject,
+    useGlobalProperties,
+    useResizeObserver
+}

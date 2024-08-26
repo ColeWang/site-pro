@@ -4,9 +4,8 @@ import type { BaseSlot } from '@site-pro/utils'
 import type { LocaleProviderExpose, LocaleType } from './typings'
 import { localeProviderProps } from './typings'
 import { LocaleReceiverKey } from './hooks/useLocaleReceiver'
-import { withInstall } from '../tools'
 
-const LocaleProvider = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProLocaleProvider',
     props: localeProviderProps(),
@@ -33,5 +32,3 @@ const LocaleProvider = defineComponent({
         }
     }
 })
-
-export default withInstall(LocaleProvider)

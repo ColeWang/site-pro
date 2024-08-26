@@ -4,8 +4,8 @@ import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldTimeRangePickerProps } from './typings'
-import type { CustomFormat } from '../utils'
-import { formatDate } from '../utils'
+import type { CustomFormat } from '../../../vue-tools'
+import { formatDate } from '../../../vue-tools'
 import type { TimeRangePickerProps } from '../../../ant-typings'
 
 export default defineComponent({
@@ -34,7 +34,7 @@ export default defineComponent({
             const needFieldProps: TimeRangePickerProps = {
                 allowClear: true,
                 ...fieldProps,
-                placeholder: placeholder
+                placeholder: placeholder as any
             }
             const fieldDom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
             // ----

@@ -5,7 +5,6 @@ import { get, isFunction, isObject } from 'lodash-es'
 import type { BaseFieldProps, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
 import { useCustomFields } from './custom-fields'
-import { withInstall } from '../tools'
 // ---
 import {
     FieldCascader,
@@ -175,7 +174,7 @@ function defaultRenderText (
 }
 
 
-const BaseField = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProBaseField',
     props: baseFieldProps(),
@@ -218,5 +217,3 @@ const BaseField = defineComponent({
         }
     }
 })
-
-export default withInstall(BaseField)

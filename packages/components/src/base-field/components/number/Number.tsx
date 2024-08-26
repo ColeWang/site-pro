@@ -30,7 +30,7 @@ export default defineComponent({
             const needFieldProps: InputNumberProps = {
                 min: 0,
                 ...fieldProps,
-                placeholder: placeholder
+                placeholder: placeholder as any
             }
             const fieldDom = <InputNumber {...needFieldProps} v-slots={slots}/>
             // ----

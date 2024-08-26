@@ -3,10 +3,6 @@ import type { NamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import { formProps } from '../../ant-typings'
 
-declare module 'scroll-into-view-if-needed' {
-    // -- fix formProps inferred type --
-}
-
 export interface Updater {
     (value: any): any;
 }

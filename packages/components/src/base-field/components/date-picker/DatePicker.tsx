@@ -3,8 +3,8 @@ import { DatePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import { fieldDatePickerProps } from './typings'
-import type { CustomFormat } from '../utils'
-import { formatDate } from '../utils'
+import type { CustomFormat } from '../../../vue-tools'
+import { formatDate } from '../../../vue-tools'
 import type { DatePickerProps } from '../../../ant-typings'
 
 export default defineComponent({
@@ -25,7 +25,7 @@ export default defineComponent({
             const needFieldProps: DatePickerProps = {
                 allowClear: true,
                 ...fieldProps,
-                placeholder: placeholder
+                placeholder: placeholder as any
             }
             const fieldDom = <DatePicker {...needFieldProps} v-slots={slots}/>
             // ----

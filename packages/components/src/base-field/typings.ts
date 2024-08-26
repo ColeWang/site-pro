@@ -62,7 +62,7 @@ export const baseFieldProps = () => ({
         default: 'edit'
     },
     placeholder: {
-        type: String as PropType<string>,
+        type: [String, Array] as PropType<string | string[]>,
         default: undefined
     },
     valueType: {
