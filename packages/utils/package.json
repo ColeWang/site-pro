@@ -1,7 +1,7 @@
 {
   "name": "@site-pro/utils",
   "version": "0.3.0",
-  "description": "",
+  "description": "Vue3 Admin Pro Utils of Vue",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build"
