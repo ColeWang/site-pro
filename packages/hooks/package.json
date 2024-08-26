@@ -18,10 +18,11 @@
       "import": "./es/index.js",
       "require": "./lib/index.js"
     },
-    "./*": [
-      "./*.js",
-      "./*.d.ts"
-    ]
+    "./*": {
+      "types": "./types/*.d.ts",
+      "import": "./es/*.js",
+      "require": "./lib/*.js"
+    }
   },
   "files": [
     "lib",
