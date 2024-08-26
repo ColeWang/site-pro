@@ -7,21 +7,29 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import typescript from '@rollup/plugin-typescript'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const __filename: string = fileURLToPath(import.meta.url)
+const __dirname: string = dirname(__filename)
 
-function readPackageFile () {
-    const urlPath = new URL('./package.json', import.meta.url)
-    const file = readFileSync(urlPath, 'utf-8')
+function readPackageFile (): Record<string, any> {
+    const urlPath: URL = new URL('./package.json', import.meta.url)
+    const file: string = readFileSync(urlPath, 'utf-8')
     return JSON.parse(file)
 }
 
-const { version } = readPackageFile()
+function replacePaths (id: string): string {
+    const regExp: RegExp = /(ant-design-vue)\/(es)\/(.*)/
+    if (id && regExp.test(id)) {
+        return id.replace(regExp, '$1/lib/$3')
+    }
+    return id
+}
 
 export default defineConfig((config) => {
-    const env = loadEnv(config.mode, __dirname, ['VITE_', 'ENV_'])
+    const env: Record<string, string> = loadEnv(config.mode, __dirname, ['VITE_', 'ENV_'])
 
     console.log(env)
+
+    const { version } = readPackageFile()
 
     return {
         plugins: [
@@ -30,7 +38,6 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@site-pro/plugins': resolve(__dirname, 'src'),
                 '@': resolve(__dirname, 'examples')
             }
         },
@@ -45,9 +52,9 @@ export default defineConfig((config) => {
                     'vue-router',
                     'lodash-es',
                     'dayjs',
-                    'ant-design-vue',
-                    '@ant-design/icons-vue',
-                    '@types/lodash-es'
+                    /@ant-design/,
+                    /ant-design-vue/,
+                    /@site-pro/
                 ],
                 output: [
                     {
@@ -56,7 +63,8 @@ export default defineConfig((config) => {
                     },
                     {
                         entryFileNames: 'index.cjs.js',
-                        format: 'cjs'
+                        format: 'cjs',
+                        paths: replacePaths
                     }
                 ],
                 plugins: [
