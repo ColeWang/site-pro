@@ -24,7 +24,7 @@ export type CheckboxInstance = ComponentPublicInstance<CheckboxProps>;
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'ProCascader',
+    name: 'ProCheckbox',
     props: checkboxProps(),
     slots: Object.assign(fieldSlots, fieldCheckboxSlots),
     setup (props, { slots }) {
