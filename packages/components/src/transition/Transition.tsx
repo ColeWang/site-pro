@@ -1,47 +1,48 @@
+import type { PropType, TransitionProps } from 'vue'
 import { defineComponent, nextTick, Transition } from 'vue'
-import { addClass, removeClass } from '../../utils/dom'
-import { useConfigInject } from '../../utils/extend'
+import { addClass, removeClass, toPx } from '@site-pro/utils'
+import { useConfigInject } from '@site-pro/hooks'
 import useStyle from './style'
 
-function collapseMotion (name, appear) {
+function collapseMotion (name: string, appear: boolean): TransitionProps {
     return {
-        name,
-        appear,
+        name: name,
+        appear: appear,
         css: true,
-        onBeforeEnter (node) {
+        onBeforeEnter (node: Element): void {
             addClass(node, name)
-            node.style.height = '0px'
-            node.style.opacity = '0'
+            ;(node as HTMLElement).style.height = '0px'
+            ;(node as HTMLElement).style.opacity = '0'
         },
-        onEnter (node) {
+        onEnter (node: Element): void {
             nextTick().then(() => {
-                node.style.height = `${node.scrollHeight}px`
-                node.style.opacity = '1'
+                ;(node as HTMLElement).style.height = toPx(node.scrollHeight)!
+                ;(node as HTMLElement).style.opacity = '1'
             })
         },
-        onAfterEnter (node) {
-            if (node && node.style) {
+        onAfterEnter (node: Element): void {
+            if (node && (node as HTMLElement).style) {
                 removeClass(node, name)
-                node.style.height = ''
-                node.style.opacity = ''
+                ;(node as HTMLElement).style.height = ''
+                ;(node as HTMLElement).style.opacity = ''
             }
         },
-        onBeforeLeave (node) {
+        onBeforeLeave (node: Element): void {
             addClass(node, name)
-            node.style.height = `${node.offsetHeight}px`
-            node.style.opacity = ''
+            ;(node as HTMLElement).style.height = toPx((node as HTMLElement).offsetHeight)!
+            ;(node as HTMLElement).style.opacity = ''
         },
-        onLeave (node) {
+        onLeave (node: Element): void {
             nextTick().then(() => {
-                node.style.height = '0px'
-                node.style.opacity = '0'
+                ;(node as HTMLElement).style.height = toPx(0)!
+                ;(node as HTMLElement).style.opacity = '0'
             })
         },
-        onAfterLeave (node) {
-            if (node && node.style) {
+        onAfterLeave (node: Element): void {
+            if (node && (node as HTMLElement).style) {
                 removeClass(node, name)
-                node.style.height = ''
-                node.style.opacity = ''
+                ;(node as HTMLElement).style.height = ''
+                ;(node as HTMLElement).style.opacity = ''
             }
         }
     }
@@ -49,9 +50,10 @@ function collapseMotion (name, appear) {
 
 export default defineComponent({
     inheritAttrs: false,
+    name: 'ProTransition',
     props: {
         appear: {
-            type: Boolean,
+            type: Boolean as PropType<boolean>,
             default: false,
         }
     },

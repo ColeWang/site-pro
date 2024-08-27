@@ -38,9 +38,10 @@ declare module 'scroll-into-view-if-needed' {
 
 declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
-        ProFieldTextarea?: {},
-        ProBaseForm?: {},
-        ProDescriptions?: {},
+        ProFieldTextarea?: {};
+        ProBaseForm?: {};
+        ProDescriptions?: {};
+        ProTransition?: {};
     }
 }
 
