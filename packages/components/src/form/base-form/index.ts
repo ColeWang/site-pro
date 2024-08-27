@@ -1,7 +1,18 @@
+import type { App } from 'vue'
 import BaseForm from './BaseForm'
 import { baseFormProps } from './typings'
 import Submitter, { submitterProps } from './Submitter'
 import { createFromInstance, FormInstanceKey, useFormInstance } from './hooks/useFormInstance'
+
+BaseForm.install = function (app: App): App {
+    app.component(BaseForm.name as string, BaseForm)
+    return app
+}
+
+Submitter.install = function (app: App): App {
+    app.component(Submitter.name as string, Submitter)
+    return app
+}
 
 export { BaseForm, baseFormProps }
 export { Submitter, submitterProps }
