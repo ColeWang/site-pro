@@ -5,13 +5,14 @@ import type { BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldSelectProps } from './typings'
-import type { SelectProps } from '../../../ant-typings'
+import type { FieldSelectFieldProps } from './typings'
+import { fieldSelectProps, fieldSelectSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSelect',
     props: fieldSelectProps(),
+    slots: fieldSelectSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -32,7 +33,7 @@ export default defineComponent({
                 const valueText = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps: SelectProps = {
+            const needFieldProps: FieldSelectFieldProps = {
                 options: unref(options),
                 allowClear: true,
                 ...fieldProps,

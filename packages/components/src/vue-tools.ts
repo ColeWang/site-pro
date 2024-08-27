@@ -21,3 +21,5 @@ export function withInstall<T> (component: T): T & Plugin {
     }
     return comp as T & Plugin
 }
+
+

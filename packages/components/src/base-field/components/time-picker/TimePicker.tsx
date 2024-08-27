@@ -2,15 +2,16 @@ import { defineComponent } from 'vue'
 import { TimePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldTimePickerProps } from './typings'
 import type { CustomFormat } from '../../../vue-tools'
 import { formatDate } from '../../../vue-tools'
-import type { TimePickerProps } from '../../../ant-typings'
+import type { FieldTimePickerFieldProps } from './typings'
+import { fieldTimePickerProps, fieldTimePickerSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimePicker',
     props: fieldTimePickerProps(),
+    slots: fieldTimePickerSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -22,7 +23,7 @@ export default defineComponent({
                 const valueText = formatDate(text, fieldProps.format as CustomFormat)
                 return valueText ?? emptyText
             }
-            const needFieldProps: TimePickerProps = {
+            const needFieldProps: FieldTimePickerFieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder as any

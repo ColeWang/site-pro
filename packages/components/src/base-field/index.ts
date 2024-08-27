@@ -12,3 +12,4 @@ export type {
 } from './typings'
 
 export * from './custom-fields'
+export * from './components'

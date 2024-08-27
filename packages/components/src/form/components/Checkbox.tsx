@@ -5,28 +5,28 @@ import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
 import type { FieldProps } from './Field'
 import Field, { fieldProps, fieldSlots } from './Field'
-import type { BaseFieldFormItemProps, BaseFieldValueType, FieldTextFieldProps } from '../../base-field'
-import { fieldTextSlots } from '../../base-field'
+import type { BaseFieldFormItemProps, BaseFieldValueType, FieldCheckboxFieldProps } from '../../base-field'
+import { fieldCheckboxSlots } from '../../base-field'
 
-const TEXT_VALUE_TYPE: BaseFieldValueType = 'text'
+const CHECKBOX_VALUE_TYPE: BaseFieldValueType = 'checkbox'
 
-export const textProps = () => ({
+export const checkboxProps = () => ({
     ...fieldProps(),
     ...formItemProps(),
     fieldProps: {
-        type: Object as PropType<FieldTextFieldProps>,
+        type: Object as PropType<FieldCheckboxFieldProps>,
         default: () => ({})
     }
 })
 
-export type TextProps = Partial<ExtractPropTypes<ReturnType<typeof textProps>>>;
-export type TextInstance = ComponentPublicInstance<TextProps>;
+export type CheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof checkboxProps>>>;
+export type CheckboxInstance = ComponentPublicInstance<CheckboxProps>;
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'ProText',
-    props: textProps(),
-    slots: Object.assign(fieldSlots, fieldTextSlots),
+    name: 'ProCascader',
+    props: checkboxProps(),
+    slots: Object.assign(fieldSlots, fieldCheckboxSlots),
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
@@ -36,7 +36,7 @@ export default defineComponent({
             }
             const needFieldProps: FieldProps = {
                 ...props,
-                valueType: TEXT_VALUE_TYPE,
+                valueType: CHECKBOX_VALUE_TYPE,
                 fieldProps: propsFieldProps,
                 formItemProps: needFormItemProps
             }

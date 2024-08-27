@@ -1,11 +1,27 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { SelectProps } from '../../../ant-typings'
+
+export type FieldSelectFieldProps = BaseFieldFieldProps<'select'>;
+
+export const fieldSelectSlots = Object as SlotsType<{
+    clearIcon?: BaseSlot;
+    dropdownRender?: BaseSlot;
+    maxTagPlaceholder?: BaseSlot;
+    menuItemSelectedIcon?: BaseSlot;
+    notFoundContent?: BaseSlot;
+    option?: BaseSlot;
+    placeholder?: BaseSlot;
+    removeIcon?: BaseSlot;
+    suffixIcon?: BaseSlot;
+    tagRender?: BaseSlot;
+}>
 
 export const fieldSelectProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<SelectProps>,
+        type: Object as PropType<FieldSelectFieldProps>,
         default: () => ({})
     }
 })

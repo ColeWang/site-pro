@@ -3,15 +3,16 @@ import { TimeRangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldTimeRangePickerProps } from './typings'
 import type { CustomFormat } from '../../../vue-tools'
 import { formatDate } from '../../../vue-tools'
-import type { TimeRangePickerProps } from '../../../ant-typings'
+import type { FieldTimeRangePickerFieldProps } from './typings'
+import { fieldTimeRangePickerProps, fieldTimeRangePickerSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimeRangePicker',
     props: fieldTimeRangePickerProps(),
+    slots: fieldTimeRangePickerSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -31,7 +32,7 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps: TimeRangePickerProps = {
+            const needFieldProps: FieldTimeRangePickerFieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder as any

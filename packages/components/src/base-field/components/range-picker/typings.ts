@@ -1,11 +1,24 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { RangePickerProps } from '../../../ant-typings'
+
+export type FieldRangePickerFieldProps = BaseFieldFieldProps<'dateRange'>;
+
+export const fieldRangePickerSlots = Object as SlotsType<{
+    dateRender?: BaseSlot;
+    nextIcon?: BaseSlot;
+    prevIcon?: BaseSlot;
+    suffixIcon?: BaseSlot;
+    superNextIcon?: BaseSlot;
+    superPrevIcon?: BaseSlot;
+    separator?: BaseSlot;
+}>
 
 export const fieldRangePickerProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<RangePickerProps>,
+        type: Object as PropType<FieldRangePickerFieldProps>,
         default: () => ({})
     }
 })

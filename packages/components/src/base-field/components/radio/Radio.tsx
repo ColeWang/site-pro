@@ -4,13 +4,14 @@ import { Radio } from 'ant-design-vue'
 import type { BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
-import { fieldRadioProps } from './typings'
-import type { RadioGroupProps } from '../../../ant-typings'
+import type { FieldRadioFieldProps } from './typings'
+import { fieldRadioProps, fieldRadioSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRadio',
     props: fieldRadioProps(),
+    slots: fieldRadioSlots,
     setup (props, { slots }) {
         const options: ComputedRef<BaseOptionType[]> = computed(() => {
             if (isUndefined(props.valueEnum)) {
@@ -28,7 +29,7 @@ export default defineComponent({
                 const valueText = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
-            const needFieldProps: RadioGroupProps = {
+            const needFieldProps: FieldRadioFieldProps = {
                 options: unref(options) as any,
                 ...fieldProps
             }

@@ -1,6 +1,6 @@
 import TreeSelect from './TreeSelect'
-import { fieldTreeSelectProps } from './typings'
+import { fieldTreeSelectProps, fieldTreeSelectSlots } from './typings'
 
-export { TreeSelect as FieldTreeSelect, fieldTreeSelectProps }
+export { TreeSelect as FieldTreeSelect, fieldTreeSelectProps, fieldTreeSelectSlots }
 
-export type { FieldTreeSelectProps, FieldTreeSelectInstance } from './typings'
+export type { FieldTreeSelectFieldProps, FieldTreeSelectProps, FieldTreeSelectInstance } from './typings'

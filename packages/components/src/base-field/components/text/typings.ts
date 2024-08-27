@@ -1,11 +1,22 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { InputProps } from '../../../ant-typings'
+
+export type FieldTextFieldProps = BaseFieldFieldProps<'text'>;
+
+export const fieldTextSlots = Object as SlotsType<{
+    addonAfter?: BaseSlot;
+    addonBefore?: BaseSlot;
+    clearIcon?: BaseSlot;
+    prefix?: BaseSlot;
+    suffix?: BaseSlot;
+}>
 
 export const fieldTextProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<InputProps>,
+        type: Object as PropType<FieldTextFieldProps>,
         default: () => ({})
     }
 })

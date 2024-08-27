@@ -1,12 +1,20 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseOptionType } from '@site-pro/utils'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseOptionType, BaseSlot } from '@site-pro/utils'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { TreeSelectProps } from '../../../ant-typings'
+
+export type FieldTreeSelectFieldProps = BaseFieldFieldProps<'treeSelect'>;
+
+export const fieldTreeSelectSlots = Object as SlotsType<{
+    clearIcon?: BaseSlot;
+    renderExtraFooter?: BaseSlot;
+    suffixIcon?: BaseSlot;
+}>
 
 export const fieldTreeSelectProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<TreeSelectProps & {
+        type: Object as PropType<FieldTreeSelectFieldProps & {
             options?: BaseOptionType;
         }>,
         default: () => ({})

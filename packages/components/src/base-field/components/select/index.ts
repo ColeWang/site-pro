@@ -1,6 +1,6 @@
 import Select from './Select'
-import { fieldSelectProps } from './typings'
+import { fieldSelectProps, fieldSelectSlots } from './typings'
 
-export { Select as FieldSelect, fieldSelectProps }
+export { Select as FieldSelect, fieldSelectProps, fieldSelectSlots }
 
-export type { FieldSelectProps, FieldSelectInstance } from './typings'
+export type { FieldSelectFieldProps, FieldSelectProps, FieldSelectInstance } from './typings'

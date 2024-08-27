@@ -1,9 +1,9 @@
-import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import type { NamePath } from '@site-pro/utils'
+import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { has, isArray, isNumber, isString, merge, pick } from 'lodash-es'
+import { has, isArray, isNumber, isString, merge, omit, pick } from 'lodash-es'
 import type { ColWrapProps } from '../helpers/ColWrap'
 import ColWrap from '../helpers/ColWrap'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
@@ -11,7 +11,7 @@ import { BaseField, baseFieldProps } from '../../base-field'
 import { useFormInstance } from '../base-form'
 import { genFormItemFixStyle } from '../utils'
 
-const sizeEnum: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
+const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,
     sm: 216,
     md: 328,
@@ -19,7 +19,14 @@ const sizeEnum: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xl: 552
 }
 
-export type FieldSizeType = Extract<keyof typeof sizeEnum, any> | number;
+export type FieldSizeType = Extract<keyof typeof SIZE_ENUM, any> | number;
+
+export const fieldSlots = Object as SlotsType<{
+    extra?: BaseSlot;
+    help?: BaseSlot;
+    label?: BaseSlot;
+    tooltip?: BaseSlot;
+}>
 
 export const fieldProps = () => ({
     ...baseFieldProps(),
@@ -44,9 +51,16 @@ export const fieldProps = () => ({
 export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>>;
 export type FieldInstance = ComponentPublicInstance<FieldProps>;
 
-function fieldStyle (style: CSSProperties | undefined, fieldWidth: FieldSizeType): CSSProperties {
+function fieldStyle (
+    style: CSSProperties | undefined,
+    fieldWidth: FieldSizeType,
+    sizeEnum: Record<string, number>
+): CSSProperties {
     const { maxWidth, minWidth, width, ...restStyle } = style || {}
-    const fieldSize: string | undefined = isNumber(fieldWidth) ? toPx(fieldWidth) : toPx(sizeEnum[fieldWidth])
+    const fieldSize: string | undefined = isNumber(fieldWidth)
+        ? toPx(fieldWidth)
+        : toPx(sizeEnum[fieldWidth])
+
     return {
         ...restStyle,
         maxWidth: maxWidth || '100%',
@@ -59,7 +73,10 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProField',
     props: fieldProps(),
-    setup (props, { slots: fieldSlots }) {
+    slots: fieldSlots,
+    setup (props, { slots }) {
+        const SLOTS_KEYS: string[] = ['extra', 'help', 'label', 'tooltip']
+
         const { model, formProps, setModelValue } = useFormInstance()
 
         // 初始化值 防止 form 报错
@@ -86,7 +103,7 @@ export default defineComponent({
 
             const needFieldProps: any = {
                 ...fieldProps,
-                style: fieldStyle(fieldProps.style, fieldWidth!),
+                style: fieldStyle(fieldProps.style, fieldWidth!, SIZE_ENUM),
                 ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
             }
 
@@ -108,10 +125,13 @@ export default defineComponent({
                 grid: grid,
             }
 
+            const formItemSlots = pick(slots, SLOTS_KEYS)
+            const baseFieldSlots = omit(slots, SLOTS_KEYS)
+
             return (
                 <ColWrap {...needColWrapProps} key={key}>
-                    <Form.Item {...needFormItemProps}>
-                        <BaseField {...needBaseFieldProps} v-slots={fieldSlots}/>
+                    <Form.Item {...needFormItemProps} v-slots={formItemSlots}>
+                        <BaseField {...needBaseFieldProps} v-slots={baseFieldSlots}/>
                     </Form.Item>
                 </ColWrap>
             )

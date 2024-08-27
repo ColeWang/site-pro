@@ -1,6 +1,6 @@
 import Slider from './Slider'
-import { fieldSliderProps } from './typings'
+import { fieldSliderProps, fieldSliderSlots } from './typings'
 
-export { Slider as FieldSlider, fieldSliderProps }
+export { Slider as FieldSlider, fieldSliderProps, fieldSliderSlots }
 
-export type { FieldSliderProps, FieldSliderInstance } from './typings'
+export type { FieldSliderFieldProps, FieldSliderProps, FieldSliderInstance } from './typings'

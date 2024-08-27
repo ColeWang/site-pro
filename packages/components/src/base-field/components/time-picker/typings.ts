@@ -1,11 +1,20 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { TimePickerProps } from '../../../ant-typings'
+
+export type FieldTimePickerFieldProps = BaseFieldFieldProps<'time'>;
+
+export const fieldTimePickerSlots = Object as SlotsType<{
+    clearIcon?: BaseSlot;
+    renderExtraFooter?: BaseSlot;
+    suffixIcon?: BaseSlot;
+}>
 
 export const fieldTimePickerProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<TimePickerProps>,
+        type: Object as PropType<FieldTimePickerFieldProps>,
         default: () => ({})
     }
 })

@@ -1,11 +1,15 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { InputTextareaProps } from '../../../ant-typings'
+
+export type FieldTextareaFieldProps = BaseFieldFieldProps<'textarea'>;
+
+export const fieldTextareaSlots = Object as SlotsType<{}>
 
 export const fieldTextareaProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<InputTextareaProps>,
+        type: Object as PropType<FieldTextareaFieldProps>,
         default: () => ({})
     }
 })

@@ -1,6 +1,6 @@
 import RangePicker from './RangePicker'
-import { fieldRangePickerProps } from './typings'
+import { fieldRangePickerProps, fieldRangePickerSlots } from './typings'
 
-export { RangePicker as FieldRangePicker, fieldRangePickerProps }
+export { RangePicker as FieldRangePicker, fieldRangePickerProps, fieldRangePickerSlots }
 
-export type { FieldRangePickerProps, FieldRangePickerInstance } from './typings'
+export type { FieldRangePickerFieldProps, FieldRangePickerProps, FieldRangePickerInstance } from './typings'

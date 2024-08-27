@@ -1,6 +1,6 @@
 import TimePicker from './TimePicker'
-import { fieldTimePickerProps } from './typings'
+import { fieldTimePickerProps, fieldTimePickerSlots } from './typings'
 
-export { TimePicker as FieldTimePicker, fieldTimePickerProps }
+export { TimePicker as FieldTimePicker, fieldTimePickerProps, fieldTimePickerSlots }
 
-export type { FieldTimePickerProps, FieldTimePickerInstance } from './typings'
+export type { FieldTimePickerFieldProps, FieldTimePickerProps, FieldTimePickerInstance } from './typings'

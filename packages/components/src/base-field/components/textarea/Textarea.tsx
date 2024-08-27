@@ -3,13 +3,14 @@ import { Input, theme } from 'ant-design-vue'
 import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldTextareaProps } from './typings'
-import type { InputTextareaProps } from '../../../ant-typings'
+import type { FieldTextareaFieldProps } from './typings'
+import { fieldTextareaProps, fieldTextareaSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTextarea',
     props: fieldTextareaProps(),
+    slots: fieldTextareaSlots,
     setup (props, { slots }) {
         const { prefixCls } = useConfigInject('pro-field-textarea', props)
         const { token } = theme.useToken()
@@ -37,7 +38,7 @@ export default defineComponent({
                     </span>
                 )
             }
-            const needFieldProps: InputTextareaProps = {
+            const needFieldProps: FieldTextareaFieldProps = {
                 rows: 3,
                 ...fieldProps,
                 placeholder: placeholder

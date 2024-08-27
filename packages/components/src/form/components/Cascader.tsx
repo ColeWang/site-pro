@@ -4,16 +4,17 @@ import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
 import type { FieldProps } from './Field'
-import Field, { fieldProps } from './Field'
-import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../../base-field'
+import Field, { fieldProps, fieldSlots } from './Field'
+import type { BaseFieldFormItemProps, BaseFieldValueType, FieldCascaderFieldProps } from '../../base-field'
+import { fieldCascaderSlots } from '../../base-field'
 
-const valueType: BaseFieldValueType = 'cascader'
+const CASCADER_VALUE_TYPE: BaseFieldValueType = 'cascader'
 
 export const cascaderProps = () => ({
     ...fieldProps(),
     ...formItemProps(),
     fieldProps: {
-        type: Object as PropType<BaseFieldFieldProps<'cascader'>>,
+        type: Object as PropType<FieldCascaderFieldProps>,
         default: () => ({})
     }
 })
@@ -25,6 +26,7 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProCascader',
     props: cascaderProps(),
+    slots: Object.assign(fieldSlots, fieldCascaderSlots),
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
@@ -34,7 +36,7 @@ export default defineComponent({
             }
             const needFieldProps: FieldProps = {
                 ...props,
-                valueType: valueType,
+                valueType: CASCADER_VALUE_TYPE,
                 fieldProps: propsFieldProps,
                 formItemProps: needFormItemProps
             }

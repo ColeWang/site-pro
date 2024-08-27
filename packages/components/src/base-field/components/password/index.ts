@@ -1,6 +1,6 @@
 import Password from './Password'
-import { fieldPasswordProps } from './typings'
+import { fieldPasswordProps, fieldPasswordSlots } from './typings'
 
-export { Password as FieldPassword, fieldPasswordProps }
+export { Password as FieldPassword, fieldPasswordProps, fieldPasswordSlots }
 
-export type { FieldPasswordProps, FieldPasswordInstance } from './typings'
+export type { FieldPasswordFieldProps, FieldPasswordProps, FieldPasswordInstance } from './typings'

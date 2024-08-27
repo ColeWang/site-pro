@@ -1,15 +1,16 @@
 import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
-import { getSlotVNode } from '@site-pro/utils'
+import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldSwitchProps } from './typings'
-import type { SwitchProps } from '../../../ant-typings'
+import type { FieldSwitchFieldProps } from './typings'
+import { fieldSwitchProps, fieldSwitchSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSwitch',
     props: fieldSwitchProps(),
+    slots: fieldSwitchSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -25,11 +26,11 @@ export default defineComponent({
             const { value, checked, style, ...restFieldProps } = fieldProps
 
             if (mode === 'read') {
-                const open = fieldProps.checkedChildren ?? t('open')
-                const close = fieldProps.unCheckedChildren ?? t('close')
+                const open = getPropsSlot(slots, fieldProps, 'checkedChildren') ?? t('open')
+                const close = getPropsSlot(slots, fieldProps, 'unCheckedChildren') ?? t('close')
                 return text ? open : close
             }
-            const needFieldProps: SwitchProps = {
+            const needFieldProps: FieldSwitchFieldProps = {
                 ...restFieldProps,
                 checked: checked || value,
                 ['onUpdate:checked']: onUpdateChecked

@@ -1,6 +1,6 @@
 import Text from './Text'
-import { fieldTextProps } from './typings'
+import { fieldTextProps, fieldTextSlots } from './typings'
 
-export { Text as FieldText, fieldTextProps }
+export { Text as FieldText, fieldTextProps, fieldTextSlots }
 
-export type { FieldTextProps, FieldTextInstance } from './typings'
+export type { FieldTextFieldProps, FieldTextProps, FieldTextInstance } from './typings'

@@ -3,15 +3,16 @@ import { RangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldRangePickerProps } from './typings'
 import type { CustomFormat } from '../../../vue-tools'
 import { formatDate } from '../../../vue-tools'
-import type { RangePickerProps } from '../../../ant-typings'
+import type { FieldRangePickerFieldProps } from './typings'
+import { fieldRangePickerProps, fieldRangePickerSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRangePicker',
     props: fieldRangePickerProps(),
+    slots: fieldRangePickerSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -31,7 +32,7 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps: RangePickerProps & any = {
+            const needFieldProps: FieldRangePickerFieldProps & any = {
                 allowClear: true,
                 ...fieldProps,
                 // -- placeholder 类型有问题 string | [string, string]

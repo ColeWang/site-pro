@@ -1,6 +1,6 @@
 import Radio from './Radio'
-import { fieldRadioProps } from './typings'
+import { fieldRadioProps, fieldRadioSlots } from './typings'
 
-export { Radio as FieldRadio, fieldRadioProps }
+export { Radio as FieldRadio, fieldRadioProps, fieldRadioSlots }
 
-export type { FieldRadioProps, FieldRadioInstance } from './typings'
+export type { FieldRadioFieldProps, FieldRadioProps, FieldRadioInstance } from './typings'

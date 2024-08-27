@@ -2,13 +2,14 @@ import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { fieldTextProps } from './typings'
-import type { InputProps } from '../../../ant-typings'
+import type { FieldTextFieldProps } from './typings'
+import { fieldTextProps, fieldTextSlots } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldText',
     props: fieldTextProps(),
+    slots: fieldTextSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 
@@ -27,7 +28,7 @@ export default defineComponent({
                     </Fragment>
                 )
             }
-            const needFieldProps: InputProps = {
+            const needFieldProps: FieldTextFieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder

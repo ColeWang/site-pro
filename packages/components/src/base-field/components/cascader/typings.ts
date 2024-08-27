@@ -1,11 +1,24 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
+import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
-import type { CascaderProps } from '../../../ant-typings'
+
+export type FieldCascaderFieldProps = BaseFieldFieldProps<'cascader'>;
+
+export const fieldCascaderSlots = Object as SlotsType<{
+    clearIcon?: BaseSlot;
+    expandIcon?: BaseSlot;
+    maxTagPlaceholder?: BaseSlot;
+    notFoundContent?: BaseSlot;
+    removeIcon?: BaseSlot;
+    suffixIcon?: BaseSlot;
+    tagRender?: BaseSlot;
+}>
 
 export const fieldCascaderProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
-        type: Object as PropType<CascaderProps>,
+        type: Object as PropType<FieldCascaderFieldProps>,
         default: () => ({})
     }
 })
