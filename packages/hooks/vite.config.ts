@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url'
 import { readFileSync } from 'fs'
-import { dirname, resolve } from 'path'
+import { dirname, extname, relative, resolve } from 'path'
+import { sync as globSync } from 'glob'
 // --
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -14,6 +15,17 @@ function readPackageFile (): Record<string, any> {
     const urlPath: URL = new URL('./package.json', import.meta.url)
     const file: string = readFileSync(urlPath, 'utf-8')
     return JSON.parse(file)
+}
+
+function readChunksEntry (fileNames: string[], root: string) {
+    const pairs = fileNames.map((name) => {
+        const path: string = name.slice(0, name.length - extname(name).length)
+        return [
+            relative(root, path),
+            fileURLToPath(new URL(name, import.meta.url))
+        ]
+    })
+    return Object.fromEntries(pairs)
 }
 
 function replacePaths (id: string): string {
@@ -46,10 +58,11 @@ export default defineConfig((config) => {
             }
         },
         build: {
-            target: 'modules',
             minify: false,
             lib: {
-                entry: resolve(__dirname, 'src')
+                entry: readChunksEntry(globSync('src/**/*.{ts,tsx}', {
+                    ignore: ['src/**/__tests__/*.{ts,tsx}']
+                }), 'src')
             },
             rollupOptions: {
                 external: [
@@ -66,17 +79,13 @@ export default defineConfig((config) => {
                         format: 'es',
                         dir: 'es',
                         exports: 'named',
-                        entryFileNames: '[name].js',
-                        preserveModules: true,
-                        preserveModulesRoot: 'src'
+                        entryFileNames: '[name].js'
                     },
                     {
                         format: 'cjs',
                         dir: 'lib',
                         exports: 'named',
                         entryFileNames: '[name].js',
-                        preserveModules: true,
-                        preserveModulesRoot: 'src',
                         paths: replacePaths
                     }
                 ]
