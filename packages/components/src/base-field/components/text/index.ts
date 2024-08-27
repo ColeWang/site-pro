@@ -1,7 +1,7 @@
 import FieldText from './Text'
-import type { FieldTextFieldProps, FieldTextInstance, FieldTextProps } from './typings'
-import { fieldTextProps, fieldTextSlots } from './typings'
+import type { FieldTextFieldProps, FieldTextInstance, FieldTextProps, FieldTextSlots } from './typings'
+import { fieldTextProps } from './typings'
 
-export { FieldText, fieldTextProps, fieldTextSlots }
+export { FieldText, fieldTextProps }
 
-export type { FieldTextFieldProps, FieldTextProps, FieldTextInstance }
+export type { FieldTextFieldProps, FieldTextProps, FieldTextInstance, FieldTextSlots }

@@ -3,10 +3,14 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps } from './Field'
-import Field, { fieldProps, fieldSlots } from './Field'
-import type { BaseFieldFormItemProps, BaseFieldValueType, FieldSliderFieldProps } from '../../base-field'
-import { fieldSliderSlots } from '../../base-field'
+import type { FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type {
+    BaseFieldFormItemProps,
+    BaseFieldValueType,
+    FieldSliderFieldProps,
+    FieldSliderSlots
+} from '../../base-field'
 
 const SLIDER_VALUE_TYPE: BaseFieldValueType = 'slider'
 
@@ -26,7 +30,7 @@ const Slider = defineComponent({
     inheritAttrs: false,
     name: 'ProSlider',
     props: sliderProps(),
-    slots: Object.assign(fieldSlots, fieldSliderSlots),
+    slots: Object as FieldSlots & FieldSliderSlots,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

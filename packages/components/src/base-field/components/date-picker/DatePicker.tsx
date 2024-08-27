@@ -5,14 +5,14 @@ import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { CustomFormat } from '../../../vue-tools'
 import { formatDate } from '../../../vue-tools'
-import type { FieldDatePickerFieldProps } from './typings'
-import { fieldDatePickerProps, fieldDatePickerSlots } from './typings'
+import type { FieldDatePickerFieldProps, FieldDatePickerSlots } from './typings'
+import { fieldDatePickerProps } from './typings'
 
 const FieldDatePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldDatePicker',
     props: fieldDatePickerProps(),
-    slots: fieldDatePickerSlots,
+    slots: Object as FieldDatePickerSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

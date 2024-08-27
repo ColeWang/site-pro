@@ -5,17 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldDatePickerFieldProps = BaseFieldFieldProps<'date'>;
 
-export const fieldDatePickerSlots = Object as SlotsType<{
-    dateRender?: BaseSlot;
-    nextIcon?: BaseSlot;
-    prevIcon?: BaseSlot;
-    suffixIcon?: BaseSlot;
-    superNextIcon?: BaseSlot;
-    superPrevIcon?: BaseSlot;
-    renderExtraFooter?: BaseSlot;
-    monthCellRender?: BaseSlot;
-}>
-
 export const fieldDatePickerProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -26,3 +15,13 @@ export const fieldDatePickerProps = () => ({
 
 export type FieldDatePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldDatePickerProps>>>;
 export type FieldDatePickerInstance = ComponentPublicInstance<FieldDatePickerProps>;
+export type FieldDatePickerSlots = SlotsType<{
+    dateRender?: BaseSlot;
+    nextIcon?: BaseSlot;
+    prevIcon?: BaseSlot;
+    suffixIcon?: BaseSlot;
+    superNextIcon?: BaseSlot;
+    superPrevIcon?: BaseSlot;
+    renderExtraFooter?: BaseSlot;
+    monthCellRender?: BaseSlot;
+}>

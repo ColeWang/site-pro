@@ -1,7 +1,7 @@
 import FieldCascader from './Cascader'
-import type { FieldCascaderFieldProps, FieldCascaderInstance, FieldCascaderProps } from './typings'
-import { fieldCascaderProps, fieldCascaderSlots } from './typings'
+import type { FieldCascaderFieldProps, FieldCascaderInstance, FieldCascaderProps, FieldCascaderSlots } from './typings'
+import { fieldCascaderProps } from './typings'
 
-export { FieldCascader, fieldCascaderProps, fieldCascaderSlots }
+export { FieldCascader, fieldCascaderProps }
 
-export type { FieldCascaderFieldProps, FieldCascaderProps, FieldCascaderInstance }
+export type { FieldCascaderFieldProps, FieldCascaderProps, FieldCascaderInstance, FieldCascaderSlots }

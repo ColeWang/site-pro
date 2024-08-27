@@ -1,13 +1,16 @@
 <template>
   <LocaleProvider :locale="enUS">
     <ProBaseForm :model="{}" @finish="onFinish">
-      <ProText :field-props="{ addonAfter: '123' }"></ProText>
+    
     </ProBaseForm>
+    <ProText>
+      <template #prefix>111</template>
+    </ProText>
   </LocaleProvider>
 </template>
 
 <script setup lang="ts">
-  import { BaseForm as ProBaseForm, LocaleProvider, Text as ProText } from '@site-pro/components'
+  import { BaseForm as ProBaseForm, LocaleProvider, Text as ProText } from '../../src'
   import enUS from '@site-pro/locale/en-US'
   
   function onFinish (value: string) {

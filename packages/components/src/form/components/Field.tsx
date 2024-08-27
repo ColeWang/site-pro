@@ -21,7 +21,7 @@ const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
 
 export type FieldSizeType = Extract<keyof typeof SIZE_ENUM, any> | number;
 
-export const fieldSlots = Object as SlotsType<{
+export type FieldSlots = SlotsType<{
     default?: BaseSlot;
     extra?: BaseSlot;
     help?: BaseSlot;
@@ -74,7 +74,7 @@ const Field = defineComponent({
     inheritAttrs: false,
     name: 'ProField',
     props: fieldProps(),
-    slots: fieldSlots,
+    slots: Object as FieldSlots,
     setup (props, { slots }) {
         const SLOTS_KEYS: string[] = ['extra', 'help', 'label', 'tooltip']
 

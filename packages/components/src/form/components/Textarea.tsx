@@ -3,10 +3,14 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps } from './Field'
-import Field, { fieldProps, fieldSlots } from './Field'
-import type { BaseFieldFormItemProps, BaseFieldValueType, FieldTextareaFieldProps } from '../../base-field'
-import { fieldTextareaSlots } from '../../base-field'
+import type { FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type {
+    BaseFieldFormItemProps,
+    BaseFieldValueType,
+    FieldTextareaFieldProps,
+    FieldTextareaSlots
+} from '../../base-field'
 
 const TEXTAREA_VALUE_TYPE: BaseFieldValueType = 'textarea'
 
@@ -26,7 +30,7 @@ const Textarea = defineComponent({
     inheritAttrs: false,
     name: 'ProTextarea',
     props: textareaProps(),
-    slots: Object.assign(fieldSlots, fieldTextareaSlots),
+    slots: Object as FieldSlots & FieldTextareaSlots,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

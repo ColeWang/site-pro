@@ -3,14 +3,14 @@ import { defineComponent } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { FieldTreeSelectFieldProps } from './typings'
-import { fieldTreeSelectProps, fieldTreeSelectSlots } from './typings'
+import type { FieldTreeSelectFieldProps, FieldTreeSelectSlots } from './typings'
+import { fieldTreeSelectProps } from './typings'
 
 const FieldTreeSelect = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTreeSelect',
     props: fieldTreeSelectProps(),
-    slots: fieldTreeSelectSlots,
+    slots: Object as FieldTreeSelectSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

@@ -1,9 +1,8 @@
 import { computed, ref, unref, watch } from 'vue'
-import useSpanConfig from './useSpanConfig'
-import tryOnScopeDispose from '../../../../../hooks/tryOnScopeDispose'
-import { flattenChildren } from '../../../../../utils/props-util'
-import { isValidElement } from '../../../../../utils/is'
+import { tryOnScopeDispose } from '@site-pro/hooks'
+import { flattenChildren, isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
+import useSpanConfig from './useSpanConfig'
 
 function getOffset (length, span) {
     const cols = 24 / span

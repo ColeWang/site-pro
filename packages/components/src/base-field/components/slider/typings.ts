@@ -5,10 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldSliderFieldProps = BaseFieldFieldProps<'slider'>;
 
-export const fieldSliderSlots = Object as SlotsType<{
-    mark?: BaseSlot;
-}>
-
 export const fieldSliderProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -21,3 +17,6 @@ export const fieldSliderProps = () => ({
 
 export type FieldSliderProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSliderProps>>>;
 export type FieldSliderInstance = ComponentPublicInstance<FieldSliderProps>;
+export type FieldSliderSlots = SlotsType<{
+    mark?: BaseSlot;
+}>

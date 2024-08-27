@@ -4,8 +4,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldCheckboxFieldProps = BaseFieldFieldProps<'checkbox'>;
 
-export const fieldCheckboxSlots = Object as SlotsType<{}>
-
 export const fieldCheckboxProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -16,3 +14,4 @@ export const fieldCheckboxProps = () => ({
 
 export type FieldCheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof fieldCheckboxProps>>>;
 export type FieldCheckboxInstance = ComponentPublicInstance<FieldCheckboxProps>;
+export type FieldCheckboxSlots = SlotsType<{}>

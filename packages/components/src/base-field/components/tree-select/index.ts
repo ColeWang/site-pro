@@ -1,7 +1,17 @@
 import FieldTreeSelect from './TreeSelect'
-import type { FieldTreeSelectFieldProps, FieldTreeSelectInstance, FieldTreeSelectProps } from './typings'
-import { fieldTreeSelectProps, fieldTreeSelectSlots } from './typings'
+import type {
+    FieldTreeSelectFieldProps,
+    FieldTreeSelectInstance,
+    FieldTreeSelectProps,
+    FieldTreeSelectSlots
+} from './typings'
+import { fieldTreeSelectProps } from './typings'
 
-export { FieldTreeSelect, fieldTreeSelectProps, fieldTreeSelectSlots }
+export { FieldTreeSelect, fieldTreeSelectProps }
 
-export type { FieldTreeSelectFieldProps, FieldTreeSelectProps, FieldTreeSelectInstance }
+export type {
+    FieldTreeSelectFieldProps,
+    FieldTreeSelectProps,
+    FieldTreeSelectInstance,
+    FieldTreeSelectSlots
+}

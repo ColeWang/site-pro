@@ -5,12 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldTreeSelectFieldProps = BaseFieldFieldProps<'treeSelect'>;
 
-export const fieldTreeSelectSlots = Object as SlotsType<{
-    clearIcon?: BaseSlot;
-    renderExtraFooter?: BaseSlot;
-    suffixIcon?: BaseSlot;
-}>
-
 export const fieldTreeSelectProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -23,3 +17,8 @@ export const fieldTreeSelectProps = () => ({
 
 export type FieldTreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTreeSelectProps>>>;
 export type FieldTreeSelectInstance = ComponentPublicInstance<FieldTreeSelectProps>;
+export type FieldTreeSelectSlots = SlotsType<{
+    clearIcon?: BaseSlot;
+    renderExtraFooter?: BaseSlot;
+    suffixIcon?: BaseSlot;
+}>

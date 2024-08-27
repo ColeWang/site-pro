@@ -5,11 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldSwitchFieldProps = BaseFieldFieldProps<'switch'>;
 
-export const fieldSwitchSlots = Object as SlotsType<{
-    checkedChildren?: BaseSlot;
-    unCheckedChildren?: BaseSlot;
-}>
-
 export const fieldSwitchProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -24,3 +19,7 @@ export const fieldSwitchProps = () => ({
 
 export type FieldSwitchProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSwitchProps>>>;
 export type FieldSwitchInstance = ComponentPublicInstance<FieldSwitchProps>;
+export type FieldSwitchSlots = SlotsType<{
+    checkedChildren?: BaseSlot;
+    unCheckedChildren?: BaseSlot;
+}>

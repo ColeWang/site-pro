@@ -1,7 +1,7 @@
 import FieldTextarea from './Textarea'
-import type { FieldTextareaFieldProps, FieldTextareaInstance, FieldTextareaProps } from './typings'
-import { fieldTextareaProps, fieldTextareaSlots } from './typings'
+import type { FieldTextareaFieldProps, FieldTextareaInstance, FieldTextareaProps, FieldTextareaSlots } from './typings'
+import { fieldTextareaProps } from './typings'
 
-export { FieldTextarea, fieldTextareaProps, fieldTextareaSlots }
+export { FieldTextarea, fieldTextareaProps }
 
-export type { FieldTextareaFieldProps, FieldTextareaProps, FieldTextareaInstance }
+export type { FieldTextareaFieldProps, FieldTextareaProps, FieldTextareaInstance, FieldTextareaSlots }

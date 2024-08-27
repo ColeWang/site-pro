@@ -1,7 +1,7 @@
 import FieldSwitch from './Switch'
-import type { FieldSwitchFieldProps, FieldSwitchInstance, FieldSwitchProps } from './typings'
-import { fieldSwitchProps, fieldSwitchSlots } from './typings'
+import type { FieldSwitchFieldProps, FieldSwitchInstance, FieldSwitchProps, FieldSwitchSlots } from './typings'
+import { fieldSwitchProps } from './typings'
 
-export { FieldSwitch, fieldSwitchProps, fieldSwitchSlots }
+export { FieldSwitch, fieldSwitchProps }
 
-export type { FieldSwitchFieldProps, FieldSwitchProps, FieldSwitchInstance }
+export type { FieldSwitchFieldProps, FieldSwitchProps, FieldSwitchInstance, FieldSwitchSlots }

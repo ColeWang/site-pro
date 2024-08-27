@@ -5,15 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldPasswordFieldProps = BaseFieldFieldProps<'password'>;
 
-export const fieldPasswordSlots = Object as SlotsType<{
-    addonAfter?: BaseSlot;
-    addonBefore?: BaseSlot;
-    clearIcon?: BaseSlot;
-    prefix?: BaseSlot;
-    suffix?: BaseSlot;
-    iconRender?: BaseSlot;
-}>
-
 export const fieldPasswordProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -24,3 +15,11 @@ export const fieldPasswordProps = () => ({
 
 export type FieldPasswordProps = Partial<ExtractPropTypes<ReturnType<typeof fieldPasswordProps>>>;
 export type FieldPasswordInstance = ComponentPublicInstance<FieldPasswordProps>;
+export type FieldPasswordSlots = SlotsType<{
+    addonAfter?: BaseSlot;
+    addonBefore?: BaseSlot;
+    clearIcon?: BaseSlot;
+    prefix?: BaseSlot;
+    suffix?: BaseSlot;
+    iconRender?: BaseSlot;
+}>

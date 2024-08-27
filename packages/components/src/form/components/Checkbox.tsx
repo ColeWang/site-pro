@@ -3,10 +3,14 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps } from './Field'
-import Field, { fieldProps, fieldSlots } from './Field'
-import type { BaseFieldFormItemProps, BaseFieldValueType, FieldCheckboxFieldProps } from '../../base-field'
-import { fieldCheckboxSlots } from '../../base-field'
+import type { FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type {
+    BaseFieldFormItemProps,
+    BaseFieldValueType,
+    FieldCheckboxFieldProps,
+    FieldCheckboxSlots
+} from '../../base-field'
 
 const CHECKBOX_VALUE_TYPE: BaseFieldValueType = 'checkbox'
 
@@ -26,7 +30,7 @@ const Checkbox = defineComponent({
     inheritAttrs: false,
     name: 'ProCheckbox',
     props: checkboxProps(),
-    slots: Object.assign(fieldSlots, fieldCheckboxSlots),
+    slots: Object as FieldSlots & FieldCheckboxSlots,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

@@ -1,7 +1,17 @@
 import FieldDatePicker from './DatePicker'
-import type { FieldDatePickerFieldProps, FieldDatePickerInstance, FieldDatePickerProps } from './typings'
-import { fieldDatePickerProps, fieldDatePickerSlots } from './typings'
+import type {
+    FieldDatePickerFieldProps,
+    FieldDatePickerInstance,
+    FieldDatePickerProps,
+    FieldDatePickerSlots
+} from './typings'
+import { fieldDatePickerProps, } from './typings'
 
-export { FieldDatePicker, fieldDatePickerProps, fieldDatePickerSlots }
+export { FieldDatePicker, fieldDatePickerProps }
 
-export type { FieldDatePickerFieldProps, FieldDatePickerProps, FieldDatePickerInstance }
+export type {
+    FieldDatePickerFieldProps,
+    FieldDatePickerProps,
+    FieldDatePickerInstance,
+    FieldDatePickerSlots
+}

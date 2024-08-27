@@ -4,14 +4,14 @@ import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
 import { getSlotVNode, isEmpty, preventDefault } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { FieldPasswordFieldProps } from './typings'
-import { fieldPasswordProps, fieldPasswordSlots } from './typings'
+import type { FieldPasswordFieldProps, FieldPasswordSlots } from './typings'
+import { fieldPasswordProps } from './typings'
 
 const FieldPassword = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldPassword',
     props: fieldPasswordProps(),
-    slots: fieldPasswordSlots,
+    slots: Object as FieldPasswordSlots,
     setup (props, { slots }) {
         const { token } = theme.useToken()
         const { t } = useLocaleReceiver(['global'])

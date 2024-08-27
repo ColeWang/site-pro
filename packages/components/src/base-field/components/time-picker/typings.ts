@@ -5,12 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldTimePickerFieldProps = BaseFieldFieldProps<'time'>;
 
-export const fieldTimePickerSlots = Object as SlotsType<{
-    clearIcon?: BaseSlot;
-    renderExtraFooter?: BaseSlot;
-    suffixIcon?: BaseSlot;
-}>
-
 export const fieldTimePickerProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -21,3 +15,8 @@ export const fieldTimePickerProps = () => ({
 
 export type FieldTimePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTimePickerProps>>>;
 export type FieldTimePickerInstance = ComponentPublicInstance<FieldTimePickerProps>;
+export type FieldTimePickerSlots = SlotsType<{
+    clearIcon?: BaseSlot;
+    renderExtraFooter?: BaseSlot;
+    suffixIcon?: BaseSlot;
+}>

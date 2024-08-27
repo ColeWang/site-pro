@@ -5,16 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldRangePickerFieldProps = BaseFieldFieldProps<'dateRange'>;
 
-export const fieldRangePickerSlots = Object as SlotsType<{
-    dateRender?: BaseSlot;
-    nextIcon?: BaseSlot;
-    prevIcon?: BaseSlot;
-    suffixIcon?: BaseSlot;
-    superNextIcon?: BaseSlot;
-    superPrevIcon?: BaseSlot;
-    separator?: BaseSlot;
-}>
-
 export const fieldRangePickerProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -25,3 +15,12 @@ export const fieldRangePickerProps = () => ({
 
 export type FieldRangePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldRangePickerProps>>>;
 export type FieldRangePickerInstance = ComponentPublicInstance<FieldRangePickerProps>;
+export type FieldRangePickerSlots = SlotsType<{
+    dateRender?: BaseSlot;
+    nextIcon?: BaseSlot;
+    prevIcon?: BaseSlot;
+    suffixIcon?: BaseSlot;
+    superNextIcon?: BaseSlot;
+    superPrevIcon?: BaseSlot;
+    separator?: BaseSlot;
+}>

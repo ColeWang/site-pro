@@ -6,14 +6,14 @@ import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { CustomFormat } from '../../../vue-tools'
 import { formatDate } from '../../../vue-tools'
-import type { FieldRangePickerFieldProps } from './typings'
-import { fieldRangePickerProps, fieldRangePickerSlots } from './typings'
+import type { FieldRangePickerFieldProps, FieldRangePickerSlots } from './typings'
+import { fieldRangePickerProps } from './typings'
 
 const FieldRangePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRangePicker',
     props: fieldRangePickerProps(),
-    slots: fieldRangePickerSlots,
+    slots: Object as FieldRangePickerSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

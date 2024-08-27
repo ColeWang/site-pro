@@ -5,7 +5,17 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldSelectFieldProps = BaseFieldFieldProps<'select'>;
 
-export const fieldSelectSlots = Object as SlotsType<{
+export const fieldSelectProps = () => ({
+    ...baseFieldProps(),
+    fieldProps: {
+        type: Object as PropType<FieldSelectFieldProps>,
+        default: () => ({})
+    }
+})
+
+export type FieldSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSelectProps>>>;
+export type FieldSelectInstance = ComponentPublicInstance<FieldSelectProps>;
+export type FieldSelectSlots = SlotsType<{
     clearIcon?: BaseSlot;
     dropdownRender?: BaseSlot;
     maxTagPlaceholder?: BaseSlot;
@@ -17,14 +27,3 @@ export const fieldSelectSlots = Object as SlotsType<{
     suffixIcon?: BaseSlot;
     tagRender?: BaseSlot;
 }>
-
-export const fieldSelectProps = () => ({
-    ...baseFieldProps(),
-    fieldProps: {
-        type: Object as PropType<FieldSelectFieldProps>,
-        default: () => ({})
-    }
-})
-
-export type FieldSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSelectProps>>>;
-export type FieldSelectInstance = ComponentPublicInstance<FieldSelectProps>;

@@ -4,14 +4,14 @@ import { Checkbox } from 'ant-design-vue'
 import type { BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
-import type { FieldCheckboxFieldProps } from './typings'
-import { fieldCheckboxProps, fieldCheckboxSlots } from './typings'
+import type { FieldCheckboxFieldProps, FieldCheckboxSlots } from './typings'
+import { fieldCheckboxProps } from './typings'
 
 const FieldCheckbox = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldCheckbox',
     props: fieldCheckboxProps(),
-    slots: fieldCheckboxSlots,
+    slots: Object as FieldCheckboxSlots,
     setup (props, { slots }) {
         const options: ComputedRef<BaseOptionType[]> = computed(() => {
             if (isUndefined(props.valueEnum)) {

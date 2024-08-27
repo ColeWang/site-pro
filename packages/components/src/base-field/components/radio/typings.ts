@@ -4,8 +4,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldRadioFieldProps = BaseFieldFieldProps<'radio'>;
 
-export const fieldRadioSlots = Object as SlotsType<{}>
-
 export const fieldRadioProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -16,3 +14,4 @@ export const fieldRadioProps = () => ({
 
 export type FieldRadioProps = Partial<ExtractPropTypes<ReturnType<typeof fieldRadioProps>>>;
 export type FieldRadioInstance = ComponentPublicInstance<FieldRadioProps>;
+export type FieldRadioSlots = SlotsType<{}>

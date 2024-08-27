@@ -4,14 +4,14 @@ import { Switch } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { FieldSwitchFieldProps } from './typings'
-import { fieldSwitchProps, fieldSwitchSlots } from './typings'
+import type { FieldSwitchFieldProps, FieldSwitchSlots } from './typings'
+import { fieldSwitchProps } from './typings'
 
 const FieldSwitch = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSwitch',
     props: fieldSwitchProps(),
-    slots: fieldSwitchSlots,
+    slots: Object as FieldSwitchSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

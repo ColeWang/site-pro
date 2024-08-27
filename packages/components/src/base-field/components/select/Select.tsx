@@ -5,14 +5,14 @@ import type { BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { FieldSelectFieldProps } from './typings'
-import { fieldSelectProps, fieldSelectSlots } from './typings'
+import type { FieldSelectFieldProps, FieldSelectSlots } from './typings'
+import { fieldSelectProps } from './typings'
 
 const FieldSelect = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSelect',
     props: fieldSelectProps(),
-    slots: fieldSelectSlots,
+    slots: Object as FieldSelectSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

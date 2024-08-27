@@ -1,7 +1,6 @@
 import { computed, h } from 'vue'
 import { TypographyText } from 'ant-design-vue'
-import { valueEnumToText } from '../../../utils/valueEnum'
-import { isEmpty } from '../../../utils/is'
+import { enumToText, isEmpty } from '@site-pro/utils'
 import { isArray, isFunction, isObject } from 'lodash-es'
 
 function getEllipsis (column) {
@@ -28,7 +27,7 @@ function customRender (oldColumn, emptyText) {
             return oldCustomRender.call(null, { text, ...restArgs })
         }
         if (oldColumn.valueEnum && isObject(oldColumn.valueEnum) && !isEmpty(text)) {
-            return valueEnumToText(text, oldColumn.valueEnum)
+            return enumToText(text, oldColumn.valueEnum)
         }
         if ((oldColumn.copyable || oldColumn.ellipsis) && !isEmpty(text)) {
             const copyable = getCopyable(oldColumn, text)

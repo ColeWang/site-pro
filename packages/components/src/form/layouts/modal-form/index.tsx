@@ -1,10 +1,10 @@
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
-import { Drawer } from 'ant-design-vue'
+import { Modal } from 'ant-design-vue'
+import { getSlotVNode } from '@site-pro/utils'
+import { isFunction, omit, pick } from 'lodash-es'
 import { BaseForm, Submitter } from '../../base-form'
 import { default as useFloatForm, floatProps } from '../hooks/useFloatForm'
 import { useLocaleReceiver } from '../../../locale-provider'
-import { getSlotVNode } from '../../../../utils/props-util'
-import { isFunction, omit, pick } from 'lodash-es'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -33,11 +33,11 @@ export default defineComponent({
         function onAfterClose () {
             const { extraProps } = props
 
-            const drawerProps = {
-                ...pick(props, Object.keys(Drawer.props)),
+            const modalProps = {
+                ...pick(props, Object.keys(Modal.props)),
                 ...extraProps
             }
-            if (drawerProps.destroyOnClose) {
+            if (modalProps.destroyOnClose) {
                 const context = unref(baseFormRef)
                 context && context.resetFields()
             }
@@ -71,16 +71,16 @@ export default defineComponent({
             }
             const baseFormSlots = omit(slots, ['trigger'])
 
-            const needDrawerProps = {
+            const needModalProps = {
                 ...attrs,
-                ...pick(props, Object.keys(Drawer.props)),
+                ...pick(props, Object.keys(Modal.props)),
                 ...extraProps,
                 open: unref(sOpen),
-                onClose: onCancel,
-                onAfterOpenChange: onAfterClose
+                onCancel: onCancel,
+                onAfterClose: onAfterClose
             }
-            const drawerSlots = {
-                extra: () => {
+            const modalSlots = {
+                footer: () => {
                     const submitterProps = {
                         ...pick(submitter, Object.keys(Submitter.props)),
                         submitText: submitter.submitText || t('okText'),
@@ -97,9 +97,9 @@ export default defineComponent({
 
             return (
                 <Fragment>
-                    <Drawer {...needDrawerProps} v-slots={drawerSlots}>
+                    <Modal {...needModalProps} v-slots={modalSlots}>
                         <BaseForm {...baseFormProps} ref={baseFormRef} v-slots={baseFormSlots}/>
-                    </Drawer>
+                    </Modal>
                     {triggerDom && (
                         <div style={{ display: 'inline-block' }} onClick={onOpen}>
                             {triggerDom}

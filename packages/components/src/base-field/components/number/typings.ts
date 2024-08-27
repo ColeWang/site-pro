@@ -5,14 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldNumberFieldProps = BaseFieldFieldProps<'number'>;
 
-export const fieldNumberSlots = Object as SlotsType<{
-    addonAfter?: BaseSlot;
-    addonBefore?: BaseSlot;
-    prefix?: BaseSlot;
-    upIcon?: BaseSlot;
-    downIcon?: BaseSlot;
-}>
-
 export const fieldNumberProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -23,3 +15,10 @@ export const fieldNumberProps = () => ({
 
 export type FieldNumberProps = Partial<ExtractPropTypes<ReturnType<typeof fieldNumberProps>>>;
 export type FieldNumberInstance = ComponentPublicInstance<FieldNumberProps>;
+export type FieldNumberSlots = SlotsType<{
+    addonAfter?: BaseSlot;
+    addonBefore?: BaseSlot;
+    prefix?: BaseSlot;
+    upIcon?: BaseSlot;
+    downIcon?: BaseSlot;
+}>

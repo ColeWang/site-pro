@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, SlotsType } from 'vue'
+import type { App, ComputedRef, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
 import type { BaseSlot, NamePath } from '@site-pro/utils'
@@ -19,7 +19,7 @@ function resetLayoutOfGrid (props: BaseFormProps): string | undefined {
     return (grid && layout === 'inline') ? 'vertical' : layout
 }
 
-export default defineComponent({
+const BaseForm = defineComponent({
     inheritAttrs: false,
     name: 'ProBaseForm',
     props: baseFormProps(),
@@ -170,3 +170,10 @@ export default defineComponent({
         }
     }
 })
+
+BaseForm.install = function (app: App): App {
+    app.component(BaseForm.name as string, BaseForm)
+    return app
+}
+
+export default BaseForm

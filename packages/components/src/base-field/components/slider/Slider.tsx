@@ -3,14 +3,14 @@ import { defineComponent, Fragment } from 'vue'
 import { Slider } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
-import type { FieldSliderFieldProps } from './typings'
-import { fieldSliderProps, fieldSliderSlots } from './typings'
+import type { FieldSliderFieldProps, FieldSliderSlots } from './typings'
+import { fieldSliderProps } from './typings'
 
 const FieldSlider = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSlider',
     props: fieldSliderProps(),
-    slots: fieldSliderSlots,
+    slots: Object as FieldSliderSlots,
     setup (props, { slots }) {
         return () => {
             const { mode, text, emptyText, fieldProps } = props

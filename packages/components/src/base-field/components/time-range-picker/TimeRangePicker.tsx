@@ -6,14 +6,14 @@ import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { CustomFormat } from '../../../vue-tools'
 import { formatDate } from '../../../vue-tools'
-import type { FieldTimeRangePickerFieldProps } from './typings'
-import { fieldTimeRangePickerProps, fieldTimeRangePickerSlots } from './typings'
+import type { FieldTimeRangePickerFieldProps, FieldTimeRangePickerSlots } from './typings'
+import { fieldTimeRangePickerProps } from './typings'
 
 const FieldTimeRangePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimeRangePicker',
     props: fieldTimeRangePickerProps(),
-    slots: fieldTimeRangePickerSlots,
+    slots: Object as FieldTimeRangePickerSlots,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

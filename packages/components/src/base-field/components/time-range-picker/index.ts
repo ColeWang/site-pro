@@ -1,7 +1,17 @@
 import FieldTimeRangePicker from './TimeRangePicker'
-import type { FieldTimeRangePickerFieldProps, FieldTimeRangePickerInstance, FieldTimeRangePickerProps } from './typings'
-import { fieldTimeRangePickerProps, fieldTimeRangePickerSlots } from './typings'
+import type {
+    FieldTimeRangePickerFieldProps,
+    FieldTimeRangePickerInstance,
+    FieldTimeRangePickerProps,
+    FieldTimeRangePickerSlots
+} from './typings'
+import { fieldTimeRangePickerProps } from './typings'
 
-export { FieldTimeRangePicker, fieldTimeRangePickerProps, fieldTimeRangePickerSlots }
+export { FieldTimeRangePicker, fieldTimeRangePickerProps }
 
-export type { FieldTimeRangePickerFieldProps, FieldTimeRangePickerProps, FieldTimeRangePickerInstance }
+export type {
+    FieldTimeRangePickerFieldProps,
+    FieldTimeRangePickerProps,
+    FieldTimeRangePickerInstance,
+    FieldTimeRangePickerSlots
+}

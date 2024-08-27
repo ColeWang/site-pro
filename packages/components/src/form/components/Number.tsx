@@ -3,10 +3,14 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps } from './Field'
-import Field, { fieldProps, fieldSlots } from './Field'
-import type { BaseFieldFormItemProps, BaseFieldValueType, FieldNumberFieldProps } from '../../base-field'
-import { fieldNumberSlots } from '../../base-field'
+import type { FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type {
+    BaseFieldFormItemProps,
+    BaseFieldValueType,
+    FieldNumberFieldProps,
+    FieldNumberSlots
+} from '../../base-field'
 
 const NUMBER_VALUE_TYPE: BaseFieldValueType = 'number'
 
@@ -26,7 +30,7 @@ const Number = defineComponent({
     inheritAttrs: false,
     name: 'ProNumber',
     props: numberProps(),
-    slots: Object.assign(fieldSlots, fieldNumberSlots),
+    slots: Object as FieldSlots & FieldNumberSlots,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

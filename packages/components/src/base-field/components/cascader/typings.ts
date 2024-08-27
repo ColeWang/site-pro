@@ -5,16 +5,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldCascaderFieldProps = BaseFieldFieldProps<'cascader'>;
 
-export const fieldCascaderSlots = Object as SlotsType<{
-    clearIcon?: BaseSlot;
-    expandIcon?: BaseSlot;
-    maxTagPlaceholder?: BaseSlot;
-    notFoundContent?: BaseSlot;
-    removeIcon?: BaseSlot;
-    suffixIcon?: BaseSlot;
-    tagRender?: BaseSlot;
-}>
-
 export const fieldCascaderProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -25,3 +15,12 @@ export const fieldCascaderProps = () => ({
 
 export type FieldCascaderProps = Partial<ExtractPropTypes<ReturnType<typeof fieldCascaderProps>>>;
 export type FieldCascaderInstance = ComponentPublicInstance<FieldCascaderProps>;
+export type FieldCascaderSlots = SlotsType<{
+    clearIcon?: BaseSlot;
+    expandIcon?: BaseSlot;
+    maxTagPlaceholder?: BaseSlot;
+    notFoundContent?: BaseSlot;
+    removeIcon?: BaseSlot;
+    suffixIcon?: BaseSlot;
+    tagRender?: BaseSlot;
+}>

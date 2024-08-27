@@ -3,10 +3,14 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps } from './Field'
-import Field, { fieldProps, fieldSlots } from './Field'
-import type { BaseFieldFormItemProps, BaseFieldValueType, FieldRadioFieldProps } from '../../base-field'
-import { fieldRadioSlots } from '../../base-field'
+import type { FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type {
+    BaseFieldFormItemProps,
+    BaseFieldValueType,
+    FieldRadioFieldProps,
+    FieldRadioSlots
+} from '../../base-field'
 
 const RADIO_VALUE_TYPE: BaseFieldValueType = 'radio'
 
@@ -26,7 +30,7 @@ const Radio = defineComponent({
     inheritAttrs: false,
     name: 'ProRadio',
     props: radioProps(),
-    slots: Object.assign(fieldSlots, fieldRadioSlots),
+    slots: Object as FieldSlots & FieldRadioSlots,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

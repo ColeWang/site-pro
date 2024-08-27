@@ -1,7 +1,7 @@
 import FieldCheckbox from './Checkbox'
-import type { FieldCheckboxFieldProps, FieldCheckboxInstance, FieldCheckboxProps } from './typings'
-import { fieldCheckboxProps, fieldCheckboxSlots } from './typings'
+import type { FieldCheckboxFieldProps, FieldCheckboxInstance, FieldCheckboxProps, FieldCheckboxSlots } from './typings'
+import { fieldCheckboxProps } from './typings'
 
-export { FieldCheckbox, fieldCheckboxProps, fieldCheckboxSlots }
+export { FieldCheckbox, fieldCheckboxProps }
 
-export type { FieldCheckboxFieldProps, FieldCheckboxProps, FieldCheckboxInstance }
+export type { FieldCheckboxFieldProps, FieldCheckboxProps, FieldCheckboxInstance, FieldCheckboxSlots }

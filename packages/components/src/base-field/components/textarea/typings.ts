@@ -4,8 +4,6 @@ import { baseFieldProps } from '../../typings'
 
 export type FieldTextareaFieldProps = BaseFieldFieldProps<'textarea'>;
 
-export const fieldTextareaSlots = Object as SlotsType<{}>
-
 export const fieldTextareaProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
@@ -16,3 +14,4 @@ export const fieldTextareaProps = () => ({
 
 export type FieldTextareaProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTextareaProps>>>;
 export type FieldTextareaInstance = ComponentPublicInstance<FieldTextareaProps>;
+export type FieldTextareaSlots = SlotsType<{}>

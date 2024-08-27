@@ -1,7 +1,7 @@
 import FieldSelect from './Select'
-import type { FieldSelectFieldProps, FieldSelectInstance, FieldSelectProps } from './typings'
-import { fieldSelectProps, fieldSelectSlots } from './typings'
+import type { FieldSelectFieldProps, FieldSelectInstance, FieldSelectProps, FieldSelectSlots } from './typings'
+import { fieldSelectProps } from './typings'
 
-export { FieldSelect, fieldSelectProps, fieldSelectSlots }
+export { FieldSelect, fieldSelectProps }
 
-export type { FieldSelectFieldProps, FieldSelectProps, FieldSelectInstance }
+export type { FieldSelectFieldProps, FieldSelectProps, FieldSelectInstance, FieldSelectSlots }
