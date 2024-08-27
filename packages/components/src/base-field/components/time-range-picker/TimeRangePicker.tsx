@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { TimeRangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -8,7 +9,7 @@ import { formatDate } from '../../../vue-tools'
 import type { FieldTimeRangePickerFieldProps } from './typings'
 import { fieldTimeRangePickerProps, fieldTimeRangePickerSlots } from './typings'
 
-export default defineComponent({
+const FieldTimeRangePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimeRangePicker',
     props: fieldTimeRangePickerProps(),
@@ -46,3 +47,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldTimeRangePicker.install = function (app: App): App {
+    app.component(FieldTimeRangePicker.name as string, FieldTimeRangePicker)
+    return app
+}
+
+export default FieldTimeRangePicker

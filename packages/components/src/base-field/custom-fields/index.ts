@@ -1,20 +1,9 @@
-import type { App } from 'vue'
 import CustomFields from './CustomFields'
+import type { CustomFieldsExpose, CustomFieldsInstance, CustomFieldsProps, CustomFieldsValueTypeMap } from './typings'
 import { customFieldsProps } from './typings'
 import useCustomFields from './hooks/useCustomFields'
-
-CustomFields.install = function (app: App): App {
-    app.component(CustomFields.name as string, CustomFields)
-    return app
-}
 
 export { CustomFields, customFieldsProps }
 export { useCustomFields }
 
-export type { InjectCustomFields } from './hooks/useCustomFields'
-export type {
-    CustomFieldsValueTypeMap,
-    CustomFieldsProps,
-    CustomFieldsExpose,
-    CustomFieldsInstance
-} from './typings'
+export type { CustomFieldsValueTypeMap, CustomFieldsProps, CustomFieldsExpose, CustomFieldsInstance }

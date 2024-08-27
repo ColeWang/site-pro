@@ -1,4 +1,4 @@
-import type { Ref, SlotsType } from 'vue'
+import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import { useResizeObserver } from '@site-pro/hooks'
@@ -6,7 +6,7 @@ import { debounce, head } from 'lodash-es'
 import type { RectSizeType } from './typings'
 import { resizeObserverProps } from './typings'
 
-export default defineComponent({
+const ResizeObserver = defineComponent({
     inheritAttrs: false,
     name: 'ProResizeObserver',
     props: resizeObserverProps(),
@@ -45,3 +45,10 @@ export default defineComponent({
         }
     }
 })
+
+ResizeObserver.install = function (app: App): App {
+    app.component(ResizeObserver.name as string, ResizeObserver)
+    return app
+}
+
+export default ResizeObserver

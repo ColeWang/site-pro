@@ -1,7 +1,8 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { rowProps } from 'ant-design-vue/es/grid/Row'
+import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { RowProps } from '../../ant-typings'
 
@@ -20,6 +21,9 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProRowWrap',
     props: rowWarpProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+    }>,
     setup (props, { slots }) {
         return () => {
             const { grid } = props

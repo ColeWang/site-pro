@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import RangePicker from './RangePicker'
+import FieldRangePicker from './RangePicker'
+import type { FieldRangePickerFieldProps, FieldRangePickerInstance, FieldRangePickerProps } from './typings'
 import { fieldRangePickerProps, fieldRangePickerSlots } from './typings'
 
-RangePicker.install = function (app: App): App {
-    app.component(RangePicker.name as string, RangePicker)
-    return app
-}
+export { FieldRangePicker, fieldRangePickerProps, fieldRangePickerSlots }
 
-export { RangePicker as FieldRangePicker, fieldRangePickerProps, fieldRangePickerSlots }
-
-export type { FieldRangePickerFieldProps, FieldRangePickerProps, FieldRangePickerInstance } from './typings'
+export type { FieldRangePickerFieldProps, FieldRangePickerProps, FieldRangePickerInstance }

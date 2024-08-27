@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import TimePicker from './TimePicker'
+import FieldTimePicker from './TimePicker'
+import type { FieldTimePickerFieldProps, FieldTimePickerInstance, FieldTimePickerProps } from './typings'
 import { fieldTimePickerProps, fieldTimePickerSlots } from './typings'
 
-TimePicker.install = function (app: App): App {
-    app.component(TimePicker.name as string, TimePicker)
-    return app
-}
+export { FieldTimePicker, fieldTimePickerProps, fieldTimePickerSlots }
 
-export { TimePicker as FieldTimePicker, fieldTimePickerProps, fieldTimePickerSlots }
-
-export type { FieldTimePickerFieldProps, FieldTimePickerProps, FieldTimePickerInstance } from './typings'
+export type { FieldTimePickerFieldProps, FieldTimePickerProps, FieldTimePickerInstance }

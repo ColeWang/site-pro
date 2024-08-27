@@ -2,14 +2,12 @@ import type { InjectionKey } from 'vue'
 import { inject, provide } from 'vue'
 import type { BaseFormExpose } from '../typings'
 
-export type InjectFormInstance = Partial<BaseFormExpose>;
-
-export const FormInstanceKey: InjectionKey<InjectFormInstance> = Symbol('FormInstance')
+export const FormInstanceKey: InjectionKey<Partial<BaseFormExpose>> = Symbol('FormInstance')
 
 export function createFromInstance (instance: BaseFormExpose): void {
     provide(FormInstanceKey, instance)
 }
 
-export function useFormInstance (): InjectFormInstance {
+export function useFormInstance (): Partial<BaseFormExpose> {
     return inject(FormInstanceKey, {})
 }

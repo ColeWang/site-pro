@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { defineComponent } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
@@ -5,7 +6,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldTreeSelectFieldProps } from './typings'
 import { fieldTreeSelectProps, fieldTreeSelectSlots } from './typings'
 
-export default defineComponent({
+const FieldTreeSelect = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTreeSelect',
     props: fieldTreeSelectProps(),
@@ -39,3 +40,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldTreeSelect.install = function (app: App): App {
+    app.component(FieldTreeSelect.name as string, FieldTreeSelect)
+    return app
+}
+
+export default FieldTreeSelect

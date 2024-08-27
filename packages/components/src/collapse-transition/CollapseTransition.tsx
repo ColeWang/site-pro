@@ -1,7 +1,9 @@
-import type { PropType, TransitionProps } from 'vue'
+import type { App, SlotsType, TransitionProps } from 'vue'
 import { defineComponent, nextTick, Transition } from 'vue'
+import type { BaseSlot } from '@site-pro/utils'
 import { addClass, removeClass, setStyle, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
+import { collapseTransitionProps } from './typings'
 import useStyle from './style'
 
 function collapseMotion (name: string, appear: boolean): TransitionProps {
@@ -42,17 +44,15 @@ function collapseMotion (name: string, appear: boolean): TransitionProps {
     }
 }
 
-export default defineComponent({
+const CollapseTransition = defineComponent({
     inheritAttrs: false,
-    name: 'ProTransition',
-    props: {
-        appear: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        }
-    },
+    name: 'ProCollapseTransition',
+    props: collapseTransitionProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+    }>,
     setup (props, { slots, attrs }) {
-        const { prefixCls } = useConfigInject('pro-transition', props)
+        const { prefixCls } = useConfigInject('pro-collapse-transition', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
 
         return () => {
@@ -60,7 +60,7 @@ export default defineComponent({
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <Transition {...collapseMotion(`${prefixCls.value}-collapse`, appear)}>
+                    <Transition {...collapseMotion(`${prefixCls.value}-wrapper`, appear)}>
                         {slots.default && slots.default()}
                     </Transition>
                 </div>
@@ -68,3 +68,10 @@ export default defineComponent({
         }
     }
 })
+
+CollapseTransition.install = function (app: App): App {
+    app.component(CollapseTransition.name as string, CollapseTransition)
+    return app
+}
+
+export default CollapseTransition

@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { InputNumber } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -5,7 +6,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldNumberFieldProps } from './typings'
 import { fieldNumberProps, fieldNumberSlots } from './typings'
 
-export default defineComponent({
+const FieldNumber = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldNumber',
     props: fieldNumberProps(),
@@ -42,3 +43,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldNumber.install = function (app: App): App {
+    app.component(FieldNumber.name as string, FieldNumber)
+    return app
+}
+
+export default FieldNumber

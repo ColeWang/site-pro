@@ -4,14 +4,12 @@ import type { NamePath } from '@site-pro/utils'
 import { get, has } from 'lodash-es'
 import type { LocaleProviderExpose, LocaleType } from '../typings'
 
-export type InjectLocaleReceiver = Partial<LocaleProviderExpose>;
-
 interface UseLocaleReceiverReturnType {
     locale: ComputedRef<LocaleType>;
     t: (namePath: NamePath) => string | number | undefined;
 }
 
-export const LocaleReceiverKey: InjectionKey<InjectLocaleReceiver> = Symbol('LocaleReceiver')
+export const LocaleReceiverKey: InjectionKey<Partial<LocaleProviderExpose>> = Symbol('LocaleReceiver')
 
 function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverReturnType {
     const { locale } = inject(LocaleReceiverKey, {})

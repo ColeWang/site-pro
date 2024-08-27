@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Radio from './Radio'
+import FieldRadio from './Radio'
+import type { FieldRadioFieldProps, FieldRadioInstance, FieldRadioProps } from './typings'
 import { fieldRadioProps, fieldRadioSlots } from './typings'
 
-Radio.install = function (app: App): App {
-    app.component(Radio.name as string, Radio)
-    return app
-}
+export { FieldRadio, fieldRadioProps, fieldRadioSlots }
 
-export { Radio as FieldRadio, fieldRadioProps, fieldRadioSlots }
-
-export type { FieldRadioFieldProps, FieldRadioProps, FieldRadioInstance } from './typings'
+export type { FieldRadioFieldProps, FieldRadioProps, FieldRadioInstance }

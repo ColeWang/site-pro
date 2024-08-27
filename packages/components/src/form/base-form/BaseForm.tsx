@@ -1,14 +1,14 @@
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
-import type { NamePath } from '@site-pro/utils'
+import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
 import type { RowWrapProps } from '../helpers/RowWrap'
 import RowWrap from '../helpers/RowWrap'
 import { createFromInstance } from './hooks/useFormInstance'
-import type { BaseFormExpose, BaseFormModel, BaseFormProps, Updater } from './typings'
+import type { BaseFormExpose, BaseFormModel, BaseFormProps, BaseFormUpdater } from './typings'
 import { baseFormProps } from './typings'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import useStyle from './style'
@@ -23,6 +23,9 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProBaseForm',
     props: baseFormProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+    }>,
     emits: ['submit', 'finish', 'finishFailed', 'reset', 'valuesChange'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-base-form', props)
@@ -60,7 +63,7 @@ export default defineComponent({
             return get(model.value, namePath, undefined)
         }
 
-        function updateModelValue (namePath: NamePath, updater: Updater): BaseFormModel {
+        function updateModelValue (namePath: NamePath, updater: BaseFormUpdater): BaseFormModel {
             return update(model.value, namePath, updater)
         }
 

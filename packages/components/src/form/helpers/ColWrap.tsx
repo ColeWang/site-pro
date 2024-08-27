@@ -1,7 +1,8 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { colProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
+import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ColProps } from '../../ant-typings'
 
@@ -24,6 +25,9 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProColWrap',
     props: colWrapProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+    }>,
     setup (props, { slots }) {
         return () => {
             const { grid } = props

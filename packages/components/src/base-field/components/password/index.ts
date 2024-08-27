@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Password from './Password'
+import FieldPassword from './Password'
+import type { FieldPasswordFieldProps, FieldPasswordInstance, FieldPasswordProps } from './typings'
 import { fieldPasswordProps, fieldPasswordSlots } from './typings'
 
-Password.install = function (app: App): App {
-    app.component(Password.name as string, Password)
-    return app
-}
+export { FieldPassword, fieldPasswordProps, fieldPasswordSlots }
 
-export { Password as FieldPassword, fieldPasswordProps, fieldPasswordSlots }
-
-export type { FieldPasswordFieldProps, FieldPasswordProps, FieldPasswordInstance } from './typings'
+export type { FieldPasswordFieldProps, FieldPasswordProps, FieldPasswordInstance }

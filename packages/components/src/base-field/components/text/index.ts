@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Text from './Text'
+import FieldText from './Text'
+import type { FieldTextFieldProps, FieldTextInstance, FieldTextProps } from './typings'
 import { fieldTextProps, fieldTextSlots } from './typings'
 
-Text.install = function (app: App): App {
-    app.component(Text.name as string, Text)
-    return app
-}
+export { FieldText, fieldTextProps, fieldTextSlots }
 
-export { Text as FieldText, fieldTextProps, fieldTextSlots }
-
-export type { FieldTextFieldProps, FieldTextProps, FieldTextInstance } from './typings'
+export type { FieldTextFieldProps, FieldTextProps, FieldTextInstance }

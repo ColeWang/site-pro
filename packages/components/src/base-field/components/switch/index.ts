@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Switch from './Switch'
+import FieldSwitch from './Switch'
+import type { FieldSwitchFieldProps, FieldSwitchInstance, FieldSwitchProps } from './typings'
 import { fieldSwitchProps, fieldSwitchSlots } from './typings'
 
-Switch.install = function (app: App): App {
-    app.component(Switch.name as string, Switch)
-    return app
-}
+export { FieldSwitch, fieldSwitchProps, fieldSwitchSlots }
 
-export { Switch as FieldSwitch, fieldSwitchProps, fieldSwitchSlots }
-
-export type { FieldSwitchFieldProps, FieldSwitchProps, FieldSwitchInstance } from './typings'
+export type { FieldSwitchFieldProps, FieldSwitchProps, FieldSwitchInstance }

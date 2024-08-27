@@ -1,10 +1,10 @@
-import type { ComputedRef } from 'vue'
+import type { App, ComputedRef } from 'vue'
 import { computed, defineComponent, provide } from 'vue'
 import { CustomFieldsKey } from './hooks/useCustomFields'
 import type { CustomFieldsExpose, CustomFieldsValueTypeMap } from './typings'
 import { customFieldsProps } from './typings'
 
-export default defineComponent({
+const CustomFields = defineComponent({
     inheritAttrs: false,
     name: 'ProCustomFields',
     props: customFieldsProps(),
@@ -25,3 +25,10 @@ export default defineComponent({
         }
     }
 })
+
+CustomFields.install = function (app: App): App {
+    app.component(CustomFields.name as string, CustomFields)
+    return app
+}
+
+export default CustomFields

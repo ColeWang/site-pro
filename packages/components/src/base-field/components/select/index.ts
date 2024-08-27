@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Select from './Select'
+import FieldSelect from './Select'
+import type { FieldSelectFieldProps, FieldSelectInstance, FieldSelectProps } from './typings'
 import { fieldSelectProps, fieldSelectSlots } from './typings'
 
-Select.install = function (app: App): App {
-    app.component(Select.name as string, Select)
-    return app
-}
+export { FieldSelect, fieldSelectProps, fieldSelectSlots }
 
-export { Select as FieldSelect, fieldSelectProps, fieldSelectSlots }
-
-export type { FieldSelectFieldProps, FieldSelectProps, FieldSelectInstance } from './typings'
+export type { FieldSelectFieldProps, FieldSelectProps, FieldSelectInstance }

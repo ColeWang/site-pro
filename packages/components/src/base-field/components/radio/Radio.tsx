@@ -1,4 +1,4 @@
-import type { ComputedRef } from 'vue'
+import type { App, ComputedRef } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Radio } from 'ant-design-vue'
 import type { BaseOptionType } from '@site-pro/utils'
@@ -7,7 +7,7 @@ import { isUndefined } from 'lodash-es'
 import type { FieldRadioFieldProps } from './typings'
 import { fieldRadioProps, fieldRadioSlots } from './typings'
 
-export default defineComponent({
+const FieldRadio = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRadio',
     props: fieldRadioProps(),
@@ -42,3 +42,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldRadio.install = function (app: App): App {
+    app.component(FieldRadio.name as string, FieldRadio)
+    return app
+}
+
+export default FieldRadio

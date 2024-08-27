@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { defineComponent } from 'vue'
 import { DatePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -7,7 +8,7 @@ import { formatDate } from '../../../vue-tools'
 import type { FieldDatePickerFieldProps } from './typings'
 import { fieldDatePickerProps, fieldDatePickerSlots } from './typings'
 
-export default defineComponent({
+const FieldDatePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldDatePicker',
     props: fieldDatePickerProps(),
@@ -37,3 +38,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldDatePicker.install = function (app: App): App {
+    app.component(FieldDatePicker.name as string, FieldDatePicker)
+    return app
+}
+
+export default FieldDatePicker

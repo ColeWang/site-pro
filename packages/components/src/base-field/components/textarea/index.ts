@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Textarea from './Textarea'
+import FieldTextarea from './Textarea'
+import type { FieldTextareaFieldProps, FieldTextareaInstance, FieldTextareaProps } from './typings'
 import { fieldTextareaProps, fieldTextareaSlots } from './typings'
 
-Textarea.install = function (app: App): App {
-    app.component(Textarea.name as string, Textarea)
-    return app
-}
+export { FieldTextarea, fieldTextareaProps, fieldTextareaSlots }
 
-export { Textarea as FieldTextarea, fieldTextareaProps, fieldTextareaSlots }
-
-export type { FieldTextareaFieldProps, FieldTextareaProps, FieldTextareaInstance } from './typings'
+export type { FieldTextareaFieldProps, FieldTextareaProps, FieldTextareaInstance }

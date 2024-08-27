@@ -1,11 +1,11 @@
-import type { Ref, SlotsType } from 'vue'
+import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, provide, ref, watch } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import type { LocaleProviderExpose, LocaleType } from './typings'
 import { localeProviderProps } from './typings'
 import { LocaleReceiverKey } from './hooks/useLocaleReceiver'
 
-export default defineComponent({
+const LocaleProvider = defineComponent({
     inheritAttrs: false,
     name: 'ProLocaleProvider',
     props: localeProviderProps(),
@@ -32,3 +32,10 @@ export default defineComponent({
         }
     }
 })
+
+LocaleProvider.install = function (app: App): App {
+    app.component(LocaleProvider.name as string, LocaleProvider)
+    return app
+}
+
+export default LocaleProvider

@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
 import { getSlotVNode, toPx } from '@site-pro/utils'
@@ -6,7 +7,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldTextareaFieldProps } from './typings'
 import { fieldTextareaProps, fieldTextareaSlots } from './typings'
 
-export default defineComponent({
+const FieldTextarea = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTextarea',
     props: fieldTextareaProps(),
@@ -52,3 +53,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldTextarea.install = function (app: App): App {
+    app.component(FieldTextarea.name as string, FieldTextarea)
+    return app
+}
+
+export default FieldTextarea

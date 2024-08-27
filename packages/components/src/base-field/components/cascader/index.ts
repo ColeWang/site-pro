@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Cascader from './Cascader'
+import FieldCascader from './Cascader'
+import type { FieldCascaderFieldProps, FieldCascaderInstance, FieldCascaderProps } from './typings'
 import { fieldCascaderProps, fieldCascaderSlots } from './typings'
 
-Cascader.install = function (app: App): App {
-    app.component(Cascader.name as string, Cascader)
-    return app
-}
+export { FieldCascader, fieldCascaderProps, fieldCascaderSlots }
 
-export { Cascader as FieldCascader, fieldCascaderProps, fieldCascaderSlots }
-
-export type { FieldCascaderFieldProps, FieldCascaderProps, FieldCascaderInstance } from './typings'
+export type { FieldCascaderFieldProps, FieldCascaderProps, FieldCascaderInstance }

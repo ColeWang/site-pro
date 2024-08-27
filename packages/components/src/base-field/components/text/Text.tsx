@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -5,7 +6,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldTextFieldProps } from './typings'
 import { fieldTextProps, fieldTextSlots } from './typings'
 
-export default defineComponent({
+const FieldText = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldText',
     props: fieldTextProps(),
@@ -42,3 +43,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldText.install = function (app: App): App {
+    app.component(FieldText.name as string, FieldText)
+    return app
+}
+
+export default FieldText

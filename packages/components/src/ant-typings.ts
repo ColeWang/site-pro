@@ -41,7 +41,7 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProFieldTextarea?: {};
         ProBaseForm?: {};
         ProDescriptions?: {};
-        ProTransition?: {};
+        ProCollapseTransition?: {};
     }
 }
 

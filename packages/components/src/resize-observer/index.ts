@@ -1,11 +1,6 @@
-import type { App } from 'vue'
 import ResizeObserver from './ResizeObserver'
+import type { RectSizeType, ResizeObserverInstance, ResizeObserverProps } from './typings'
 import { resizeObserverProps } from './typings'
 
-ResizeObserver.install = function (app: App): App {
-    app.component(ResizeObserver.name as string, ResizeObserver)
-    return app
-}
-
 export { ResizeObserver, resizeObserverProps }
-export type { RectSizeType, ResizeObserverProps, ResizeObserverInstance } from './typings'
+export type { RectSizeType, ResizeObserverProps, ResizeObserverInstance }

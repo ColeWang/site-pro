@@ -3,7 +3,7 @@ import { formProps } from 'ant-design-vue/es/form'
 import type { NamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 
-export interface Updater {
+export interface BaseFormUpdater {
     (value: any): any;
 }
 
@@ -73,7 +73,7 @@ export interface BaseFormExpose {
     formProps: ComputedRef<BaseFormProps>;
     setModelValue: (namePath: NamePath, value: any) => BaseFormModel;
     getModelValue: (namePath: NamePath) => BaseFormModel;
-    updateModelValue: (namePath: NamePath, updater: Updater) => BaseFormModel;
+    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => BaseFormModel;
     deleteModelValue: (namePath: NamePath) => boolean;
     submit: () => void;
     validate: (names?: NamePath[]) => Promise<BaseFormModel>;

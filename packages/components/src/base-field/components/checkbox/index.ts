@@ -1,12 +1,7 @@
-import type { App } from 'vue'
-import Checkbox from './Checkbox'
+import FieldCheckbox from './Checkbox'
+import type { FieldCheckboxFieldProps, FieldCheckboxInstance, FieldCheckboxProps } from './typings'
 import { fieldCheckboxProps, fieldCheckboxSlots } from './typings'
 
-Checkbox.install = function (app: App): App {
-    app.component(Checkbox.name as string, Checkbox)
-    return app
-}
+export { FieldCheckbox, fieldCheckboxProps, fieldCheckboxSlots }
 
-export { Checkbox as FieldCheckbox, fieldCheckboxProps, fieldCheckboxSlots }
-
-export type { FieldCheckboxFieldProps, FieldCheckboxProps, FieldCheckboxInstance } from './typings'
+export type { FieldCheckboxFieldProps, FieldCheckboxProps, FieldCheckboxInstance }

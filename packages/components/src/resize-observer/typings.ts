@@ -22,4 +22,3 @@ export const resizeObserverProps = () => ({
 
 export type ResizeObserverProps = Partial<ExtractPropTypes<ReturnType<typeof resizeObserverProps>>>;
 export type ResizeObserverInstance = ComponentPublicInstance<ResizeObserverProps>;
-

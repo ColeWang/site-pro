@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { App, Ref } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
@@ -7,7 +7,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldPasswordFieldProps } from './typings'
 import { fieldPasswordProps, fieldPasswordSlots } from './typings'
 
-export default defineComponent({
+const FieldPassword = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldPassword',
     props: fieldPasswordProps(),
@@ -53,3 +53,10 @@ export default defineComponent({
         }
     }
 })
+
+FieldPassword.install = function (app: App): App {
+    app.component(FieldPassword.name as string, FieldPassword)
+    return app
+}
+
+export default FieldPassword

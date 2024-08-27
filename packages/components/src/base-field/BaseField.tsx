@@ -1,4 +1,4 @@
-import type { VNode } from 'vue'
+import type { App, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction, isObject } from 'lodash-es'
@@ -173,8 +173,7 @@ function defaultRenderText (
     return <FieldText {...props} v-slots={slots}/>
 }
 
-
-export default defineComponent({
+const BaseField = defineComponent({
     inheritAttrs: false,
     name: 'ProBaseField',
     props: baseFieldProps(),
@@ -217,3 +216,10 @@ export default defineComponent({
         }
     }
 })
+
+BaseField.install = function (app: App): App {
+    app.component(BaseField.name as string, BaseField)
+    return app
+}
+
+export default BaseField

@@ -1,23 +1,13 @@
-import type { App } from 'vue'
 import BaseForm from './BaseForm'
+import type { BaseFormExpose, BaseFormInstance, BaseFormModel, BaseFormProps } from './typings'
 import { baseFormProps } from './typings'
+import type { SubmitterInstance, SubmitterProps } from './Submitter'
 import Submitter, { submitterProps } from './Submitter'
-import { createFromInstance, FormInstanceKey, useFormInstance } from './hooks/useFormInstance'
-
-BaseForm.install = function (app: App): App {
-    app.component(BaseForm.name as string, BaseForm)
-    return app
-}
-
-Submitter.install = function (app: App): App {
-    app.component(Submitter.name as string, Submitter)
-    return app
-}
+import { createFromInstance, useFormInstance } from './hooks/useFormInstance'
 
 export { BaseForm, baseFormProps }
 export { Submitter, submitterProps }
-export { useFormInstance, createFromInstance, FormInstanceKey }
+export { useFormInstance, createFromInstance }
 
-export type { BaseFormModel, BaseFormProps, BaseFormExpose, BaseFormInstance } from './typings'
-export type { SubmitterProps, SubmitterInstance } from './Submitter'
-export type { InjectFormInstance } from './hooks/useFormInstance'
+export type { BaseFormModel, BaseFormProps, BaseFormExpose, BaseFormInstance }
+export type { SubmitterProps, SubmitterInstance }
