@@ -42,10 +42,10 @@ export interface BaseFieldValueTypeWithFieldProps {
     checkbox: CheckboxGroupProps;
     switch: SwitchProps;
     slider: SliderProps;
+    text: InputProps;
     number: InputNumberProps;
     textarea: InputTextareaProps;
     password: InputPasswordProps;
-    text: InputProps;
 }
 
 export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
