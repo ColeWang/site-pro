@@ -1,6 +1,6 @@
 import type { PropType, TransitionProps } from 'vue'
 import { defineComponent, nextTick, Transition } from 'vue'
-import { addClass, removeClass, toPx } from '@site-pro/utils'
+import { addClass, removeClass, setStyle, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import useStyle from './style'
 
@@ -11,38 +11,32 @@ function collapseMotion (name: string, appear: boolean): TransitionProps {
         css: true,
         onBeforeEnter (node: Element): void {
             addClass(node, name)
-            ;(node as HTMLElement).style.height = '0px'
-            ;(node as HTMLElement).style.opacity = '0'
+            setStyle(node, { height: toPx(0), opacity: '0' })
         },
         onEnter (node: Element): void {
             nextTick().then(() => {
-                ;(node as HTMLElement).style.height = toPx(node.scrollHeight)!
-                ;(node as HTMLElement).style.opacity = '1'
+                setStyle(node, { height: toPx(node.scrollHeight), opacity: '1' })
             })
         },
         onAfterEnter (node: Element): void {
             if (node && (node as HTMLElement).style) {
                 removeClass(node, name)
-                ;(node as HTMLElement).style.height = ''
-                ;(node as HTMLElement).style.opacity = ''
+                setStyle(node, { height: '', opacity: '' })
             }
         },
         onBeforeLeave (node: Element): void {
             addClass(node, name)
-            ;(node as HTMLElement).style.height = toPx((node as HTMLElement).offsetHeight)!
-            ;(node as HTMLElement).style.opacity = ''
+            setStyle(node, { height: toPx((node as HTMLElement).offsetHeight), opacity: '' })
         },
         onLeave (node: Element): void {
             nextTick().then(() => {
-                ;(node as HTMLElement).style.height = toPx(0)!
-                ;(node as HTMLElement).style.opacity = '0'
+                setStyle(node, { height: toPx(0), opacity: '0' })
             })
         },
         onAfterLeave (node: Element): void {
             if (node && (node as HTMLElement).style) {
                 removeClass(node, name)
-                ;(node as HTMLElement).style.height = ''
-                ;(node as HTMLElement).style.opacity = ''
+                setStyle(node, { height: '', opacity: '' })
             }
         }
     }

@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, MaybeRef } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, MaybeRef } from 'vue'
 import { unref } from 'vue'
 
 export function hasClass<T extends Element | HTMLElement> (node: T, className: string): boolean {
@@ -28,6 +28,18 @@ export function removeClass<T extends Element | HTMLElement> (node: T, className
             node.className = ` ${originClass} `.replace(` ${className} `, ' ')
         }
     }
+}
+
+export function setStyle<T extends Element | HTMLElement> (node: T, style: CSSProperties): CSSProperties {
+    const keys = Object.keys(style)
+    const oldStyle: CSSProperties = {}
+    keys.forEach((key) => {
+        oldStyle[key as any] = (node as HTMLElement).style[key as any]
+    })
+    keys.forEach((key) => {
+        ;(node as any).style[key] = style[key as any]
+    })
+    return oldStyle
 }
 
 export function getElement<E extends ComponentPublicInstance | Element | HTMLElement, T = MaybeRef<E | null>> (el: T): E {
