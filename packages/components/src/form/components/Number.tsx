@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const numberProps = () => ({
 export type NumberProps = Partial<ExtractPropTypes<ReturnType<typeof numberProps>>>;
 export type NumberInstance = ComponentPublicInstance<NumberProps>;
 
-export default defineComponent({
+const Number = defineComponent({
     inheritAttrs: false,
     name: 'ProNumber',
     props: numberProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Number.install = function (app: App): App {
+    app.component(Number.name as string, Number)
+    return app
+}
+
+export default Number

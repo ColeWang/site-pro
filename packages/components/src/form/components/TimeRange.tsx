@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const timeRangeProps = () => ({
 export type TimeRangeProps = Partial<ExtractPropTypes<ReturnType<typeof timeRangeProps>>>;
 export type TimeRangeInstance = ComponentPublicInstance<TimeRangeProps>;
 
-export default defineComponent({
+const TimeRange = defineComponent({
     inheritAttrs: false,
     name: 'ProTimeRange',
     props: timeRangeProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+TimeRange.install = function (app: App): App {
+    app.component(TimeRange.name as string, TimeRange)
+    return app
+}
+
+export default TimeRange

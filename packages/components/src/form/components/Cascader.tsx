@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const cascaderProps = () => ({
 export type CascaderProps = Partial<ExtractPropTypes<ReturnType<typeof cascaderProps>>>;
 export type CascaderInstance = ComponentPublicInstance<CascaderProps>;
 
-export default defineComponent({
+const Cascader = defineComponent({
     inheritAttrs: false,
     name: 'ProCascader',
     props: cascaderProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Cascader.install = function (app: App): App {
+    app.component(Cascader.name as string, Cascader)
+    return app
+}
+
+export default Cascader

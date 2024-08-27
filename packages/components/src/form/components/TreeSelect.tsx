@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const treeSelectProps = () => ({
 export type TreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof treeSelectProps>>>;
 export type TreeSelectInstance = ComponentPublicInstance<TreeSelectProps>;
 
-export default defineComponent({
+const TreeSelect = defineComponent({
     inheritAttrs: false,
     name: 'ProTreeSelect',
     props: treeSelectProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+TreeSelect.install = function (app: App): App {
+    app.component(TreeSelect.name as string, TreeSelect)
+    return app
+}
+
+export default TreeSelect

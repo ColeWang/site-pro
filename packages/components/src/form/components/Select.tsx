@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const selectProps = () => ({
 export type SelectProps = Partial<ExtractPropTypes<ReturnType<typeof selectProps>>>;
 export type SelectInstance = ComponentPublicInstance<SelectProps>;
 
-export default defineComponent({
+const Select = defineComponent({
     inheritAttrs: false,
     name: 'ProSelect',
     props: selectProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Select.install = function (app: App): App {
+    app.component(Select.name as string, Select)
+    return app
+}
+
+export default Select

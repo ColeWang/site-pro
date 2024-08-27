@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const switchProps = () => ({
 export type SwitchProps = Partial<ExtractPropTypes<ReturnType<typeof switchProps>>>;
 export type SwitchInstance = ComponentPublicInstance<SwitchProps>;
 
-export default defineComponent({
+const Switch = defineComponent({
     inheritAttrs: false,
     name: 'ProSwitch',
     props: switchProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Switch.install = function (app: App): App {
+    app.component(Switch.name as string, Switch)
+    return app
+}
+
+export default Switch

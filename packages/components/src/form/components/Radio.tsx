@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const radioProps = () => ({
 export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>>;
 export type RadioInstance = ComponentPublicInstance<RadioProps>;
 
-export default defineComponent({
+const Radio = defineComponent({
     inheritAttrs: false,
     name: 'ProRadio',
     props: radioProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Radio.install = function (app: App): App {
+    app.component(Radio.name as string, Radio)
+    return app
+}
+
+export default Radio

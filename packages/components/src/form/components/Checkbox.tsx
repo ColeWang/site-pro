@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const checkboxProps = () => ({
 export type CheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof checkboxProps>>>;
 export type CheckboxInstance = ComponentPublicInstance<CheckboxProps>;
 
-export default defineComponent({
+const Checkbox = defineComponent({
     inheritAttrs: false,
     name: 'ProCheckbox',
     props: checkboxProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Checkbox.install = function (app: App): App {
+    app.component(Checkbox.name as string, Checkbox)
+    return app
+}
+
+export default Checkbox

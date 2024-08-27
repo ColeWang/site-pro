@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const textProps = () => ({
 export type TextProps = Partial<ExtractPropTypes<ReturnType<typeof textProps>>>;
 export type TextInstance = ComponentPublicInstance<TextProps>;
 
-export default defineComponent({
+const Text = defineComponent({
     inheritAttrs: false,
     name: 'ProText',
     props: textProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Text.install = function (app: App): App {
+    app.component(Text.name as string, Text)
+    return app
+}
+
+export default Text

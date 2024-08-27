@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const passwordProps = () => ({
 export type PasswordProps = Partial<ExtractPropTypes<ReturnType<typeof passwordProps>>>;
 export type PasswordInstance = ComponentPublicInstance<PasswordProps>;
 
-export default defineComponent({
+const Password = defineComponent({
     inheritAttrs: false,
     name: 'ProPassword',
     props: passwordProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Password.install = function (app: App): App {
+    app.component(Password.name as string, Password)
+    return app
+}
+
+export default Password

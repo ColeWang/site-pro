@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const textareaProps = () => ({
 export type TextareaProps = Partial<ExtractPropTypes<ReturnType<typeof textareaProps>>>;
 export type TextareaInstance = ComponentPublicInstance<TextareaProps>;
 
-export default defineComponent({
+const Textarea = defineComponent({
     inheritAttrs: false,
     name: 'ProTextarea',
     props: textareaProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+Textarea.install = function (app: App): App {
+    app.component(Textarea.name as string, Textarea)
+    return app
+}
+
+export default Textarea

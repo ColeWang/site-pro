@@ -1,135 +1,55 @@
-import type { App } from 'vue'
+import type { FieldInstance, FieldProps } from './Field'
 import Field, { fieldProps } from './Field'
+import type { DateInstance, DateProps } from './Date'
 import Date, { dateProps } from './Date'
+import type { DateRangeInstance, DateRangeProps } from './DateRange'
 import DateRange, { dateRangeProps } from './DateRange'
+import type { DateWeekInstance, DateWeekProps } from './DateWeek'
 import DateWeek, { dateWeekProps } from './DateWeek'
+import type { DateWeekRangeInstance, DateWeekRangeProps } from './DateWeekRange'
 import DateWeekRange, { dateWeekRangeProps } from './DateWeekRange'
+import type { DateMonthInstance, DateMonthProps } from './DateMonth'
 import DateMonth, { dateMonthProps } from './DateMonth'
+import type { DateMonthRangeInstance, DateMonthRangeProps } from './DateMonthRange'
 import DateMonthRange, { dateMonthRangeProps } from './DateMonthRange'
+import type { DateQuarterInstance, DateQuarterProps } from './DateQuarter'
 import DateQuarter, { dateQuarterProps } from './DateQuarter'
+import type { DateQuarterRangeInstance, DateQuarterRangeProps } from './DateQuarterRange'
 import DateQuarterRange, { dateQuarterRangeProps } from './DateQuarterRange'
+import type { DateYearInstance, DateYearProps } from './DateYear'
 import DateYear, { dateYearProps } from './DateYear'
+import type { DateYearRangeInstance, DateYearRangeProps } from './DateYearRange'
 import DateYearRange, { dateYearRangeProps } from './DateYearRange'
+import type { DateTimeInstance, DateTimeProps } from './DateTime'
 import DateTime, { dateTimeProps } from './DateTime'
+import type { DateTimeRangeInstance, DateTimeRangeProps } from './DateTimeRange'
 import DateTimeRange, { dateTimeRangeProps } from './DateTimeRange'
+import type { TimeInstance, TimeProps } from './Time'
 import Time, { timeProps } from './Time'
+import type { TimeRangeInstance, TimeRangeProps } from './TimeRange'
 import TimeRange, { timeRangeProps } from './TimeRange'
+import type { SelectInstance, SelectProps } from './Select'
 import Select, { selectProps } from './Select'
+import type { TreeSelectInstance, TreeSelectProps } from './TreeSelect'
 import TreeSelect, { treeSelectProps } from './TreeSelect'
+import type { CascaderInstance, CascaderProps } from './Cascader'
 import Cascader, { cascaderProps } from './Cascader'
+import type { RadioInstance, RadioProps } from './Radio'
 import Radio, { radioProps } from './Radio'
+import type { CheckboxInstance, CheckboxProps } from './Checkbox'
 import Checkbox, { checkboxProps } from './Checkbox'
+import type { SwitchInstance, SwitchProps } from './Switch'
 import Switch, { switchProps } from './Switch'
+import type { SliderInstance, SliderProps } from './Slider'
 import Slider, { sliderProps } from './Slider'
+import type { TextInstance, TextProps } from './Text'
 import Text, { textProps } from './Text'
+import type { NumberInstance, NumberProps } from './Number'
 import Number, { numberProps } from './Number'
+import type { TextareaInstance, TextareaProps } from './Textarea'
 import Textarea, { textareaProps } from './Textarea'
+import type { PasswordInstance, PasswordProps } from './Password'
 import Password, { passwordProps } from './Password'
-
-Field.install = function (app: App): App {
-    app.component(Field.name as string, Field)
-    return app
-}
-Date.install = function (app: App): App {
-    app.component(Date.name as string, Date)
-    return app
-}
-DateRange.install = function (app: App): App {
-    app.component(DateRange.name as string, DateRange)
-    return app
-}
-DateWeek.install = function (app: App): App {
-    app.component(DateWeek.name as string, DateWeek)
-    return app
-}
-DateWeekRange.install = function (app: App): App {
-    app.component(DateWeekRange.name as string, DateWeekRange)
-    return app
-}
-DateMonth.install = function (app: App): App {
-    app.component(DateMonth.name as string, DateMonth)
-    return app
-}
-DateMonthRange.install = function (app: App): App {
-    app.component(DateMonthRange.name as string, DateMonthRange)
-    return app
-}
-DateQuarter.install = function (app: App): App {
-    app.component(DateQuarter.name as string, DateQuarter)
-    return app
-}
-DateQuarterRange.install = function (app: App): App {
-    app.component(DateQuarterRange.name as string, DateQuarterRange)
-    return app
-}
-DateYear.install = function (app: App): App {
-    app.component(DateYear.name as string, DateYear)
-    return app
-}
-DateYearRange.install = function (app: App): App {
-    app.component(DateYearRange.name as string, DateYearRange)
-    return app
-}
-DateTime.install = function (app: App): App {
-    app.component(DateTime.name as string, DateTime)
-    return app
-}
-DateTimeRange.install = function (app: App): App {
-    app.component(DateTimeRange.name as string, DateTimeRange)
-    return app
-}
-Time.install = function (app: App): App {
-    app.component(Time.name as string, Time)
-    return app
-}
-TimeRange.install = function (app: App): App {
-    app.component(TimeRange.name as string, TimeRange)
-    return app
-}
-Select.install = function (app: App): App {
-    app.component(Select.name as string, Select)
-    return app
-}
-TreeSelect.install = function (app: App): App {
-    app.component(TreeSelect.name as string, TreeSelect)
-    return app
-}
-Cascader.install = function (app: App): App {
-    app.component(Cascader.name as string, Cascader)
-    return app
-}
-Radio.install = function (app: App): App {
-    app.component(Radio.name as string, Radio)
-    return app
-}
-Checkbox.install = function (app: App): App {
-    app.component(Checkbox.name as string, Checkbox)
-    return app
-}
-Switch.install = function (app: App): App {
-    app.component(Switch.name as string, Switch)
-    return app
-}
-Slider.install = function (app: App): App {
-    app.component(Slider.name as string, Slider)
-    return app
-}
-Text.install = function (app: App): App {
-    app.component(Text.name as string, Text)
-    return app
-}
-Number.install = function (app: App): App {
-    app.component(Number.name as string, Number)
-    return app
-}
-Textarea.install = function (app: App): App {
-    app.component(Textarea.name as string, Textarea)
-    return app
-}
-Password.install = function (app: App): App {
-    app.component(Password.name as string, Password)
-    return app
-}
 
 export { Field, fieldProps }
 export { Date, dateProps }
@@ -158,29 +78,29 @@ export { Number, numberProps }
 export { Textarea, textareaProps }
 export { Password, passwordProps }
 
-export type { FieldSizeType, FieldProps, FieldInstance } from './Field'
-export type { DateProps, DateInstance } from './Date'
-export type { DateRangeProps, DateRangeInstance } from './DateRange'
-export type { DateWeekProps, DateWeekInstance } from './DateWeek'
-export type { DateWeekRangeProps, DateWeekRangeInstance } from './DateWeekRange'
-export type { DateMonthProps, DateMonthInstance } from './DateMonth'
-export type { DateMonthRangeProps, DateMonthRangeInstance } from './DateMonthRange'
-export type { DateQuarterProps, DateQuarterInstance } from './DateQuarter'
-export type { DateQuarterRangeProps, DateQuarterRangeInstance } from './DateQuarterRange'
-export type { DateYearProps, DateYearInstance } from './DateYear'
-export type { DateYearRangeProps, DateYearRangeInstance } from './DateYearRange'
-export type { DateTimeProps, DateTimeInstance } from './DateTime'
-export type { DateTimeRangeProps, DateTimeRangeInstance } from './DateTimeRange'
-export type { TimeProps, TimeInstance } from './Time'
-export type { TimeRangeProps, TimeRangeInstance } from './TimeRange'
-export type { SelectProps, SelectInstance } from './Select'
-export type { TreeSelectProps, TreeSelectInstance } from './TreeSelect'
-export type { CascaderProps, CascaderInstance } from './Cascader'
-export type { RadioProps, RadioInstance } from './Radio'
-export type { CheckboxProps, CheckboxInstance } from './Checkbox'
-export type { SwitchProps, SwitchInstance } from './Switch'
-export type { SliderProps, SliderInstance } from './Slider'
-export type { TextProps, TextInstance } from './Text'
-export type { NumberProps, NumberInstance } from './Number'
-export type { TextareaProps, TextareaInstance } from './Textarea'
-export type { PasswordProps, PasswordInstance } from './Password'
+export type { FieldProps, FieldInstance }
+export type { DateProps, DateInstance }
+export type { DateRangeProps, DateRangeInstance }
+export type { DateWeekProps, DateWeekInstance }
+export type { DateWeekRangeProps, DateWeekRangeInstance }
+export type { DateMonthProps, DateMonthInstance }
+export type { DateMonthRangeProps, DateMonthRangeInstance }
+export type { DateQuarterProps, DateQuarterInstance }
+export type { DateQuarterRangeProps, DateQuarterRangeInstance }
+export type { DateYearProps, DateYearInstance }
+export type { DateYearRangeProps, DateYearRangeInstance }
+export type { DateTimeProps, DateTimeInstance }
+export type { DateTimeRangeProps, DateTimeRangeInstance }
+export type { TimeProps, TimeInstance }
+export type { TimeRangeProps, TimeRangeInstance }
+export type { SelectProps, SelectInstance }
+export type { TreeSelectProps, TreeSelectInstance }
+export type { CascaderProps, CascaderInstance }
+export type { RadioProps, RadioInstance }
+export type { CheckboxProps, CheckboxInstance }
+export type { SwitchProps, SwitchInstance }
+export type { SliderProps, SliderInstance }
+export type { TextProps, TextInstance }
+export type { NumberProps, NumberInstance }
+export type { TextareaProps, TextareaInstance }
+export type { PasswordProps, PasswordInstance }

@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps } from 'ant-design-vue/es/form'
@@ -22,7 +22,7 @@ export const dateMonthRangeProps = () => ({
 export type DateMonthRangeProps = Partial<ExtractPropTypes<ReturnType<typeof dateMonthRangeProps>>>;
 export type DateMonthRangeInstance = ComponentPublicInstance<DateMonthRangeProps>;
 
-export default defineComponent({
+const DateMonthRange = defineComponent({
     inheritAttrs: false,
     name: 'ProDateMonthRange',
     props: dateMonthRangeProps(),
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+DateMonthRange.install = function (app: App): App {
+    app.component(DateMonthRange.name as string, DateMonthRange)
+    return app
+}
+
+export default DateMonthRange

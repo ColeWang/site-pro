@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import type { BaseSlot, NamePath } from '@site-pro/utils'
@@ -70,7 +70,7 @@ function fieldStyle (
     }
 }
 
-export default defineComponent({
+const Field = defineComponent({
     inheritAttrs: false,
     name: 'ProField',
     props: fieldProps(),
@@ -139,3 +139,10 @@ export default defineComponent({
         }
     }
 })
+
+Field.install = function (app: App): App {
+    app.component(Field.name as string, Field)
+    return app
+}
+
+export default Field
