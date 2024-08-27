@@ -1,9 +1,9 @@
-import type { Dictionary, NamePath } from './typings'
+import type { NamePath, Recordable } from './typings'
 import { isProxy, toRaw } from 'vue'
 import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, toString } from 'lodash-es'
 import { isEmpty } from './is'
 
-export function cloneProxyToRaw<T = any> (proxy: Dictionary<T>): Dictionary<T> {
+export function cloneProxyToRaw<T = any> (proxy: Recordable<T>): Recordable<T> {
     return cloneWith(proxy, (value) => {
         if (isProxy(value)) {
             const nextValue = toRaw(value)
@@ -14,11 +14,11 @@ export function cloneProxyToRaw<T = any> (proxy: Dictionary<T>): Dictionary<T> {
     })
 }
 
-export function omitNil<T = any> (object: Dictionary<T> | null | undefined): Dictionary<T> {
+export function omitNil<T = any> (object: Recordable<T> | null | undefined): Recordable<T> {
     return omitBy(object, isEmpty)
 }
 
-export function omitUndefined<T = any> (object: Dictionary<T> | null | undefined): Dictionary<T> {
+export function omitUndefined<T = any> (object: Recordable<T> | null | undefined): Recordable<T> {
     return omitBy(object, isUndefined)
 }
 
