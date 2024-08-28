@@ -1,7 +1,7 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
-import { formItemProps } from 'ant-design-vue/es/form'
+import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
 import type { FieldProps, FieldSlots } from './Field'
 import Field, { fieldProps } from './Field'
@@ -16,7 +16,7 @@ const DATE_TIME_RANGE_VALUE_TYPE: BaseFieldValueType = 'dateTimeRange'
 
 export const dateTimeRangeProps = () => ({
     ...fieldProps(),
-    ...formItemProps(),
+    ...antFormItemProps(),
     fieldProps: {
         type: Object as PropType<FieldRangePickerFieldProps>,
         default: () => ({})

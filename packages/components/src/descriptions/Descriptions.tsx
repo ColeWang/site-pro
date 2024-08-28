@@ -1,6 +1,6 @@
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions, Form, Spin } from 'ant-design-vue'
-import { descriptionsProps } from 'ant-design-vue/es/descriptions'
+import { descriptionsProps as antDescriptionsProps } from 'ant-design-vue/es/descriptions'
 import { BaseField } from '../base-field'
 import useFetchData from './hooks/useFetchData'
 import { useConfigInject } from '@site-pro/hooks'
@@ -27,7 +27,7 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProDescriptions',
     props: {
-        ...descriptionsProps(),
+        ...antDescriptionsProps(),
         ...extraProps,
         request: {
             type: Function,

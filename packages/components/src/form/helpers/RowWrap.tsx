@@ -1,13 +1,13 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
-import { rowProps } from 'ant-design-vue/es/grid/Row'
+import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
 import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { RowProps } from '../../ant-typings'
 
 const rowWarpProps = () => ({
-    ...rowProps(),
+    ...antRowProps(),
     grid: {
         type: Boolean as PropType<boolean>,
         default: false

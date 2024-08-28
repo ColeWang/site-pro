@@ -1,32 +1,49 @@
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { formItemProps } from 'ant-design-vue/es/form'
-import ColWrap from '../helpers/ColWrap'
-import { useFormInstance } from '../base-form'
+import { Form } from 'ant-design-vue'
+import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
+import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
+import { useFormInstance } from '../base-form'
+import type { ColWrapProps } from '../helpers/ColWrap'
+import ColWrap from '../helpers/ColWrap'
 
-export default defineComponent({
+export const formItemProps = () => ({
+    ...antFormItemProps(),
+    colProps: {
+        type: Object as PropType<ColWrapProps>,
+        default: () => ({})
+    }
+})
+
+export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
+export type FormItemInstance = ComponentPublicInstance<FormItemProps>;
+
+const FormItem = defineComponent({
     inheritAttrs: false,
-    props: {
-        ...formItemProps(),
-        colProps: {
-            type: Object,
-            default: () => ({})
-        }
-    },
+    name: 'ProFormItem',
+    props: formItemProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+        extra?: BaseSlot;
+        help?: BaseSlot;
+        label?: BaseSlot;
+        tooltip?: BaseSlot;
+    }>,
     setup (props, { slots, attrs }) {
-        const { formProps = {} } = useFormInstance()
+        const { formProps } = useFormInstance()
 
         return () => {
             const { colProps } = props
-            const { grid } = unref(formProps)
+            const { grid } = unref(formProps) || {}
 
-            const colWrapProps = {
+            const colWrapProps: ColWrapProps = {
                 ...colProps,
-                grid: !!grid
+                grid: grid
             }
-            const formItemProps = {
-                ...attrs,
-                ...pick(props, Object.keys(Form.Item.props))
+            const formItemProps: FormItemProps = {
+                ...pick(props, Object.keys(Form.Item.props as FormItemProps)),
+                ...attrs
             }
             return (
                 <ColWrap {...colWrapProps}>
@@ -36,3 +53,10 @@ export default defineComponent({
         }
     }
 })
+
+FormItem.install = function (app: App): App {
+    app.component(FormItem.name as string, FormItem)
+    return app
+}
+
+export default FormItem

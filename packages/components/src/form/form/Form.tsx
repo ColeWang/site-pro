@@ -1,38 +1,54 @@
-import type { PropType, SlotsType, Ref } from 'vue'
-import { defineComponent, ref, unref } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import { defineComponent } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
-import type { BaseFormProps, BaseFormInstance } from '../base-form'
+import type { BaseFormInstance, BaseFormProps } from '../base-form'
 import { BaseForm, baseFormProps } from '../base-form'
 
-const formProps = () => ({
+interface OnFormRef {
+    (el: BaseFormInstance | null): void;
+}
+
+export const formProps = () => ({
     ...baseFormProps,
     layout: {
         type: String as PropType<'horizontal' | 'inline' | 'vertical'>,
         default: 'vertical'
+    },
+    onFormRef: {
+        type: Function as PropType<OnFormRef>,
+        default: undefined
     }
 })
 
-export default defineComponent({
+export type FormProps = Partial<ExtractPropTypes<ReturnType<typeof formProps>>>;
+export type FormInstance = ComponentPublicInstance<FormProps>;
+
+const Form = defineComponent({
     inheritAttrs: false,
     name: 'ProForm',
     props: formProps(),
     slots: Object as SlotsType<{
         default?: BaseSlot;
     }>,
-    setup (props, { slots, attrs, expose }) {
-        const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
-
-        function getFormInstance () {
-            return unref(baseFormRef)
+    emits: ['formRef'],
+    setup (props, { emit, slots, attrs }) {
+        // 多层组件的数据或方法透传 Expose 并不直接提供帮助
+        function onFormRef (el: any): void {
+            emit('formRef', el as BaseFormInstance)
         }
-
-        expose({ getFormInstance })
 
         return () => {
             const baseFormProps: BaseFormProps = { ...attrs, ...props }
             return (
-                <BaseForm {...baseFormProps} ref={baseFormRef} v-slots={slots}/>
+                <BaseForm {...baseFormProps} ref={onFormRef} v-slots={slots}/>
             )
         }
     }
 })
+
+Form.install = function (app: App): App {
+    app.component(Form.name as string, Form)
+    return app
+}
+
+export default Form

@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
-import { formProps } from 'ant-design-vue/es/form'
+import { formProps as antFormProps } from 'ant-design-vue/es/form'
 import type { NamePath, Recordable } from '@site-pro/utils'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 
@@ -22,7 +22,7 @@ export interface BaseFormOnValuesChange {
 }
 
 export const baseFormProps = () => ({
-    ...formProps(),
+    ...antFormProps(),
     initialValues: {
         type: Object as PropType<Recordable>,
         default: () => ({})

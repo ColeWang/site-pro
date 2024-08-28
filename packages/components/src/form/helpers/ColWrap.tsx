@@ -1,13 +1,13 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
-import { colProps } from 'ant-design-vue/es/grid/Col'
+import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ColProps } from '../../ant-typings'
 
 export const colWrapProps = () => ({
-    ...colProps(),
+    ...antColProps(),
     hidden: {
         type: Boolean as PropType<boolean>,
         default: false

@@ -1,21 +1,13 @@
 import type { ExtractPropTypes, PropType } from 'vue'
-import type {
-    ButtonProps,
-    CascaderProps,
-    CheckboxGroupProps,
-    ColProps,
-    FormInstance,
-    FormItemProps,
-    FormProps,
-    InputNumberProps,
-    InputProps,
-    RadioGroupProps,
-    RowProps,
-    SelectProps,
-    SliderProps,
-    SwitchProps,
-    TreeSelectProps
-} from 'ant-design-vue'
+import type { InputProps } from 'ant-design-vue/es/input/inputProps'
+import type { InputNumberProps } from 'ant-design-vue/es/input-number'
+import type { CascaderProps } from 'ant-design-vue/es/cascader'
+import type { CheckboxGroupProps } from 'ant-design-vue/es/checkbox/interface'
+import type { RadioGroupProps } from 'ant-design-vue/es/radio/Group'
+import type { SelectProps } from 'ant-design-vue/es/select'
+import type { SliderProps } from 'ant-design-vue/es/slider'
+import type { SwitchProps } from 'ant-design-vue/es/switch'
+import type { TreeSelectProps } from 'ant-design-vue/es/tree-select'
 import type {
     CommonProps,
     DatePickerProps as AntDatePickerProps,
@@ -26,6 +18,11 @@ import type {
     TimeRangePickerProps as AntTimeRangePickerProps
 } from 'ant-design-vue/es/time-picker/time-picker'
 import type { TextAreaProps as InputTextareaProps } from 'ant-design-vue/es/input'
+// ----
+import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes'
+import type { ColProps } from 'ant-design-vue/es/grid/Col'
+import type { RowProps } from 'ant-design-vue/es/grid/Row'
+import type { FormInstance, FormItemProps, FormProps } from 'ant-design-vue/es/form'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
