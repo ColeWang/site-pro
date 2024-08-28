@@ -43,12 +43,12 @@ const FormDependency = defineComponent({
                 return result
             }, {})
 
-            const colWrapProps: ColWrapperProps = {
+            const colWrapperProps: ColWrapperProps = {
                 ...colProps,
                 grid: grid
             }
             return (
-                <ColWrapper {...colWrapProps}>
+                <ColWrapper {...colWrapperProps}>
                     {slots.default && slots.default(slotScope)}
                 </ColWrapper>
             )

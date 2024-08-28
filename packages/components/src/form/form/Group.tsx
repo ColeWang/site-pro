@@ -56,11 +56,11 @@ const FormGroup = defineComponent({
             const titleDom = getPropsSlot(slots, props, 'title')
             const titleStyle = genTitleStyle(layout || 'vertical', unref(token))
 
-            const rowWrapProps: RowWrapperProps = { ...rowProps, grid: grid }
+            const rowWrapperProps: RowWrapperProps = { ...rowProps, grid: grid }
 
             return (
                 <ColWrapper span={24} grid={grid}>
-                    <RowWrapper {...rowWrapProps}>
+                    <RowWrapper {...rowWrapperProps}>
                         {titleDom && (
                             <Col span={24}>
                                 {noStyle ? titleDom : (

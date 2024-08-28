@@ -37,7 +37,7 @@ const FormItem = defineComponent({
             const { colProps } = props
             const { grid } = unref(formProps) || {}
 
-            const colWrapProps: ColWrapperProps = {
+            const colWrapperProps: ColWrapperProps = {
                 ...colProps,
                 grid: grid
             }
@@ -46,7 +46,7 @@ const FormItem = defineComponent({
                 ...attrs
             }
             return (
-                <ColWrapper {...colWrapProps}>
+                <ColWrapper {...colWrapperProps}>
                     <Form.Item {...formItemProps} v-slots={slots}/>
                 </ColWrapper>
             )

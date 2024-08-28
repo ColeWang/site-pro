@@ -154,14 +154,14 @@ const BaseForm = defineComponent({
                 onFinish: onFinish
             }
 
-            const rowWrapProps: RowWrapperProps = { ...rowProps, grid: grid }
+            const rowWrapperProps: RowWrapperProps = { ...rowProps, grid: grid }
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     <ConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                             <Form {...needFormProps} ref={formInstanceRef}>
-                                <RowWrapper {...rowWrapProps} v-slots={slots}/>
+                                <RowWrapper {...rowWrapperProps} v-slots={slots}/>
                             </Form>
                         </div>
                     </ConfigProvider>
