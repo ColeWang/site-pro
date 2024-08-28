@@ -1,20 +1,14 @@
 <template>
-  <LocaleProvider :locale="enUS">
-    <ProBaseForm :model="{}" @finish="onFinish">
-    
-    </ProBaseForm>
-    <ProText>
-      <template #prefix>111</template>
-    </ProText>
-  </LocaleProvider>
+  <ProForm @form-ref="onFormRef">
+    <ProText/>
+  </ProForm>
 </template>
 
 <script setup lang="ts">
-  import { BaseForm as ProBaseForm, LocaleProvider, Text as ProText } from '../../src'
-  import enUS from '@site-pro/locale/en-US'
+  import { Form as ProForm, Text as ProText } from '../../src'
   
-  function onFinish (value: string) {
-    return value
+  function onFormRef (el: any) {
+    console.log(el)
   }
 </script>
 

@@ -17,6 +17,8 @@ const breakpoints = {
     ]
 }
 
+// compact 紧凑模式
+
 function getSpanConfig (layout, width) {
     const spanConfig = breakpoints[layout || 'horizontal']
     const breakPoint = spanConfig.find((item) => width < item[0])

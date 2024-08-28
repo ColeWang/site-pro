@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
-import zhCN from '@site-pro/locale/zh-CN'
 
 export interface LocaleType {
     [key: string]: string | number | LocaleType | LocaleType[];
@@ -9,7 +8,7 @@ export interface LocaleType {
 export const localeProviderProps = () => ({
     locale: {
         type: Object as PropType<LocaleType>,
-        default: () => (zhCN)
+        default: () => ({})
     }
 })
 
