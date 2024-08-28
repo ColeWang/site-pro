@@ -9,7 +9,7 @@ interface OnFormRef {
 }
 
 export const formProps = () => ({
-    ...baseFormProps,
+    ...baseFormProps(),
     layout: {
         type: String as PropType<'horizontal' | 'inline' | 'vertical'>,
         default: 'vertical'
