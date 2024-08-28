@@ -13,12 +13,6 @@ import { baseFormProps } from './typings'
 import type { FormInstance, FormProps, RowProps } from '../../ant-typings'
 import useStyle from './style'
 
-function resetLayoutOfGrid (props: BaseFormProps): string | undefined {
-    // 当 grid = true 时 layout 不支持 inlinex
-    const { layout, grid } = props || {}
-    return (grid && layout === 'inline') ? 'vertical' : layout
-}
-
 const BaseForm = defineComponent({
     inheritAttrs: false,
     name: 'ProBaseForm',
@@ -39,16 +33,12 @@ const BaseForm = defineComponent({
         // 考虑到 model 传递就不再需要 initialValues
         const model: Ref<BaseFormModel> = ref(props.model || defaultValues)
 
-        const rowProps: ComputedRef<RowProps> = computed(() => {
-            const { sizeMS } = unref(token)
-            const baseProps = { gutter: [sizeMS, 0] }
-            return { ...baseProps, ...props.rowProps } as RowProps
-        })
-
         const formProps: ComputedRef<BaseFormProps> = computed(() => {
-            const layout = resetLayoutOfGrid(props)
-            const baseProps = { ...attrs, ...props, layout }
-            return { ...baseProps, rowProps: unref(rowProps) } as BaseFormProps
+            const { sizeMS } = unref(token)
+            const defaultRowProps: RowProps = { gutter: [sizeMS, 0] }
+            const rowProps: RowProps = { ...defaultRowProps, ...props.rowProps }
+            const layout: string | undefined = (props.grid && props.layout === 'inline') ? 'vertical' : props.layout
+            return { ...attrs, ...props, layout, rowProps } as BaseFormProps
         })
 
         watch(model, (curr: BaseFormModel) => {
