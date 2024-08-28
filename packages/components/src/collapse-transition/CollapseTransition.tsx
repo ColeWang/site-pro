@@ -58,9 +58,11 @@ const CollapseTransition = defineComponent({
         return () => {
             const { appear } = props
 
+            const transitionProps = collapseMotion(`${prefixCls.value}-wrapper`, appear)
+
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <Transition {...collapseMotion(`${prefixCls.value}-wrapper`, appear)}>
+                    <Transition {...transitionProps}>
                         {slots.default && slots.default()}
                     </Transition>
                 </div>
