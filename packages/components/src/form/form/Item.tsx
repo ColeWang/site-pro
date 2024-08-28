@@ -5,13 +5,13 @@ import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import { useFormInstance } from '../base-form'
-import type { ColWrapProps } from '../helpers/ColWrap'
-import ColWrap from '../helpers/ColWrap'
+import type { ColWrapperProps } from '../helpers/ColWrapper'
+import ColWrapper from '../helpers/ColWrapper'
 
 export const formItemProps = () => ({
     ...antFormItemProps(),
     colProps: {
-        type: Object as PropType<ColWrapProps>,
+        type: Object as PropType<ColWrapperProps>,
         default: () => ({})
     }
 })
@@ -37,7 +37,7 @@ const FormItem = defineComponent({
             const { colProps } = props
             const { grid } = unref(formProps) || {}
 
-            const colWrapProps: ColWrapProps = {
+            const colWrapProps: ColWrapperProps = {
                 ...colProps,
                 grid: grid
             }
@@ -46,9 +46,9 @@ const FormItem = defineComponent({
                 ...attrs
             }
             return (
-                <ColWrap {...colWrapProps}>
+                <ColWrapper {...colWrapProps}>
                     <Form.Item {...formItemProps} v-slots={slots}/>
-                </ColWrap>
+                </ColWrapper>
             )
         }
     }

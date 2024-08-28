@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
@@ -6,7 +6,7 @@ import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { RowProps } from '../../ant-typings'
 
-const rowWarpProps = () => ({
+const rowWrapperProps = () => ({
     ...antRowProps(),
     grid: {
         type: Boolean as PropType<boolean>,
@@ -14,13 +14,13 @@ const rowWarpProps = () => ({
     }
 })
 
-export type RowWrapProps = Partial<ExtractPropTypes<ReturnType<typeof rowWarpProps>>>;
-export type RowWrapInstance = ComponentPublicInstance<RowWrapProps>;
+export type RowWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof rowWrapperProps>>>;
+export type RowWrapperInstance = ComponentPublicInstance<RowWrapperProps>;
 
-export default defineComponent({
+const RowWrapper = defineComponent({
     inheritAttrs: false,
-    name: 'ProRowWrap',
-    props: rowWarpProps(),
+    name: 'ProRowWrapper',
+    props: rowWrapperProps(),
     slots: Object as SlotsType<{
         default?: BaseSlot;
     }>,
@@ -37,3 +37,10 @@ export default defineComponent({
         }
     }
 })
+
+RowWrapper.install = function (app: App): App {
+    app.component(RowWrapper.name as string, RowWrapper)
+    return app
+}
+
+export default RowWrapper

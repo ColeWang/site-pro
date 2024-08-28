@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
@@ -6,7 +6,7 @@ import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ColProps } from '../../ant-typings'
 
-export const colWrapProps = () => ({
+export const colWrapperProps = () => ({
     ...antColProps(),
     hidden: {
         type: Boolean as PropType<boolean>,
@@ -18,13 +18,13 @@ export const colWrapProps = () => ({
     }
 })
 
-export type ColWrapProps = Partial<ExtractPropTypes<ReturnType<typeof colWrapProps>>>;
-export type ColWrapInstance = ComponentPublicInstance<ColWrapProps>;
+export type ColWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof colWrapperProps>>>;
+export type ColWrapperInstance = ComponentPublicInstance<ColWrapperProps>;
 
-export default defineComponent({
+const ColWrapper = defineComponent({
     inheritAttrs: false,
-    name: 'ProColWrap',
-    props: colWrapProps(),
+    name: 'ProColWrapper',
+    props: colWrapperProps(),
     slots: Object as SlotsType<{
         default?: BaseSlot;
     }>,
@@ -44,3 +44,10 @@ export default defineComponent({
         }
     }
 })
+
+ColWrapper.install = function (app: App): App {
+    app.component(ColWrapper.name as string, ColWrapper)
+    return app
+}
+
+export default ColWrapper

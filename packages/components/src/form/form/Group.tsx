@@ -5,9 +5,9 @@ import type { BaseSlot } from '@site-pro/utils'
 import { getPropsSlot, toPx } from '@site-pro/utils'
 import { useFormInstance } from '../base-form'
 import type { GlobalToken } from '../../theme'
-import type { RowWrapProps } from '../helpers/RowWrap'
-import RowWrap from '../helpers/RowWrap'
-import ColWrap from '../helpers/ColWrap'
+import type { RowWrapperProps } from '../helpers/RowWrapper'
+import RowWrapper from '../helpers/RowWrapper'
+import ColWrapper from '../helpers/ColWrapper'
 
 function genTitleStyle (layout: string, token: GlobalToken): CSSProperties {
     const baseStyle: CSSProperties = {
@@ -56,21 +56,23 @@ const FormGroup = defineComponent({
             const titleDom = getPropsSlot(slots, props, 'title')
             const titleStyle = genTitleStyle(layout || 'vertical', unref(token))
 
-            const rowWrapProps: RowWrapProps = { ...rowProps, grid: grid }
+            const rowWrapProps: RowWrapperProps = { ...rowProps, grid: grid }
 
             return (
-                <ColWrap span={24} grid={grid}>
-                    <RowWrap {...rowWrapProps}>
+                <ColWrapper span={24} grid={grid}>
+                    <RowWrapper {...rowWrapProps}>
                         {titleDom && (
                             <Col span={24}>
-                                <div style={!noStyle ? titleStyle : {}} {...attrs}>
-                                    {titleDom}
-                                </div>
+                                {noStyle ? titleDom : (
+                                    <div style={titleStyle} {...attrs}>
+                                        {titleDom}
+                                    </div>
+                                )}
                             </Col>
                         )}
                         {slots.default && slots.default()}
-                    </RowWrap>
-                </ColWrap>
+                    </RowWrapper>
+                </ColWrapper>
             )
         }
     }

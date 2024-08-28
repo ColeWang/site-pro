@@ -4,8 +4,8 @@ import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
 import { useFormInstance } from '../base-form'
-import type { ColWrapProps } from '../helpers/ColWrap'
-import ColWrap from '../helpers/ColWrap'
+import type { ColWrapperProps } from '../helpers/ColWrapper'
+import ColWrapper from '../helpers/ColWrapper'
 
 export const formDependencyProps = () => ({
     name: {
@@ -13,7 +13,7 @@ export const formDependencyProps = () => ({
         default: () => ([])
     },
     colProps: {
-        type: Object as PropType<ColWrapProps>,
+        type: Object as PropType<ColWrapperProps>,
         default: () => ({})
     }
 })
@@ -43,14 +43,14 @@ const FormDependency = defineComponent({
                 return result
             }, {})
 
-            const colWrapProps: ColWrapProps = {
+            const colWrapProps: ColWrapperProps = {
                 ...colProps,
                 grid: grid
             }
             return (
-                <ColWrap {...colWrapProps}>
+                <ColWrapper {...colWrapProps}>
                     {slots.default && slots.default(slotScope)}
-                </ColWrap>
+                </ColWrapper>
             )
         }
     }

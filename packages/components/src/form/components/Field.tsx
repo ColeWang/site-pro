@@ -4,8 +4,8 @@ import { Form } from 'ant-design-vue'
 import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isNumber, isString, merge, omit, pick } from 'lodash-es'
-import type { ColWrapProps } from '../helpers/ColWrap'
-import ColWrap from '../helpers/ColWrap'
+import type { ColWrapperProps } from '../helpers/ColWrapper'
+import ColWrapper from '../helpers/ColWrapper'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
 import { useFormInstance } from '../base-form'
@@ -44,7 +44,7 @@ export const fieldProps = () => ({
         default: false
     },
     colProps: {
-        type: Object as PropType<ColWrapProps>,
+        type: Object as PropType<ColWrapperProps>,
         default: () => ({})
     }
 })
@@ -120,7 +120,7 @@ const Field = defineComponent({
                 formItemProps: needFormItemProps
             }
 
-            const needColWrapProps: ColWrapProps = {
+            const needColWrapProps: ColWrapperProps = {
                 ...colProps,
                 hidden: hidden,
                 grid: grid,
@@ -130,11 +130,11 @@ const Field = defineComponent({
             const baseFieldSlots = omit(slots, SLOTS_KEYS)
 
             return (
-                <ColWrap {...needColWrapProps} key={key}>
+                <ColWrapper {...needColWrapProps} key={key}>
                     <Form.Item {...needFormItemProps} v-slots={formItemSlots}>
                         <BaseField {...needBaseFieldProps} v-slots={baseFieldSlots}/>
                     </Form.Item>
-                </ColWrap>
+                </ColWrapper>
             )
         }
     }
