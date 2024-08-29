@@ -35,14 +35,12 @@ function useFloatForm (props: FloatFormProps, options: Options): UseFloatFormRet
     function onOpen (): void {
         setOpenValue(true)
         options.onOpen && options.onOpen()
-        isFunction(props.extraProps.onOpen) && props.extraProps.onOpen()
     }
 
     function onCancel (): void {
         if (unref(loading)) return
         setOpenValue(false)
         options.onCancel && options.onCancel()
-        isFunction(props.extraProps.onCancel) && props.extraProps.onCancel()
     }
 
     async function onFinish (values: BaseFormModel): Promise<void> {
