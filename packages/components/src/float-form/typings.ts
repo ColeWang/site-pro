@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
+import type { BaseSlot, DrawerProps, ModalProps } from '@site-pro/utils'
 import type { SubmitterProps } from '../base-form'
 import { baseFormProps } from '../base-form'
 
@@ -66,7 +66,7 @@ export const floatFormProps = () => ({
 export const modalFormProps = () => ({
     ...floatFormProps(),
     extraProps: {
-        type: Object as PropType<any>,
+        type: Object as PropType<ModalProps>,
         default: () => ({})
     }
 })
@@ -74,7 +74,7 @@ export const modalFormProps = () => ({
 export const drawerFormProps = () => ({
     ...floatFormProps(),
     extraProps: {
-        type: Object as PropType<any>,
+        type: Object as PropType<DrawerProps>,
         default: () => ({})
     }
 })
