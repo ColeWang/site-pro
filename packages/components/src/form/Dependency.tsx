@@ -3,9 +3,8 @@ import { defineComponent, unref } from 'vue'
 import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
-import { useFormInstance } from '../base-form'
-import type { ColWrapperProps } from '../base-form/helpers'
-import { ColWrapper } from '../base-form/helpers'
+import type { ColWrapperProps } from '../base-form'
+import { ColWrapper, useFormInstance } from '../base-form'
 
 export const formDependencyProps = () => ({
     name: {

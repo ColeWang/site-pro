@@ -1,12 +1,12 @@
 import { Form as AForm } from 'ant-design-vue'
-import type { FormInstance, FormProps } from './Form.tsx'
-import Form, { formProps } from './Form.tsx'
-import type { FormItemInstance, FormItemProps } from './Item.tsx'
-import FormItem, { formItemProps } from './Item.tsx'
-import type { FormGroupInstance, FormGroupProps } from './Group.tsx'
-import FormGroup, { formGroupProps } from './Group.tsx'
-import type { FormDependencyInstance, FormDependencyProps } from './Dependency.tsx'
-import FormDependency, { formDependencyProps } from './Dependency.tsx'
+import type { FormInstance, FormProps } from './Form'
+import Form, { formProps } from './Form'
+import type { FormItemInstance, FormItemProps } from './Item'
+import FormItem, { formItemProps } from './Item'
+import type { FormGroupInstance, FormGroupProps } from './Group'
+import FormGroup, { formGroupProps } from './Group'
+import type { FormDependencyInstance, FormDependencyProps } from './Dependency'
+import FormDependency, { formDependencyProps } from './Dependency'
 
 const useForm = AForm.useForm
 
