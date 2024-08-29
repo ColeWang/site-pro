@@ -1,5 +1,5 @@
 import { cloneVNode, createVNode, render as vueRender } from 'vue'
-import Loading from './component'
+import Loading from '@site-pro/components/src/loading'
 import { createDocumentFragment, createReactivePlugin } from '../../utils/create'
 import { omit } from 'lodash-es'
 

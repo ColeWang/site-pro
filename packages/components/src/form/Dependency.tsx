@@ -4,8 +4,8 @@ import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
 import { useFormInstance } from '../base-form'
-import type { ColWrapperProps } from '../helpers/ColWrapper.tsx'
-import ColWrapper from '../helpers/ColWrapper.tsx'
+import type { ColWrapperProps } from '../base-form/helpers/ColWrapper.tsx'
+import ColWrapper from '../base-form/helpers/ColWrapper.tsx'
 
 export const formDependencyProps = () => ({
     name: {

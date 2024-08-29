@@ -1,6 +1,6 @@
 <template>
   <ProForm @values-change="onValuesChange" @form-ref="onFormRef">
-    <ProText label="Text" :name="['data', 'text']"/>
+    <ProText label="Text" :name="['data', 'text']" :style="{ padding: '14px' }"/>
     <ProDateTime label="DateTime" :name="['data', 'dateTime']"/>
   </ProForm>
 </template>

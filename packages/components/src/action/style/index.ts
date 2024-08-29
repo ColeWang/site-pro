@@ -1,4 +1,4 @@
-import { genComponentStyleHook, mergeToken } from '../../../theme'
+import { genComponentStyleHook, mergeToken } from '../../theme'
 
 function genBaseStyle (token) {
     const { componentCls, actionTransition } = token
