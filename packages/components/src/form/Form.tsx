@@ -30,7 +30,7 @@ const Form = defineComponent({
     setup (props, { emit, slots, attrs }) {
         // 多层组件的数据或方法透传 Expose 并不直接提供帮助
         function onFormRef (el: any): void {
-            emit('formRef', el as BaseFormInstance)
+            emit('formRef', el as BaseFormInstance | null)
         }
 
         return () => {

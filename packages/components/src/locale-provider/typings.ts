@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 
 export interface LocaleType {
-    [key: string]: string | number | LocaleType | LocaleType[];
+    [key: string]: string | LocaleType | LocaleType[];
 }
 
 // 默认值 zhCN

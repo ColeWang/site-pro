@@ -1,34 +1,51 @@
+import type { Ref } from 'vue'
 import { ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isFunction } from 'lodash-es'
+import type { BaseFormModel } from '../../base-form'
+import type { FloatFormProps } from '../typings'
 
-function useFloatForm (props, options) {
-    const sOpen = ref(props.open)
-    const loading = ref(false)
+interface Options {
+    onOpen?: () => void;
+    onCancel?: () => void;
+    onUpdateOpen?: (value: boolean) => void;
+}
+
+interface UseFloatFormReturnType {
+    sOpen: Ref<boolean>;
+    loading: Ref<boolean>;
+    onOpen: () => void;
+    onCancel: () => void;
+    onFinish: (values: BaseFormModel) => Promise<void>;
+}
+
+function useFloatForm (props: FloatFormProps, options: Options): UseFloatFormReturnType {
+    const sOpen: Ref<boolean> = ref(props.open!)
+    const loading: Ref<boolean> = ref(false)
 
     const stopWatchOpen = watch(() => props.open, (value) => {
-        sOpen.value = value
+        sOpen.value = value!
     }, { immediate: true })
 
-    function setOpenValue (value) {
+    function setOpenValue (value: boolean): void {
         sOpen.value = value
         options.onUpdateOpen && options.onUpdateOpen(value)
     }
 
-    function onOpen () {
+    function onOpen (): void {
         setOpenValue(true)
         options.onOpen && options.onOpen()
         isFunction(props.extraProps.onOpen) && props.extraProps.onOpen()
     }
 
-    function onCancel () {
+    function onCancel (): void {
         if (unref(loading)) return
         setOpenValue(false)
         options.onCancel && options.onCancel()
         isFunction(props.extraProps.onCancel) && props.extraProps.onCancel()
     }
 
-    async function onFinish (values) {
+    async function onFinish (values: BaseFormModel): Promise<void> {
         if (!isFunction(props.onFinish) || unref(loading)) return
         loading.value = true
         try {
@@ -41,7 +58,7 @@ function useFloatForm (props, options) {
         }
     }
 
-    function onStop () {
+    function onStop (): void {
         stopWatchOpen && stopWatchOpen()
     }
 

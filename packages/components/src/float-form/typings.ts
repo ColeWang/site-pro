@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot, DrawerProps, ModalProps } from '@site-pro/utils'
-import type { BaseFormInstance, SubmitterProps } from '../base-form'
+import type { BaseFormInstance, BaseFormModel, SubmitterProps } from '../base-form'
 import { baseFormProps } from '../base-form'
 
 export const floatFormProps = () => ({
@@ -41,6 +41,10 @@ export const floatFormProps = () => ({
         type: Function as PropType<BaseSlot>,
         default: undefined
     },
+    onFinish: {
+        type: Function as PropType<(values: BaseFormModel) => Promise<boolean>>,
+        default: undefined
+    },
     onFormRef: {
         type: Function as PropType<(el: BaseFormInstance | null) => void>,
         default: undefined
@@ -66,6 +70,8 @@ export const floatFormProps = () => ({
         default: undefined
     }
 })
+
+export type FloatFormProps = Partial<ExtractPropTypes<ReturnType<typeof floatFormProps>>>;
 
 export interface FloatFormExpose {
     open: () => void;
@@ -95,4 +101,3 @@ export const drawerFormProps = () => ({
 export type DrawerFormProps = Partial<ExtractPropTypes<ReturnType<typeof drawerFormProps>>>;
 export type DrawerFormExpose = FloatFormExpose;
 export type DrawerFormInstance = ComponentPublicInstance<DrawerFormProps, DrawerFormExpose>;
-

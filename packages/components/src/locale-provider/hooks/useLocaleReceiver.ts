@@ -7,7 +7,7 @@ import type { LocaleProviderExpose, LocaleType } from '../typings'
 
 interface UseLocaleReceiverReturnType {
     locale: ComputedRef<LocaleType>;
-    t: (namePath: NamePath) => string | number | undefined;
+    t: (namePath: NamePath) => string | undefined;
 }
 
 export const LocaleReceiverKey: InjectionKey<Partial<LocaleProviderExpose>> = Symbol('LocaleReceiver')
@@ -24,7 +24,7 @@ function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseL
         return { ...needLocale, ...unref(propsLocale) }
     })
 
-    function translate (namePath: NamePath): string | number | undefined {
+    function translate (namePath: NamePath): string | undefined {
         return get(unref(mergeLocale), namePath, namePath)
     }
 
