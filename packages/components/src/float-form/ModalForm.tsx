@@ -2,7 +2,7 @@ import type { App, Ref } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { omit, pick } from 'lodash-es'
-import type { ModalProps } from '@site-pro/utils'
+import type { BaseSlot, ModalProps, Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../locale-provider'
 import useFloatForm from './hooks/useFloatForm'
@@ -73,7 +73,7 @@ const ModalForm = defineComponent({
                 afterClose: onAfterClose
                 // onAfterClose: onAfterClose
             }
-            const modalSlots = {
+            const modalSlots: Recordable<BaseSlot> = {
                 footer: () => {
                     const submitterProps: SubmitterProps = {
                         ...(pick(submitter, Object.keys(Submitter.props)) as SubmitterProps),

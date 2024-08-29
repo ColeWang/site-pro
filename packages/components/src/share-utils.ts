@@ -23,5 +23,3 @@ export function genFormItemFixStyle (labelWidth: string | number, layout: string
     }
     return {}
 }
-
-

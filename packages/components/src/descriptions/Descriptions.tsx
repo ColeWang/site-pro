@@ -1,51 +1,18 @@
 import { defineComponent, ref } from 'vue'
-import { ConfigProvider, Descriptions, Form, Spin } from 'ant-design-vue'
-import { descriptionsProps as antDescriptionsProps } from 'ant-design-vue/es/descriptions'
+import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
+import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
+import type { BaseFieldProps } from '../base-field'
 import { BaseField } from '../base-field'
 import useFetchData from './hooks/useFetchData'
 import { useConfigInject } from '@site-pro/hooks'
-import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import useStyle from './style'
 import { isFunction, omit, pick } from 'lodash-es'
+import { descriptionsProps } from './typings'
 
-const extraProps = {
-    dataSource: {
-        type: Object,
-        default: () => ({})
-    },
-    columns: {
-        type: Array,
-        default: () => ([])
-    },
-    emptyText: {
-        type: String,
-        default: '-'
-    }
-}
-
-export default defineComponent({
+const Descriptions = defineComponent({
     inheritAttrs: false,
     name: 'ProDescriptions',
-    props: {
-        ...antDescriptionsProps(),
-        ...extraProps,
-        request: {
-            type: Function,
-            default: undefined
-        },
-        params: {
-            type: Object,
-            default: () => ({})
-        },
-        onLoad: {
-            type: Function,
-            default: undefined
-        },
-        onRequestError: {
-            type: Function,
-            default: undefined
-        }
-    },
+    props: descriptionsProps(),
     emits: ['load', 'requestError'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-descriptions', props)
@@ -88,8 +55,8 @@ export default defineComponent({
                     name: namePath,
                     model: requestProps.dataSource
                 }
-                const needFieldProps = {
-                    ...pick(item, Object.keys(BaseField.props)),
+                const needFieldProps: BaseFieldProps = {
+                    ...(pick(item, Object.keys(BaseField.props)) as BaseFieldProps),
                     mode: 'read',
                     emptyText: emptyText,
                     fieldProps: fieldProps,
@@ -149,9 +116,9 @@ export default defineComponent({
                                     </div>
                                 )}
                                 <Spin spinning={requestProps.loading}>
-                                    <Descriptions {...needDescsProps}>
+                                    <AntDescriptions {...needDescsProps}>
                                         {children}
-                                    </Descriptions>
+                                    </AntDescriptions>
                                 </Spin>
                             </div>
                         </div>
@@ -161,3 +128,6 @@ export default defineComponent({
         }
     }
 })
+
+
+export default Descriptions

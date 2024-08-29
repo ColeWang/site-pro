@@ -3,11 +3,10 @@ import { genComponentStyleHook, mergeToken } from '../../theme'
 
 interface ProDescriptionsToken extends FullToken<'ProDescriptions'> {
     fieldTextareaReadCls: string;
-    descsHeaderMargin: number;
 }
 
 function genBaseStyle (token: ProDescriptionsToken): CSSInterpolation {
-    const { componentCls, fieldTextareaReadCls, descsHeaderMargin } = token
+    const { componentCls, fieldTextareaReadCls } = token
     return {
         [componentCls]: {
             [`${componentCls}-popup-container`]: {
@@ -17,7 +16,7 @@ function genBaseStyle (token: ProDescriptionsToken): CSSInterpolation {
                 [`${componentCls}-header`]: {
                     display: 'flex',
                     alignItems: 'center',
-                    marginBlockEnd: descsHeaderMargin,
+                    marginBlockEnd: token.sizeMS,
                     [`${componentCls}-title`]: {
                         flex: 'auto',
                         fontSize: token.fontSizeLG,
@@ -45,12 +44,9 @@ function genBaseStyle (token: ProDescriptionsToken): CSSInterpolation {
 export default genComponentStyleHook('ProDescriptions', (token) => {
     const { antCls } = token
 
-    // const descsHeaderMarginBottom = token.fontSizeSM * token.lineHeightSM
-    const descsHeaderMargin = token.sizeMS
     const fieldTextareaReadCls = `${antCls}-pro-field-textarea__read`
 
     const descriptionsToken = mergeToken<ProDescriptionsToken>(token, {
-        descsHeaderMargin,
         fieldTextareaReadCls
     })
     return genBaseStyle(descriptionsToken)

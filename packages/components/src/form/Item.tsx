@@ -40,8 +40,9 @@ const FormItem = defineComponent({
                 ...colProps,
                 grid: grid
             }
-            const formItemProps: FormItemProps = {
-                ...pick(props, Object.keys(Form.Item.props as FormItemProps)),
+
+            const formItemProps = {
+                ...(pick(props, Object.keys(Form.Item.props)) as FormItemProps),
                 ...attrs
             }
             return (

@@ -1,7 +1,7 @@
 import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Drawer } from 'ant-design-vue'
-import type { BaseSlot, DrawerProps } from '@site-pro/utils'
+import type { BaseSlot, DrawerProps, Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { omit, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../locale-provider'
@@ -76,10 +76,10 @@ const DrawerForm = defineComponent({
                 onClose: onCancel,
                 onAfterOpenChange: onAfterClose
             }
-            const drawerSlots = {
+            const drawerSlots: Recordable<BaseSlot> = {
                 extra: () => {
                     const submitterProps: SubmitterProps = {
-                        ...pick(submitter, Object.keys(Submitter.props)) as SubmitterProps,
+                        ...(pick(submitter, Object.keys(Submitter.props)) as SubmitterProps),
                         submitText: submitter.submitText || t('okText'),
                         resetText: submitter.resetText || t('cancelText'),
                         loading: unref(loading),
