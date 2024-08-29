@@ -113,13 +113,13 @@ function useFetchData (request, props, options) {
         fetchData()
     }
 
-    function onStop () {
+    function onStopHandle () {
         stopWatchDataSource && stopWatchDataSource()
         stopWatchPagination && stopWatchPagination()
         stopWatchParams && stopWatchParams()
     }
 
-    tryOnScopeDispose(onStop)
+    tryOnScopeDispose(onStopHandle)
 
     return { context, onReload, getQueryData, setParams, setPaginate, setFilter, setSort }
 }

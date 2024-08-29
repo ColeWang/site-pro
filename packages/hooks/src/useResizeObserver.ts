@@ -4,7 +4,7 @@ import { getElement } from '@site-pro/utils'
 import tryOnScopeDispose from './tryOnScopeDispose'
 
 function useResizeObserver (
-    target: Element | Ref<Element | ComponentPublicInstance | null>,
+    target: Element | HTMLElement | Ref<Element | HTMLElement | ComponentPublicInstance | null>,
     callback: ResizeObserverCallback,
     options?: ResizeObserverOptions
 ): void {

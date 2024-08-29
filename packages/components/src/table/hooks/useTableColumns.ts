@@ -36,11 +36,11 @@ function useTableColumns (props) {
         }
     }
 
-    function onStop () {
+    function onStopHandle () {
         stopWatchColumns && stopWatchColumns()
     }
 
-    tryOnScopeDispose(onStop)
+    tryOnScopeDispose(onStopHandle)
 
     return { columns, columnsMap, setColumnsMap }
 }

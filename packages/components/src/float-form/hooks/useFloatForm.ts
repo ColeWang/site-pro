@@ -56,11 +56,11 @@ function useFloatForm (props: FloatFormProps, options: Options): UseFloatFormRet
         }
     }
 
-    function onStop (): void {
+    function onStopHandle (): void {
         stopWatchOpen && stopWatchOpen()
     }
 
-    tryOnScopeDispose(onStop)
+    tryOnScopeDispose(onStopHandle)
 
     return { sOpen, loading, onOpen, onCancel, onFinish }
 }

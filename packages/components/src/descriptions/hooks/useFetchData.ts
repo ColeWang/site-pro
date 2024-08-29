@@ -39,11 +39,11 @@ function useFetchData (request, props, options) {
         fetchData()
     }
 
-    function onStop () {
+    function onStopHandle () {
         stopWatchDataSource && stopWatchDataSource()
     }
 
-    tryOnScopeDispose(onStop)
+    tryOnScopeDispose(onStopHandle)
 
     return { context, onReload }
 }

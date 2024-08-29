@@ -41,11 +41,11 @@ function useSpanConfig (size, props) {
         span.value = spanSize.span || 24
     })
 
-    function onStop () {
+    function onStopHandle () {
         stopWatchSize && stopWatchSize()
     }
 
-    tryOnScopeDispose(onStop)
+    tryOnScopeDispose(onStopHandle)
 
     return { layout, span }
 }

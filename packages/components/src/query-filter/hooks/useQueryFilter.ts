@@ -55,11 +55,11 @@ function useQueryFilter (size, props) {
         return { nodes: map(nodes, callback), offset, haveRow }
     }
 
-    function onStop () {
+    function onStopHandle () {
         stopWatchCollapsed && stopWatchCollapsed()
     }
 
-    tryOnScopeDispose(onStop)
+    tryOnScopeDispose(onStopHandle)
 
     return { layout, span, collapsed, setCollapse, genColNodes }
 }
