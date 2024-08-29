@@ -1,6 +1,6 @@
-import type { NamePath, Recordable } from './typings'
 import { isProxy, toRaw } from 'vue'
 import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, toString } from 'lodash-es'
+import type { NamePath, Recordable } from './types'
 import { isEmpty } from './is'
 
 export function cloneProxyToRaw<T = any> (proxy: Recordable<T>): Recordable<T> {

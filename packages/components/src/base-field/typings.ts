@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
 import type {
     BaseEnumType,
     BaseSlot,
@@ -87,12 +87,7 @@ export const baseFieldProps = () => ({
         default: '-'
     },
     renderField: {
-        type: Function as PropType<BaseSlot<{
-            text: any;
-            props: any;
-            slots: BaseSlot;
-            dom: VNodeChild | JSX.Element;
-        }>>,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     }
 })

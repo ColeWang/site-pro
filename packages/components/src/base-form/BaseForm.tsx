@@ -1,15 +1,15 @@
 import type { App, ComputedRef, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
-import type { BaseSlot, FormInstance, FormProps, NamePath, RowProps } from '@site-pro/utils'
+import type { BaseSlot, FormInstance, FormProps, NamePath, RowProps, ValidateErrorEntity } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
-import type { RowWrapperProps } from './helpers/RowWrapper.tsx'
-import RowWrapper from './helpers/RowWrapper.tsx'
-import { createFromInstance } from './hooks/useFormInstance.ts'
-import type { BaseFormExpose, BaseFormModel, BaseFormProps, BaseFormUpdater } from './typings.ts'
-import { baseFormProps } from './typings.ts'
+import { createFromInstance } from './hooks/useFormInstance'
+import type { RowWrapperProps } from './helpers'
+import { RowWrapper } from './helpers'
+import type { BaseFormExpose, BaseFormModel, BaseFormProps, BaseFormUpdater } from './typings'
+import { baseFormProps } from './typings'
 import useStyle from './style'
 
 const BaseForm = defineComponent({
@@ -86,14 +86,14 @@ const BaseForm = defineComponent({
             context && context.scrollToField(namePath, options)
         }
 
-        function onFinishFailed (error: any): void {
+        function onFinishFailed (errorInfo: ValidateErrorEntity): void {
             const { scrollToFirstError } = props
-            if (scrollToFirstError && error.errorFields.length) {
-                const headField: any = head(error.errorFields)
+            if (scrollToFirstError && errorInfo.errorFields.length) {
+                const headField: any = head(errorInfo.errorFields)
                 const options = isObject(scrollToFirstError) ? scrollToFirstError : {}
                 onScrollToField(headField.name, options)
             }
-            emit('finishFailed', error)
+            emit('finishFailed', errorInfo)
         }
 
         function submit (): void {

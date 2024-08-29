@@ -5,8 +5,8 @@ import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import { useFormInstance } from '../base-form'
-import type { ColWrapperProps } from '../base-form/helpers/ColWrapper.tsx'
-import ColWrapper from '../base-form/helpers/ColWrapper.tsx'
+import type { ColWrapperProps } from '../base-form/helpers'
+import { ColWrapper } from '../base-form/helpers'
 
 export const formItemProps = () => ({
     ...antFormItemProps(),

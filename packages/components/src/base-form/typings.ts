@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import { formProps as antFormProps } from 'ant-design-vue/es/form'
-import type { FormInstance, FormProps, NamePath, Recordable, RowProps } from '@site-pro/utils'
+import type { FormInstance, NamePath, Recordable, RowProps, ValidateErrorEntity } from '@site-pro/utils'
 
 export interface BaseFormUpdater {
     (value: any): any;
@@ -10,6 +10,18 @@ export type BaseFormModel = Recordable;
 
 export interface BaseFormTransform {
     (values: BaseFormModel): BaseFormModel;
+}
+
+export interface BaseFormOnSubmit {
+    (evt: Event): void;
+}
+
+export interface BaseFormOnFinish {
+    (values: BaseFormModel): void;
+}
+
+export interface BaseFormOnFinishFailed {
+    (errorInfo: ValidateErrorEntity): void;
 }
 
 export interface BaseFormOnReset {
@@ -43,15 +55,15 @@ export const baseFormProps = () => ({
         default: undefined
     },
     onSubmit: {
-        type: Function as PropType<FormProps['onSubmit']>,
+        type: Function as PropType<BaseFormOnSubmit>,
         default: undefined
     },
     onFinish: {
-        type: Function as PropType<FormProps['onFinish']>,
+        type: Function as PropType<BaseFormOnFinish>,
         default: undefined
     },
     onFinishFailed: {
-        type: Function as PropType<FormProps['onFinishFailed']>,
+        type: Function as PropType<BaseFormOnFinishFailed>,
         default: undefined
     },
     onReset: {

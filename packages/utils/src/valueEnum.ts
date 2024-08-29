@@ -3,7 +3,7 @@ import { h, isVNode } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
 import { isEmpty } from './is'
-import type { BaseEnumType, BaseOptionType, FieldNames } from './typings'
+import type { BaseEnumType, BaseOptionType, FieldNames } from './types'
 
 export function enumToOptions<E extends BaseEnumType, Option extends BaseOptionType> (valueEnum?: E): Array<Option> {
     const result = map(valueEnum || ({} as E), (item, key) => {

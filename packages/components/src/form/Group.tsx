@@ -4,10 +4,9 @@ import { Col, theme } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
 import { getPropsSlot, toPx } from '@site-pro/utils'
 import { useFormInstance } from '../base-form'
+import type { RowWrapperProps } from '../base-form/helpers'
+import { ColWrapper, RowWrapper } from '../base-form/helpers'
 import type { GlobalToken } from '../theme'
-import type { RowWrapperProps } from '../base-form/helpers/RowWrapper.tsx'
-import RowWrapper from '../base-form/helpers/RowWrapper.tsx'
-import ColWrapper from '../base-form/helpers/ColWrapper.tsx'
 
 function genTitleStyle (layout: string, token: GlobalToken): CSSProperties {
     const baseStyle: CSSProperties = {

@@ -4,12 +4,12 @@ import { Form } from 'ant-design-vue'
 import type { BaseSlot, NamePath } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isNumber, isString, merge, omit, pick } from 'lodash-es'
-import type { ColWrapperProps } from '../../base-form/helpers/ColWrapper.tsx'
-import ColWrapper from '../../base-form/helpers/ColWrapper.tsx'
+import { useFormInstance } from '../../base-form'
+import type { ColWrapperProps } from '../../base-form/helpers'
+import { ColWrapper } from '../../base-form/helpers'
+import { genFormItemFixStyle } from '../../share-utils'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
-import { useFormInstance } from '../../base-form'
-import { genFormItemFixStyle } from '../utils'
 
 const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,

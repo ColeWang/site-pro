@@ -23,6 +23,7 @@ import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes'
 import type { ColProps } from 'ant-design-vue/es/grid/Col'
 import type { RowProps } from 'ant-design-vue/es/grid/Row'
 import type { FormInstance, FormItemProps, FormProps } from 'ant-design-vue/es/form'
+import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -81,5 +82,7 @@ export type {
     FormInstance,
     FormItemProps,
     RowProps,
-    ColProps
+    ColProps,
+    // --
+    ValidateErrorEntity
 }

@@ -1,8 +1,8 @@
 import type { VNode } from 'vue'
 import { Fragment } from 'vue'
 import { isArray, isFunction } from 'lodash-es'
+import type { BaseSlot } from './types'
 import { isEmptyElement } from './is'
-import type { BaseSlot } from './typings'
 
 export function flattenChildren (children: Array<VNode | VNode[]>): Array<VNode> {
     const result: Array<VNode> = []

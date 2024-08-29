@@ -5,7 +5,7 @@ import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
 import type { BaseSlot, RowProps } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 
-const rowWrapperProps = () => ({
+export const rowWrapperProps = () => ({
     ...antRowProps(),
     grid: {
         type: Boolean as PropType<boolean>,
