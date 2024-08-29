@@ -3,7 +3,7 @@ import { defineComponent, unref } from 'vue'
 import { Button, Space, theme } from 'ant-design-vue'
 import type { ButtonProps } from '@site-pro/utils'
 import { preventDefault } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../locale-provider'
+import { useLocaleReceiver } from '../locale-provider'
 
 export const submitterProps = () => ({
     size: {

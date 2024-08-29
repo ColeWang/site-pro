@@ -1,6 +1,6 @@
-import Table from './table'
+import Table from './index.tsx'
 import EditableTable from '../editable-table'
-import { BaseSearch } from './compatible/search'
+import { BaseSearch } from './components/search'
 
 export { Table, EditableTable, BaseSearch }
 
