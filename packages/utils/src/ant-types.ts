@@ -22,8 +22,11 @@ import type { TextAreaProps as InputTextareaProps } from 'ant-design-vue/es/inpu
 import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes'
 import type { ColProps } from 'ant-design-vue/es/grid/Col'
 import type { RowProps } from 'ant-design-vue/es/grid/Row'
-import type { FormInstance, FormItemProps, FormProps } from 'ant-design-vue/es/form'
+import type { FormInstance, FormProps } from 'ant-design-vue/es/form/Form'
+import type { FormItemProps } from 'ant-design-vue/es/form/FormItem'
 import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+import type { ModalProps } from 'ant-design-vue/es/modal/Modal'
+import type { DrawerProps } from 'ant-design-vue/es/drawer'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -83,6 +86,8 @@ export type {
     FormItemProps,
     RowProps,
     ColProps,
+    ModalProps,
+    DrawerProps,
     // --
     ValidateErrorEntity
 }

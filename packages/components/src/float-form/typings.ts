@@ -3,14 +3,6 @@ import type { BaseSlot } from '@site-pro/utils'
 import type { SubmitterProps } from '../base-form'
 import { baseFormProps } from '../base-form'
 
-export interface FloatFormOnOpen {
-    (): void;
-}
-
-export interface FloatFormOnCancel {
-    (): void;
-}
-
 export const floatFormProps = () => ({
     ...baseFormProps(),
     layout: {
@@ -50,24 +42,40 @@ export const floatFormProps = () => ({
         default: undefined
     },
     onOpen: {
-        type: Function as PropType<FloatFormOnOpen>,
+        type: Function as PropType<() => void>,
         default: undefined
     },
     onCancel: {
-        type: Function as PropType<FloatFormOnCancel>,
+        type: Function as PropType<() => void>,
         default: undefined
     },
     onAfterClose: {
-        type: Function,
+        type: Function as PropType<() => void>,
         default: undefined
     },
     onOpenChange: {
-        type: Function,
+        type: Function as PropType<(value: boolean) => void>,
         default: undefined
     },
     onLoadingChange: {
-        type: Function,
+        type: Function as PropType<(value: boolean) => void>,
         default: undefined
+    }
+})
+
+export const modalFormProps = () => ({
+    ...floatFormProps(),
+    extraProps: {
+        type: Object as PropType<any>,
+        default: () => ({})
+    }
+})
+
+export const drawerFormProps = () => ({
+    ...floatFormProps(),
+    extraProps: {
+        type: Object as PropType<any>,
+        default: () => ({})
     }
 })
 

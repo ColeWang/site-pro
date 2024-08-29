@@ -4,10 +4,6 @@ import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFormInstance, BaseFormProps } from '../base-form'
 import { BaseForm, baseFormProps } from '../base-form'
 
-interface OnFormRef {
-    (el: BaseFormInstance | null): void;
-}
-
 export const formProps = () => ({
     ...baseFormProps(),
     layout: {
@@ -15,7 +11,7 @@ export const formProps = () => ({
         default: 'vertical'
     },
     onFormRef: {
-        type: Function as PropType<OnFormRef>,
+        type: Function as PropType<(el: BaseFormInstance | null) => void>,
         default: undefined
     }
 })

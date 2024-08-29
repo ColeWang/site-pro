@@ -2,34 +2,10 @@ import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, 
 import { formProps as antFormProps } from 'ant-design-vue/es/form'
 import type { FormInstance, NamePath, Recordable, RowProps, ValidateErrorEntity } from '@site-pro/utils'
 
-export interface BaseFormUpdater {
-    (value: any): any;
-}
-
 export type BaseFormModel = Recordable;
 
-export interface BaseFormTransform {
-    (values: BaseFormModel): BaseFormModel;
-}
-
-export interface BaseFormOnSubmit {
-    (evt: Event): void;
-}
-
-export interface BaseFormOnFinish {
-    (values: BaseFormModel): void;
-}
-
-export interface BaseFormOnFinishFailed {
-    (errorInfo: ValidateErrorEntity): void;
-}
-
-export interface BaseFormOnReset {
-    (values: BaseFormModel): void;
-}
-
-export interface BaseFormOnValuesChange {
-    (values: BaseFormModel): void;
+export interface BaseFormUpdater {
+    (value: any): any;
 }
 
 export const baseFormProps = () => ({
@@ -51,27 +27,27 @@ export const baseFormProps = () => ({
         default: () => ({})
     },
     transform: {
-        type: Function as PropType<BaseFormTransform>,
+        type: Function as PropType<(values: BaseFormModel) => BaseFormModel>,
         default: undefined
     },
     onSubmit: {
-        type: Function as PropType<BaseFormOnSubmit>,
+        type: Function as PropType<(evt: Event) => void>,
         default: undefined
     },
     onFinish: {
-        type: Function as PropType<BaseFormOnFinish>,
+        type: Function as PropType<(values: BaseFormModel) => void>,
         default: undefined
     },
     onFinishFailed: {
-        type: Function as PropType<BaseFormOnFinishFailed>,
+        type: Function as PropType<(errorInfo: ValidateErrorEntity) => void>,
         default: undefined
     },
     onReset: {
-        type: Function as PropType<BaseFormOnReset>,
+        type: Function as PropType<(values: BaseFormModel) => void>,
         default: undefined
     },
     onValuesChange: {
-        type: Function as PropType<BaseFormOnValuesChange>,
+        type: Function as PropType<(values: BaseFormModel) => void>,
         default: undefined
     }
 })
