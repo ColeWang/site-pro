@@ -2,9 +2,9 @@ import type { App, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction, isObject } from 'lodash-es'
+import useBaseFieldProvider from './hooks/useBaseFieldProvider'
 import type { BaseFieldProps, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
-import { useCustomFields } from './custom-fields'
 // ---
 import {
     FieldCascader,
@@ -178,7 +178,7 @@ const BaseField = defineComponent({
     name: 'ProBaseField',
     props: baseFieldProps(),
     setup (props, { slots }) {
-        const { valueTypeMap } = useCustomFields()
+        const { valueTypeMap } = useBaseFieldProvider()
 
         function onUpdateValue (value: any): void {
             const { fieldProps } = props

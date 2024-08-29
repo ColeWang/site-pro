@@ -1,6 +1,7 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
-import type { BaseEnumType, BaseSlot } from '@site-pro/utils'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import type {
+    BaseEnumType,
+    BaseSlot,
     CascaderProps,
     CheckboxGroupProps,
     DatePickerProps,
@@ -18,7 +19,7 @@ import type {
     TimePickerProps,
     TimeRangePickerProps,
     TreeSelectProps
-} from '../ant-typings'
+} from '@site-pro/utils'
 
 export interface BaseFieldValueTypeWithFieldProps {
     date: DatePickerProps;
@@ -98,3 +99,23 @@ export const baseFieldProps = () => ({
 
 export type BaseFieldProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProps>>>;
 export type BaseFieldInstance = ComponentPublicInstance<BaseFieldProps>;
+
+// BaseFieldProvider
+export interface BaseFieldProviderValueTypeMap {
+    [key: string]: BaseSlot;
+}
+
+export const baseFieldProviderProps = () => ({
+    valueTypeMap: {
+        type: Object as PropType<BaseFieldProviderValueTypeMap>,
+        default: () => ({})
+    }
+})
+
+export type BaseFieldProviderProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProviderProps>>>;
+
+export interface BaseFieldProviderExpose {
+    valueTypeMap: ComputedRef<BaseFieldProviderValueTypeMap>;
+}
+
+export type BaseFieldProviderInstance = ComponentPublicInstance<BaseFieldProviderProps, BaseFieldProviderExpose>;

@@ -50,7 +50,7 @@ export function getElement<E extends ComponentPublicInstance | Element | HTMLEle
     return target as E
 }
 
-export function getWindowSize (): number[] {
+export function getWindowSize (): [number, number] {
     // @todo visualViewport
     return [window.innerWidth, window.innerHeight]
 }

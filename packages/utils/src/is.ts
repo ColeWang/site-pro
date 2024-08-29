@@ -15,7 +15,7 @@ export function isPromise<T = any> (value: any): value is Promise<T> {
     return isObject(value) && isFunction((value as Record<any, any>).then) && isFunction((value as Record<any, any>).catch)
 }
 
-export function isEmpty (value: any): value is '' | null | undefined | number {
+export function isEmpty (value: any): value is '' | null | undefined {
     return isEqual(value, '') || isNil(value) || isNaN(value)
 }
 

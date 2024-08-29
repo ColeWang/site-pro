@@ -1,4 +1,9 @@
-export const version: string = __VERSION__
+import zhCN from './zh-CN'
+import enUS from './en-US'
 
-export { default as zhCN } from './zh-CN'
-export { default as enUS } from './en-US'
+const version: string = __VERSION__
+
+export { version }
+
+export { zhCN }
+export { enUS }
