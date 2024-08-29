@@ -39,17 +39,9 @@ const DrawerForm = defineComponent({
             emit('loadingChange', value)
         })
 
-        /* v8 ignore next 7 */
-        function onAfterClose (): void {
-            if (props.destroyOnClose || props.extraProps.destroyOnClose) {
-                const context = unref(baseFormRef)
-                context && context.resetFields()
-            }
-            emit('afterClose')
-        }
-
-        function onAfterOpenChange (value: boolean): void {
-            !value && onAfterClose()
+        /* v8 ignore next 3 */
+        function onAfterClose (value: boolean): void {
+            !value && emit('afterClose')
         }
 
         function onSubmit (): void {
@@ -82,7 +74,7 @@ const DrawerForm = defineComponent({
                 ...extraProps,
                 open: unref(sOpen),
                 onClose: onCancel,
-                onAfterOpenChange: onAfterOpenChange
+                onAfterOpenChange: onAfterClose
             }
             const drawerSlots = {
                 extra: () => {

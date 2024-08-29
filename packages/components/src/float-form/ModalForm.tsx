@@ -35,12 +35,8 @@ const ModalForm = defineComponent({
             emit('loadingChange', value)
         })
 
-        /* v8 ignore next 7 */
+        /* v8 ignore next 3 */
         function onAfterClose (): void {
-            if (props.destroyOnClose || props.extraProps.destroyOnClose) {
-                const context = unref(baseFormRef)
-                context && context.resetFields()
-            }
             emit('afterClose')
         }
 

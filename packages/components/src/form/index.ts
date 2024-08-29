@@ -24,3 +24,5 @@ export type { FormProps, FormInstance }
 export type { FormItemProps, FormItemInstance }
 export type { FormGroupProps, FormGroupInstance }
 export type { FormDependencyProps, FormDependencyInstance }
+
+export * from './components'
