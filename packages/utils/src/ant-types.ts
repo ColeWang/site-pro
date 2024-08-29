@@ -27,6 +27,8 @@ import type { FormItemProps } from 'ant-design-vue/es/form/FormItem'
 import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import type { ModalProps } from 'ant-design-vue/es/modal/Modal'
 import type { DrawerProps } from 'ant-design-vue/es/drawer'
+import type { TableProps } from 'ant-design-vue/es/table/Table'
+import type { ColumnsType, TablePaginationConfig, TableRowSelection } from 'ant-design-vue/es/table/interface'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -88,6 +90,10 @@ export type {
     ColProps,
     ModalProps,
     DrawerProps,
+    TableProps,
+    ColumnsType,
+    TablePaginationConfig,
+    TableRowSelection,
     // --
     ValidateErrorEntity
 }
