@@ -1,17 +1,23 @@
+import type { App, Ref } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Modal } from 'ant-design-vue'
+import { omit, pick } from 'lodash-es'
+import type { ModalProps } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
-import { isFunction, omit, pick } from 'lodash-es'
-import { BaseForm, Submitter } from '../../base-form'
-import { default as useFloatForm, floatProps } from '../hooks/useFloatForm.ts'
-import { useLocaleReceiver } from '../../locale-provider'
+import { useLocaleReceiver } from '../locale-provider'
+import useFloatForm from './hooks/useFloatForm'
+import type { BaseFormInstance, BaseFormProps, SubmitterProps } from '../base-form'
+import { BaseForm, Submitter } from '../base-form'
+import type { ModalFormExpose } from './typings'
+import { modalFormProps } from './typings'
 
-export default defineComponent({
+const ModalForm = defineComponent({
     inheritAttrs: false,
-    props: floatProps,
-    emits: ['update:open', 'open', 'cancel', 'afterClose', 'openChange', 'loadingChange'],
+    name: 'ProModalForm',
+    props: modalFormProps(),
+    emits: ['update:open', 'formRef', 'open', 'cancel', 'afterClose', 'openChange', 'loadingChange'],
     setup (props, { emit, slots, attrs, expose }) {
-        const baseFormRef = ref(null)
+        const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
 
         const { t } = useLocaleReceiver(['Form'])
 
@@ -29,60 +35,52 @@ export default defineComponent({
             emit('loadingChange', value)
         })
 
-        /* v8 ignore next 16 */
-        function onAfterClose () {
-            const { extraProps } = props
-
-            const modalProps = {
-                ...pick(props, Object.keys(Modal.props)),
-                ...extraProps
-            }
-            if (modalProps.destroyOnClose) {
+        /* v8 ignore next 7 */
+        function onAfterClose (): void {
+            if (props.destroyOnClose || props.extraProps.destroyOnClose) {
                 const context = unref(baseFormRef)
                 context && context.resetFields()
-            }
-            if (extraProps.onAfterClose && isFunction(extraProps.onAfterClose)) {
-                extraProps.onAfterClose()
             }
             emit('afterClose')
         }
 
-        function onSubmit () {
+        function onSubmit (): void {
             const context = unref(baseFormRef)
             context && context.submit()
         }
 
-        function getFormInstance () {
-            return unref(baseFormRef)
+        function onBaseFormRef (el: any): void {
+            baseFormRef.value = el as BaseFormInstance | null
+            emit('formRef', el as BaseFormInstance | null)
         }
 
-        expose({
+        const modalFormExpose: ModalFormExpose = {
             open: onOpen,
-            close: onCancel,
-            getFormInstance,
-        })
+            close: onCancel
+        }
+        expose(modalFormExpose)
 
         return () => {
             const { extraProps, submitter } = props
 
-            const baseFormProps = {
-                ...pick(props, Object.keys(BaseForm.props)),
+            const baseFormProps: BaseFormProps = {
+                ...(pick(props, Object.keys(BaseForm.props)) as BaseFormProps),
                 onFinish: onFinish
             }
-            const baseFormSlots = omit(slots, ['trigger'])
 
-            const needModalProps = {
-                ...attrs,
-                ...pick(props, Object.keys(Modal.props)),
+            const needModalProps: ModalProps = {
+                ...(pick(props, Object.keys(Modal.props)) as ModalProps),
                 ...extraProps,
+                ...attrs,
                 open: unref(sOpen),
                 onCancel: onCancel,
-                onAfterClose: onAfterClose
+                afterClose: onAfterClose
+                // onAfterClose: onAfterClose
             }
             const modalSlots = {
                 footer: () => {
-                    const submitterProps = {
-                        ...pick(submitter, Object.keys(Submitter.props)),
+                    const submitterProps: SubmitterProps = {
+                        ...(pick(submitter, Object.keys(Submitter.props)) as SubmitterProps),
                         submitText: submitter.submitText || t('okText'),
                         resetText: submitter.resetText || t('cancelText'),
                         loading: unref(loading),
@@ -94,11 +92,12 @@ export default defineComponent({
             }
 
             const triggerDom = getSlotVNode(slots, props, 'trigger')
+            const baseFormSlots = omit(slots, ['trigger'])
 
             return (
                 <Fragment>
                     <Modal {...needModalProps} v-slots={modalSlots}>
-                        <BaseForm {...baseFormProps} ref={baseFormRef} v-slots={baseFormSlots}/>
+                        <BaseForm {...baseFormProps} ref={onBaseFormRef} v-slots={baseFormSlots}/>
                     </Modal>
                     {triggerDom && (
                         <div style={{ display: 'inline-block' }} onClick={onOpen}>
@@ -110,3 +109,10 @@ export default defineComponent({
         }
     }
 })
+
+ModalForm.install = function (app: App): App {
+    app.component(ModalForm.name as string, ModalForm)
+    return app
+}
+
+export default ModalForm
