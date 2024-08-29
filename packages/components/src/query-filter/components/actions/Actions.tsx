@@ -3,8 +3,8 @@ import { Button, Space, theme } from 'ant-design-vue'
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import { pick } from 'lodash-es'
-import { useLocaleReceiver } from '../locale-provider'
-import { Submitter } from '../base-form'
+import { useLocaleReceiver } from '../../../locale-provider'
+import { Submitter } from '../../../base-form'
 import useStyle from './style/actions.ts'
 
 export default defineComponent({

@@ -1,4 +1,6 @@
 export * from './locale-provider'
+export * from './theme'
+export * from './transition'
 export * from './resize-observer'
 export * from './base-field'
 export * from './base-form'

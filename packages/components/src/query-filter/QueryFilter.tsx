@@ -6,7 +6,7 @@ import { useConfigInject } from '@site-pro/hooks'
 import { pick } from 'lodash-es'
 import { ResizeObserver } from '../resize-observer'
 import { BaseForm } from '../base-form'
-import Actions from './Actions.tsx'
+import Actions from './components/actions/Actions.tsx'
 import useQueryFilter from './hooks/useQueryFilter.ts'
 import useStyle from './style'
 
