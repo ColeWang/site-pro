@@ -6,10 +6,10 @@
   "files": [],
   "references": [
     {
-      "path": "./tsconfig.app.json"
+      "path": "./tsconfig.vite.json"
     },
     {
-      "path": "./tsconfig.vite.json"
+      "path": "./tsconfig.app.json"
     },
     {
       "path": "./tsconfig.vitest.json"
