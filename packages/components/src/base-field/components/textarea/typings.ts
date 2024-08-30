@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -12,6 +12,8 @@ export const fieldTextareaProps = () => ({
     }
 })
 
+export interface FieldTextareaSlots {
+}
+
 export type FieldTextareaProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTextareaProps>>>;
 export type FieldTextareaInstance = ComponentPublicInstance<FieldTextareaProps>;
-export type FieldTextareaSlots = SlotsType<{}>

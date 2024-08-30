@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -10,7 +10,7 @@ const FieldText = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldText',
     props: fieldTextProps(),
-    slots: Object as FieldTextSlots,
+    slots: Object as SlotsType<FieldTextSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

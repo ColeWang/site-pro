@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
@@ -30,7 +30,7 @@ const Checkbox = defineComponent({
     inheritAttrs: false,
     name: 'ProCheckbox',
     props: checkboxProps(),
-    slots: Object as FieldSlots & FieldCheckboxSlots,
+    slots: Object as SlotsType<FieldSlots & FieldCheckboxSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

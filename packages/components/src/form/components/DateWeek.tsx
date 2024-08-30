@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
@@ -30,7 +30,7 @@ const DateWeek = defineComponent({
     inheritAttrs: false,
     name: 'ProDateWeek',
     props: dateWeekProps(),
-    slots: Object as FieldSlots & FieldDatePickerSlots,
+    slots: Object as SlotsType<FieldSlots & FieldDatePickerSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Cascader } from 'ant-design-vue'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
@@ -10,7 +10,7 @@ const FieldCascader = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldCascader',
     props: fieldCascaderProps(),
-    slots: Object as FieldCascaderSlots,
+    slots: Object as SlotsType<FieldCascaderSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

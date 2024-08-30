@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { TimePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -12,7 +12,7 @@ const FieldTimePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimePicker',
     props: fieldTimePickerProps(),
-    slots: Object as FieldTimePickerSlots,
+    slots: Object as SlotsType<FieldTimePickerSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

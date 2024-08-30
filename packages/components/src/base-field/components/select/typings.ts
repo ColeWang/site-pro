@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
@@ -13,9 +13,7 @@ export const fieldSelectProps = () => ({
     }
 })
 
-export type FieldSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSelectProps>>>;
-export type FieldSelectInstance = ComponentPublicInstance<FieldSelectProps>;
-export type FieldSelectSlots = SlotsType<{
+export interface FieldSelectSlots {
     clearIcon?: BaseSlot;
     dropdownRender?: BaseSlot;
     maxTagPlaceholder?: BaseSlot;
@@ -26,4 +24,7 @@ export type FieldSelectSlots = SlotsType<{
     removeIcon?: BaseSlot;
     suffixIcon?: BaseSlot;
     tagRender?: BaseSlot;
-}>
+}
+
+export type FieldSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSelectProps>>>;
+export type FieldSelectInstance = ComponentPublicInstance<FieldSelectProps>;

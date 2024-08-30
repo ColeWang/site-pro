@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -11,7 +11,7 @@ const FieldSwitch = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSwitch',
     props: fieldSwitchProps(),
-    slots: Object as FieldSwitchSlots,
+    slots: Object as SlotsType<FieldSwitchSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

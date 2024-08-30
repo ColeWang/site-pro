@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Slider } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -10,7 +10,7 @@ const FieldSlider = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSlider',
     props: fieldSliderProps(),
-    slots: Object as FieldSliderSlots,
+    slots: Object as SlotsType<FieldSliderSlots>,
     setup (props, { slots }) {
         return () => {
             const { mode, text, emptyText, fieldProps } = props

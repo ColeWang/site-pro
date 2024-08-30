@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
@@ -15,8 +15,9 @@ export const fieldSliderProps = () => ({
     }
 })
 
+export interface FieldSliderSlots {
+    mark?: BaseSlot;
+}
+
 export type FieldSliderProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSliderProps>>>;
 export type FieldSliderInstance = ComponentPublicInstance<FieldSliderProps>;
-export type FieldSliderSlots = SlotsType<{
-    mark?: BaseSlot;
-}>

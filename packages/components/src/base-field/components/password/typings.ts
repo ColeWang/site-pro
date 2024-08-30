@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
@@ -13,13 +13,14 @@ export const fieldPasswordProps = () => ({
     }
 })
 
-export type FieldPasswordProps = Partial<ExtractPropTypes<ReturnType<typeof fieldPasswordProps>>>;
-export type FieldPasswordInstance = ComponentPublicInstance<FieldPasswordProps>;
-export type FieldPasswordSlots = SlotsType<{
+export interface FieldPasswordSlots {
     addonAfter?: BaseSlot;
     addonBefore?: BaseSlot;
     clearIcon?: BaseSlot;
     prefix?: BaseSlot;
     suffix?: BaseSlot;
     iconRender?: BaseSlot;
-}>
+}
+
+export type FieldPasswordProps = Partial<ExtractPropTypes<ReturnType<typeof fieldPasswordProps>>>;
+export type FieldPasswordInstance = ComponentPublicInstance<FieldPasswordProps>;

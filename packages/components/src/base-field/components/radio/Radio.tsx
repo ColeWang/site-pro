@@ -11,7 +11,7 @@ const FieldRadio = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRadio',
     props: fieldRadioProps(),
-    slots: Object as FieldRadioSlots,
+    slots: Object as SlotsType<FieldRadioSlots>,
     setup (props, { slots }) {
         const options: ComputedRef<BaseOptionType[]> = computed(() => {
             if (isUndefined(props.valueEnum)) {

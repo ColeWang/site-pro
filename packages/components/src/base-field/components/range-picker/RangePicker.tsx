@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { RangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -13,7 +13,7 @@ const FieldRangePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRangePicker',
     props: fieldRangePickerProps(),
-    slots: Object as FieldRangePickerSlots,
+    slots: Object as SlotsType<FieldRangePickerSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

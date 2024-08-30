@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { TimeRangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -13,7 +13,7 @@ const FieldTimeRangePicker = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimeRangePicker',
     props: fieldTimeRangePickerProps(),
-    slots: Object as FieldTimeRangePickerSlots,
+    slots: Object as SlotsType<FieldTimeRangePickerSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

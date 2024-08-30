@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -12,6 +12,8 @@ export const fieldRadioProps = () => ({
     }
 })
 
+export interface FieldRadioSlots {
+}
+
 export type FieldRadioProps = Partial<ExtractPropTypes<ReturnType<typeof fieldRadioProps>>>;
 export type FieldRadioInstance = ComponentPublicInstance<FieldRadioProps>;
-export type FieldRadioSlots = SlotsType<{}>

@@ -11,7 +11,7 @@ const FieldCheckbox = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldCheckbox',
     props: fieldCheckboxProps(),
-    slots: Object as FieldCheckboxSlots,
+    slots: Object as SlotsType<FieldCheckboxSlots>,
     setup (props, { slots }) {
         const options: ComputedRef<BaseOptionType[]> = computed(() => {
             if (isUndefined(props.valueEnum)) {

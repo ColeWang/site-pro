@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -12,6 +12,8 @@ export const fieldCheckboxProps = () => ({
     }
 })
 
+export interface FieldCheckboxSlots {
+}
+
 export type FieldCheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof fieldCheckboxProps>>>;
 export type FieldCheckboxInstance = ComponentPublicInstance<FieldCheckboxProps>;
-export type FieldCheckboxSlots = SlotsType<{}>

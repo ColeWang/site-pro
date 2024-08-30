@@ -1,9 +1,11 @@
 <template>
-  <ProDrawerForm @after-close="onAfterClose" @form-ref="onFormRef">
+  <ProDrawerForm @form-ref="onFormRef" @after-close="onAfterClose">
     <template v-slot:trigger>
       <Button>点击</Button>
     </template>
-    <ProText label="Text" :name="['data', 'text']" :style="{ padding: '14px' }"/>
+    <ProText label="Text" :name="['data', 'text']" :style="{ padding: '14px' }">
+      <template v-slot:addonAfter></template>
+    </ProText>
     <ProDateTime label="DateTime" :name="['data', 'dateTime']"/>
   </ProDrawerForm>
 </template>
@@ -12,12 +14,12 @@
   import { Button } from 'ant-design-vue'
   import { ModalForm as ProDrawerForm, Text as ProText, DateTime as ProDateTime } from '../../src'
   
-  function onFormRef () {
-    // console.log(el)
+  function onFormRef (el: any) {
+    console.log(el)
   }
   
-  function onAfterClose (value: any) {
-    console.log(value)
+  function onAfterClose () {
+    console.log()
   }
 </script>
 

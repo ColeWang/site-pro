@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
 import { getSlotVNode, toPx } from '@site-pro/utils'
@@ -11,7 +11,7 @@ const FieldTextarea = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTextarea',
     props: fieldTextareaProps(),
-    slots: Object as FieldTextareaSlots,
+    slots: Object as SlotsType<FieldTextareaSlots>,
     setup (props, { slots }) {
         const { prefixCls } = useConfigInject('pro-field-textarea', props)
         const { token } = theme.useToken()

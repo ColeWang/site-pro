@@ -11,7 +11,7 @@ const FieldPassword = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldPassword',
     props: fieldPasswordProps(),
-    slots: Object as FieldPasswordSlots,
+    slots: Object as SlotsType<FieldPasswordSlots>,
     setup (props, { slots }) {
         const { token } = theme.useToken()
         const { t } = useLocaleReceiver(['global'])

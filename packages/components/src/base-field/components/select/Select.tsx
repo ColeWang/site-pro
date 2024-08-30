@@ -12,7 +12,7 @@ const FieldSelect = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSelect',
     props: fieldSelectProps(),
-    slots: Object as FieldSelectSlots,
+    slots: Object as SlotsType<FieldSelectSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

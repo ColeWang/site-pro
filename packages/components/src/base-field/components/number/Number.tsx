@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { InputNumber } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -10,7 +10,7 @@ const FieldNumber = defineComponent({
     inheritAttrs: false,
     name: 'ProFieldNumber',
     props: fieldNumberProps(),
-    slots: Object as FieldNumberSlots,
+    slots: Object as SlotsType<FieldNumberSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
 

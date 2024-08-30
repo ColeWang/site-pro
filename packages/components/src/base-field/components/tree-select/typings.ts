@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseOptionType, BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
@@ -15,10 +15,11 @@ export const fieldTreeSelectProps = () => ({
     }
 })
 
-export type FieldTreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTreeSelectProps>>>;
-export type FieldTreeSelectInstance = ComponentPublicInstance<FieldTreeSelectProps>;
-export type FieldTreeSelectSlots = SlotsType<{
+export interface FieldTreeSelectSlots {
     clearIcon?: BaseSlot;
     renderExtraFooter?: BaseSlot;
     suffixIcon?: BaseSlot;
-}>
+}
+
+export type FieldTreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTreeSelectProps>>>;
+export type FieldTreeSelectInstance = ComponentPublicInstance<FieldTreeSelectProps>;

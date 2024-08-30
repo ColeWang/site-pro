@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
@@ -13,9 +13,7 @@ export const fieldDatePickerProps = () => ({
     }
 })
 
-export type FieldDatePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldDatePickerProps>>>;
-export type FieldDatePickerInstance = ComponentPublicInstance<FieldDatePickerProps>;
-export type FieldDatePickerSlots = SlotsType<{
+export interface FieldDatePickerSlots {
     dateRender?: BaseSlot;
     nextIcon?: BaseSlot;
     prevIcon?: BaseSlot;
@@ -24,4 +22,7 @@ export type FieldDatePickerSlots = SlotsType<{
     superPrevIcon?: BaseSlot;
     renderExtraFooter?: BaseSlot;
     monthCellRender?: BaseSlot;
-}>
+}
+
+export type FieldDatePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldDatePickerProps>>>;
+export type FieldDatePickerInstance = ComponentPublicInstance<FieldDatePickerProps>;
