@@ -1,13 +1,13 @@
 import { computed, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
-import { genFormItemFixStyle } from '../form/utils'
 import { flattenChildren } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { pick } from 'lodash-es'
 import { ResizeObserver } from '../resize-observer'
 import { BaseForm } from '../base-form'
 import Actions from './components/actions/Actions.tsx'
-import useQueryFilter from './hooks/useQueryFilter.ts'
+import useQueryFilter from './hooks/useQueryFilter'
+import { genFormItemFixStyle } from '../share-utils'
 import useStyle from './style'
 
 const queryFilterProps = {

@@ -1,4 +1,4 @@
-import type { App, Ref } from 'vue'
+import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { omit, pick } from 'lodash-es'
@@ -15,6 +15,10 @@ const ModalForm = defineComponent({
     inheritAttrs: false,
     name: 'ProModalForm',
     props: modalFormProps(),
+    slots: Object as SlotsType<{
+        default?: BaseSlot;
+        trigger?: BaseSlot;
+    }>,
     emits: ['update:open', 'formRef', 'open', 'cancel', 'afterClose', 'openChange', 'loadingChange'],
     setup (props, { emit, slots, attrs, expose }) {
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
