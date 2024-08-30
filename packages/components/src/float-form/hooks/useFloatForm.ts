@@ -5,7 +5,7 @@ import { isFunction } from 'lodash-es'
 import type { BaseFormModel } from '../../base-form'
 import type { FloatFormProps } from '../typings'
 
-interface Options {
+interface UseFloatFormOptions {
     onOpen?: () => void;
     onCancel?: () => void;
     onUpdateOpen?: (value: boolean) => void;
@@ -19,7 +19,7 @@ interface UseFloatFormReturnType {
     onFinish: (values: BaseFormModel) => Promise<void>;
 }
 
-function useFloatForm (props: FloatFormProps, options: Options): UseFloatFormReturnType {
+function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): UseFloatFormReturnType {
     const sOpen: Ref<boolean> = ref(props.open!)
     const loading: Ref<boolean> = ref(false)
 
