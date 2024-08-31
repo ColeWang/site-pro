@@ -1,8 +1,10 @@
+import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isFunction } from 'lodash-es'
+import type { ResizeObserverRectSize } from '../../resize-observer'
 
-const breakpoints = {
+const breakpoints: Record<string, any[]> = {
     horizontal: [
         [556, 24, 'vertical'],
         [834, 12, 'horizontal'],
@@ -19,13 +21,13 @@ const breakpoints = {
 
 // compact 紧凑模式
 
-function getSpanConfig (layout, width) {
+function getSpanConfig (layout: string, width: number) {
     const spanConfig = breakpoints[layout || 'horizontal']
     const breakPoint = spanConfig.find((item) => width < item[0])
     return { span: breakPoint[1], layout: breakPoint[2] }
 }
 
-function useSpanConfig (size, props) {
+function useSpanConfig (size: Ref<ResizeObserverRectSize>, props) {
     const { getSpanConfig: propsGetSpanConfig } = props
 
     // vertical horizontal 只有两种

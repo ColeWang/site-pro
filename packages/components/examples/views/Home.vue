@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
   import { Button } from 'ant-design-vue'
-  import { ModalForm as ProDrawerForm, Text as ProText, DateTime as ProDateTime } from '../../src'
+  import { DateTime as ProDateTime, ModalForm as ProDrawerForm, Text as ProText } from '../../src'
   
   function onFormRef (el: any) {
     console.log(el)

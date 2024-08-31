@@ -17,9 +17,9 @@ function genBaseStyle (token: ProBaseFormToken): CSSInterpolation {
     }
 }
 
-const useStyle = genComponentStyleHook('ProBaseForm', (token) => {
+function genStyleToken (token: FullToken<'ProBaseForm'>): CSSInterpolation {
     const proBaseFormToken = mergeToken<ProBaseFormToken>(token, {})
     return genBaseStyle(proBaseFormToken)
-})
+}
 
-export default useStyle
+export default genComponentStyleHook('ProBaseForm', genStyleToken)

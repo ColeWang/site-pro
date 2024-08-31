@@ -14,11 +14,11 @@ export const fieldNumberProps = () => ({
 })
 
 export interface FieldNumberSlots {
-    addonAfter?: BaseSlot;
-    addonBefore?: BaseSlot;
-    prefix?: BaseSlot;
-    upIcon?: BaseSlot;
-    downIcon?: BaseSlot;
+    addonAfter?: any;
+    addonBefore?: any;
+    prefix?: any;
+    upIcon?: any;
+    downIcon?: any;
 }
 
 export type FieldNumberProps = Partial<ExtractPropTypes<ReturnType<typeof fieldNumberProps>>>;

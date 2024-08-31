@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -14,9 +13,9 @@ export const fieldTimeRangePickerProps = () => ({
 })
 
 export interface FieldTimeRangePickerSlots {
-    clearIcon?: BaseSlot;
-    renderExtraFooter?: BaseSlot;
-    suffixIcon?: BaseSlot;
+    clearIcon?: any;
+    renderExtraFooter?: any;
+    suffixIcon?: any;
 }
 
 export type FieldTimeRangePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTimeRangePickerProps>>>;

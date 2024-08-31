@@ -28,10 +28,9 @@ type BaseFieldFieldProps = BaseFieldProps['fieldProps'] & any;
 
 function mergeFieldProps (
     props: BaseFieldProps,
-    extraFieldProps: BaseFieldFieldProps
+    fieldProps: BaseFieldFieldProps
 ): BaseFieldProps {
-    const fieldProps = { ...props.fieldProps, ...extraFieldProps }
-    return { ...props, fieldProps }
+    return { ...props, fieldProps: { ...props.fieldProps, ...fieldProps } }
 }
 
 function defaultRenderText (

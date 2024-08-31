@@ -11,7 +11,7 @@ interface UseFloatFormOptions {
     onUpdateOpen?: (value: boolean) => void;
 }
 
-interface UseFloatFormReturnType {
+interface UseFloatFormResult {
     sOpen: Ref<boolean>;
     loading: Ref<boolean>;
     onOpen: () => void;
@@ -19,7 +19,7 @@ interface UseFloatFormReturnType {
     onFinish: (values: BaseFormModel) => Promise<void>;
 }
 
-function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): UseFloatFormReturnType {
+function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): UseFloatFormResult {
     const sOpen: Ref<boolean> = ref(props.open!)
     const loading: Ref<boolean> = ref(false)
 

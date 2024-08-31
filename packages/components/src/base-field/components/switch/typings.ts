@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -18,8 +17,8 @@ export const fieldSwitchProps = () => ({
 })
 
 export interface FieldSwitchSlots {
-    checkedChildren?: BaseSlot;
-    unCheckedChildren?: BaseSlot;
+    checkedChildren?: any;
+    unCheckedChildren?: any;
 }
 
 export type FieldSwitchProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSwitchProps>>>;

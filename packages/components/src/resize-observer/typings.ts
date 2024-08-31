@@ -1,12 +1,12 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 
-export interface RectSizeType extends Partial<DOMRectReadOnly> {
+export interface ResizeObserverRectSize extends Partial<DOMRectReadOnly> {
     width: number;
     height: number;
 }
 
 export interface ResizeObserverOnResize {
-    (size: RectSizeType): void;
+    (size: ResizeObserverRectSize): void;
 }
 
 export const resizeObserverProps = () => ({

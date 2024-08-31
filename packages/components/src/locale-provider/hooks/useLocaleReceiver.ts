@@ -5,14 +5,14 @@ import zhCN from '@site-pro/locale/zh-CN'
 import { get, has } from 'lodash-es'
 import type { LocaleProviderExpose, LocaleType } from '../typings'
 
-interface UseLocaleReceiverReturnType {
+interface UseLocaleReceiverResult {
     locale: ComputedRef<LocaleType>;
     t: (namePath: NamePath) => string | undefined;
 }
 
 export const LocaleReceiverKey: InjectionKey<Partial<LocaleProviderExpose>> = Symbol('LocaleReceiver')
 
-function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverReturnType {
+function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverResult {
     const { locale } = inject(LocaleReceiverKey, {})
 
     const mergeLocale: ComputedRef<LocaleType> = computed(() => {

@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -14,13 +13,13 @@ export const fieldCascaderProps = () => ({
 })
 
 export interface FieldCascaderSlots {
-    clearIcon?: BaseSlot;
-    expandIcon?: BaseSlot;
-    maxTagPlaceholder?: BaseSlot;
-    notFoundContent?: BaseSlot;
-    removeIcon?: BaseSlot;
-    suffixIcon?: BaseSlot;
-    tagRender?: BaseSlot;
+    clearIcon?: any;
+    expandIcon?: any;
+    maxTagPlaceholder?: any;
+    notFoundContent?: any;
+    removeIcon?: any;
+    suffixIcon?: any;
+    tagRender?: any;
 }
 
 export type FieldCascaderProps = Partial<ExtractPropTypes<ReturnType<typeof fieldCascaderProps>>>;

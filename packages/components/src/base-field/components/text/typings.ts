@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -14,11 +13,11 @@ export const fieldTextProps = () => ({
 })
 
 export interface FieldTextSlots {
-    addonAfter?: BaseSlot;
-    addonBefore?: BaseSlot;
-    clearIcon?: BaseSlot;
-    prefix?: BaseSlot;
-    suffix?: BaseSlot;
+    addonAfter?: any;
+    addonBefore?: any;
+    clearIcon?: any;
+    prefix?: any;
+    suffix?: any;
 }
 
 export type FieldTextProps = Partial<ExtractPropTypes<ReturnType<typeof fieldTextProps>>>;

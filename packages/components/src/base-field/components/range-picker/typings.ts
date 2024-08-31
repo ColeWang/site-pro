@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -14,13 +13,13 @@ export const fieldRangePickerProps = () => ({
 })
 
 export interface FieldRangePickerSlots {
-    dateRender?: BaseSlot;
-    nextIcon?: BaseSlot;
-    prevIcon?: BaseSlot;
-    suffixIcon?: BaseSlot;
-    superNextIcon?: BaseSlot;
-    superPrevIcon?: BaseSlot;
-    separator?: BaseSlot;
+    dateRender?: any;
+    nextIcon?: any;
+    prevIcon?: any;
+    suffixIcon?: any;
+    superNextIcon?: any;
+    superPrevIcon?: any;
+    separator?: any;
 }
 
 export type FieldRangePickerProps = Partial<ExtractPropTypes<ReturnType<typeof fieldRangePickerProps>>>;

@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
@@ -14,16 +13,16 @@ export const fieldSelectProps = () => ({
 })
 
 export interface FieldSelectSlots {
-    clearIcon?: BaseSlot;
-    dropdownRender?: BaseSlot;
-    maxTagPlaceholder?: BaseSlot;
-    menuItemSelectedIcon?: BaseSlot;
-    notFoundContent?: BaseSlot;
-    option?: BaseSlot;
-    placeholder?: BaseSlot;
-    removeIcon?: BaseSlot;
-    suffixIcon?: BaseSlot;
-    tagRender?: BaseSlot;
+    clearIcon?: any;
+    dropdownRender?: any;
+    maxTagPlaceholder?: any;
+    menuItemSelectedIcon?: any;
+    notFoundContent?: any;
+    option?: any;
+    placeholder?: any;
+    removeIcon?: any;
+    suffixIcon?: any;
+    tagRender?: any;
 }
 
 export type FieldSelectProps = Partial<ExtractPropTypes<ReturnType<typeof fieldSelectProps>>>;
