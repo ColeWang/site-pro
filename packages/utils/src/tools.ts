@@ -3,8 +3,8 @@ import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, t
 import type { NamePath, Recordable } from './types'
 import { isEmpty } from './is'
 
-export function cloneProxyToRaw<T extends Recordable> (proxy: T): T {
-    return cloneWith(proxy, (value) => {
+export function cloneProxyToRaw<T extends Recordable> (object?: T): T {
+    return cloneWith(object || {} as T, (value) => {
         if (isProxy(value)) {
             const nextValue = toRaw(value)
             return cloneDeep(nextValue)
@@ -14,12 +14,12 @@ export function cloneProxyToRaw<T extends Recordable> (proxy: T): T {
     })
 }
 
-export function omitNil<T extends Recordable> (object: T): Partial<T> {
-    return omitBy(object, isEmpty) as Partial<T>
+export function omitNil<T extends Recordable> (object?: T): T {
+    return omitBy(object || {}, isEmpty) as T
 }
 
-export function omitUndefined<T extends Recordable> (object: T): Partial<T> {
-    return omitBy(object, isUndefined) as Partial<T>
+export function omitUndefined<T extends Recordable> (object?: T): T {
+    return omitBy(object || {}, isUndefined) as T
 }
 
 export function namePathToString (namePath: NamePath): string {

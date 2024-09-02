@@ -4,11 +4,15 @@ import type { BaseRefType } from '@site-pro/utils'
 import { getElement } from '@site-pro/utils'
 import tryOnScopeDispose from './tryOnScopeDispose'
 
+export interface UseResizeObserverResult {
+    onStop: () => void;
+}
+
 function useResizeObserver (
     target: BaseRefType | Ref<BaseRefType>,
     callback: ResizeObserverCallback,
     options?: ResizeObserverOptions
-): void {
+): UseResizeObserverResult {
     let observer: ResizeObserver | null = null
 
     function cleanup (): void {
@@ -32,6 +36,8 @@ function useResizeObserver (
     }
 
     tryOnScopeDispose(onStopHandle)
+
+    return { onStop: onStopHandle }
 }
 
 export default useResizeObserver

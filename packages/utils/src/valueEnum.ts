@@ -2,8 +2,8 @@ import type { VNodeChild } from 'vue'
 import { h, isVNode } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
-import { isEmpty } from './is'
 import type { BaseEnumType, BaseFieldNames, BaseOptionType } from './types'
+import { isEmpty } from './is'
 
 export function enumToOptions (valueEnum?: BaseEnumType): BaseOptionType[] {
     const result = map(valueEnum || ({} as BaseEnumType), (item, key) => {

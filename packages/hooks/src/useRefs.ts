@@ -1,9 +1,14 @@
 import type { Ref } from 'vue'
 import { onBeforeUpdate, ref } from 'vue'
-import type { BaseRefType } from '@site-pro/utils'
+import type { BaseRefType, Recordable } from '@site-pro/utils'
 
-function useRefs () {
-    const refs: Ref<Record<string, BaseRefType>> = ref({})
+export interface UseRefsResult {
+    refs: Ref<Recordable<BaseRefType>>;
+    setRef: (key: string | number) => (el: BaseRefType) => void;
+}
+
+function useRefs (): UseRefsResult {
+    const refs: Ref<Recordable<BaseRefType>> = ref({})
 
     function setRef (key: string | number) {
         return (el: BaseRefType) => {
