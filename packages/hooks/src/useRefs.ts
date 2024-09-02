@@ -1,10 +1,12 @@
 import type { Ref } from 'vue'
 import { onBeforeUpdate, ref } from 'vue'
 import type { BaseRefType, Recordable } from '@site-pro/utils'
+import { get, set } from 'lodash-es'
 
 export interface UseRefsResult {
     refs: Ref<Recordable<BaseRefType>>;
-    setRef: (key: string | number) => (el: BaseRefType) => void;
+    setRef: (key: string | number) => (el: BaseRefType) => Recordable<BaseRefType>;
+    getRef: (key: string | number) => BaseRefType;
 }
 
 function useRefs (): UseRefsResult {
@@ -12,15 +14,19 @@ function useRefs (): UseRefsResult {
 
     function setRef (key: string | number) {
         return (el: BaseRefType) => {
-            refs.value[key] = el
+            return set(refs.value, key, el)
         }
+    }
+
+    function getRef (key: string | number): BaseRefType {
+        return get(refs.value, key, null)
     }
 
     onBeforeUpdate(() => {
         refs.value = {}
     })
 
-    return { refs, setRef }
+    return { refs, setRef, getRef }
 }
 
 
