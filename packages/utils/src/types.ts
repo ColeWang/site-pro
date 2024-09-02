@@ -1,4 +1,4 @@
-import type { VNodeChild } from 'vue'
+import type { CSSProperties, VNodeChild } from 'vue'
 
 export type Recordable<T = any> = Record<string, T>;
 
@@ -18,8 +18,15 @@ export interface FieldNames extends Recordable {
     children?: string;
 }
 
+export type BaseClass = string | Recordable<boolean> | Array<BaseClass>;
+
 export interface BaseSlot<T extends any = any> {
     (...args: IfAny<T, any[], [T] | (T extends undefined ? [] : never)>): VNodeChild | JSX.Element;
+}
+
+export interface BaseAttrs extends Recordable {
+    style?: CSSProperties;
+    class?: BaseClass;
 }
 
 export interface BaseBadgeType extends Recordable {
