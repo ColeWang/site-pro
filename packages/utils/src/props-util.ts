@@ -1,10 +1,10 @@
-import type { VNode } from 'vue'
+import type { VNode, VNodeChild } from 'vue'
 import { Fragment } from 'vue'
 import { isArray, isFunction } from 'lodash-es'
-import type { BaseSlot } from './types'
+import type { BaseSlot, Recordable } from './types'
 import { isEmptyElement } from './is'
 
-export function flattenChildren (children: Array<VNode | VNode[]>): Array<VNode> {
+export function flattenChildren (children?: VNode[]): VNode[] {
     const result: Array<VNode> = []
     if (isArray(children) && children.length !== 0) {
         children.forEach((child) => {
@@ -20,30 +20,30 @@ export function flattenChildren (children: Array<VNode | VNode[]>): Array<VNode>
     return result.filter((c) => !isEmptyElement(c))
 }
 
-export function getSlot<T = BaseSlot> (
-    slots: Record<string, any>,
-    props: Record<string, any>,
+export function getSlot<T = any, Slot = BaseSlot<T>> (
+    slots: Recordable,
+    props: Recordable,
     name: string = 'default'
-): T | false {
+): Slot | false {
     const result: any = props[name] || slots[name]
-    return isFunction(result) ? result as T : false
+    return isFunction(result) ? result as Slot : false
 }
 
-export function getSlotVNode<T = ReturnType<BaseSlot>> (
-    slots: Record<string, any>,
-    props: Record<string, any>,
+export function getSlotVNode<T = VNodeChild | JSX.Element> (
+    slots: Recordable,
+    props: Recordable,
     name: string = 'default',
-    slotScope?: Record<string, any>
+    slotScope?: Recordable
 ): T | false {
     const result: any = props[name] || slots[name]
     return isFunction(result) ? result(slotScope) as T : false
 }
 
-export function getPropsSlot<T = ReturnType<BaseSlot>> (
-    slots: Record<string, any>,
-    props: Record<string, any>,
+export function getPropsSlot<T = VNodeChild | JSX.Element> (
+    slots: Recordable,
+    props: Recordable,
     name: string = 'default',
-    slotScope?: Record<string, any>
+    slotScope?: Recordable
 ): T | false {
     const result: any = props[name] ?? slots[name]
     return isFunction(result) ? result(slotScope) as T : (result || false)

@@ -1,7 +1,7 @@
 import { isBoolean } from 'lodash-es'
 
-export function addEvt<T extends Element | HTMLElement> (
-    el: T,
+export function addEvt (
+    el: HTMLElement,
     type: string,
     listener: EventListener,
     options?: boolean | EventListenerOptions
@@ -9,8 +9,8 @@ export function addEvt<T extends Element | HTMLElement> (
     el.addEventListener(type, listener, options)
 }
 
-export function cleanEvt<T extends Element | HTMLElement> (
-    el: T,
+export function cleanEvt (
+    el: HTMLElement,
     type: string,
     listener: EventListener,
     options?: boolean | EventListenerOptions
@@ -18,8 +18,8 @@ export function cleanEvt<T extends Element | HTMLElement> (
     el.removeEventListener(type, listener, options)
 }
 
-export function onceEvt<T extends Element | HTMLElement> (
-    el: T,
+export function onceEvt (
+    el: HTMLElement,
     type: string,
     listener: EventListener,
     options?: boolean | EventListenerOptions
@@ -45,7 +45,7 @@ export function preventDefault (evt: Event, isStopPropagation?: boolean): void {
     }
 }
 
-export function trigger<T extends Element | HTMLElement> (target: T, type: string): void {
+export function trigger (target: HTMLElement, type: string): void {
     const inputEvent = document.createEvent('HTMLEvents')
     inputEvent.initEvent(type, true, true)
     target.dispatchEvent(inputEvent)

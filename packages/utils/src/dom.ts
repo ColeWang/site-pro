@@ -1,7 +1,8 @@
 import type { ComponentPublicInstance, CSSProperties, MaybeRef } from 'vue'
 import { unref } from 'vue'
+import type { BaseRefType } from './types'
 
-export function hasClass<T extends Element | HTMLElement> (node: T, className: string): boolean {
+export function hasClass (node: HTMLElement, className: string): boolean {
     if (node.classList) {
         return node.classList.contains(className)
     }
@@ -9,7 +10,7 @@ export function hasClass<T extends Element | HTMLElement> (node: T, className: s
     return ` ${originClass} `.indexOf(` ${className} `) > -1
 }
 
-export function addClass<T extends Element | HTMLElement> (node: T, className: string): void {
+export function addClass (node: HTMLElement, className: string): void {
     if (node.classList) {
         node.classList.add(className)
     } else {
@@ -19,7 +20,7 @@ export function addClass<T extends Element | HTMLElement> (node: T, className: s
     }
 }
 
-export function removeClass<T extends Element | HTMLElement> (node: T, className: string): void {
+export function removeClass (node: HTMLElement, className: string): void {
     if (node.classList) {
         node.classList.remove(className)
     } else {
@@ -30,24 +31,24 @@ export function removeClass<T extends Element | HTMLElement> (node: T, className
     }
 }
 
-export function setStyle<T extends Element | HTMLElement> (node: T, style: CSSProperties): CSSProperties {
-    const keys = Object.keys(style)
+export function setStyle (node: HTMLElement, style: CSSProperties): CSSProperties {
+    const keys: any[] = Object.keys(style)
     const oldStyle: CSSProperties = {}
     keys.forEach((key) => {
-        oldStyle[key as any] = (node as HTMLElement).style[key as any]
+        oldStyle[key] = node.style[key]
     })
     keys.forEach((key) => {
-        ;(node as any).style[key] = style[key as any]
+        node.style[key] = style[key] as any
     })
     return oldStyle
 }
 
-export function getElement<E extends ComponentPublicInstance | Element | HTMLElement, T = MaybeRef<E | null>> (el: T): E {
-    const target = unref(el) as E | null
+export function getElement (el: MaybeRef<BaseRefType>): HTMLElement | null {
+    const target: BaseRefType = unref(el)
     if (target && (target as ComponentPublicInstance).$el) {
         return (target as ComponentPublicInstance).$el
     }
-    return target as E
+    return target as (HTMLElement | null)
 }
 
 export function getWindowSize (): [number, number] {

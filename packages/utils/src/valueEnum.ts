@@ -3,10 +3,10 @@ import { h, isVNode } from 'vue'
 import { Badge, Space } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
 import { isEmpty } from './is'
-import type { BaseEnumType, BaseOptionType, FieldNames } from './types'
+import type { BaseEnumType, BaseFieldNames, BaseOptionType } from './types'
 
-export function enumToOptions<E extends BaseEnumType, Option extends BaseOptionType> (valueEnum?: E): Array<Option> {
-    const result = map(valueEnum || ({} as E), (item, key) => {
+export function enumToOptions (valueEnum?: BaseEnumType): BaseOptionType[] {
+    const result = map(valueEnum || ({} as BaseEnumType), (item, key) => {
         if (isEmpty(item)) return undefined
         if (isObject(item) && item.text) {
             const { text, disabled } = item
@@ -14,13 +14,13 @@ export function enumToOptions<E extends BaseEnumType, Option extends BaseOptionT
         }
         return { value: key, label: item }
     })
-    return compact(result) as Array<Option>
+    return compact(result) as BaseOptionType[]
 }
 
-export function optionsToEnum<Option extends BaseOptionType, E extends BaseEnumType> (options?: Array<Option>, fieldNames?: FieldNames): E {
+export function optionsToEnum (options?: BaseOptionType[], fieldNames?: BaseFieldNames): BaseEnumType {
     const { value = 'value', label = 'label', children = 'children' } = fieldNames || {}
 
-    const traverseOptions = (values: Array<Option> = [], result: E) => {
+    const traverseOptions = (values: BaseOptionType[] = [], result: BaseEnumType) => {
         return reduce(values, (_, option) => {
             const key = option[value], text = option[label]
             if (!(isEmpty(key) || isEmpty(text))) {
@@ -34,10 +34,10 @@ export function optionsToEnum<Option extends BaseOptionType, E extends BaseEnumT
         }, result)
     }
 
-    return traverseOptions(options || [], {} as E)
+    return traverseOptions(options || [], {} as BaseEnumType)
 }
 
-export function enumToText<T extends BaseOptionType | VNodeChild> (text: T, valueEnum: BaseEnumType): VNodeChild {
+export function enumToText (text: BaseOptionType | VNodeChild, valueEnum: BaseEnumType): VNodeChild {
     if (isEmpty(text) || isVNode(text)) return text
     if (isObject(text) && (text as BaseOptionType).label) return (text as BaseOptionType).label
     if (isArray(text)) {

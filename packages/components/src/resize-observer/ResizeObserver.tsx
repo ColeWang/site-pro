@@ -15,7 +15,7 @@ const ResizeObserver = defineComponent({
     }>,
     emits: ['resize'],
     setup (props, { emit, slots, attrs }) {
-        const elRef: Ref<Element | null> = ref(null)
+        const elRef: Ref<HTMLElement | null> = ref(null)
 
         const rectSize: Ref<ResizeObserverRectSize> = ref({ width: 0, height: 0 })
 

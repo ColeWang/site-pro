@@ -1,4 +1,4 @@
-import type { CSSProperties, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, VNodeChild } from 'vue'
 
 export type Recordable<T = any> = Record<string, T>;
 
@@ -12,11 +12,7 @@ export type Merge<A, B> = Omit<Omit<A, keyof B> & B, never>;
 
 export type LiteralUnion<T extends string> = T | (string & {});
 
-export interface FieldNames extends Recordable {
-    value?: string;
-    label?: string;
-    children?: string;
-}
+export type BaseRefType = HTMLElement | ComponentPublicInstance | null;
 
 export type BaseClass = string | Recordable<boolean> | Array<BaseClass>;
 
@@ -27,6 +23,12 @@ export interface BaseSlot<T extends any = any> {
 export interface BaseAttrs extends Recordable {
     style?: CSSProperties;
     class?: BaseClass;
+}
+
+export interface BaseFieldNames extends Recordable {
+    value?: string;
+    label?: string;
+    children?: string;
 }
 
 export interface BaseBadgeType extends Recordable {
