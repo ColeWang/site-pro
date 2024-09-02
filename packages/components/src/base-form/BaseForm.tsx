@@ -8,7 +8,7 @@ import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodas
 import { createFromInstance } from './hooks/useFormInstance'
 import type { RowWrapperProps } from './helpers'
 import { RowWrapper } from './helpers'
-import type { BaseFormExpose, BaseFormModel, BaseFormProps, BaseFormUpdater } from './typings'
+import type { BaseFormExpose, BaseFormLayout, BaseFormModel, BaseFormProps, BaseFormUpdater } from './typings'
 import { baseFormProps } from './typings'
 import useStyle from './style'
 
@@ -34,9 +34,14 @@ const BaseForm = defineComponent({
 
         const formProps: ComputedRef<BaseFormProps> = computed(() => {
             const { sizeMS } = unref(token)
-            const defaultRowProps: RowProps = { gutter: [sizeMS, 0] }
-            const rowProps: RowProps = { ...defaultRowProps, ...props.rowProps }
-            const layout: string | undefined = (props.grid && props.layout === 'inline') ? 'vertical' : props.layout
+            const rowProps: RowProps = {
+                gutter: [sizeMS, 0],
+                ...props.rowProps
+            }
+            const layout: BaseFormLayout = (props.grid && props.layout === 'inline')
+                ? 'vertical'
+                : props.layout
+
             return { ...attrs, ...props, layout, rowProps } as BaseFormProps
         })
 

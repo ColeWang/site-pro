@@ -3,11 +3,11 @@ import { defineComponent, unref } from 'vue'
 import { Col, theme } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
 import { getPropsSlot, toPx } from '@site-pro/utils'
-import type { RowWrapperProps } from '../base-form'
+import type { BaseFormLayout, RowWrapperProps } from '../base-form'
 import { ColWrapper, RowWrapper, useFormInstance } from '../base-form'
 import type { GlobalToken } from '../theme'
 
-function genTitleStyle (layout: string, token: GlobalToken): CSSProperties {
+function genTitleStyle (layout: BaseFormLayout, token: GlobalToken): CSSProperties {
     const baseStyle: CSSProperties = {
         fontSize: token.fontSize,
         color: token.colorText,

@@ -1,12 +1,12 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot, DrawerProps, ModalProps } from '@site-pro/utils'
-import type { BaseFormInstance, BaseFormModel, SubmitterProps } from '../base-form'
+import type { BaseFormInstance, BaseFormLayout, BaseFormModel, SubmitterProps } from '../base-form'
 import { baseFormProps } from '../base-form'
 
 export const floatFormProps = () => ({
     ...baseFormProps(),
     layout: {
-        type: String as PropType<'horizontal' | 'inline' | 'vertical'>,
+        type: String as PropType<BaseFormLayout>,
         default: 'vertical'
     },
     open: {

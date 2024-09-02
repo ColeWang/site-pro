@@ -1,8 +1,8 @@
 import type { Ref } from 'vue'
 import { ref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import { isFunction } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../resize-observer'
+import type { QueryFilterLayout, QueryFilterProps, QueryFilterSpanConfig } from '../typings'
 
 const breakpoints: Record<string, any[]> = {
     horizontal: [
@@ -21,26 +21,26 @@ const breakpoints: Record<string, any[]> = {
 
 // compact 紧凑模式
 
-function getSpanConfig (layout: string, width: number) {
+function getSpanConfig (layout: string, width: number): QueryFilterSpanConfig {
     const spanConfig = breakpoints[layout || 'horizontal']
     const breakPoint = spanConfig.find((item) => width < item[0])
     return { span: breakPoint[1], layout: breakPoint[2] }
 }
 
-function useSpanConfig (size: Ref<ResizeObserverRectSize>, props) {
+function useSpanConfig (size: Ref<ResizeObserverRectSize>, props: QueryFilterProps) {
     const { getSpanConfig: propsGetSpanConfig } = props
 
     // vertical horizontal 只有两种
-    const layout = ref('horizontal')
-    const span = ref(24)
+    const layout: Ref<QueryFilterLayout> = ref('horizontal')
+    const span: Ref<number> = ref(24)
 
     const stopWatchSize = watch(size, ({ width }) => {
-        const spanSize = propsGetSpanConfig && isFunction(propsGetSpanConfig)
-            ? propsGetSpanConfig(props.layout, width) || {}
-            : getSpanConfig(props.layout, width)
+        const spanConfig = propsGetSpanConfig
+            ? propsGetSpanConfig(props.layout!, width)
+            : getSpanConfig(props.layout!, width)
         // ---
-        layout.value = spanSize.layout || 'horizontal'
-        span.value = spanSize.span || 24
+        layout.value = spanConfig.layout || 'horizontal'
+        span.value = spanConfig.span || 24
     })
 
     function onStopHandle () {

@@ -12,7 +12,7 @@ function getOffset (length: number, span: number) {
     return (cols - 1 - (length % cols)) * span
 }
 
-function useQueryFilter (size: ResizeObserverRectSize, props: QueryFilterProps) {
+function useQueryFilter (size: Ref<ResizeObserverRectSize>, props: QueryFilterProps) {
     const { showCollapse } = props
 
     const { layout, span } = useSpanConfig(size, props)

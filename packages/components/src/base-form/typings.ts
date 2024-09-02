@@ -8,8 +8,14 @@ export interface BaseFormUpdater {
     (value: any): any;
 }
 
+export type BaseFormLayout = 'horizontal' | 'vertical' | 'inline';
+
 export const baseFormProps = () => ({
     ...antFormProps(),
+    layout: {
+        type: String as PropType<BaseFormLayout>,
+        default: 'horizontal'
+    },
     initialValues: {
         type: Object as PropType<Recordable>,
         default: () => ({})

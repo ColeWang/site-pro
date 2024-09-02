@@ -1,13 +1,13 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
-import type { BaseFormInstance, BaseFormProps } from '../base-form'
+import type { BaseFormInstance, BaseFormLayout, BaseFormProps } from '../base-form'
 import { BaseForm, baseFormProps } from '../base-form'
 
 export const formProps = () => ({
     ...baseFormProps(),
     layout: {
-        type: String as PropType<'horizontal' | 'inline' | 'vertical'>,
+        type: String as PropType<BaseFormLayout>,
         default: 'vertical'
     },
     onFormRef: {

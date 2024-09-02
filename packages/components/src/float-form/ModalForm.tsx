@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNodeProps } from 'vue'
+import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { omit, pick } from 'lodash-es'

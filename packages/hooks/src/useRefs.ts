@@ -23,6 +23,7 @@ function useRefs (): UseRefsResult {
     }
 
     onBeforeUpdate(() => {
+        // 重置 refs
         refs.value = {}
     })
 

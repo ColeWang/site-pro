@@ -47,7 +47,7 @@ function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): Use
         if (!isFunction(props.onFinish) || unref(loading)) return
         loading.value = true
         try {
-            const result = await props.onFinish(values)
+            const result: any = await props.onFinish(values)
             loading.value = false
             result && onCancel()
         } catch (err) {
