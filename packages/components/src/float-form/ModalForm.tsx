@@ -50,8 +50,8 @@ const ModalForm = defineComponent({
         }
 
         function onBaseFormRef (el: any): void {
-            baseFormRef.value = el as BaseFormInstance | null
-            emit('formRef', el as BaseFormInstance | null)
+            baseFormRef.value = el
+            emit('formRef', el)
         }
 
         const modalFormExpose: ModalFormExpose = {

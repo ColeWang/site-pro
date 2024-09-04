@@ -22,8 +22,8 @@ const QueryFilter = defineComponent({
     slots: Object as SlotsType<{
         default?: any;
     }>,
-    emits: ['resize', 'collapse'],
-    setup (props, { emit, slots, attrs, expose }) {
+    emits: ['formRef', 'resize', 'collapse'],
+    setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-query-filter', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { token } = theme.useToken()
@@ -54,11 +54,10 @@ const QueryFilter = defineComponent({
             emit('collapse', value)
         }
 
-        function getFormInstance () {
-            return unref(baseFormRef)
+        function onBaseFormRef (el: any): void {
+            baseFormRef.value = el
+            emit('formRef', el)
         }
-
-        expose({ getFormInstance })
 
         return () => {
             const { labelWidth, rowProps } = props
@@ -117,7 +116,7 @@ const QueryFilter = defineComponent({
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     <ResizeObserver onResize={onResize}>
-                        <BaseForm {...baseFormProps} ref={baseFormRef}>
+                        <BaseForm {...baseFormProps} ref={onBaseFormRef}>
                             <Row {...needRowProps}>
                                 {colNodes}
                                 {actionDom}

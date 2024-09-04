@@ -1,5 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { ResizeObserverRectSize } from '../resize-observer'
+import type { BaseFormInstance } from '../base-form'
 import { baseFormProps } from '../base-form'
 import { queryFilterActionsProps } from './Actions'
 
@@ -27,6 +28,10 @@ export const queryFilterProps = () => ({
     },
     getSpanConfig: {
         type: Function as PropType<(layout: string, width: number) => QueryFilterSpanConfig>,
+        default: undefined
+    },
+    onFormRef: {
+        type: Function as PropType<(el: BaseFormInstance | null) => void>,
         default: undefined
     },
     onResize: {
