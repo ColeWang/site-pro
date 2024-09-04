@@ -53,17 +53,16 @@ export type FieldInstance = ComponentPublicInstance<FieldProps>;
 function genFieldStyle (
     style: CSSProperties | undefined,
     fieldWidth: FieldSizeType,
-    sizeEnum: Record<string, number>
 ): CSSProperties {
     const { maxWidth, minWidth, width, ...restStyle } = style || {}
     const fieldSize: number | undefined = isString(fieldWidth)
-        ? get(sizeEnum, fieldWidth)
+        ? get(SIZE_ENUM, fieldWidth)
         : fieldWidth
 
     return {
         ...restStyle,
         maxWidth: maxWidth || '100%',
-        minWidth: minWidth || toPx(sizeEnum['xs']),
+        minWidth: minWidth || toPx(SIZE_ENUM['xs']),
         width: width || toPx(fieldSize) || '100%'
     }
 }
@@ -116,7 +115,7 @@ const Field = defineComponent({
 
             const needFieldProps: any = {
                 ...fieldProps,
-                style: genFieldStyle(fieldProps.style, fieldWidth!, SIZE_ENUM),
+                style: genFieldStyle(fieldProps.style, fieldWidth!),
                 ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
             }
 

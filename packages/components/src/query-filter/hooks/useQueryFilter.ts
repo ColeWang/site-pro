@@ -5,7 +5,7 @@ import { isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../resize-observer'
 import type { QueryFilterLayout, QueryFilterProps } from '../typings'
-import useSpanConfig from './useSpanConfig'
+import useBreakPoint from './useBreakPoint'
 
 interface ColDealNode {
     child: VNode;
@@ -42,7 +42,7 @@ function useQueryFilter (
 ): UseQueryFilterResult {
     const { showCollapse } = props
 
-    const { layout, span } = useSpanConfig(size, props)
+    const { layout, span } = useBreakPoint(size, props)
 
     const collapsed: Ref<boolean> = ref(props.collapsed!)
     const showNumber: ComputedRef<number> = computed(() => {

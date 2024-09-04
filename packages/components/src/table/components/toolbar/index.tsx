@@ -12,7 +12,7 @@ import { pick, toPlainObject } from 'lodash-es'
 import { ResizeObserver } from '../../../resize-observer'
 import Density from '../density'
 import Setting from '../setting'
-import useSpanConfig from '../../../query-filter/hooks/useSpanConfig'
+import useBreakPoint from '../../../query-filter/hooks/useBreakPoint.ts'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
 import useStyle from './style'
@@ -63,7 +63,7 @@ export default defineComponent({
 
         const size = ref({ width: 0, height: 0 })
 
-        const { span } = useSpanConfig(size, props)
+        const { span } = useBreakPoint(size, props)
 
         function onResize (value) {
             size.value = value

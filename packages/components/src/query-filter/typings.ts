@@ -5,6 +5,7 @@ import { baseFormProps } from '../base-form'
 import { queryFilterActionsProps } from './Actions'
 
 export type QueryFilterLayout = 'horizontal' | 'vertical';
+export type QueryFilterBreakPoint = [number, number, QueryFilterLayout];
 
 export const queryFilterProps = () => ({
     ...baseFormProps(),
@@ -17,10 +18,6 @@ export const queryFilterProps = () => ({
         type: [Number, String] as PropType<'auto' | number>,
         default: undefined
     },
-    span: {
-        type: Number as PropType<number>,
-        default: undefined
-    },
     compact: {
         type: Boolean as PropType<boolean>,
         default: false
@@ -28,6 +25,10 @@ export const queryFilterProps = () => ({
     defaultRowsNumber: {
         type: Number as PropType<number>,
         default: 1
+    },
+    breakPoints: {
+        type: Array as PropType<QueryFilterBreakPoint[]>,
+        default: undefined
     },
     onFormRef: {
         type: Function as PropType<(el: BaseFormInstance | null) => void>,
