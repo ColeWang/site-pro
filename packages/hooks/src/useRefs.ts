@@ -30,5 +30,4 @@ function useRefs (): UseRefsResult {
     return { refs, setRef, getRef }
 }
 
-
 export default useRefs

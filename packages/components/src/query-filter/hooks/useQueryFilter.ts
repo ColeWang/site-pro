@@ -4,11 +4,17 @@ import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../resize-observer'
-import type { QueryFilterProps, QueryFilterLayout } from '../typings'
+import type { QueryFilterLayout, QueryFilterProps } from '../typings'
 import useSpanConfig from './useSpanConfig'
 
-interface GenColNodesCallback {
-    (node: VNode): VNode;
+interface ColDealNode {
+    child: VNode;
+    hidden: boolean;
+    key: string | number | symbol;
+}
+
+interface GenColNodesIteratee {
+    (node: ColDealNode): VNode;
 }
 
 interface GenColNodesResult {
@@ -22,7 +28,7 @@ interface UseQueryFilterResult {
     span: Ref<number>;
     collapsed: Ref<boolean>;
     setCollapse: (value: boolean) => void;
-    genColNodes: (children: VNode[], callback: GenColNodesCallback) => void;
+    genColNodes: (children: VNode[], iteratee: GenColNodesIteratee) => GenColNodesResult;
 }
 
 function getOffset (length: number, span: number): number {
@@ -52,33 +58,33 @@ function useQueryFilter (
         collapsed.value = value
     }
 
-    function createNodes (children: VNode[]) {
-        const maxIndex = unref(showNumber) - 1
+    function createDealNodes (children: VNode[]): ColDealNode[] {
+        const maxIndex: number = unref(showNumber) - 1
         // 计数器
-        let hiddenCount = 0
+        let hiddenCount: number = 0
         const isChildHidden = (propsHidden: boolean, index: number) => {
             propsHidden && (hiddenCount += 1)
-            const cHidden = unref(collapsed) && (index - hiddenCount) > maxIndex
+            const cHidden: boolean = unref(collapsed) && (index - hiddenCount) > maxIndex
             return showCollapse ? (propsHidden || cHidden) : propsHidden
         }
 
         return children.map((child, index) => {
-            const propsHidden = child.props && child.props.hidden || false
+            const propsHidden: boolean = child.props && child.props.hidden || false
             const hidden: boolean = isChildHidden(propsHidden, index)
-            const key = (isValidElement(child) && child.key) || index
+            const key: string | number | symbol = (isValidElement(child) && child.key) || index
             return { key: key, child: child, hidden: hidden }
         })
     }
 
-    function genColNodes (children: VNode[], callback: (node: VNode) => VNode) {
-        const nodes = createNodes(children)
-        const showNodes = nodes.filter((c) => !c.hidden)
-        const offset = getOffset(showNodes.length, unref(span))
-        const haveRow = unref(span) + offset === 24
-        return { nodes: map(nodes, callback), offset, haveRow }
+    function genColNodes (children: VNode[], iteratee: GenColNodesIteratee): GenColNodesResult {
+        const dealNodes: ColDealNode[] = createDealNodes(children)
+        const showNodes: ColDealNode[] = dealNodes.filter((c) => !c.hidden)
+        const offset: number = getOffset(showNodes.length, unref(span))
+        const haveRow: boolean = unref(span) + offset === 24
+        return { nodes: map(dealNodes, iteratee), offset, haveRow }
     }
 
-    function onStopHandle () {
+    function onStopHandle (): void {
         stopWatchCollapsed && stopWatchCollapsed()
     }
 

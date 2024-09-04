@@ -1,25 +1,20 @@
 <template>
-  <ProDrawerForm @form-ref="onFormRef" @after-close="onAfterClose">
-    <template v-slot:trigger>
-      <Button>点击</Button>
-    </template>
-    <ProText label="Text" :name="['data', 'text']" :style="{ padding: '14px' }">
-      <template v-slot:addonAfter></template>
-    </ProText>
-    <ProDateTime label="DateTime" :name="['data', 'dateTime']"/>
-  </ProDrawerForm>
+  <ProQueryFilter :label-width="90" :on-values-change="onValuesChange" :on-finish="onFinish">
+    <ProText name="aaa" label="ProText" :label-width="150"></ProText>
+    <ProText name="bbb" label="ProText" :label-width="100"></ProText>
+    <ProText :name="['ccc', 'ddd']" label="ProText"></ProText>
+  </ProQueryFilter>
 </template>
 
 <script setup lang="ts">
-  import { Button } from 'ant-design-vue'
-  import { DateTime as ProDateTime, ModalForm as ProDrawerForm, Text as ProText } from '../../src'
+  import { QueryFilter as ProQueryFilter, Text as ProText } from '../../src'
   
-  function onFormRef (el: any) {
-    console.log(el)
+  function onValuesChange (values: any) {
+    console.log(values)
   }
   
-  function onAfterClose () {
-    console.log()
+  function onFinish (values: any) {
+    console.log(values)
   }
 </script>
 
