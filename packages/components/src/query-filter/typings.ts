@@ -6,11 +6,6 @@ import { queryFilterActionsProps } from './Actions'
 
 export type QueryFilterLayout = 'horizontal' | 'vertical';
 
-export interface QueryFilterSpanConfig {
-    layout: QueryFilterLayout;
-    span: number;
-}
-
 export const queryFilterProps = () => ({
     ...baseFormProps(),
     ...queryFilterActionsProps(),
@@ -22,13 +17,17 @@ export const queryFilterProps = () => ({
         type: [Number, String] as PropType<'auto' | number>,
         default: undefined
     },
+    span: {
+        type: Number as PropType<number>,
+        default: undefined
+    },
+    compact: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
     defaultRowsNumber: {
         type: Number as PropType<number>,
         default: 1
-    },
-    getSpanConfig: {
-        type: Function as PropType<(layout: string, width: number) => QueryFilterSpanConfig>,
-        default: undefined
     },
     onFormRef: {
         type: Function as PropType<(el: BaseFormInstance | null) => void>,
