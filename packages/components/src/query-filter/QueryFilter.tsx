@@ -75,7 +75,7 @@ const QueryFilter = defineComponent({
                 const fieldNode: VNode = cloneVNode(child, {
                     labelWidth: fieldLabelWidth || labelWidth || sizeMD * 4
                 })
-                const colClass = { [`${prefixCls.value}-col-hidden`]: hidden }
+                const colClass: BaseClass = { [`${prefixCls.value}-col-hidden`]: hidden }
                 return (
                     <Col key={key} class={colClass} span={unref(span)}>
                         {() => fieldNode}

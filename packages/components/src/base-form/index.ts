@@ -1,4 +1,4 @@
-import BaseForm from './BaseForm.tsx'
+import BaseForm from './BaseForm'
 import type { BaseFormExpose, BaseFormInstance, BaseFormLayout, BaseFormModel, BaseFormProps } from './typings'
 import { baseFormProps } from './typings'
 import { createFromInstance, useFormInstance } from './hooks/useFormInstance'

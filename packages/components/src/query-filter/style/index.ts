@@ -1,14 +1,19 @@
+import type { CSSInterpolation, FullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, antCls, formItemVerticalMargin } = token
+interface ProQueryFilterToken extends FullToken<'ProQueryFilter'> {
+    proQueryFilterVerticalMargin: number;
+}
+
+function genBaseStyle (token: ProQueryFilterToken): CSSInterpolation {
+    const { componentCls, antCls, proQueryFilterVerticalMargin } = token
     return {
         [componentCls]: {
             [`${antCls}-form-item`]: {
                 marginBlock: 0
             },
             [`${componentCls}-form-item__vertical`]: {
-                marginBlockStart: formItemVerticalMargin
+                marginBlockStart: proQueryFilterVerticalMargin
             },
             [`${componentCls}-action-col`]: {
                 textAlign: 'end'
@@ -20,11 +25,13 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProQueryFilter', (token) => {
-    const formItemVerticalMargin = token.fontSize * token.lineHeight + token.sizeXS
+function styleFn (token: FullToken<'ProQueryFilter'>): CSSInterpolation {
+    const proQueryFilterVerticalMargin = token.fontSize * token.lineHeight + token.sizeXS
 
-    const queryFilterToken = mergeToken(token, {
-        formItemVerticalMargin
+    const proQueryFilterToken = mergeToken<ProQueryFilterToken>(token, {
+        proQueryFilterVerticalMargin
     })
-    return [genBaseStyle(queryFilterToken)]
-})
+    return genBaseStyle(proQueryFilterToken)
+}
+
+export default genComponentStyleHook('ProQueryFilter', styleFn)

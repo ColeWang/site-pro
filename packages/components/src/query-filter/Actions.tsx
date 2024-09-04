@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, HTMLAttributes } from 'vue'
+import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button, Space, theme } from 'ant-design-vue'
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'

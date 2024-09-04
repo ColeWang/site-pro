@@ -19,7 +19,7 @@ const breakpoints: Record<string, any[]> = {
     ]
 }
 
-// compact 紧凑模式
+// @todo compact 紧凑模式
 
 function getSpanConfig (layout: string, width: number): QueryFilterSpanConfig {
     const spanConfig = breakpoints[layout || 'horizontal']
@@ -43,7 +43,7 @@ function useSpanConfig (size: Ref<ResizeObserverRectSize>, props: QueryFilterPro
         span.value = spanConfig.span || 24
     })
 
-    function onStopHandle () {
+    function onStopHandle (): void {
         stopWatchSize && stopWatchSize()
     }
 
