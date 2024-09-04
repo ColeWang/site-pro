@@ -4,8 +4,8 @@ import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../resize-observer'
-import type { QueryFilterLayout, QueryFilterProps } from '../typings'
 import useBreakPoint from './useBreakPoint'
+import type { QueryFilterLayout, QueryFilterProps } from '../typings'
 
 interface ColDealNode {
     child: VNode;
