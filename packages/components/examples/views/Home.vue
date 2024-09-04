@@ -4,7 +4,9 @@
       <ProQueryFilter :loading="true" :show-collapse="true" :label-width="90" :on-values-change="onValuesChange" :on-finish="onFinish">
         <ProText name="aaa" label="ProText" :label-width="150"></ProText>
         <ProText name="bbb" label="ProText" :label-width="100"></ProText>
-        <ProText :name="['ccc', 'ddd']" label="ProText"></ProText>
+        <ProText :name="['ccc', 'ddd']" label="ProText">
+          <template v-slot:prefix>$</template>
+        </ProText>
       </ProQueryFilter>
     </LocaleProvider>
   </ConfigProvider>
