@@ -1,7 +1,7 @@
-import type { App, ComputedRef } from 'vue'
+import type { App, ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Checkbox } from 'ant-design-vue'
-import type { BaseOptionType } from '@site-pro/utils'
+import type { BaseEnumType, BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import type { FieldCheckboxFieldProps, FieldCheckboxSlots } from './typings'
@@ -25,8 +25,8 @@ const FieldCheckbox = defineComponent({
 
             if (mode === 'read') {
                 const { options: propsOptions } = fieldProps
-                const optionsValueEnum = optionsToEnum(propsOptions as any, {})
-                const valueText = enumToText(text, valueEnum || optionsValueEnum)
+                const optionsValueEnum: BaseEnumType = optionsToEnum(propsOptions as any, {})
+                const valueText: VNodeChild = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
             const needFieldProps: FieldCheckboxFieldProps = {

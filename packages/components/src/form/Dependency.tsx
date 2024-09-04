@@ -1,6 +1,6 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import type { BaseSlot, NamePath } from '@site-pro/utils'
+import type { NamePath } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
 import type { ColWrapperProps } from '../base-form'
@@ -25,7 +25,7 @@ const FormDependency = defineComponent({
     name: 'ProFormDependency',
     props: formDependencyProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     setup (props, { slots }) {
         const { formProps, getModelValue } = useFormInstance()

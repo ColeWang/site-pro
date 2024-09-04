@@ -16,8 +16,8 @@ const DrawerForm = defineComponent({
     name: 'ProDrawerForm',
     props: drawerFormProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
-        trigger?: BaseSlot;
+        default?: any;
+        trigger?: any;
     }>,
     emits: ['update:open', 'formRef', 'open', 'cancel', 'afterClose', 'openChange', 'loadingChange'],
     setup (props, { emit, slots, attrs, expose }) {

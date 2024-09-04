@@ -2,7 +2,7 @@ import type { App, Ref, SlotsType, VNode } from 'vue'
 import { cloneVNode, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import type { BaseSlot, RowProps } from '@site-pro/utils'
+import type { BaseClass, RowProps } from '@site-pro/utils'
 import { flattenChildren } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../resize-observer'
@@ -20,7 +20,7 @@ const QueryFilter = defineComponent({
     name: 'ProQueryFilter',
     props: queryFilterProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     emits: ['resize', 'collapse'],
     setup (props, { emit, slots, attrs, expose }) {
@@ -64,7 +64,7 @@ const QueryFilter = defineComponent({
             const { labelWidth, rowProps } = props
             const { sizeMD, sizeMS, sizeLG } = unref(token)
 
-            const children: VNode[] = flattenChildren(slots.default ? slots.default() as VNode[] : [])
+            const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child, hidden, key } = item
                 const fieldLabelWidth: number | 'auto' | undefined = child.props
@@ -72,7 +72,7 @@ const QueryFilter = defineComponent({
                     || (child.props as any).labelWidth
 
                 // 默认宽度 80px sizeMD * 4
-                const fieldNode = cloneVNode(child, {
+                const fieldNode: VNode = cloneVNode(child, {
                     labelWidth: fieldLabelWidth || labelWidth || sizeMD * 4
                 })
                 const colClass = { [`${prefixCls.value}-col-hidden`]: hidden }
@@ -103,7 +103,7 @@ const QueryFilter = defineComponent({
                 justify: 'start'
             }
 
-            const formItemClass = {
+            const formItemClass: BaseClass = {
                 [`${prefixCls.value}-form-item__vertical`]: unref(layout) === 'vertical' && !haveRow
             }
             const actionDom = (

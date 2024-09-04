@@ -1,4 +1,4 @@
-import type { App, Ref } from 'vue'
+import type { App, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
@@ -26,12 +26,12 @@ const FieldPassword = defineComponent({
         return () => {
             const { mode, text, emptyText, fieldProps } = props
             const { sizeXXS } = unref(token)
-            const placeholder = fieldProps.placeholder || t('inputPlaceholder')
+            const placeholder: string | number = fieldProps.placeholder || t('inputPlaceholder')!
 
             if (mode === 'read') {
                 if (isEmpty(text)) return emptyText
                 // --
-                const eyeIcon = unref(visible) ? <EyeOutlined/> : <EyeInvisibleOutlined/>
+                const eyeIcon: VNodeChild = unref(visible) ? <EyeOutlined/> : <EyeInvisibleOutlined/>
                 return (
                     <Space size={sizeXXS}>
                         <span>{unref(visible) ? text : '＊＊＊＊＊'}</span>

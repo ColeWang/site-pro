@@ -2,7 +2,6 @@ import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsTyp
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
-import type { BaseSlot } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ColWrapperProps } from '../base-form'
 import { ColWrapper, useFormInstance } from '../base-form'
@@ -23,11 +22,11 @@ const FormItem = defineComponent({
     name: 'ProFormItem',
     props: formItemProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
-        extra?: BaseSlot;
-        help?: BaseSlot;
-        label?: BaseSlot;
-        tooltip?: BaseSlot;
+        default?: any;
+        extra?: any;
+        help?: any;
+        label?: any;
+        tooltip?: any;
     }>,
     setup (props, { slots, attrs }) {
         const { formProps } = useFormInstance()

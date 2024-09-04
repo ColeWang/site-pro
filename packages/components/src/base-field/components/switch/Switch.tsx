@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -27,8 +27,8 @@ const FieldSwitch = defineComponent({
             const { value, checked, style, ...restFieldProps } = fieldProps
 
             if (mode === 'read') {
-                const open = getPropsSlot(slots, fieldProps, 'checkedChildren') ?? t('open')
-                const close = getPropsSlot(slots, fieldProps, 'unCheckedChildren') ?? t('close')
+                const open: VNodeChild = getPropsSlot(slots, fieldProps, 'checkedChildren') ?? t('open')
+                const close: VNodeChild = getPropsSlot(slots, fieldProps, 'unCheckedChildren') ?? t('close')
                 return text ? open : close
             }
             const needFieldProps: FieldSwitchFieldProps = {

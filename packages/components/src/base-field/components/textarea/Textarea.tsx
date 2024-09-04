@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, CSSProperties, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
 import { getSlotVNode, toPx } from '@site-pro/utils'
@@ -20,10 +20,10 @@ const FieldTextarea = defineComponent({
         return () => {
             const { mode, text, emptyText, fieldProps } = props
             const { fontSize, colorText, lineHeight, sizeXXS, sizeSM } = unref(token)
-            const placeholder = fieldProps.placeholder || t('inputPlaceholder')
+            const placeholder: string | number = fieldProps.placeholder || t('inputPlaceholder')!
 
             if (mode === 'read') {
-                const styles = {
+                const styles: CSSProperties = {
                     display: 'inline-block',
                     fontSize: toPx(fontSize),
                     color: colorText,

@@ -1,6 +1,7 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Cascader } from 'ant-design-vue'
+import type { BaseEnumType } from '@site-pro/utils'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldCascaderFieldProps, FieldCascaderSlots } from './typings'
@@ -16,12 +17,12 @@ const FieldCascader = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder = fieldProps.placeholder || t('selectPlaceholder')
+            const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
                 const { options: propsOptions, fieldNames } = fieldProps
-                const optionsValueEnum = optionsToEnum(propsOptions as any, fieldNames)
-                const valueText = enumToText(text, optionsValueEnum)
+                const optionsValueEnum: BaseEnumType = optionsToEnum(propsOptions as any, fieldNames)
+                const valueText: VNodeChild = enumToText(text, optionsValueEnum)
                 return valueText ?? emptyText
             }
             const needFieldProps: FieldCascaderFieldProps = {

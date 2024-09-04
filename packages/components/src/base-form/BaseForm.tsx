@@ -1,7 +1,7 @@
 import type { App, ComputedRef, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
-import type { BaseSlot, FormInstance, FormProps, NamePath, RowProps, ValidateErrorEntity } from '@site-pro/utils'
+import type { FormInstance, FormProps, NamePath, RowProps, ValidateErrorEntity } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
@@ -17,7 +17,7 @@ const BaseForm = defineComponent({
     name: 'ProBaseForm',
     props: baseFormProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     emits: ['submit', 'finish', 'finishFailed', 'reset', 'valuesChange'],
     setup (props, { emit, slots, attrs, expose }) {

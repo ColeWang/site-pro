@@ -1,7 +1,7 @@
-import type { App, ComputedRef } from 'vue'
+import type { App, ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Select } from 'ant-design-vue'
-import type { BaseOptionType } from '@site-pro/utils'
+import type { BaseEnumType, BaseOptionType } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
@@ -25,12 +25,12 @@ const FieldSelect = defineComponent({
 
         return () => {
             const { mode, text, emptyText, valueEnum, fieldProps } = props
-            const placeholder = fieldProps.placeholder || t('selectPlaceholder')
+            const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
                 const { options: propsOptions, fieldNames } = fieldProps
-                const optionsValueEnum = optionsToEnum(propsOptions as any, fieldNames)
-                const valueText = enumToText(text, valueEnum || optionsValueEnum)
+                const optionsValueEnum: BaseEnumType = optionsToEnum(propsOptions as any, fieldNames)
+                const valueText: VNodeChild = enumToText(text, valueEnum || optionsValueEnum)
                 return valueText ?? emptyText
             }
             const needFieldProps: FieldSelectFieldProps = {

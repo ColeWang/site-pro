@@ -1,7 +1,7 @@
 import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import type { BaseAttrs, BaseSlot, FormItemProps, NamePath } from '@site-pro/utils'
+import type { BaseAttrs, FormItemProps, NamePath } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { get, has, isArray, isString, merge, omit, pick } from 'lodash-es'
 import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
@@ -20,11 +20,11 @@ const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
 export type FieldSizeType = Extract<keyof typeof SIZE_ENUM, any> | number;
 
 export interface FieldSlots {
-    default?: BaseSlot;
-    extra?: BaseSlot;
-    help?: BaseSlot;
-    label?: BaseSlot;
-    tooltip?: BaseSlot;
+    default?: any;
+    extra?: any;
+    help?: any;
+    label?: any;
+    tooltip?: any;
 }
 
 export const fieldProps = () => ({

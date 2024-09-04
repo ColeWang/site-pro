@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { TimePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -18,16 +18,16 @@ const FieldTimePicker = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder = fieldProps.placeholder || t('selectPlaceholder')
+            const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
-                const valueText = formatDate(text, fieldProps.format as CustomFormat)
+                const valueText: VNodeChild = formatDate(text, fieldProps.format as CustomFormat)
                 return valueText ?? emptyText
             }
             const needFieldProps: FieldTimePickerFieldProps = {
                 allowClear: true,
                 ...fieldProps,
-                placeholder: placeholder as any
+                placeholder: placeholder
             }
             const fieldDom = <TimePicker {...needFieldProps} v-slots={slots}/>
             // ----

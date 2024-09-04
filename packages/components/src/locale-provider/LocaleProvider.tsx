@@ -1,6 +1,5 @@
 import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, provide, ref, watch } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { LocaleProviderExpose, LocaleType } from './typings'
 import { localeProviderProps } from './typings'
 import { LocaleReceiverKey } from './hooks/useLocaleReceiver'
@@ -10,7 +9,7 @@ const LocaleProvider = defineComponent({
     name: 'ProLocaleProvider',
     props: localeProviderProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     setup (props, { slots, expose }) {
         const locale: Ref<LocaleType> = ref({ ...props.locale })

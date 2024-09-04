@@ -19,7 +19,7 @@ const FieldTimeRangePicker = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder = fieldProps.placeholder || [t('selectPlaceholder'), t('selectPlaceholder')]
+            const placeholder: [string, string] = fieldProps.placeholder || [t('selectPlaceholder')!, t('selectPlaceholder')!]
 
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : []
@@ -36,7 +36,7 @@ const FieldTimeRangePicker = defineComponent({
             const needFieldProps: FieldTimeRangePickerFieldProps = {
                 allowClear: true,
                 ...fieldProps,
-                placeholder: placeholder as any
+                placeholder: placeholder
             }
             const fieldDom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
             // ----

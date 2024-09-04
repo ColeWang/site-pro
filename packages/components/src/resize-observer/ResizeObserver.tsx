@@ -1,6 +1,5 @@
 import type { App, Ref, SlotsType } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
 import type { ResizeObserverRectSize } from './typings'
@@ -11,7 +10,7 @@ const ResizeObserver = defineComponent({
     name: 'ProResizeObserver',
     props: resizeObserverProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     emits: ['resize'],
     setup (props, { emit, slots, attrs }) {

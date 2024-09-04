@@ -1,5 +1,4 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFieldFieldProps } from '../../typings'
 import { baseFieldProps } from '../../typings'
 

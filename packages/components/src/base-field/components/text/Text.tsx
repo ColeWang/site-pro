@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
 import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -16,11 +16,11 @@ const FieldText = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder = fieldProps.placeholder || t('inputPlaceholder')
+            const placeholder: string | number = fieldProps.placeholder || t('inputPlaceholder')!
 
             if (mode === 'read') {
-                const prefixDom = getPropsSlot(slots, fieldProps, 'prefix')
-                const suffixDom = getPropsSlot(slots, fieldProps, 'suffix')
+                const prefixDom: VNodeChild = getPropsSlot(slots, fieldProps, 'prefix')
+                const suffixDom: VNodeChild = getPropsSlot(slots, fieldProps, 'suffix')
                 return (
                     <Fragment>
                         {prefixDom}

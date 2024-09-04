@@ -2,7 +2,7 @@ import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsTyp
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
-import type { BaseSlot, RowProps } from '@site-pro/utils'
+import type { RowProps } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 
 export const rowWrapperProps = () => ({
@@ -21,7 +21,7 @@ const RowWrapper = defineComponent({
     name: 'ProRowWrapper',
     props: rowWrapperProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     setup (props, { slots }) {
         return () => {

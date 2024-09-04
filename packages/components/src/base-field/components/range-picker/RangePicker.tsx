@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { RangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -19,12 +19,12 @@ const FieldRangePicker = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder = fieldProps.placeholder || [t('selectPlaceholder'), t('selectPlaceholder')]
+            const placeholder: [string, string] = fieldProps.placeholder || [t('selectPlaceholder')!, t('selectPlaceholder')!]
 
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : []
-                const valueStartText = formatDate(startText, fieldProps.format as CustomFormat)
-                const valueEndText = formatDate(endText, fieldProps.format as CustomFormat)
+                const valueStartText: VNodeChild = formatDate(startText, fieldProps.format as CustomFormat)
+                const valueEndText: VNodeChild = formatDate(endText, fieldProps.format as CustomFormat)
                 return (
                     <Fragment>
                         {valueStartText ?? emptyText}

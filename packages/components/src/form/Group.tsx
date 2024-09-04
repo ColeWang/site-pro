@@ -40,8 +40,8 @@ const FormGroup = defineComponent({
     name: 'ProFormGroup',
     props: formGroupProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
-        title?: BaseSlot;
+        default?: any;
+        title?: any;
     }>,
     setup (props, { slots, attrs }) {
         const { token } = theme.useToken()

@@ -2,7 +2,7 @@ import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsTyp
 import { defineComponent } from 'vue'
 import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
-import type { BaseSlot, ColProps } from '@site-pro/utils'
+import type { ColProps } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 
 export const colWrapperProps = () => ({
@@ -25,7 +25,7 @@ const ColWrapper = defineComponent({
     name: 'ProColWrapper',
     props: colWrapperProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     setup (props, { slots }) {
         return () => {

@@ -1,6 +1,5 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
-import type { BaseSlot } from '@site-pro/utils'
 import type { BaseFormInstance, BaseFormLayout, BaseFormProps } from '../base-form'
 import { BaseForm, baseFormProps } from '../base-form'
 
@@ -24,7 +23,7 @@ const Form = defineComponent({
     name: 'ProForm',
     props: formProps(),
     slots: Object as SlotsType<{
-        default?: BaseSlot;
+        default?: any;
     }>,
     emits: ['formRef'],
     setup (props, { emit, slots, attrs }) {

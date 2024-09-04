@@ -1,6 +1,6 @@
 import type { App, ComputedRef } from 'vue'
-import { computed, defineComponent, provide } from 'vue'
-import { BaseFieldProviderKey } from './hooks/useBaseFieldProvider'
+import { computed, defineComponent, provide, unref } from 'vue'
+import useBaseFieldProvider, { BaseFieldProviderKey } from './hooks/useBaseFieldProvider'
 import type { BaseFieldProviderExpose, BaseFieldProviderValueTypeMap } from './typings'
 import { baseFieldProviderProps } from './typings'
 
@@ -9,8 +9,10 @@ const BaseFieldProvider = defineComponent({
     name: 'ProBaseFieldProvider',
     props: baseFieldProviderProps(),
     setup (props, { slots, expose }) {
+        const { valueTypeMap: parentValueTypeMap } = useBaseFieldProvider()
+
         const valueTypeMap: ComputedRef<BaseFieldProviderValueTypeMap> = computed(() => {
-            return props.valueTypeMap
+            return { ...unref(parentValueTypeMap), ...props.valueTypeMap }
         })
 
         const baseFieldProviderExpose: BaseFieldProviderExpose = {
