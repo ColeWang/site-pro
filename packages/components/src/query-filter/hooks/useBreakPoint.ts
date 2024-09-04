@@ -68,7 +68,7 @@ function getBreakPointConfig (width: number, props: QueryFilterProps): GetBreakP
 
     const breakPointsConfig: BreakPointsConfig = compact ? COMPACT_BREAK_POINTS_CONFIG : BREAK_POINTS_CONFIG
 
-    const breakPoints: QueryFilterBreakPoint[] = propsBreakPoints || breakPointsConfig[layout || 'horizontal']
+    const breakPoints: QueryFilterBreakPoint[] = propsBreakPoints || breakPointsConfig[layout!]
     const breakPoint: QueryFilterBreakPoint = breakPoints.find((item) => width < item[0])!
     return { span: breakPoint[1], layout: breakPoint[2] }
 }

@@ -130,7 +130,7 @@ export default defineComponent({
             const data = getQueryData && getQueryData()
             const exportParams = {
                 pageData: requestProps.dataSource,
-                tableElement: unref(tableRef),
+                tableEl: unref(tableRef),
                 queryData: data || {}
             }
             emit('export', exportParams)
