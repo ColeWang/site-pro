@@ -1,18 +1,39 @@
-import type { Ref, ComputedRef, VNode } from 'vue'
+import type { ComputedRef, Ref, VNode } from 'vue'
 import { computed, ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import { flattenChildren, isValidElement } from '@site-pro/utils'
+import { isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../resize-observer'
-import type { QueryFilterProps } from '../typings'
+import type { QueryFilterProps, QueryFilterLayout } from '../typings'
 import useSpanConfig from './useSpanConfig'
 
-function getOffset (length: number, span: number) {
+interface GenColNodesCallback {
+    (node: VNode): VNode;
+}
+
+interface GenColNodesResult {
+    nodes: VNode[];
+    offset: number;
+    haveRow: boolean;
+}
+
+interface UseQueryFilterResult {
+    layout: Ref<QueryFilterLayout>;
+    span: Ref<number>;
+    collapsed: Ref<boolean>;
+    setCollapse: (value: boolean) => void;
+    genColNodes: (children: VNode[], callback: GenColNodesCallback) => void;
+}
+
+function getOffset (length: number, span: number): number {
     const cols = 24 / span
     return (cols - 1 - (length % cols)) * span
 }
 
-function useQueryFilter (size: Ref<ResizeObserverRectSize>, props: QueryFilterProps) {
+function useQueryFilter (
+    size: Ref<ResizeObserverRectSize>,
+    props: QueryFilterProps
+): UseQueryFilterResult {
     const { showCollapse } = props
 
     const { layout, span } = useSpanConfig(size, props)
@@ -50,8 +71,7 @@ function useQueryFilter (size: Ref<ResizeObserverRectSize>, props: QueryFilterPr
     }
 
     function genColNodes (children: VNode[], callback: (node: VNode) => VNode) {
-        const validChildren = flattenChildren(children || [])
-        const nodes = createNodes(validChildren)
+        const nodes = createNodes(children)
         const showNodes = nodes.filter((c) => !c.hidden)
         const offset = getOffset(showNodes.length, unref(span))
         const haveRow = unref(span) + offset === 24

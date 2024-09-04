@@ -10,7 +10,6 @@ export interface QueryFilterSpanConfig {
     span: number;
 }
 
-
 export const queryFilterProps = () => ({
     ...baseFormProps(),
     ...queryFilterActionsProps(),

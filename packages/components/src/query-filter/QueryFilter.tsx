@@ -1,5 +1,5 @@
 import type { App, Ref, VNode } from 'vue'
-import { defineComponent, ref, unref } from 'vue'
+import { defineComponent, ref, unref, cloneVNode } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { RowProps } from '@site-pro/utils'
@@ -12,7 +12,6 @@ import { BaseForm } from '../base-form'
 import type { QueryFilterActionsProps } from './Actions'
 import Actions from './Actions'
 import useQueryFilter from './hooks/useQueryFilter'
-import { genFormItemFixStyle } from '../share-utils'
 import { queryFilterProps } from './typings'
 import useStyle from './style'
 
@@ -62,10 +61,7 @@ const QueryFilter = defineComponent({
             const { labelWidth, rowProps } = props
             const { sizeMD, sizeMS, sizeLG } = unref(token)
 
-            const formItemProps = genFormItemFixStyle(labelWidth || sizeMD * 4, unref(layout))
-            const slotScope = { layout: unref(layout), props: formItemProps }
-
-            const children: VNode[] = flattenChildren(slots.default ? slots.default(slotScope) : [])
+            const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child: fieldNode, hidden, key } = item || {}
                 const colClass = { [`${prefixCls.value}-col-hidden`]: hidden }

@@ -1,12 +1,11 @@
 import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import type { BaseSlot, NamePath } from '@site-pro/utils'
+import type { BaseAttrs, BaseSlot, FormItemProps, NamePath } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { has, isArray, isNumber, isString, merge, omit, pick } from 'lodash-es'
-import type { ColWrapperProps } from '../../base-form'
+import { get, has, isArray, isString, merge, omit, pick } from 'lodash-es'
+import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
 import { ColWrapper, useFormInstance } from '../../base-form'
-import { genFormItemFixStyle } from '../../share-utils'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
 
@@ -51,29 +50,43 @@ export const fieldProps = () => ({
 export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>>;
 export type FieldInstance = ComponentPublicInstance<FieldProps>;
 
-function fieldStyle (
+function genFieldStyle (
     style: CSSProperties | undefined,
     fieldWidth: FieldSizeType,
     sizeEnum: Record<string, number>
 ): CSSProperties {
     const { maxWidth, minWidth, width, ...restStyle } = style || {}
-    const fieldSize: string | undefined = isNumber(fieldWidth)
-        ? toPx(fieldWidth)
-        : toPx(sizeEnum[fieldWidth])
+    const fieldSize: number | undefined = isString(fieldWidth)
+        ? get(sizeEnum, fieldWidth)
+        : fieldWidth
 
     return {
         ...restStyle,
         maxWidth: maxWidth || '100%',
         minWidth: minWidth || toPx(sizeEnum['xs']),
-        width: width || fieldSize || '100%'
+        width: width || toPx(fieldSize) || '100%'
     }
+}
+
+function genFormItemLabelWidth (
+    labelWidth: 'auto' | number | undefined,
+    layout: BaseFormLayout
+): FormItemProps & BaseAttrs {
+    if (labelWidth && layout !== 'vertical' && labelWidth !== 'auto') {
+        return {
+            labelCol: { flex: `0 0 ${labelWidth}px` },
+            wrapperCol: { style: { maxWidth: `calc(100% - ${labelWidth}px)` } },
+            style: { flexWrap: 'nowrap' }
+        }
+    }
+    return {}
 }
 
 const Field = defineComponent({
     inheritAttrs: false,
     name: 'ProField',
     props: fieldProps(),
-    slots: Object as SlotsType<SlotsType<FieldSlots>>,
+    slots: Object as SlotsType<FieldSlots>,
     setup (props, { slots }) {
         const SLOTS_KEYS: string[] = ['extra', 'help', 'label', 'tooltip']
 
@@ -98,12 +111,12 @@ const Field = defineComponent({
             const { fieldProps, formItemProps, width: fieldWidth, labelWidth, hidden, colProps } = props
             const { layout, grid } = unref(formProps) || {}
 
-            const extraFormItemProps: any = genFormItemFixStyle(labelWidth, layout || 'vertical')
+            const extraFormItemProps: BaseFieldFormItemProps = genFormItemLabelWidth(labelWidth, layout || 'vertical')
             const key: string = namePathToString(formItemProps.name!)
 
             const needFieldProps: any = {
                 ...fieldProps,
-                style: fieldStyle(fieldProps.style, fieldWidth!, SIZE_ENUM),
+                style: genFieldStyle(fieldProps.style, fieldWidth!, SIZE_ENUM),
                 ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
             }
 
