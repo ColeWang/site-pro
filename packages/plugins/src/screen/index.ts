@@ -1,22 +1,30 @@
 import { App, ObjectPlugin } from 'vue'
-
-import { addClass, addEvt, getWindowSize, removeClass } from '@site-pro/utils'
+import { addClass, addWindowEvt, getWindowSize, removeClass } from '@site-pro/utils'
 import { debounce, pick } from 'lodash-es'
 import { createReactivePlugin } from '../plugin-utils'
 
-const SIZE_LIST: ['sm', 'md', 'lg', 'xl', 'xxl'] = ['sm', 'md', 'lg', 'xl', 'xxl']
+type ScreenName = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
-interface State extends Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl', boolean> {
-    name: string;
+interface ScreenInstallOptions {
+    sizes: Record<Exclude<ScreenName, 'xs'>, number>;
+    delay: number;
+    classes: boolean;
+    $site?: any;
+}
+
+const SCREEN_SIZE_LIST: Exclude<ScreenName, 'xs'>[] = ['sm', 'md', 'lg', 'xl', 'xxl']
+
+interface State extends Record<ScreenName, boolean> {
+    name: ScreenName;
     width: number;
     height: number;
-    sizes: Record<'sm' | 'md' | 'lg' | 'xl' | 'xxl', number>;
-    lt: Record<'sm' | 'md' | 'lg' | 'xl' | 'xxl', boolean>;
-    gt: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', boolean>;
+    sizes: Record<Exclude<ScreenName, 'xs'>, number>;
+    lt: Record<Exclude<ScreenName, 'xs'>, boolean>;
+    gt: Record<Exclude<ScreenName, 'xxl'>, boolean>;
 }
 
 interface Plugin extends ObjectPlugin {
-    install: (this: State & Plugin, app: App, options: any, $site: any) => App;
+    install: (this: State & Plugin, app: App, options: ScreenInstallOptions) => App;
 }
 
 const state: State = {
@@ -53,31 +61,30 @@ const state: State = {
 }
 
 const plugin: Plugin = {
-    install (this: State & Plugin, app, options, $site) {
-        const { sizes = {}, delay = 16, classes } = options || {}
+    install (this: State & Plugin, app: App, options?: ScreenInstallOptions) {
+        const { sizes, delay, classes, $site } = options || {}
 
         $site && ($site.screen = this)
 
-        this.sizes = pick({ ...this.sizes, ...sizes }, SIZE_LIST)
+        this.sizes = pick({ ...this.sizes, ...sizes }, SCREEN_SIZE_LIST)
 
         const update = () => {
             const [width, height] = getWindowSize()
-            const { sizes } = this
 
             this.width = width
             this.height = height
 
-            this.lt.sm = width < sizes.sm
-            this.lt.md = width < sizes.md
-            this.lt.lg = width < sizes.lg
-            this.lt.xl = width < sizes.xl
-            this.lt.xxl = width < sizes.xxl
+            this.lt.sm = width < this.sizes.sm
+            this.lt.md = width < this.sizes.md
+            this.lt.lg = width < this.sizes.lg
+            this.lt.xl = width < this.sizes.xl
+            this.lt.xxl = width < this.sizes.xxl
 
-            this.gt.xs = width >= sizes.sm
-            this.gt.sm = width >= sizes.md
-            this.gt.md = width >= sizes.lg
-            this.gt.lg = width >= sizes.xl
-            this.gt.xl = width >= sizes.xxl
+            this.gt.xs = width >= this.sizes.sm
+            this.gt.sm = width >= this.sizes.md
+            this.gt.md = width >= this.sizes.lg
+            this.gt.lg = width >= this.sizes.xl
+            this.gt.xl = width >= this.sizes.xxl
 
             this.xs = this.lt.sm
             this.sm = this.gt.xs && this.lt.md
@@ -86,7 +93,7 @@ const plugin: Plugin = {
             this.xl = this.gt.lg && this.lt.xxl
             this.xxl = this.gt.xl
 
-            const name = (this.xs && 'xs')
+            const name: ScreenName = (this.xs && 'xs')
                 || (this.sm && 'sm')
                 || (this.md && 'md')
                 || (this.lg && 'lg')
@@ -102,9 +109,10 @@ const plugin: Plugin = {
             }
         }
 
-        const updateEvent = debounce(update, delay)
+        const updateEvent = debounce(update, delay || 16)
+
         // @todo visualViewport
-        addEvt(window as unknown as HTMLElement, 'resize', updateEvent, { passive: true })
+        addWindowEvt('resize', updateEvent, { passive: true })
 
         update()
 
