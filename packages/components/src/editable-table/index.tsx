@@ -1,7 +1,7 @@
 import { defineComponent, reactive, unref, watch } from 'vue'
 import { theme } from 'ant-design-vue'
 import { Field, Form } from '../form'
-import Table from '../table'
+import { Table } from '../table'
 import InlineError from './components/inline-error'
 import { get, pick, set, unset } from 'lodash-es'
 

@@ -2,7 +2,7 @@ import { defineComponent, Fragment, ref, unref } from 'vue'
 import { ConfigProvider, Space, theme } from 'ant-design-vue'
 import { getSlotVNode, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { Action } from '../../components'
+import { Action } from '../../../action'
 import { useLocaleReceiver } from '../../../locale-provider'
 import useStyle from './style'
 

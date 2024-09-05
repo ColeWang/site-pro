@@ -1,7 +1,7 @@
 import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
 import { flattenChildren, isValidElement } from '@site-pro/utils'
-import { QueryFilter } from '../../../form'
+import { QueryFilter } from '../../../query-filter'
 import { merge, pick } from 'lodash-es'
 
 export default defineComponent({
