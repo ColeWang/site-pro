@@ -57,7 +57,7 @@ const state: State = {
 }
 
 const plugin: Plugin = {
-    request (this: State & Plugin, target?: HTMLElement) {
+    request (this: State & Plugin, target?: HTMLElement): Promise<void> {
         const el: HTMLElement = target || document.documentElement
         if (this.activeEl === el) return Promise.resolve()
         // --
@@ -67,13 +67,13 @@ const plugin: Plugin = {
 
         return result.finally(() => promisify(el, native.request))
     },
-    exit (this: State & Plugin) {
+    exit (this: State & Plugin): Promise<void> {
         return this.isActive ? promisify(document, native.exit) : Promise.resolve()
     },
-    toggle (this: State & Plugin, target?: HTMLElement) {
+    toggle (this: State & Plugin, target?: HTMLElement): Promise<void> {
         return this.isActive ? this.exit() : this.request(target)
     },
-    install (this: State & Plugin, app: App, options?: FullscreenInstallOptions) {
+    install (this: State & Plugin, app: App, options?: FullscreenInstallOptions): App {
         const { $site } = options || {}
 
         $site && ($site.fullscreen = this)

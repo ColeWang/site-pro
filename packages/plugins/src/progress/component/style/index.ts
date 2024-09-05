@@ -1,6 +1,11 @@
-import { genComponentStyleHook } from '@site-pro/components'
+import type { CSSInterpolation, FullToken } from '@site-pro/components'
+import { genComponentStyleHook, mergeToken } from '@site-pro/components'
 
-function genBaseStyle (token) {
+interface ProPluginProgressToken extends FullToken<'ProPluginProgress'> {
+    // --
+}
+
+function genBaseStyle (token: ProPluginProgressToken): CSSInterpolation {
     const { componentCls } = token
     return {
         [componentCls]: {
@@ -18,6 +23,9 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProProgress', (token) => {
-    return [genBaseStyle(token)]
-})
+function styleFn (token: FullToken<'ProPluginProgress'>): CSSInterpolation {
+    const proPluginProgressToken = mergeToken<ProPluginProgressToken>(token, {})
+    return genBaseStyle(proPluginProgressToken)
+}
+
+export default genComponentStyleHook('ProPluginProgress', styleFn)

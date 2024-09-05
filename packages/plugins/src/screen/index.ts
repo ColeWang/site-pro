@@ -59,7 +59,7 @@ const state: State = {
 }
 
 const plugin: Plugin = {
-    install (this: State & Plugin, app: App, options?: ScreenInstallOptions) {
+    install (this: State & Plugin, app: App, options?: ScreenInstallOptions): App {
         const { sizes: optionsSizes, delay, classes, $site } = options || {}
 
         $site && ($site.screen = this)

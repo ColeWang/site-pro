@@ -13,7 +13,7 @@ interface LoadingInstallOptions extends PluginLoadingProps {
 
 const container: HTMLElement = createDocumentFragment('site-loading')
 let instance: VNode | null = null
-let configOptions: LoadingInstallOptions = {}
+let configOptions: Omit<LoadingInstallOptions, '$site'> = {}
 let configProps: PluginLoadingProps = {}
 
 interface State {
@@ -25,7 +25,7 @@ interface Plugin extends ObjectPlugin {
     hide: (this: State & Plugin, config: PluginLoadingProps) => void;
     update: (props: PluginLoadingProps) => void;
     destroy: () => void;
-    render: (props: PluginLoadingProps, options: LoadingInstallOptions) => VNode | null;
+    render: (props: PluginLoadingProps, options: Omit<LoadingInstallOptions, '$site'>) => VNode | null;
     install: (this: State & Plugin, app: App, options: LoadingInstallOptions) => App;
 }
 
@@ -34,13 +34,13 @@ const state: State = {
 }
 
 const plugin: Plugin = {
-    show (this: State & Plugin) {
+    show (this: State & Plugin): void {
         instance = this.render(configProps, configOptions)
         // --
         this.isActive = true
         this.update({ visible: true })
     },
-    hide (this: State & Plugin, config: PluginLoadingProps) {
+    hide (this: State & Plugin, config: PluginLoadingProps): void {
         if (!this.isActive) return
         // 动画结束
         const onAfterClose = () => {
@@ -50,24 +50,24 @@ const plugin: Plugin = {
         }
         this.update({ visible: false, onAfterClose })
     },
-    update (props: PluginLoadingProps) {
+    update (props: PluginLoadingProps): void {
         if (!container || !instance) return
         const nextVNode: VNode = cloneVNode(instance, { ...configProps, ...props })
         vueRender(nextVNode, container)
     },
-    destroy () {
+    destroy (): void {
         if (!container || !instance) return
         vueRender(null, container)
         instance = null
     },
-    render (props: PluginLoadingProps, options: LoadingInstallOptions): VNode | null {
+    render (props: PluginLoadingProps, options: Omit<LoadingInstallOptions, '$site'>): VNode | null {
         if (!container) return null
         const vm: VNode = createVNode(PluginLoading, { ...props })
         vm.appContext = options.parentContext || options.appContext || vm.appContext
         vueRender(vm, container)
         return vm
     },
-    install (this: State & Plugin, app: App, options?: LoadingInstallOptions) {
+    install (this: State & Plugin, app: App, options?: LoadingInstallOptions): App {
         const { $site } = options || {}
 
         $site && ($site.loading = this)

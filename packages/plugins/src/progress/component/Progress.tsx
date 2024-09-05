@@ -1,17 +1,14 @@
 import { defineComponent } from 'vue'
 import { useConfigInject } from '@site-pro/hooks'
+import { pluginProgressProps } from './typings'
 import useStyle from './style'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        style: {
-            type: Object,
-            default: () => ({})
-        }
-    },
+    name: 'ProPluginProgress',
+    props: pluginProgressProps(),
     setup (props, { attrs }) {
-        const { prefixCls } = useConfigInject('pro-progress', props)
+        const { prefixCls } = useConfigInject('pro-plugin-progress', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
 
         return () => {
