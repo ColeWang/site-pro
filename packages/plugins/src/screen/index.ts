@@ -1,14 +1,34 @@
-import { addEvt, addClass, getWindowSize, removeClass } from '@site-pro/utils'
+import { App } from 'vue'
+
+import { addClass, addEvt, getWindowSize, removeClass } from '@site-pro/utils'
 import { debounce, pick } from 'lodash-es'
 import { createReactivePlugin } from '../plugin-utils'
 
+interface State {
+    name: string;
+    width: number;
+    height: number;
+    sizes: any;
+    lt: any;
+    gt: any;
+    xs: any;
+    sm: any;
+    md: any;
+    lg: any;
+    xl: any;
+    xxl: any;
+}
+
+interface Plugin {
+    install: (this: State & Plugin, app: App, options: any, $site: any) => void;
+}
+
 const SIZE_LIST = ['sm', 'md', 'lg', 'xl', 'xxl']
 
-
-const state = {
+const state: State = {
+    name: 'xs',
     width: 0,
     height: 0,
-    name: 'xs',
     sizes: {
         sm: 576,
         md: 768,
@@ -38,8 +58,8 @@ const state = {
     xxl: false
 }
 
-const plugin = {
-    install (this: typeof state, app, options, $site) {
+const plugin: Plugin = {
+    install (this: State & Plugin, app, options, $site) {
         const { sizes = {}, delay = 16, classes } = options || {}
 
         $site && ($site.screen = this)

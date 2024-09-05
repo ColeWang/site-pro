@@ -17,7 +17,7 @@ export type BaseRefType = HTMLElement | ComponentPublicInstance | null;
 export type BaseClass = string | Recordable<boolean> | Array<BaseClass>;
 
 export interface BaseSlot<T extends any = any> {
-    (...args: IfAny<T, any[], [T] | (T extends undefined ? [] : never)>): VNodeChild | JSX.Element;
+    (...args: IfAny<T, any[], [T] | (T extends undefined ? [] : never)>): VNodeChild;
 }
 
 export interface BaseAttrs extends Recordable {

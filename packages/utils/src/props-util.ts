@@ -29,7 +29,7 @@ export function getSlot<T = any, Slot = BaseSlot<T>> (
     return isFunction(result) ? result as Slot : false
 }
 
-export function getSlotVNode<T = VNodeChild | JSX.Element> (
+export function getSlotVNode<T extends VNodeChild> (
     slots: Recordable,
     props: Recordable,
     name: string = 'default',
@@ -39,7 +39,7 @@ export function getSlotVNode<T = VNodeChild | JSX.Element> (
     return isFunction(result) ? result(slotScope) as T : false
 }
 
-export function getPropsSlot<T = VNodeChild | JSX.Element> (
+export function getPropsSlot<T extends VNodeChild> (
     slots: Recordable,
     props: Recordable,
     name: string = 'default',
