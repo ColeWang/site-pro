@@ -12,8 +12,6 @@ interface ScreenInstallOptions {
     $site?: any;
 }
 
-const SCREEN_SIZE_LIST: Exclude<ScreenName, 'xs'>[] = ['sm', 'md', 'lg', 'xl', 'xxl']
-
 interface State extends Record<ScreenName, boolean> {
     name: ScreenName;
     width: number;
@@ -62,11 +60,11 @@ const state: State = {
 
 const plugin: Plugin = {
     install (this: State & Plugin, app: App, options?: ScreenInstallOptions) {
-        const { sizes, delay, classes, $site } = options || {}
+        const { sizes: optionsSizes, delay, classes, $site } = options || {}
 
         $site && ($site.screen = this)
 
-        this.sizes = pick({ ...this.sizes, ...sizes }, SCREEN_SIZE_LIST)
+        this.sizes = pick({ ...this.sizes, ...optionsSizes }, ['sm', 'md', 'lg', 'xl', 'xxl'])
 
         const update = () => {
             const [width, height] = getWindowSize()
@@ -111,7 +109,6 @@ const plugin: Plugin = {
 
         const updateEvent = debounce(update, delay || 16)
 
-        // @todo visualViewport
         addWindowEvt('resize', updateEvent, { passive: true })
 
         update()
