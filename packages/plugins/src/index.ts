@@ -14,7 +14,7 @@ interface BaseSitePlugins extends ObjectPlugin {
     name: string;
 }
 
-interface BaseSiteOptions {
+interface BaseSitePluginsOptions {
     fullscreen?: FullscreenPluginInstallOptions;
     loading?: LoadingPluginInstallOptions;
     progress?: ProgressPluginInstallOptions;
@@ -28,15 +28,15 @@ interface BaseDefaultPlugins {
     screen: ScreenState & ScreenPlugin;
 }
 
-interface BaseSiteExpose extends BaseDefaultPlugins {
+interface BaseSitePluginsExpose extends BaseDefaultPlugins {
     name: string;
     version: string;
-    options: BaseSiteOptions;
+    options: BaseSitePluginsOptions;
 }
 
 const version: string = __VERSION__
 
-const SiteInstanceKey: InjectionKey<BaseSiteExpose> = Symbol('SitePro')
+const SitePluginsInstanceKey: InjectionKey<BaseSitePluginsExpose> = Symbol('SitePlugins')
 
 const defaultPlugins: BaseDefaultPlugins = {
     fullscreen: Fullscreen,
@@ -45,15 +45,15 @@ const defaultPlugins: BaseDefaultPlugins = {
     screen: Screen
 }
 
-function install (app: App, options: BaseSiteOptions) {
-    const $site: Partial<BaseSiteExpose> = {
-        name: 'site-pro',
+function install (app: App, options: BaseSitePluginsOptions) {
+    const $site: Partial<BaseSitePluginsExpose> = {
+        name: 'site-plugins',
         version: version,
         options: options
     }
 
     app.config.globalProperties.$site = $site
-    app.provide(SiteInstanceKey, $site as BaseSiteExpose)
+    app.provide(SitePluginsInstanceKey, $site as BaseSitePluginsExpose)
 
     Object.keys(defaultPlugins).forEach((name) => {
         // fix: the context of type is not assignable to method's this of type
@@ -65,19 +65,19 @@ function install (app: App, options: BaseSiteOptions) {
 }
 
 // 默认有值 避免使用时多余的判断
-function useSite (): BaseSiteExpose {
-    return inject(SiteInstanceKey, {} as BaseSiteExpose)
+function useSite (): BaseSitePluginsExpose {
+    return inject(SitePluginsInstanceKey, {} as BaseSitePluginsExpose)
 }
 
-function createSite (options: BaseSiteOptions = {}): BaseSitePlugins {
+function createSite (options: BaseSitePluginsOptions = {}): BaseSitePlugins {
     const installExtend = (app: App) => {
         install(app, { ...options })
     }
-    return { name: 'site-pro', install: installExtend }
+    return { name: 'site-plugins', install: installExtend }
 }
 
 export { version }
 export { useSite, createSite }
 export { Fullscreen, Loading, Progress, Screen }
 
-export type { BaseSitePlugins, BaseSiteOptions, BaseSiteExpose }
+export type { BaseSitePlugins, BaseSitePluginsOptions, BaseSitePluginsExpose }
