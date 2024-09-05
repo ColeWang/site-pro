@@ -1,6 +1,6 @@
 import type { ObjectPlugin, Reactive } from 'vue'
 import { reactive } from 'vue'
-
+import type { Recordable } from '@site-pro/utils'
 
 export function createDocumentFragment (id?: string): HTMLElement {
     const container: HTMLElement = document.createElement('div')
@@ -9,20 +9,22 @@ export function createDocumentFragment (id?: string): HTMLElement {
     return container
 }
 
-export function createReactivePlugin<S extends Record<string, any>, P extends Record<any, any> & ObjectPlugin> (state: S, plugin: P): P {
-    const pluginState: Reactive<S> = reactive(state)
+export function createReactivePlugin<T extends Recordable, P extends ObjectPlugin> (state: T, plugin: P): T & P {
+    const pluginState: Reactive<T> = reactive(state)
 
     for (const name in pluginState) {
-        Object.defineProperty(plugin, name, {
-            enumerable: true,
-            get () {
-                return pluginState[name]
-            },
-            set (value) {
-                pluginState[name] = value
-            }
-        })
+        if (Object.hasOwnProperty.bind(pluginState, name)) {
+            Object.defineProperty(plugin, name, {
+                enumerable: true,
+                get (): T[keyof T] {
+                    return pluginState[name]
+                },
+                set (value: T[keyof T]): void {
+                    pluginState[name] = value
+                }
+            })
+        }
     }
 
-    return plugin as P
+    return plugin as T & P
 }

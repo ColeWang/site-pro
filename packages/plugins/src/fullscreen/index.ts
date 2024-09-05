@@ -1,4 +1,4 @@
-import { createReactivePlugin } from '../../utils/create'
+import { createReactivePlugin } from '../plugin-utils'
 
 const native = {
     request: ['requestFullscreen', 'msRequestFullscreen', 'mozRequestFullScreen', 'webkitRequestFullscreen'].find((request) => !!document.documentElement[request]),
@@ -57,13 +57,13 @@ export default createReactivePlugin({
         this.isActive = !!getFullElement()
         this.isActive === true && onUpdateActiveEl()
 
-        // ;['fullscreenchange', 'MSFullscreenChange', 'mozfullscreenchange', 'webkitfullscreenchange'].forEach((type) => {
-        //     addEvt(document, type, onChange)
-        // })
-
-        ;['onfullscreenchange', 'onmsfullscreenchange', 'onmozfullscreenchange', 'onwebkitfullscreenchange'].forEach((event) => {
-            document[event] = onChange
+        ;['fullscreenchange', 'MSFullscreenChange', 'mozfullscreenchange', 'webkitfullscreenchange'].forEach((type) => {
+            addEvt(document, type, onChange)
         })
+
+        // ;['onfullscreenchange', 'onmsfullscreenchange', 'onmozfullscreenchange', 'onwebkitfullscreenchange'].forEach((event) => {
+        //     document[event] = onChange
+        // })
     }
 })
 

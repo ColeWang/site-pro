@@ -1,6 +1,6 @@
 import { cloneVNode, createVNode, render as vueRender } from 'vue'
 import Progress from '@site-pro/components/src/progress'
-import { createDocumentFragment, createReactivePlugin } from '../../utils/create'
+import { createDocumentFragment, createReactivePlugin } from '../plugin-utils'
 
 const container = createDocumentFragment('site-progress')
 let instance = null

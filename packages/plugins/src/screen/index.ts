@@ -1,11 +1,11 @@
-import { createReactivePlugin } from '../../utils/create'
-import { addClass, getWindowSize, removeClass } from '../../utils/dom'
-import { addEvt } from '../../utils/event'
+import { addEvt, addClass, getWindowSize, removeClass } from '@site-pro/utils'
 import { debounce, pick } from 'lodash-es'
+import { createReactivePlugin } from '../plugin-utils'
 
 const SIZE_LIST = ['sm', 'md', 'lg', 'xl', 'xxl']
 
-export default createReactivePlugin({
+
+const state = {
     width: 0,
     height: 0,
     name: 'xs',
@@ -36,8 +36,10 @@ export default createReactivePlugin({
     lg: false,
     xl: false,
     xxl: false
-}, {
-    install (app, options, $site) {
+}
+
+const plugin = {
+    install (this: typeof state, app, options, $site) {
         const { sizes = {}, delay = 16, classes } = options || {}
 
         $site && ($site.screen = this)
@@ -64,17 +66,17 @@ export default createReactivePlugin({
             this.gt.xl = width >= sizes.xxl
 
             this.xs = this.lt.sm
-            this.sm = this.gt.xs === true && this.lt.md === true
-            this.md = this.gt.sm === true && this.lt.lg === true
-            this.lg = this.gt.md === true && this.lt.xl === true
-            this.xl = this.gt.lg === true && this.lt.xxl === true
+            this.sm = this.gt.xs && this.lt.md
+            this.md = this.gt.sm && this.lt.lg
+            this.lg = this.gt.md && this.lt.xl
+            this.xl = this.gt.lg && this.lt.xxl
             this.xxl = this.gt.xl
 
-            const name = (this.xs === true && 'xs')
-                || (this.sm === true && 'sm')
-                || (this.md === true && 'md')
-                || (this.lg === true && 'lg')
-                || (this.xl === true && 'xl')
+            const name = (this.xs && 'xs')
+                || (this.sm && 'sm')
+                || (this.md && 'md')
+                || (this.lg && 'lg')
+                || (this.xl && 'xl')
                 || 'xxl'
 
             if (name !== this.name) {
@@ -88,7 +90,7 @@ export default createReactivePlugin({
 
         const updateEvent = debounce(update, delay)
         // @todo visualViewport
-        addEvt(window, 'resize', updateEvent, { passive: true })
+        addEvt(window as unknown as HTMLElement, 'resize', updateEvent, { passive: true })
 
         update()
 
@@ -96,4 +98,6 @@ export default createReactivePlugin({
             addClass(document.body, `screen--xs`)
         }
     }
-})
+}
+
+export default createReactivePlugin(state, plugin)
