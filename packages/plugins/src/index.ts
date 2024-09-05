@@ -10,11 +10,8 @@ import Progress from './progress'
 import type { ScreenPlugin, ScreenPluginInstallOptions, ScreenState } from './screen'
 import Screen from './screen'
 
-interface BaseDefaultPlugins {
-    fullscreen: FullscreenState & FullscreenPlugin;
-    loading: LoadingState & LoadingPlugin;
-    progress: ProgressState & ProgressPlugin;
-    screen: ScreenState & ScreenPlugin;
+interface BaseSitePlugins extends ObjectPlugin {
+    name: string;
 }
 
 interface BaseSiteOptions {
@@ -24,7 +21,15 @@ interface BaseSiteOptions {
     screen?: ScreenPluginInstallOptions;
 }
 
+interface BaseDefaultPlugins {
+    fullscreen: FullscreenState & FullscreenPlugin;
+    loading: LoadingState & LoadingPlugin;
+    progress: ProgressState & ProgressPlugin;
+    screen: ScreenState & ScreenPlugin;
+}
+
 interface BaseSiteExpose extends BaseDefaultPlugins {
+    name: string;
     version: string;
     options: BaseSiteOptions;
 }
@@ -42,6 +47,7 @@ const defaultPlugins: BaseDefaultPlugins = {
 
 function install (app: App, options: BaseSiteOptions) {
     const $site: Partial<BaseSiteExpose> = {
+        name: 'site-pro',
         version: version,
         options: options
     }
@@ -55,7 +61,6 @@ function install (app: App, options: BaseSiteOptions) {
         // -- install --
         const pluginOpts: any = get(options, name, {})
         Plugin.install.call(Plugin, app, { ...pluginOpts, $site })
-        Plugin.__installed = true
     })
 }
 
@@ -64,15 +69,15 @@ function useSite (): BaseSiteExpose {
     return inject(SiteInstanceKey, {} as BaseSiteExpose)
 }
 
-function createSite (options: BaseSiteOptions = {}): ObjectPlugin & { name: string } {
+function createSite (options: BaseSiteOptions = {}): BaseSitePlugins {
     const installExtend = (app: App) => {
         install(app, { ...options })
     }
-    return { name: 'SitePro', install: installExtend }
+    return { name: 'site-pro', install: installExtend }
 }
 
 export { version }
 export { useSite, createSite }
 export { Fullscreen, Loading, Progress, Screen }
 
-export type { BaseSiteOptions }
+export type { BaseSitePlugins, BaseSiteOptions, BaseSiteExpose }

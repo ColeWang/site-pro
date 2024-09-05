@@ -14,6 +14,7 @@ export interface ProgressPluginInstallOptions {
 }
 
 export interface ProgressState {
+    __installed: boolean;
     isActive: boolean;
     status: number;
 }
@@ -49,23 +50,24 @@ function step (value: number): number {
     return 0
 }
 
-function barCSS (status: number, speed?: number, easing?: string): CSSProperties {
+function barCSS (status: number, speed: number, easing: string): CSSProperties {
     const offset: number = status - 100
     return {
-        transition: `all ${speed || 200}ms ${easing || 'linear'} 0s`,
-        transform: `translate3d(${offset}%, 0, 0)`,
-        opacity: 1
+        opacity: 1,
+        transition: `all ${speed}ms ${easing} 0s`,
+        transform: `translate3d(${offset}%, 0, 0)`
     }
 }
 
 const state: ProgressState = {
+    __installed: false,
     isActive: false,
     status: 0
 }
 
 const plugin: ProgressPlugin = {
     start (this: ProgressState & ProgressPlugin): void {
-        const { speed, easing } = configOptions
+        const { speed = 200, easing = 'linear' } = configOptions
 
         this.status = 0
         instance = this.render({ style: barCSS(this.status, speed, easing) }, configOptions)
@@ -80,7 +82,7 @@ const plugin: ProgressPlugin = {
         this.setStatus(100)
     },
     trickle (this: ProgressState & ProgressPlugin): void {
-        const { speed } = configOptions
+        const { speed = 200 } = configOptions
         const nextStatus: number = this.status + step(this.status)
         const status: number = clamp(nextStatus, 0, 99.5)
         this.setStatus(status)
@@ -88,10 +90,10 @@ const plugin: ProgressPlugin = {
             if (this.status < 100) {
                 this.trickle()
             }
-        }, speed || 200)
+        }, speed)
     },
     setStatus (this: ProgressState & ProgressPlugin, value: number): void {
-        const { speed, easing } = configOptions
+        const { speed = 200, easing = 'linear' } = configOptions
         this.status = clamp(value, 8, 100)
         this.update({ style: barCSS(this.status, speed, easing) })
         if (this.status >= 100) {
@@ -126,6 +128,7 @@ const plugin: ProgressPlugin = {
     install (this: ProgressState & ProgressPlugin, app: App, options?: ProgressPluginInstallOptions): App {
         const { $site } = options || {}
 
+        this.__installed = true
         $site && ($site.progress = this)
 
         configOptions = omit(options, ['$site'])

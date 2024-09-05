@@ -13,6 +13,7 @@ export interface ScreenPluginInstallOptions {
 }
 
 export interface ScreenState extends Record<ScreenStateName, boolean> {
+    __installed: boolean;
     name: ScreenStateName;
     width: number;
     height: number;
@@ -26,6 +27,7 @@ export interface ScreenPlugin extends ObjectPlugin {
 }
 
 const state: ScreenState = {
+    __installed: false,
     name: 'xs',
     width: 0,
     height: 0,
@@ -62,6 +64,7 @@ const plugin: ScreenPlugin = {
     install (this: ScreenState & ScreenPlugin, app: App, options?: ScreenPluginInstallOptions): App {
         const { sizes: optionsSizes, delay, classes, $site } = options || {}
 
+        this.__installed = true
         $site && ($site.screen = this)
 
         this.sizes = pick({ ...this.sizes, ...optionsSizes }, ['sm', 'md', 'lg', 'xl', 'xxl'])

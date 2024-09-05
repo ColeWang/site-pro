@@ -9,6 +9,7 @@ export interface FullscreenPluginInstallOptions {
 export interface FullscreenState {
     isActive: boolean;
     activeEl: HTMLElement | null;
+    __installed: boolean;
 }
 
 export interface FullscreenPlugin extends ObjectPlugin {
@@ -52,6 +53,7 @@ function promisify (target: any, event: string): Promise<void> {
 }
 
 const state: FullscreenState = {
+    __installed: false,
     isActive: false,
     activeEl: null
 }
@@ -76,6 +78,7 @@ const plugin: FullscreenPlugin = {
     install (this: FullscreenState & FullscreenPlugin, app: App, options?: FullscreenPluginInstallOptions): App {
         const { $site } = options || {}
 
+        this.__installed = true
         $site && ($site.fullscreen = this)
 
         const onUpdateActiveEl = () => {

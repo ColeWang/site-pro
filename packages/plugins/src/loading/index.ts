@@ -5,19 +5,20 @@ import { createDocumentFragment, createReactivePlugin } from '../plugin-utils'
 import type { LoadingProps } from './component'
 import { Loading as LoadingComponent } from './component'
 
-export interface LoadingPluginInstallOptions extends LoadingProps {
+export interface LoadingPluginInstallOptions {
     parentContext?: AppContext;
     appContext?: AppContext;
     $site?: any;
 }
 
 export interface LoadingState {
+    __installed: boolean;
     isActive: boolean;
 }
 
 export interface LoadingPlugin extends ObjectPlugin {
     show: (this: LoadingState & LoadingPlugin) => void;
-    hide: (this: LoadingState & LoadingPlugin, config: LoadingProps) => void;
+    hide: (this: LoadingState & LoadingPlugin, options?: LoadingProps) => void;
     update: (props: LoadingProps) => void;
     destroy: () => void;
     render: (props: LoadingProps, options: Omit<LoadingPluginInstallOptions, '$site'>) => VNode | null;
@@ -28,32 +29,34 @@ export interface LoadingPlugin extends ObjectPlugin {
 const container: HTMLElement = createDocumentFragment('site-loading')
 let instance: VNode | null = null
 let configOptions: Omit<LoadingPluginInstallOptions, '$site'> = {}
-let configProps: LoadingProps = {}
 
 const state: LoadingState = {
+    __installed: false,
     isActive: false
 }
 
 const plugin: LoadingPlugin = {
     show (this: LoadingState & LoadingPlugin): void {
-        instance = this.render(configProps, configOptions)
+        instance = this.render({}, configOptions)
         // --
         this.isActive = true
         this.update({ visible: true })
     },
-    hide (this: LoadingState & LoadingPlugin, config: LoadingProps): void {
+    hide (this: LoadingState & LoadingPlugin, options?: LoadingProps): void {
         if (!this.isActive) return
         // 动画结束
         const onAfterClose = () => {
+            if (options && options.onAfterClose) {
+                options.onAfterClose()
+            }
             this.destroy()
             this.isActive = false
-            config && config.onAfterClose && config.onAfterClose()
         }
         this.update({ visible: false, onAfterClose })
     },
     update (props: LoadingProps): void {
         if (!container || !instance) return
-        const nextVNode: VNode = cloneVNode(instance, { ...configProps, ...props })
+        const nextVNode: VNode = cloneVNode(instance, { ...props })
         vueRender(nextVNode, container)
     },
     destroy (): void {
@@ -71,9 +74,9 @@ const plugin: LoadingPlugin = {
     install (this: LoadingState & LoadingPlugin, app: App, options?: LoadingPluginInstallOptions): App {
         const { $site } = options || {}
 
+        this.__installed = true
         $site && ($site.loading = this)
 
-        configProps = omit(options, ['parentContext', 'appContext', '$site'])
         configOptions = omit(options, ['$site'])
 
         return app
