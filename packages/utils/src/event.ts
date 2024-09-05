@@ -101,8 +101,8 @@ export function preventDefault (evt: Event, isStopPropagation?: boolean): void {
     }
 }
 
-export function trigger<T> (target: EventTarget, type: string): void {
-    const event: CustomEvent<T> = new CustomEvent(type, {
+export function trigger<T> (target: EventTarget, type?: string): void {
+    const event: CustomEvent<T> = new CustomEvent(type || 'HTMLEvents', {
         cancelable: true,
         bubbles: true
     })
