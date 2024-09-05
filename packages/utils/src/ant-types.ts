@@ -43,9 +43,11 @@ declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
         ProFieldTextarea?: {};
         ProBaseForm?: {};
-        ProDescriptions?: {};
-        ProQueryFilter?: {},
+        ProQueryFilter?: {};
         ProQueryFilterActions?: {};
+        ProDescriptions?: {};
+        ProPluginLoading?: {};
+        ProPluginProgress?: {};
     }
 }
 

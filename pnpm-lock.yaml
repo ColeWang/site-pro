@@ -96,7 +96,17 @@ importers:
 
   packages/locale: {}
 
-  packages/plugins: {}
+  packages/plugins:
+    dependencies:
+      '@site-pro/components':
+        specifier: workspace:*
+        version: link:../components
+      '@site-pro/hooks':
+        specifier: workspace:*
+        version: link:../hooks
+      '@site-pro/utils':
+        specifier: workspace:*
+        version: link:../utils
 
   packages/utils: {}
 

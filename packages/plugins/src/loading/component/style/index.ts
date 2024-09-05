@@ -1,6 +1,11 @@
-import { genComponentStyleHook } from '@site-pro/components'
+import type { CSSInterpolation, FullToken } from '@site-pro/components'
+import { genComponentStyleHook, mergeToken } from '@site-pro/components'
 
-function genBaseStyle (token) {
+interface ProPluginLoadingToken extends FullToken<'ProPluginLoading'> {
+    // --
+}
+
+function genBaseStyle (token: ProPluginLoadingToken): CSSInterpolation {
     const { componentCls, iconCls } = token
     return {
         [componentCls]: {
@@ -42,6 +47,9 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProLoading', (token) => {
-    return [genBaseStyle(token)]
-})
+function styleFn (token: FullToken<'ProPluginLoading'>): CSSInterpolation {
+    const proPluginLoadingToken = mergeToken<ProPluginLoadingToken>(token, {})
+    return genBaseStyle(proPluginLoadingToken)
+}
+
+export default genComponentStyleHook('ProPluginLoading', styleFn)

@@ -1,23 +1,46 @@
+import type { App, AppContext, ObjectPlugin, VNode } from 'vue'
 import { cloneVNode, createVNode, render as vueRender } from 'vue'
-import Loading from '@site-pro/components/src/loading'
-import { createDocumentFragment, createReactivePlugin } from '../plugin-utils'
 import { omit } from 'lodash-es'
+import { createDocumentFragment, createReactivePlugin } from '../plugin-utils'
+import type { PluginLoadingProps } from './component'
+import { PluginLoading } from './component'
 
-const container = createDocumentFragment('site-loading')
-let instance = null
-let configOptions = {}
-let configProps = {}
+interface LoadingInstallOptions extends PluginLoadingProps {
+    parentContext?: AppContext;
+    appContext?: AppContext;
+    $site?: any;
+}
 
-export default createReactivePlugin({
+const container: HTMLElement = createDocumentFragment('site-loading')
+let instance: VNode | null = null
+let configOptions: LoadingInstallOptions = {}
+let configProps: PluginLoadingProps = {}
+
+interface State {
+    isActive: boolean;
+}
+
+interface Plugin extends ObjectPlugin {
+    show: (this: State & Plugin) => void;
+    hide: (this: State & Plugin, config: PluginLoadingProps) => void;
+    update: (props: PluginLoadingProps) => void;
+    destroy: () => void;
+    render: (props: PluginLoadingProps, options: LoadingInstallOptions) => VNode | null;
+    install: (this: State & Plugin, app: App, options: LoadingInstallOptions) => App;
+}
+
+const state: State = {
     isActive: false
-}, {
-    show () {
+}
+
+const plugin: Plugin = {
+    show (this: State & Plugin) {
         instance = this.render(configProps, configOptions)
         // --
         this.isActive = true
         this.update({ visible: true })
     },
-    hide (config) {
+    hide (this: State & Plugin, config: PluginLoadingProps) {
         if (!this.isActive) return
         // 动画结束
         const onAfterClose = () => {
@@ -27,9 +50,9 @@ export default createReactivePlugin({
         }
         this.update({ visible: false, onAfterClose })
     },
-    update (props) {
+    update (props: PluginLoadingProps) {
         if (!container || !instance) return
-        const nextVNode = cloneVNode(instance, { ...configProps, ...props })
+        const nextVNode: VNode = cloneVNode(instance, { ...configProps, ...props })
         vueRender(nextVNode, container)
     },
     destroy () {
@@ -37,17 +60,23 @@ export default createReactivePlugin({
         vueRender(null, container)
         instance = null
     },
-    render (props, options) {
+    render (props: PluginLoadingProps, options: LoadingInstallOptions): VNode | null {
         if (!container) return null
-        const vm = createVNode(Loading, { ...props })
+        const vm: VNode = createVNode(PluginLoading, { ...props })
         vm.appContext = options.parentContext || options.appContext || vm.appContext
         vueRender(vm, container)
         return vm
     },
-    install (app, options, $site) {
+    install (this: State & Plugin, app: App, options?: LoadingInstallOptions) {
+        const { $site } = options || {}
+
         $site && ($site.loading = this)
 
-        configProps = omit(options, ['parentContext', 'appContext'])
-        configOptions = options
+        configProps = omit(options, ['parentContext', 'appContext', '$site'])
+        configOptions = omit(options, ['$site'])
+
+        return app
     }
-})
+}
+
+export default createReactivePlugin(state, plugin)
