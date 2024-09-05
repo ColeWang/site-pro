@@ -1,14 +1,19 @@
+import type { CSSInterpolation, FullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, actionTransition } = token
+interface ProActionToken extends FullToken<'ProAction'> {
+    proActionTransition: string;
+}
+
+function genBaseStyle (token: ProActionToken): CSSInterpolation {
+    const { componentCls, proActionTransition } = token
     return {
         [componentCls]: {
             display: 'inline-block',
             fontSize: token.fontSize,
             lineHeight: token.lineHeight,
             color: token.colorText,
-            transition: actionTransition,
+            transition: proActionTransition,
             textDecoration: 'none',
             outline: 'none',
             cursor: 'pointer',
@@ -44,11 +49,14 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableAction', (token) => {
-    const actionTransition = `all ${token.motionDurationMid} ${token.motionEaseInOut}`
+function styleFn (token: FullToken<'ProAction'>): CSSInterpolation {
+    const proActionTransition = `all ${token.motionDurationMid} ${token.motionEaseInOut}`
 
-    const actionToken = mergeToken(token, {
-        actionTransition
+    const proActionToken = mergeToken<ProActionToken>(token, {
+        proActionTransition
     })
-    return [genBaseStyle(actionToken)]
-})
+    return genBaseStyle(proActionToken)
+}
+
+
+export default genComponentStyleHook('ProAction', styleFn)
