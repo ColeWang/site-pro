@@ -2,6 +2,20 @@ import { App, ObjectPlugin } from 'vue'
 import { addDocumentEvt } from '@site-pro/utils'
 import { createReactivePlugin } from '../plugin-utils'
 
+interface Native {
+    request: 'requestFullscreen';
+    exit: 'exitFullscreen';
+}
+
+const native: Native = {
+    request: ['requestFullscreen', 'msRequestFullscreen', 'mozRequestFullScreen', 'webkitRequestFullscreen'].find((request) => {
+        return !!(document.documentElement as any)[request]
+    }) as 'requestFullscreen',
+    exit: ['exitFullscreen', 'msExitFullscreen', 'mozCancelFullScreen', 'webkitExitFullscreen'].find((exit) => {
+        return !!(document as unknown as any)[exit]
+    }) as 'exitFullscreen',
+}
+
 interface FullscreenInstallOptions {
     $site?: any;
 }
@@ -18,25 +32,20 @@ interface Plugin extends ObjectPlugin {
     install: (this: State & Plugin, app: App, options: FullscreenInstallOptions) => App;
 }
 
-const native = {
-    request: ['requestFullscreen', 'msRequestFullscreen', 'mozRequestFullScreen', 'webkitRequestFullscreen'].find((request) => !!document.documentElement[request]),
-    exit: ['exitFullscreen', 'msExitFullscreen', 'mozCancelFullScreen', 'webkitExitFullscreen'].find((exit) => !!document[exit])
-}
-
 function getFullElement (): HTMLElement | null {
     return (
-        document.fullscreenElement
-        || document.mozFullScreenElement
-        || document.webkitFullscreenElement
-        || document.msFullscreenElement
+        (document as unknown as any).fullscreenElement
+        || (document as unknown as any).mozFullScreenElement
+        || (document as unknown as any).webkitFullscreenElement
+        || (document as unknown as any).msFullscreenElement
         || null
     )
 }
 
-function promisify (target: HTMLElement, event: any) {
+function promisify (target: any, event: string): Promise<void> {
     try {
         const result = target[event]()
-        return result || Promise.resolve()
+        return result ? result : Promise.resolve()
     } catch (err) {
         return Promise.reject(err)
     }
@@ -49,19 +58,17 @@ const state: State = {
 
 const plugin: Plugin = {
     request (this: State & Plugin, target?: HTMLElement) {
-        const el = target || document.documentElement
+        const el: HTMLElement = target || document.documentElement
         if (this.activeEl === el) return Promise.resolve()
         // --
-        const result = this.activeEl !== null && el.contains(this.activeEl)
+        const result = this.activeEl && el.contains(this.activeEl)
             ? this.exit()
             : Promise.resolve()
 
         return result.finally(() => promisify(el, native.request))
     },
     exit (this: State & Plugin) {
-        return this.isActive
-            ? promisify(document, native.exit)
-            : Promise.resolve()
+        return this.isActive ? promisify(document, native.exit) : Promise.resolve()
     },
     toggle (this: State & Plugin, target?: HTMLElement) {
         return this.isActive ? this.exit() : this.request(target)
