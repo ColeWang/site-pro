@@ -1,29 +1,23 @@
-import { App } from 'vue'
+import { App, ObjectPlugin } from 'vue'
 
 import { addClass, addEvt, getWindowSize, removeClass } from '@site-pro/utils'
 import { debounce, pick } from 'lodash-es'
 import { createReactivePlugin } from '../plugin-utils'
 
-interface State {
+const SIZE_LIST: ['sm', 'md', 'lg', 'xl', 'xxl'] = ['sm', 'md', 'lg', 'xl', 'xxl']
+
+interface State extends Record<'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl', boolean> {
     name: string;
     width: number;
     height: number;
-    sizes: any;
-    lt: any;
-    gt: any;
-    xs: any;
-    sm: any;
-    md: any;
-    lg: any;
-    xl: any;
-    xxl: any;
+    sizes: Record<'sm' | 'md' | 'lg' | 'xl' | 'xxl', number>;
+    lt: Record<'sm' | 'md' | 'lg' | 'xl' | 'xxl', boolean>;
+    gt: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', boolean>;
 }
 
-interface Plugin {
-    install: (this: State & Plugin, app: App, options: any, $site: any) => void;
+interface Plugin extends ObjectPlugin {
+    install: (this: State & Plugin, app: App, options: any, $site: any) => App;
 }
-
-const SIZE_LIST = ['sm', 'md', 'lg', 'xl', 'xxl']
 
 const state: State = {
     name: 'xs',
@@ -117,6 +111,8 @@ const plugin: Plugin = {
         if (classes === true && this.name === 'xs') {
             addClass(document.body, `screen--xs`)
         }
+
+        return app
     }
 }
 

@@ -1,3 +1,4 @@
+import { addDocumentEvt } from '@site-pro/utils'
 import { createReactivePlugin } from '../plugin-utils'
 
 const native = {
@@ -58,12 +59,8 @@ export default createReactivePlugin({
         this.isActive === true && onUpdateActiveEl()
 
         ;['fullscreenchange', 'MSFullscreenChange', 'mozfullscreenchange', 'webkitfullscreenchange'].forEach((type) => {
-            addEvt(document, type, onChange)
+            addDocumentEvt(type as 'fullscreenchange', onChange)
         })
-
-        // ;['onfullscreenchange', 'onmsfullscreenchange', 'onmozfullscreenchange', 'onwebkitfullscreenchange'].forEach((event) => {
-        //     document[event] = onChange
-        // })
     }
 })
 
