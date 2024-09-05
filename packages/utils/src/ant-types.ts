@@ -46,8 +46,6 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProQueryFilter?: {};
         ProQueryFilterActions?: {};
         ProDescriptions?: {};
-        ProPluginLoading?: {};
-        ProPluginProgress?: {};
     }
 }
 

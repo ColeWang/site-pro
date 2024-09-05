@@ -2,16 +2,16 @@ import { defineComponent, Transition } from 'vue'
 import { Spin } from 'ant-design-vue'
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import { pluginLoadingProps } from './typings'
+import { loadingProps } from './typings'
 import useStyle from './style'
 
 export default defineComponent({
     inheritAttrs: false,
-    name: 'ProPluginLoading',
-    props: pluginLoadingProps(),
+    name: 'ProLoadingPlugin',
+    props: loadingProps(),
     emits: ['afterClose'],
     setup (props, { emit, attrs }) {
-        const { prefixCls } = useConfigInject('pro-plugin-loading', props)
+        const { prefixCls } = useConfigInject('pro-loading-plugin', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
 
         // @todo body overflow: 'hidden' preventScroll

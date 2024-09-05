@@ -1,6 +1,6 @@
-import type { PropType, ExtractPropTypes, ComponentPublicInstance } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 
-export const pluginLoadingProps = () => ({
+export const loadingProps = () => ({
     visible: {
         type: Boolean as PropType<boolean>,
         default: false
@@ -11,5 +11,5 @@ export const pluginLoadingProps = () => ({
     }
 })
 
-export type PluginLoadingProps = Partial<ExtractPropTypes<ReturnType<typeof pluginLoadingProps>>>;
-export type PluginLoadingInstance = ComponentPublicInstance<PluginLoadingProps>;
+export type LoadingProps = Partial<ExtractPropTypes<ReturnType<typeof loadingProps>>>;
+export type LoadingInstance = ComponentPublicInstance<LoadingProps>;

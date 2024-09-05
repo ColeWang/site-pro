@@ -3,29 +3,29 @@ import { addClass, addWindowEvt, getWindowSize, removeClass } from '@site-pro/ut
 import { debounce, pick } from 'lodash-es'
 import { createReactivePlugin } from '../plugin-utils'
 
-type ScreenName = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type ScreenStateName = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
-interface ScreenInstallOptions {
-    sizes: Record<Exclude<ScreenName, 'xs'>, number>;
+export interface ScreenPluginInstallOptions {
+    sizes: Record<Exclude<ScreenStateName, 'xs'>, number>;
     delay: number;
     classes: boolean;
     $site?: any;
 }
 
-interface State extends Record<ScreenName, boolean> {
-    name: ScreenName;
+export interface ScreenState extends Record<ScreenStateName, boolean> {
+    name: ScreenStateName;
     width: number;
     height: number;
-    sizes: Record<Exclude<ScreenName, 'xs'>, number>;
-    lt: Record<Exclude<ScreenName, 'xs'>, boolean>;
-    gt: Record<Exclude<ScreenName, 'xxl'>, boolean>;
+    sizes: Record<Exclude<ScreenStateName, 'xs'>, number>;
+    lt: Record<Exclude<ScreenStateName, 'xs'>, boolean>;
+    gt: Record<Exclude<ScreenStateName, 'xxl'>, boolean>;
 }
 
-interface Plugin extends ObjectPlugin {
-    install: (this: State & Plugin, app: App, options: ScreenInstallOptions) => App;
+export interface ScreenPlugin extends ObjectPlugin {
+    install: (this: ScreenState & ScreenPlugin, app: App, options: ScreenPluginInstallOptions) => App;
 }
 
-const state: State = {
+const state: ScreenState = {
     name: 'xs',
     width: 0,
     height: 0,
@@ -58,8 +58,8 @@ const state: State = {
     xxl: false
 }
 
-const plugin: Plugin = {
-    install (this: State & Plugin, app: App, options?: ScreenInstallOptions): App {
+const plugin: ScreenPlugin = {
+    install (this: ScreenState & ScreenPlugin, app: App, options?: ScreenPluginInstallOptions): App {
         const { sizes: optionsSizes, delay, classes, $site } = options || {}
 
         $site && ($site.screen = this)
@@ -91,7 +91,7 @@ const plugin: Plugin = {
             this.xl = this.gt.lg && this.lt.xxl
             this.xxl = this.gt.xl
 
-            const name: ScreenName = (this.xs && 'xs')
+            const name: ScreenStateName = (this.xs && 'xs')
                 || (this.sm && 'sm')
                 || (this.md && 'md')
                 || (this.lg && 'lg')

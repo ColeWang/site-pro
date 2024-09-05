@@ -1,6 +1,6 @@
-import PluginLoading from './Loading'
-import type { PluginLoadingInstance, PluginLoadingProps } from './typings'
-import { pluginLoadingProps } from './typings'
+import Loading from './Loading'
+import type { LoadingInstance, LoadingProps } from './typings'
+import { loadingProps } from './typings'
 
-export { PluginLoading, pluginLoadingProps }
-export type { PluginLoadingProps, PluginLoadingInstance }
+export { Loading, loadingProps }
+export type { LoadingProps, LoadingInstance }

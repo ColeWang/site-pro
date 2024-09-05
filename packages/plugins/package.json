@@ -7,7 +7,6 @@
     "build": "vue-tsc --noEmit && vite build"
   },
   "dependencies": {
-    "@site-pro/components": "workspace:*",
     "@site-pro/hooks": "workspace:*",
     "@site-pro/utils": "workspace:*"
   },

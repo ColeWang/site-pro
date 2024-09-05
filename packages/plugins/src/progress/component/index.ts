@@ -1,6 +1,6 @@
-import PluginProgress from './Progress'
-import type { PluginProgressInstance, PluginProgressProps } from './typings'
-import { pluginProgressProps } from './typings'
+import Progress from './Progress'
+import type { ProgressInstance, ProgressProps } from './typings'
+import { progressProps } from './typings'
 
-export { PluginProgress, pluginProgressProps }
-export type { PluginProgressProps, PluginProgressInstance }
+export { Progress, progressProps }
+export type { ProgressProps, ProgressInstance }

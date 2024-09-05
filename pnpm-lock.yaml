@@ -98,9 +98,6 @@ importers:
 
   packages/plugins:
     dependencies:
-      '@site-pro/components':
-        specifier: workspace:*
-        version: link:../components
       '@site-pro/hooks':
         specifier: workspace:*
         version: link:../hooks

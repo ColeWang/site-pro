@@ -2,45 +2,46 @@ import type { App, AppContext, ObjectPlugin, VNode } from 'vue'
 import { cloneVNode, createVNode, render as vueRender } from 'vue'
 import { omit } from 'lodash-es'
 import { createDocumentFragment, createReactivePlugin } from '../plugin-utils'
-import type { PluginLoadingProps } from './component'
-import { PluginLoading } from './component'
+import type { LoadingProps } from './component'
+import { Loading as LoadingComponent } from './component'
 
-interface LoadingInstallOptions extends PluginLoadingProps {
+export interface LoadingPluginInstallOptions extends LoadingProps {
     parentContext?: AppContext;
     appContext?: AppContext;
     $site?: any;
 }
 
-const container: HTMLElement = createDocumentFragment('site-loading')
-let instance: VNode | null = null
-let configOptions: Omit<LoadingInstallOptions, '$site'> = {}
-let configProps: PluginLoadingProps = {}
-
-interface State {
+export interface LoadingState {
     isActive: boolean;
 }
 
-interface Plugin extends ObjectPlugin {
-    show: (this: State & Plugin) => void;
-    hide: (this: State & Plugin, config: PluginLoadingProps) => void;
-    update: (props: PluginLoadingProps) => void;
+export interface LoadingPlugin extends ObjectPlugin {
+    show: (this: LoadingState & LoadingPlugin) => void;
+    hide: (this: LoadingState & LoadingPlugin, config: LoadingProps) => void;
+    update: (props: LoadingProps) => void;
     destroy: () => void;
-    render: (props: PluginLoadingProps, options: Omit<LoadingInstallOptions, '$site'>) => VNode | null;
-    install: (this: State & Plugin, app: App, options: LoadingInstallOptions) => App;
+    render: (props: LoadingProps, options: Omit<LoadingPluginInstallOptions, '$site'>) => VNode | null;
+    install: (this: LoadingState & LoadingPlugin, app: App, options: LoadingPluginInstallOptions) => App;
 }
 
-const state: State = {
+
+const container: HTMLElement = createDocumentFragment('site-loading')
+let instance: VNode | null = null
+let configOptions: Omit<LoadingPluginInstallOptions, '$site'> = {}
+let configProps: LoadingProps = {}
+
+const state: LoadingState = {
     isActive: false
 }
 
-const plugin: Plugin = {
-    show (this: State & Plugin): void {
+const plugin: LoadingPlugin = {
+    show (this: LoadingState & LoadingPlugin): void {
         instance = this.render(configProps, configOptions)
         // --
         this.isActive = true
         this.update({ visible: true })
     },
-    hide (this: State & Plugin, config: PluginLoadingProps): void {
+    hide (this: LoadingState & LoadingPlugin, config: LoadingProps): void {
         if (!this.isActive) return
         // 动画结束
         const onAfterClose = () => {
@@ -50,7 +51,7 @@ const plugin: Plugin = {
         }
         this.update({ visible: false, onAfterClose })
     },
-    update (props: PluginLoadingProps): void {
+    update (props: LoadingProps): void {
         if (!container || !instance) return
         const nextVNode: VNode = cloneVNode(instance, { ...configProps, ...props })
         vueRender(nextVNode, container)
@@ -60,14 +61,14 @@ const plugin: Plugin = {
         vueRender(null, container)
         instance = null
     },
-    render (props: PluginLoadingProps, options: Omit<LoadingInstallOptions, '$site'>): VNode | null {
+    render (props: LoadingProps, options: Omit<LoadingPluginInstallOptions, '$site'>): VNode | null {
         if (!container) return null
-        const vm: VNode = createVNode(PluginLoading, { ...props })
+        const vm: VNode = createVNode(LoadingComponent, { ...props })
         vm.appContext = options.parentContext || options.appContext || vm.appContext
         vueRender(vm, container)
         return vm
     },
-    install (this: State & Plugin, app: App, options?: LoadingInstallOptions): App {
+    install (this: LoadingState & LoadingPlugin, app: App, options?: LoadingPluginInstallOptions): App {
         const { $site } = options || {}
 
         $site && ($site.loading = this)

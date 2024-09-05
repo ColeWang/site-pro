@@ -1,11 +1,18 @@
-import type { CSSInterpolation, FullToken } from '@site-pro/components'
-import { genComponentStyleHook, mergeToken } from '@site-pro/components'
+import type { FullToken } from 'ant-design-vue/es/theme/internal'
+import { genComponentStyleHook, mergeToken } from 'ant-design-vue/es/theme/internal'
+import type { CSSInterpolation } from 'ant-design-vue/es/_util/cssinjs'
 
-interface ProPluginLoadingToken extends FullToken<'ProPluginLoading'> {
+declare module 'ant-design-vue/es/theme/interface' {
+    interface ComponentTokenMap {
+        ProLoadingPlugin?: {};
+    }
+}
+
+interface ProLoadingPluginToken extends FullToken<'ProLoadingPlugin'> {
     // --
 }
 
-function genBaseStyle (token: ProPluginLoadingToken): CSSInterpolation {
+function genBaseStyle (token: ProLoadingPluginToken): CSSInterpolation {
     const { componentCls, iconCls } = token
     return {
         [componentCls]: {
@@ -47,9 +54,9 @@ function genBaseStyle (token: ProPluginLoadingToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProPluginLoading'>): CSSInterpolation {
-    const proPluginLoadingToken = mergeToken<ProPluginLoadingToken>(token, {})
-    return genBaseStyle(proPluginLoadingToken)
+function styleFn (token: FullToken<'ProLoadingPlugin'>): CSSInterpolation {
+    const proLoadingPluginToken = mergeToken<ProLoadingPluginToken>(token, {})
+    return genBaseStyle(proLoadingPluginToken)
 }
 
-export default genComponentStyleHook('ProPluginLoading', styleFn)
+export default genComponentStyleHook('ProLoadingPlugin', styleFn)
