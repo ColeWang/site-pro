@@ -21,7 +21,10 @@ export type {
     BaseFieldFieldProps,
     BaseFieldFormItemProps,
     BaseFieldProps,
-    BaseFieldInstance,
+    BaseFieldInstance
+}
+
+export type {
     BaseFieldProviderValueTypeMap,
     BaseFieldProviderProps,
     BaseFieldProviderExpose,
