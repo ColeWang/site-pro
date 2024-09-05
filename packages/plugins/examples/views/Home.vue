@@ -2,10 +2,12 @@
   <div>
     <Button @click="onLoadingClick">Loading</Button>
     <Button @click="onProgressClick">Progress</Button>
+    <Button @click="onFullscreenClick">Fullscreen</Button>
   </div>
 </template>
 
 <script setup lang="ts">
+  import { watch } from 'vue'
   import { Button } from 'ant-design-vue'
   import { useSite } from '../../src'
   
@@ -32,6 +34,14 @@
       $site.progress.done()
     }, 200)
   }
+  
+  function onFullscreenClick () {
+    $site.fullscreen.toggle()
+  }
+  
+  watch(() => $site.screen.name, (value) => {
+    console.log(value)
+  })
 </script>
 
 <style scoped>
