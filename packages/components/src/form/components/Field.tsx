@@ -17,7 +17,7 @@ const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xl: 552
 }
 
-export type FieldSizeType = Extract<keyof typeof SIZE_ENUM, any> | number;
+export type FieldSizeType = keyof typeof SIZE_ENUM | number;
 
 export interface FieldSlots {
     default?: any;

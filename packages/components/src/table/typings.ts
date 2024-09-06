@@ -1,12 +1,44 @@
-import { Table } from 'ant-design-vue'
+import type { PropType } from 'vue'
+import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
+import type { BaseEnumType, BaseSlot, ColumnType } from '@site-pro/utils'
+import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
-const extraProps = {
+export interface TableColumn extends ColumnType {
+    search?: false | { transform: (value: any) => any };
+    hideInSearch?: boolean;
+    hideInTable?: boolean;
+    hideInSetting?: boolean;
+    hideInDescriptions?: boolean;
+    // customRender
+    ellipsis?: boolean;
+    copyable?: boolean;
+    // field
+    valueType?: BaseFieldValueType | string;
+    initialValue?: any;
+    valueEnum?: BaseEnumType;
+    // 对应 valueType 需要使用类型断言来确保类型正确
+    fieldProps?: BaseFieldFieldProps<BaseFieldValueType> | any;
+    formItemProps?: BaseFieldFormItemProps;
+    // setting
+    order?: number;
+    checked?: boolean;
+    disable?: boolean;
+}
+
+export interface TableColumnGroup extends Omit<TableColumn, 'dataIndex'> {
+    children: TableColumns;
+}
+
+export type TableColumns = (TableColumnGroup | TableColumn)[];
+
+export const tableProps = () => ({
+    ...antTableProps(),
     title: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     columns: {
-        type: Array,
+        type: Array as PropType<TableColumns>,
         default: () => ([])
     },
     rowSelection: {
@@ -18,20 +50,15 @@ const extraProps = {
         default: () => ({ x: 'max-content' })
     },
     emptyText: {
-        type: String,
+        type: String as PropType<string>,
         default: '-'
-    }
-}
-
-const tableProps = {
-    ...Table.props,
-    ...extraProps,
+    },
     search: {
         type: [Object, Boolean],
         default: undefined
     },
     manualRequest: {
-        type: Boolean,
+        type: Boolean as PropType<boolean>,
         default: false
     },
     request: {
@@ -126,6 +153,4 @@ const tableProps = {
         type: Function,
         default: undefined
     }
-}
-
-export default tableProps
+})

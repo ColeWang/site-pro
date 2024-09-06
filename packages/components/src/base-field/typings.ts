@@ -49,7 +49,7 @@ export interface BaseFieldValueTypeWithFieldProps {
     password: InputPasswordProps;
 }
 
-export type BaseFieldValueType = Extract<keyof BaseFieldValueTypeWithFieldProps, any>;
+export type BaseFieldValueType = keyof BaseFieldValueTypeWithFieldProps;
 export type BaseFieldFieldProps<T extends BaseFieldValueType> = BaseFieldValueTypeWithFieldProps[T];
 export type BaseFieldFormItemProps = FormItemProps & { model?: FormProps['model'] };
 
