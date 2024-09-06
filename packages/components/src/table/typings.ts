@@ -1,9 +1,9 @@
 import type { PropType } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
 import type { BaseEnumType, BaseSlot, ColumnType } from '@site-pro/utils'
-import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
+import type { BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
-export interface TableColumn extends ColumnType {
+export interface TableColumnType extends ColumnType {
     search?: false | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
@@ -17,7 +17,7 @@ export interface TableColumn extends ColumnType {
     initialValue?: any;
     valueEnum?: BaseEnumType;
     // 对应 valueType 需要使用类型断言来确保类型正确
-    fieldProps?: BaseFieldFieldProps<BaseFieldValueType> | any;
+    fieldProps?: any;
     formItemProps?: BaseFieldFormItemProps;
     // setting
     order?: number;
@@ -25,11 +25,11 @@ export interface TableColumn extends ColumnType {
     disable?: boolean;
 }
 
-export interface TableColumnGroup extends Omit<TableColumn, 'dataIndex'> {
+export interface TableColumnGroup extends Omit<TableColumnType, 'dataIndex'> {
     children: TableColumns;
 }
 
-export type TableColumns = (TableColumnGroup | TableColumn)[];
+export type TableColumns = (TableColumnGroup | TableColumnType)[];
 
 export const tableProps = () => ({
     ...antTableProps(),
