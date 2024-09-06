@@ -14,7 +14,7 @@ export const baseFormProps = () => ({
     ...antFormProps(),
     layout: {
         type: String as PropType<BaseFormLayout>,
-        default: 'horizontal'
+        default: 'vertical'
     },
     initialValues: {
         type: Object as PropType<Recordable>,

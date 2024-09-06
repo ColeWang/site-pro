@@ -21,7 +21,7 @@ import { BaseField, baseFieldProps } from '../../base-field'
 // 104 * 5 + 64 =
 
 
-// @todo 紧凑模式
+// @todo 紧凑模式 还需要考虑到 非 grid 模式下 怎么使用
 const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,
     sm: 216,
