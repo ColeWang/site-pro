@@ -1,34 +1,34 @@
 {
-  "name": "@site-pro/components",
-  "version": "0.3.0",
-  "description": "Vue3 Admin Pro Components of Vue",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build"
-  },
-  "dependencies": {
-    "@site-pro/hooks": "workspace:*",
-    "@site-pro/locale": "workspace:*",
-    "@site-pro/utils": "workspace:*"
-  },
-  "types": "./types/index.d.ts",
-  "module": "./es/index.js",
-  "main": "./lib/index.js",
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js"
+    "name": "@site-pro/components",
+    "version": "0.3.0",
+    "description": "Vue3 Admin Pro Components of Vue",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc --noEmit && vite build"
     },
-    "./*": {
-      "types": "./types/*.d.ts",
-      "import": "./es/*.js",
-      "require": "./lib/*.js"
-    }
-  },
-  "files": [
-    "lib",
-    "es",
-    "package.json"
-  ]
+    "dependencies": {
+        "@site-pro/hooks": "workspace:*",
+        "@site-pro/locale": "workspace:*",
+        "@site-pro/utils": "workspace:*"
+    },
+    "types": "./types/index.d.ts",
+    "module": "./es/index.js",
+    "main": "./lib/index.js",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "import": "./es/index.js",
+            "require": "./lib/index.js"
+        },
+        "./*": {
+            "types": "./types/*.d.ts",
+            "import": "./es/*.js",
+            "require": "./lib/*.js"
+        }
+    },
+    "files": [
+        "lib",
+        "es",
+        "package.json"
+    ]
 }

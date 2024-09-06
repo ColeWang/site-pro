@@ -1,29 +1,29 @@
 {
-  "name": "@site-pro/locale",
-  "version": "0.3.0",
-  "description": "Vue3 Admin Pro Locale of Vue",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build"
-  },
-  "types": "./types/index.d.ts",
-  "module": "./es/index.js",
-  "main": "./lib/index.js",
-  "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "import": "./es/index.js",
-      "require": "./lib/index.js"
+    "name": "@site-pro/locale",
+    "version": "0.3.0",
+    "description": "Vue3 Admin Pro Locale of Vue",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc --noEmit && vite build"
     },
-    "./*": {
-      "types": "./types/*.d.ts",
-      "import": "./es/*.js",
-      "require": "./lib/*.js"
-    }
-  },
-  "files": [
-    "lib",
-    "es",
-    "package.json"
-  ]
+    "types": "./types/index.d.ts",
+    "module": "./es/index.js",
+    "main": "./lib/index.js",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "import": "./es/index.js",
+            "require": "./lib/index.js"
+        },
+        "./*": {
+            "types": "./types/*.d.ts",
+            "import": "./es/*.js",
+            "require": "./lib/*.js"
+        }
+    },
+    "files": [
+        "lib",
+        "es",
+        "package.json"
+    ]
 }

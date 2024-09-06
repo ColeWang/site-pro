@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
-import type { BaseEnumType, BaseSlot, ColumnType } from '@site-pro/utils'
+import type { BaseEnumType, BaseSlot, ColumnType, TableRowSelection } from '@site-pro/utils'
 import type { BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
 export interface TableColumnType extends ColumnType {
@@ -44,7 +44,7 @@ export const tableProps = () => ({
         default: () => ([])
     },
     rowSelection: {
-        type: [Object, Boolean],
+        type: [Object, Boolean] as PropType<TableRowSelection | boolean>,
         default: false
     },
     scroll: {

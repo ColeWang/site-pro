@@ -12,7 +12,13 @@ function genBaseStyle (token: ProBaseFormToken): CSSInterpolation {
             [`${componentCls}-popup-container`]: {
                 position: 'relative'
             },
-            [`${antCls}-form`]: {}
+            [`${antCls}-form`]: {
+                // [`&-inline`]: {
+                //     [`${antCls}-form-item`]: {
+                //         marginInlineEnd: token.sizeMS
+                //     }
+                // }
+            }
         }
     }
 }

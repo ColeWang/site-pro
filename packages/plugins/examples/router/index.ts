@@ -9,9 +9,29 @@ const router = createRouter({
             redirect: { name: 'Home' }
         },
         {
-            path: '/home',
+            path: '/Home',
             name: 'Home',
             component: () => import('@/views/Home.vue')
+        },
+        {
+            path: '/Fullscreen',
+            name: 'Fullscreen',
+            component: () => import('@/views/Fullscreen.vue')
+        },
+        {
+            path: '/Loading',
+            name: 'Loading',
+            component: () => import('@/views/Loading.vue')
+        },
+        {
+            path: '/Progress',
+            name: 'Progress',
+            component: () => import('@/views/Progress.vue')
+        },
+        {
+            path: '/Screen',
+            name: 'Screen',
+            component: () => import('@/views/Screen.vue')
         },
     ]
 })

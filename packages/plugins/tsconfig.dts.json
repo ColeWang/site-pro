@@ -1,31 +1,31 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
-    "sourceMap": false,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "lib": [
-      "esnext",
-      "dom"
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "strict": true,
+        "jsx": "preserve",
+        "sourceMap": false,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "types": [
+            "vite/client",
+            "node"
+        ],
+        "declaration": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "vite-env.d.ts",
+        "src/**/*",
+        "src/**/*.vue"
     ],
-    "types": [
-      "vite/client",
-      "node"
-    ],
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": [
-    "vite-env.d.ts",
-    "src/**/*",
-    "src/**/*.vue"
-  ],
-  "exclude": [
-    "src/**/__tests__/*"
-  ]
+    "exclude": [
+        "src/**/__tests__/*"
+    ]
 }

@@ -8,6 +8,18 @@ import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
 import { ColWrapper, useFormInstance } from '../../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
+// 88
+// 88 * 2 + 12 = 188
+// 88 * 3 + 24 = 288
+// 88 * 4 + 36 = 388
+// 88 * 5 + 48 = 488
+
+// 104
+// 104 * 2 + 16 = 224
+// 104 * 3 + 32 =
+// 104 * 4 + 48 =
+// 104 * 5 + 64 =
+
 
 // @todo 紧凑模式
 const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
