@@ -34,10 +34,11 @@ const BaseForm = defineComponent({
 
         const formProps: ComputedRef<BaseFormProps> = computed(() => {
             const { sizeMS } = unref(token)
-            const rowProps: RowProps = {
-                gutter: [sizeMS, 0],
-                ...props.rowProps
-            }
+
+            const rowProps: RowProps = Object.assign({
+                gutter: [sizeMS, 0]
+            }, props.rowProps)
+
             const layout: BaseFormLayout = (props.grid && props.layout === 'inline')
                 ? 'vertical'
                 : props.layout

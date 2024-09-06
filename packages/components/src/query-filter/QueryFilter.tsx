@@ -96,11 +96,10 @@ const QueryFilter = defineComponent({
                 onCollapse: onCollapse
             }
 
-            const needRowProps: RowProps = {
+            const needRowProps: RowProps = Object.assign({
                 gutter: [sizeMS, sizeLG],
-                ...rowProps,
                 justify: 'start'
-            }
+            }, rowProps)
 
             const formItemClass: BaseClass = {
                 [`${prefixCls.value}-form-item__vertical`]: unref(layout) === 'vertical' && !haveRow

@@ -31,6 +31,8 @@ export interface TableColumnGroup extends Omit<TableColumnType, 'dataIndex'> {
 
 export type TableColumns = (TableColumnGroup | TableColumnType)[];
 
+// 工厂函数 createTableColumn
+
 export const tableProps = () => ({
     ...antTableProps(),
     title: {

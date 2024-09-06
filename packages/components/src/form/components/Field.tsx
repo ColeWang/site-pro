@@ -1,7 +1,7 @@
 import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import type { BaseAttrs, FormItemProps, NamePath } from '@site-pro/utils'
+import type { BaseAttrs, BaseSlot, FormItemProps, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { get, has, isArray, isString, merge, omit, pick } from 'lodash-es'
 import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
@@ -9,6 +9,7 @@ import { ColWrapper, useFormInstance } from '../../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
 
+// @todo 紧凑模式
 const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,
     sm: 216,
@@ -137,8 +138,8 @@ const Field = defineComponent({
                 grid: grid,
             }
 
-            const formItemSlots = pick(slots, SLOTS_KEYS)
-            const baseFieldSlots = omit(slots, SLOTS_KEYS)
+            const formItemSlots: Recordable<BaseSlot> = pick(slots, SLOTS_KEYS)
+            const baseFieldSlots: Recordable<BaseSlot> = omit(slots, SLOTS_KEYS)
 
             return (
                 <ColWrapper {...needColWrapProps} key={key}>
