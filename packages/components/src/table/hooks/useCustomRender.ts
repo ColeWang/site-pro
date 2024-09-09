@@ -45,7 +45,7 @@ function useCustomRender (props) {
 
     function genCustomRenderColumns (columns) {
         return columns.map((column, index) => {
-            const key = column.key || column.dataIndex || String(index)
+            const key = column.dataIndex || column.key || String(index)
             const tempColumns = { ...column, key: key }
             if (column.children && isArray(column.children)) {
                 tempColumns.children = genCustomRenderColumns(column.children)

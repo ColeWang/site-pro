@@ -31,7 +31,7 @@ const Descriptions = defineComponent({
                 const { fieldProps, formItemProps, __SLOTS__: itemSlots } = item
                 const { valueType, dataIndex, name, label } = item
 
-                const namePath = dataIndex || name || item.key
+                const namePath = name || dataIndex || item.key
                 const title = isFunction(item.title) ? item.title() : (item.title || label)
 
                 const descsItemProps = {

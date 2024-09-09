@@ -20,7 +20,7 @@ export default defineComponent({
     setup (props, { attrs }) {
         const defaultColumns = filterSearchColumns(props.columns)
         const initialValues = reduce(defaultColumns, (result, column) => {
-            const namePath = column.key || column.dataIndex
+            const namePath = column.dataIndex || column.key
             if (namePath && !isEmpty(column.initialValue)) {
                 return set(result, namePath, column.initialValue)
             }
@@ -40,7 +40,7 @@ export default defineComponent({
                 <BaseSearch {...baseSearchProps}>
                     {unref(searchColumns).map((column) => {
                         const { fieldProps, formItemProps } = column
-                        const namePath = column.key || column.dataIndex
+                        const namePath = column.dataIndex || column.key
 
                         const needFormItemProps = {
                             ...formItemProps,

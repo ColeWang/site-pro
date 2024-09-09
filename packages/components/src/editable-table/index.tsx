@@ -53,7 +53,7 @@ export default defineComponent({
         function customRender ({ text, record, index, column }) {
             const { controlHeight, fontSize, lineHeight } = unref(token)
             const { fieldProps, formItemProps } = column
-            const namePath = [index, column.key || column.dataIndex]
+            const namePath = [index, column.dataIndex || column.key]
 
             const needFormItemProps = {
                 ...formItemProps,
