@@ -145,6 +145,10 @@ export default defineComponent({
             emit('sizeChange', value)
         }
 
+        function getPopupContainer (): HTMLElement {
+            return getElement(popupContainer) || document.body
+        }
+
         createSharedContext({
             requestProps,
             tableSize,
@@ -246,7 +250,7 @@ export default defineComponent({
                     <Card bodyStyle={cardBodyStyle}>
                         {propsToolbar !== false && renderToolbar()}
                         {propsRowSelection !== false && renderAlert()}
-                        <ConfigProvider getPopupContainer={getElement.bind(null, popupContainer)}>
+                        <ConfigProvider getPopupContainer={getPopupContainer}>
                             <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                                 <div class={`${prefixCls.value}-container`} ref={tableRef}>
                                     {tableDom || baseTableDom}

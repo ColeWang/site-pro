@@ -3,7 +3,7 @@ import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
 import type { BaseEnumType, BaseSlot, ColumnType, TableRowSelection } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
-export interface TableColumnType<T extends BaseFieldValueType> extends ColumnType {
+export interface TableColumnType extends ColumnType {
     search?: false | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
@@ -13,11 +13,11 @@ export interface TableColumnType<T extends BaseFieldValueType> extends ColumnTyp
     ellipsis?: boolean;
     copyable?: boolean;
     // field
-    valueType?: T;
+    valueType?: BaseFieldValueType;
     initialValue?: any;
     valueEnum?: BaseEnumType;
     // 对应 valueType 需要使用类型断言来确保类型正确
-    fieldProps?: BaseFieldFieldProps<T>;
+    fieldProps?: BaseFieldFieldProps<BaseFieldValueType>;
     formItemProps?: BaseFieldFormItemProps;
     // setting
     order?: number;
@@ -25,11 +25,17 @@ export interface TableColumnType<T extends BaseFieldValueType> extends ColumnTyp
     disable?: boolean;
 }
 
-export interface TableColumnGroup<T extends BaseFieldValueType> extends Omit<TableColumnType<T>, 'dataIndex'> {
+export interface TableColumnGroup extends Omit<TableColumnType, 'dataIndex'> {
     children: TableColumns;
 }
 
-export type TableColumns = (TableColumnGroup<BaseFieldValueType> | TableColumnType<BaseFieldValueType>)[];
+export type TableColumns = (TableColumnGroup | TableColumnType)[];
+
+export interface TableScroll {
+    x?: number | true | string;
+    y?: number | string;
+    scrollToFirstRowOnChange?: boolean;
+}
 
 export const tableProps = () => ({
     ...antTableProps(),
@@ -46,7 +52,7 @@ export const tableProps = () => ({
         default: false
     },
     scroll: {
-        type: Object,
+        type: Object as PropType<TableScroll>,
         default: () => ({ x: 'max-content' })
     },
     emptyText: {
