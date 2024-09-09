@@ -3,7 +3,7 @@ import { defineComponent, unref } from 'vue'
 import { Dropdown, Menu, Space, theme } from 'ant-design-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { flattenChildren } from '@site-pro/utils'
-import { take, takeRight } from 'lodash-es'
+import { drop, take } from 'lodash-es'
 import Action from './Action'
 import { actionGroupProps } from './typings'
 
@@ -23,15 +23,13 @@ const ActionGroup = defineComponent({
             const nodes: VNode[] = flattenChildren(slots.default ? slots.default() : [])
 
             if (nodes.length && nodes.length > max) {
-                // 前部分
-                const firstHalfNodes: VNode[] = take(nodes, max)
-                // 后部分
-                const secondHalfNodes: VNode[] = takeRight(nodes, nodes.length - max)
+                const takeNodes: VNode[] = take(nodes, max)
+                const dropNodes: VNode[] = drop(nodes, max)
                 /* v8 ignore next 9 */
                 const dropdownSlots: Recordable<BaseSlot> = {
                     overlay: () => (
                         <Menu data-type={'dropdown'} selectedKeys={[]}>
-                            {secondHalfNodes.map((item, index) => {
+                            {dropNodes.map((item, index) => {
                                 return <Menu.Item key={index}>{item}</Menu.Item>
                             })}
                         </Menu>
@@ -39,7 +37,7 @@ const ActionGroup = defineComponent({
                 }
                 return (
                     <Space size={propsSize || sizeMS / 2} {...attrs}>
-                        {firstHalfNodes}
+                        {takeNodes}
                         <Dropdown placement={'bottomRight'} v-slots={dropdownSlots}>
                             <Action>...</Action>
                         </Dropdown>

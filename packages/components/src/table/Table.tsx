@@ -1,32 +1,35 @@
+import type { Ref, SlotsType } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table, theme } from 'ant-design-vue'
-import { getSlot, getSlotVNode, omitNil, getElement } from '@site-pro/utils'
+import { getElement, getSlot, getSlotVNode, omitNil } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import tableProps from './typings.ts'
+import { isArray, isFunction, omit, pick, toPlainObject } from 'lodash-es'
 import Search from './components/search'
 import Extra from './components/extra'
 import Toolbar from './components/toolbar'
 import Alert from './components/alert'
-import useFetchData from './hooks/useFetchData.ts'
-import useTableColumns from './hooks/useTableColumns.ts'
-import useRowSelection from './hooks/useRowSelection.ts'
-import { createSharedContext } from './hooks/useSharedContext.ts'
+import useFetchData from './hooks/useFetchData'
+import useTableColumns from './hooks/useTableColumns'
+import useRowSelection from './hooks/useRowSelection'
+import { createSharedContext } from './hooks/useSharedContext'
+import { tableProps } from './typings'
 import useStyle from './style'
-import { isArray, isFunction, omit, pick, toPlainObject } from 'lodash-es'
 
 export default defineComponent({
     inheritAttrs: false,
-    props: tableProps,
+    name: 'ProTable',
+    props: tableProps(),
+    slots: Object as SlotsType<{}>,
     emits: ['change', 'paginateChange', 'filterChange', 'sortChange', 'loadingChange', 'export', 'sizeChange', 'columnsChange', 'load', 'requestError', 'finish', 'reset'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-table', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { token } = theme.useToken()
 
-        const popupContainer = ref(null)
-        const tableRef = ref(null)
+        const popupContainer: Ref<HTMLElement | null> = ref(null)
+        const tableRef: Ref<HTMLElement | null> = ref(null)
 
-        const tableSize = ref(props.size || 'middle')
+        const tableSize: Ref<'small' | 'large' | 'middle'> = ref(props.size || 'middle')
 
         const {
             context: requestProps,

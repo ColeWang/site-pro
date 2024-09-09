@@ -16,7 +16,7 @@ export interface TableColumnType<T extends BaseFieldValueType> extends ColumnTyp
     valueType?: T;
     initialValue?: any;
     valueEnum?: BaseEnumType;
-    // 对应 valueType 需要使用类型断言来确保类型正确 工厂函数 createTableColumn
+    // 对应 valueType 需要使用类型断言来确保类型正确
     fieldProps?: BaseFieldFieldProps<T>;
     formItemProps?: BaseFieldFormItemProps;
     // setting
