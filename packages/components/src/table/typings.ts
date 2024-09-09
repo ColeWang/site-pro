@@ -1,9 +1,9 @@
 import type { PropType } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
 import type { BaseEnumType, BaseSlot, ColumnType, TableRowSelection } from '@site-pro/utils'
-import type { BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
+import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
-export interface TableColumnType extends ColumnType {
+export interface TableColumnType<T extends BaseFieldValueType> extends ColumnType {
     search?: false | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
@@ -13,11 +13,11 @@ export interface TableColumnType extends ColumnType {
     ellipsis?: boolean;
     copyable?: boolean;
     // field
-    valueType?: BaseFieldValueType | string;
+    valueType?: T;
     initialValue?: any;
     valueEnum?: BaseEnumType;
-    // 对应 valueType 需要使用类型断言来确保类型正确
-    fieldProps?: any;
+    // 对应 valueType 需要使用类型断言来确保类型正确 工厂函数 createTableColumn
+    fieldProps?: BaseFieldFieldProps<T>;
     formItemProps?: BaseFieldFormItemProps;
     // setting
     order?: number;
@@ -25,13 +25,11 @@ export interface TableColumnType extends ColumnType {
     disable?: boolean;
 }
 
-export interface TableColumnGroup extends Omit<TableColumnType, 'dataIndex'> {
+export interface TableColumnGroup<T extends BaseFieldValueType> extends Omit<TableColumnType<T>, 'dataIndex'> {
     children: TableColumns;
 }
 
-export type TableColumns = (TableColumnGroup | TableColumnType)[];
-
-// 工厂函数 createTableColumn
+export type TableColumns = (TableColumnGroup<BaseFieldValueType> | TableColumnType<BaseFieldValueType>)[];
 
 export const tableProps = () => ({
     ...antTableProps(),

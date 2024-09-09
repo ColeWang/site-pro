@@ -9,19 +9,20 @@ import { ColWrapper, useFormInstance } from '../../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
 // 88
-// 88 * 2 + 12 = 188
-// 88 * 3 + 24 = 288
-// 88 * 4 + 36 = 388
-// 88 * 5 + 48 = 488
+// 88 * 2 + 8 = 184
+// 88 * 3 + 16 = 280
+// 88 * 4 + 24 = 376
+// 88 * 5 + 32 = 472
 
 // 104
 // 104 * 2 + 16 = 224
-// 104 * 3 + 32 =
-// 104 * 4 + 48 =
-// 104 * 5 + 64 =
+// 104 * 3 + 32 = 344
+// 104 * 4 + 48 = 464
+// 104 * 5 + 64 = 584
 
 
 // @todo 紧凑模式 还需要考虑到 非 grid 模式下 怎么使用
+// 正常模式下
 const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,
     sm: 216,
