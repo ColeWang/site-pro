@@ -25,13 +25,15 @@ const ActionGroup = defineComponent({
             if (nodes.length && nodes.length > max) {
                 const takeNodes: VNode[] = take(nodes, max)
                 const dropNodes: VNode[] = drop(nodes, max)
+
+                const menuNodes: VNode[] = dropNodes.map((item, index) => {
+                    return <Menu.Item key={index}>{item}</Menu.Item>
+                })
                 /* v8 ignore next 9 */
                 const dropdownSlots: Recordable<BaseSlot> = {
                     overlay: () => (
                         <Menu data-type={'dropdown'} selectedKeys={[]}>
-                            {dropNodes.map((item, index) => {
-                                return <Menu.Item key={index}>{item}</Menu.Item>
-                            })}
+                            {menuNodes}
                         </Menu>
                     )
                 }
