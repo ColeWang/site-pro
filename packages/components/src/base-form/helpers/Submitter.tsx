@@ -23,11 +23,11 @@ export const submitterProps = () => ({
         default: undefined
     },
     submitButtonProps: {
-        type: [Object, Boolean] as PropType<ButtonProps | false>,
+        type: [Boolean, Object] as PropType<false | ButtonProps>,
         default: undefined
     },
     resetButtonProps: {
-        type: [Object, Boolean] as PropType<ButtonProps | false>,
+        type: [Boolean, Object] as PropType<false | ButtonProps>,
         default: undefined
     },
     onReset: {

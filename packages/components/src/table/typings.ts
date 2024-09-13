@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
-import type { BaseEnumType, BaseSlot, ColumnType, TableRowSelection } from '@site-pro/utils'
+import type { BaseEnumType, BaseSlot, ColumnType, TableRowSelection, Recordable } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
 export interface TableColumnType extends ColumnType {
@@ -37,6 +37,10 @@ export interface TableScroll {
     scrollToFirstRowOnChange?: boolean;
 }
 
+export interface TableRequest {
+    (params: Recordable, paginate, filter, sort): Promise<any>;
+}
+
 export const tableProps = () => ({
     ...antTableProps(),
     title: {
@@ -48,7 +52,7 @@ export const tableProps = () => ({
         default: () => ([])
     },
     rowSelection: {
-        type: [Object, Boolean] as PropType<TableRowSelection | boolean>,
+        type: [Boolean, Object] as PropType<boolean | TableRowSelection>,
         default: false
     },
     scroll: {
@@ -60,7 +64,7 @@ export const tableProps = () => ({
         default: '-'
     },
     search: {
-        type: [Object, Boolean],
+        type: [Boolean, Object],
         default: undefined
     },
     manualRequest: {
@@ -68,15 +72,15 @@ export const tableProps = () => ({
         default: false
     },
     request: {
-        type: Function,
+        type: Function as PropType<TableRequest>,
         default: undefined
     },
     params: {
-        type: Object,
+        type: Object as PropType<Recordable>,
         default: () => ({})
     },
     beforeSearchSubmit: {
-        type: Function,
+        type: Function as PropType<(values: Recordable) => Recordable>,
         default: undefined
     },
     postData: {
@@ -84,7 +88,7 @@ export const tableProps = () => ({
         default: undefined
     },
     toolbar: {
-        type: [Object, Boolean],
+        type: [Boolean, Object],
         default: true
     },
     actions: {

@@ -2,6 +2,7 @@ import { shallowReactive, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale-provider'
+import type { TableRequest } from '../typings'
 
 function mergePagination (pagination, t) {
     if (pagination === false) return false
@@ -27,7 +28,7 @@ function validatePaginate (paginate) {
     return { ...paginate, current: nextCurrent }
 }
 
-function useFetchData (request, props, options) {
+function useFetchData (request: TableRequest, props, options) {
     const { t } = useLocaleReceiver(['Table', 'pagination'])
     const { onLoad, onRequestError } = options || {}
 

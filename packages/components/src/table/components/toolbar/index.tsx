@@ -28,7 +28,7 @@ export default defineComponent({
     inheritAttrs: false,
     props: {
         options: {
-            type: [Object, Boolean],
+            type: [Boolean, Object],
             default: () => ({})
         },
         title: {
