@@ -1,9 +1,21 @@
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
-import type { BaseEnumType, BaseSlot, ColumnType, TableRowSelection, Recordable } from '@site-pro/utils'
+import type {
+    BaseEnumType,
+    BaseSlot,
+    Recordable,
+    TableColumnType as AntTableColumnType,
+    TableCurrentDataSource,
+    TableFilterValue,
+    TablePagination,
+    TableRowSelection,
+    TableSorterResult,
+    TableSortOrder
+} from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
+import { BaseFormModel } from '../base-form'
 
-export interface TableColumnType extends ColumnType {
+export interface TableColumnType extends AntTableColumnType {
     search?: false | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
@@ -38,11 +50,17 @@ export interface TableScroll {
 }
 
 export interface TableRequest {
-    (params: Recordable, paginate, filter, sort): Promise<any>;
+    (params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>): Promise<any>;
 }
+
+export type TableSize = 'small' | 'large' | 'middle'
 
 export const tableProps = () => ({
     ...antTableProps(),
+    size: {
+        type: String as PropType<TableSize>,
+        default: 'middle'
+    },
     title: {
         type: Function as PropType<BaseSlot>,
         default: undefined
@@ -76,15 +94,15 @@ export const tableProps = () => ({
         default: undefined
     },
     params: {
-        type: Object as PropType<Recordable>,
+        type: Object as PropType<BaseFormModel>,
         default: () => ({})
     },
     beforeSearchSubmit: {
-        type: Function as PropType<(values: Recordable) => Recordable>,
+        type: Function as PropType<(values: BaseFormModel) => BaseFormModel>,
         default: undefined
     },
     postData: {
-        type: Function,
+        type: Function as PropType<(data: any[], params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>) => any[]>,
         default: undefined
     },
     toolbar: {
@@ -116,7 +134,7 @@ export const tableProps = () => ({
         default: undefined
     },
     onChange: {
-        type: Function,
+        type: Function as PropType<(paginate: TablePagination, filters: Recordable<TableFilterValue>, sorter: TableSorterResult | TableSorterResult[], extra: TableCurrentDataSource) => void>,
         default: undefined
     },
     onPaginateChange: {
@@ -164,3 +182,12 @@ export const tableProps = () => ({
         default: undefined
     }
 })
+
+export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;
+
+export interface TableExpose {
+    size: Ref<TableSize>;
+    columns: Ref<TableColumns>;
+}
+
+export type TableInstance = ComponentPublicInstance<TableProps, TableExpose>;

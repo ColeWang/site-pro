@@ -1,9 +1,10 @@
 import type { Ref, SlotsType } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table, theme } from 'ant-design-vue'
+import type { TablePagination, TableFilterValue, TableSorterResult, TableCurrentDataSource, TableAction, TableSortOrder, Recordable } from '@site-pro/utils'
 import { getElement, getSlot, getSlotVNode, omitNil } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { isArray, isFunction, omit, pick, toPlainObject } from 'lodash-es'
+import { isArray, isFunction, omit, pick, toPlainObject, reduce } from 'lodash-es'
 import Search from './components/search'
 import Extra from './components/extra'
 import Toolbar from './components/toolbar'
@@ -12,6 +13,7 @@ import useFetchData from './hooks/useFetchData'
 import useTableColumns from './hooks/useTableColumns'
 import useRowSelection from './hooks/useRowSelection'
 import { createSharedContext } from './hooks/useSharedContext'
+import type { TableSize } from './typings'
 import { tableProps } from './typings'
 import useStyle from './style'
 
@@ -29,7 +31,7 @@ export default defineComponent({
         const popupContainer: Ref<HTMLElement | null> = ref(null)
         const tableRef: Ref<HTMLElement | null> = ref(null)
 
-        const tableSize: Ref<'small' | 'large' | 'middle'> = ref(props.size || 'middle')
+        const tableSize: Ref<TableSize> = ref(props.size)
 
         const {
             context: requestProps,
@@ -41,7 +43,7 @@ export default defineComponent({
             setSort
         } = useFetchData(props.request, props, {
             onLoad: (dataSource) => emit('load', dataSource),
-            onRequestError: (err) => emit('requestError', err)
+            onRequestError: (err: Error) => emit('requestError', err)
         })
 
         const { columns, columnsMap, setColumnsMap } = useTableColumns(props)
@@ -61,13 +63,18 @@ export default defineComponent({
 
         // 没搜索的时候 发起请求
         onMounted(() => {
-            const ifReload = props.manualRequest === false && props.search === false
+            const ifReload = !props.manualRequest && props.search === false
             ifReload && onReload(true)
         })
 
-        function onChange (paginate, filters, sorter, extra) {
+        function onChange (
+            paginate: TablePagination,
+            filters: Recordable<TableFilterValue>,
+            sorter: TableSorterResult | TableSorterResult[],
+            extra: TableCurrentDataSource
+        ) {
             emit('change', paginate, filters, sorter, extra)
-            const finalAction = {
+            const finalAction: Record<TableAction, Function> = {
                 paginate: () => {
                     onPaginateChange(paginate)
                 },
@@ -77,15 +84,15 @@ export default defineComponent({
                 },
                 sort: () => {
                     if (isArray(sorter)) {
-                        const data = sorter.reduce((pre, value) => {
-                            return { ...pre, [`${value.field}`]: value.order }
+                        const data: Recordable<TableSortOrder> = reduce(sorter, (result, value) => {
+                            return { ...result, [`${value.field}`]: value.order }
                         }, {})
                         onSortChange(data)
                     } else {
                         const sorterOfColumn = sorter.column && sorter.column.sorter
                         const isSortByField = sorterOfColumn && sorterOfColumn.toString() === sorterOfColumn
-                        const key = `${isSortByField ? sorterOfColumn : sorter.field}`
-                        const data = { [key]: sorter.order }
+                        const key: string = `${isSortByField ? sorterOfColumn : sorter.field}`
+                        const data: Recordable<TableSortOrder> = { [key]: sorter.order! }
                         onSortChange(data)
                     }
                 }
@@ -93,21 +100,21 @@ export default defineComponent({
             finalAction[extra.action] && finalAction[extra.action]()
         }
 
-        function onPaginateChange (paginate) {
-            const nextPaginate = pick(paginate, ['current', 'pageSize'])
+        function onPaginateChange (paginate: TablePagination) {
+            const nextPaginate: TablePagination = pick(paginate, ['current', 'pageSize'])
             setPaginate && setPaginate(nextPaginate)
             emit('paginateChange', nextPaginate)
         }
 
         /* v8 ignore next 5 */
-        function onFilterChange (filter) {
-            const nextFilter = omitNil(filter)
+        function onFilterChange (filter: Recordable<TableFilterValue>) {
+            const nextFilter: Recordable<TableFilterValue> = omitNil(filter)
             setFilter && setFilter(nextFilter)
             emit('filterChange', nextFilter)
         }
 
-        function onSortChange (sort) {
-            const nextSort = omitNil(sort)
+        function onSortChange (sort: Recordable<TableSortOrder>) {
+            const nextSort: Recordable<TableSortOrder> = omitNil(sort)
             setSort && setSort(nextSort)
             emit('sortChange', nextSort)
         }

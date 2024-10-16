@@ -66,9 +66,9 @@ const QueryFilter = defineComponent({
             const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child, hidden, key } = item
-                const fieldLabelWidth: number | 'auto' | undefined = child.props
-                    && (child.props as any)['label-width']
-                    || (child.props as any).labelWidth
+                const fieldLabelWidth: number | 'auto' | undefined = child.props &&
+                    (child.props as any)['label-width'] ||
+                    (child.props as any)['labelWidth']
 
                 // 默认宽度 80px sizeMD * 4
                 const fieldNode: VNode = cloneVNode(child, {

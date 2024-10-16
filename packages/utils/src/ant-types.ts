@@ -28,7 +28,16 @@ import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import type { ModalProps } from 'ant-design-vue/es/modal/Modal'
 import type { DrawerProps } from 'ant-design-vue/es/drawer'
 import type { TableProps } from 'ant-design-vue/es/table/Table'
-import type { ColumnType, TablePaginationConfig, TableRowSelection } from 'ant-design-vue/es/table/interface'
+import type {
+    ColumnType as TableColumnType,
+    TablePaginationConfig as TablePagination,
+    FilterValue as TableFilterValue,
+    SorterResult as TableSorterResult,
+    SortOrder as TableSortOrder,
+    TableAction,
+    TableCurrentDataSource,
+    TableRowSelection
+} from 'ant-design-vue/es/table/interface'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -46,7 +55,7 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProQueryFilter?: {};
         ProQueryFilterActions?: {};
         ProDescriptions?: {};
-        ProAction?:{};
+        ProAction?: {};
         ProLoadingPlugin?: {};
         ProProgressPlugin?: {};
     }
@@ -95,9 +104,14 @@ export type {
     ModalProps,
     DrawerProps,
     TableProps,
-    ColumnType,
-    TablePaginationConfig,
+    TableColumnType,
+    TablePagination,
+    TableFilterValue,
+    TableSorterResult,
+    TableSortOrder,
+    TableAction,
     TableRowSelection,
+    TableCurrentDataSource,
     // --
     ValidateErrorEntity
 }

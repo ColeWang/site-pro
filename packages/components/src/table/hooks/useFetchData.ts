@@ -1,13 +1,14 @@
 import { shallowReactive, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
+import type { NamePath, TablePagination } from '@site-pro/utils'
 import { isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale-provider'
 import type { TableRequest } from '../typings'
 
-function mergePagination (pagination, t) {
+function mergePagination (pagination: false | TablePagination, t: (namePath: NamePath) => string | undefined) {
     if (pagination === false) return false
     const { current, pageSize, showTotal, total } = pagination || {}
-    const loopShowTotal = (total, range) => {
+    const loopShowTotal = (total: number, range: [number, number]) => {
         return `${t('range')} ${range[0]}-${range[1]} ${t('total')} ${total} ${t('item')}`
     }
     return {
@@ -20,11 +21,11 @@ function mergePagination (pagination, t) {
     }
 }
 
-function validatePaginate (paginate) {
-    const { current, pageSize, total } = paginate
-    const maxCurrent = Math.ceil(total / pageSize)
-    const overflow = total && current > maxCurrent
-    const nextCurrent = overflow ? maxCurrent : current
+function validatePaginate (paginate: TablePagination): TablePagination {
+    const { current, pageSize, total } = paginate as Required<TablePagination>
+    const maxCurrent: number = Math.ceil(total / pageSize)
+    const overflow: boolean | 0 = total && current > maxCurrent
+    const nextCurrent: number = overflow ? maxCurrent : current
     return { ...paginate, current: nextCurrent }
 }
 
