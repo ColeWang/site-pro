@@ -53,6 +53,14 @@ export interface TableRequest {
     (params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>): Promise<any>;
 }
 
+export interface TablePostData {
+    (data: any[], params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>): any[];
+}
+
+export interface TableOnChange {
+    (paginate: TablePagination, filters: Recordable<TableFilterValue>, sorter: TableSorterResult | TableSorterResult[], extra: TableCurrentDataSource): void;
+}
+
 export type TableSize = 'small' | 'large' | 'middle'
 
 export const tableProps = () => ({
@@ -102,7 +110,7 @@ export const tableProps = () => ({
         default: undefined
     },
     postData: {
-        type: Function as PropType<(data: any[], params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>) => any[]>,
+        type: Function as PropType<TablePostData>,
         default: undefined
     },
     toolbar: {
@@ -134,7 +142,7 @@ export const tableProps = () => ({
         default: undefined
     },
     onChange: {
-        type: Function as PropType<(paginate: TablePagination, filters: Recordable<TableFilterValue>, sorter: TableSorterResult | TableSorterResult[], extra: TableCurrentDataSource) => void>,
+        type: Function as PropType<TableOnChange>,
         default: undefined
     },
     onPaginateChange: {
@@ -166,19 +174,19 @@ export const tableProps = () => ({
         default: undefined
     },
     onLoad: {
-        type: Function,
+        type: Function as PropType<(dataSource: any[]) => void>,
         default: undefined
     },
     onRequestError: {
-        type: Function,
+        type: Function as PropType<(err: Error) => void>,
         default: undefined
     },
     onFinish: {
-        type: Function,
+        type: Function as PropType<(values: BaseFormModel) => void>,
         default: undefined
     },
     onReset: {
-        type: Function,
+        type: Function as PropType<(values: BaseFormModel) => void>,
         default: undefined
     }
 })

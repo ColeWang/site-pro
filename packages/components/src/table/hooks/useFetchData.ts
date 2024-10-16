@@ -29,7 +29,7 @@ function validatePaginate (paginate: TablePagination): TablePagination {
     return { ...paginate, current: nextCurrent }
 }
 
-function useFetchData (request: TableRequest, props, options) {
+function useFetchData (request: TableRequest | undefined, props, options) {
     const { t } = useLocaleReceiver(['Table', 'pagination'])
     const { onLoad, onRequestError } = options || {}
 

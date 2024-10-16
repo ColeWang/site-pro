@@ -42,7 +42,7 @@ export default defineComponent({
             setFilter,
             setSort
         } = useFetchData(props.request, props, {
-            onLoad: (dataSource) => emit('load', dataSource),
+            onLoad: (dataSource: any[]) => emit('load', dataSource),
             onRequestError: (err: Error) => emit('requestError', err)
         })
 
