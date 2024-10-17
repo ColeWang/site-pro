@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot, DrawerProps, ModalProps } from '@site-pro/utils'
-import type { BaseFormInstance, BaseFormModel, SubmitterProps } from '../base-form'
+import type { BaseSlot, DrawerProps, ModalProps, Recordable } from '@site-pro/utils'
+import type { BaseFormInstance, SubmitterProps } from '../base-form'
 import { baseFormProps } from '../base-form'
 
 export const floatFormProps = () => ({
@@ -38,7 +38,7 @@ export const floatFormProps = () => ({
         default: undefined
     },
     onFinish: {
-        type: Function as PropType<(values: BaseFormModel) => Promise<boolean>>,
+        type: Function as PropType<(values: Recordable) => Promise<boolean>>,
         default: undefined
     },
     onFormRef: {

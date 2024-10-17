@@ -1,10 +1,9 @@
 import type { Ref } from 'vue'
 import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import type { TablePagination } from '@site-pro/utils'
+import type { TablePagination, Recordable } from '@site-pro/utils'
 import { isEqual, isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale-provider'
-import type { BaseFormModel } from '../../base-form'
 import type { TableProps, TableRequest } from '../typings'
 
 interface Context {
@@ -29,8 +28,8 @@ function mergePagination (
     return { ...pagination, ...basePaginate }
 }
 
-function validatePaginate (paginate: TablePagination): TablePagination {
-    const { current, pageSize, total } = paginate as Required<TablePagination>
+function validatePaginate (paginate: Required<TablePagination>): TablePagination {
+    const { current, pageSize, total } = paginate
     const maxCurrent: number = Math.ceil(total / pageSize)
     const overflow: boolean | 0 = total && current > maxCurrent
     const nextCurrent: number = overflow ? maxCurrent : current
@@ -51,7 +50,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
         pagination: mergePagination(props.pagination, defaultShowTotal)
     })
 
-    const sParams: Ref<BaseFormModel> = shallowRef({})
+    const sParams: Ref<Recordable> = shallowRef({})
 
     const stopWatchDataSource = watch(() => props.dataSource, (value) => {
         // 手动请求时 更新 dataSource
@@ -105,7 +104,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
         context.pagination = validatePaginate(needPaginate)
     }
 
-    function setParams (params: BaseFormModel): void {
+    function setParams (params: Recordable): void {
         sParams.value = params
     }
 

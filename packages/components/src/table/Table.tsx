@@ -99,10 +99,10 @@ export default defineComponent({
             finalAction[extra.action] && finalAction[extra.action]()
         }
 
-        function onFinish (values) {
+        function onFinish (values: Recordable): void {
             const nextValues = omitNil(values)
             if (isFunction(props.beforeSearchSubmit)) {
-                const result = props.beforeSearchSubmit(nextValues)
+                const result: Recordable = props.beforeSearchSubmit(nextValues)
                 setParams && setParams(result || {})
             } else {
                 setParams && setParams(nextValues)
@@ -110,8 +110,8 @@ export default defineComponent({
             emit('finish', nextValues)
         }
 
-        function onReset (value) {
-            emit('reset', value)
+        function onReset (values: Recordable): void {
+            emit('reset', values)
         }
 
         function onExport () {

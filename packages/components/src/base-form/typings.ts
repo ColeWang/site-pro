@@ -2,8 +2,6 @@ import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, 
 import { formProps as antFormProps } from 'ant-design-vue/es/form'
 import type { FormInstance, NamePath, Recordable, RowProps, ValidateErrorEntity } from '@site-pro/utils'
 
-export type BaseFormModel = Recordable;
-
 export interface BaseFormUpdater {
     (value: any): any;
 }
@@ -33,7 +31,7 @@ export const baseFormProps = () => ({
         default: () => ({})
     },
     transform: {
-        type: Function as PropType<(values: BaseFormModel) => BaseFormModel>,
+        type: Function as PropType<(values: Recordable) => Recordable>,
         default: undefined
     },
     onSubmit: {
@@ -41,7 +39,7 @@ export const baseFormProps = () => ({
         default: undefined
     },
     onFinish: {
-        type: Function as PropType<(values: BaseFormModel) => void>,
+        type: Function as PropType<(values: Recordable) => void>,
         default: undefined
     },
     onFinishFailed: {
@@ -49,11 +47,11 @@ export const baseFormProps = () => ({
         default: undefined
     },
     onReset: {
-        type: Function as PropType<(values: BaseFormModel) => void>,
+        type: Function as PropType<(values: Recordable) => void>,
         default: undefined
     },
     onValuesChange: {
-        type: Function as PropType<(values: BaseFormModel) => void>,
+        type: Function as PropType<(values: Recordable) => void>,
         default: undefined
     }
 })
@@ -62,14 +60,14 @@ export type BaseFormProps = Partial<ExtractPropTypes<ReturnType<typeof baseFormP
 
 export interface BaseFormExpose {
     formInstanceRef: Ref<FormInstance | null>;
-    model: Ref<BaseFormModel>;
+    model: Ref<Recordable>;
     formProps: ComputedRef<BaseFormProps>;
-    setModelValue: (namePath: NamePath, value: any) => BaseFormModel;
-    getModelValue: (namePath: NamePath) => BaseFormModel;
-    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => BaseFormModel;
+    setModelValue: (namePath: NamePath, value: any) => Recordable;
+    getModelValue: (namePath: NamePath) => Recordable;
+    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => Recordable;
     deleteModelValue: (namePath: NamePath) => boolean;
     submit: () => void;
-    validate: (names?: NamePath[]) => Promise<BaseFormModel>;
+    validate: (names?: NamePath[]) => Promise<Recordable>;
     resetFields: (names?: NamePath[]) => void;
 }
 

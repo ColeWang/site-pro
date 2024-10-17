@@ -13,7 +13,6 @@ import type {
     TableSortOrder,
 } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
-import { BaseFormModel } from '../base-form'
 
 export interface TableColumnType extends AntTableColumnType {
     search?: false | { transform: (value: any) => any };
@@ -50,26 +49,11 @@ export interface TableScroll {
 }
 
 export interface TableRequest {
-    (
-        params: BaseFormModel,
-        ctx: {
-            paginate: TablePagination,
-            filter: Recordable<TableFilterValue>,
-            sort: Recordable<TableSortOrder>
-        }
-    ): Promise<any>;
+    (params: Recordable, paginate: TablePagination): Promise<any>;
 }
 
 export interface TablePostData {
-    (
-        data: any[],
-        params: BaseFormModel,
-        ctx: {
-            paginate: TablePagination,
-            filter: Recordable<TableFilterValue>,
-            sort: Recordable<TableSortOrder>
-        }
-    ): any[];
+    (data: any[], params: Recordable, paginate: TablePagination): any[];
 }
 
 export interface TableOnChange {
@@ -122,11 +106,11 @@ export const tableProps = () => ({
         default: undefined
     },
     params: {
-        type: Object as PropType<BaseFormModel>,
+        type: Object as PropType<Recordable>,
         default: () => ({})
     },
     beforeSearchSubmit: {
-        type: Function as PropType<(values: BaseFormModel) => BaseFormModel>,
+        type: Function as PropType<(values: Recordable) => Recordable>,
         default: undefined
     },
     postData: {
@@ -202,11 +186,11 @@ export const tableProps = () => ({
         default: undefined
     },
     onFinish: {
-        type: Function as PropType<(values: BaseFormModel) => void>,
+        type: Function as PropType<(values: Recordable) => void>,
         default: undefined
     },
     onReset: {
-        type: Function as PropType<(values: BaseFormModel) => void>,
+        type: Function as PropType<(values: Recordable) => void>,
         default: undefined
     }
 })

@@ -1,14 +1,14 @@
 import type { App, ComputedRef, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
-import type { FormInstance, FormProps, NamePath, RowProps, ValidateErrorEntity } from '@site-pro/utils'
+import type { FormInstance, FormProps, NamePath, RowProps, ValidateErrorEntity, Recordable } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
 import { createFromInstance } from './hooks/useFormInstance'
 import type { RowWrapperProps } from './helpers'
 import { RowWrapper } from './helpers'
-import type { BaseFormExpose, BaseFormLayout, BaseFormModel, BaseFormProps, BaseFormUpdater } from './typings'
+import type { BaseFormExpose, BaseFormLayout, BaseFormProps, BaseFormUpdater } from './typings'
 import { baseFormProps } from './typings'
 import useStyle from './style'
 
@@ -28,9 +28,9 @@ const BaseForm = defineComponent({
         const popupContainer: Ref<HTMLElement | null> = ref(null)
         const formInstanceRef: Ref<FormInstance | null> = ref(null)
 
-        const defaultValues: BaseFormModel = cloneProxyToRaw(props.initialValues)
+        const defaultValues: Recordable = cloneProxyToRaw(props.initialValues)
         // 考虑到 model 传递就不再需要 initialValues
-        const model: Ref<BaseFormModel> = ref(props.model || defaultValues)
+        const model: Ref<Recordable> = ref(props.model || defaultValues)
 
         const formProps: ComputedRef<BaseFormProps> = computed(() => {
             const { sizeMS } = unref(token)
@@ -46,11 +46,11 @@ const BaseForm = defineComponent({
             return { ...attrs, ...props, layout, rowProps } as BaseFormProps
         })
 
-        watch(model, (curr: BaseFormModel) => {
+        watch(model, (curr: Recordable) => {
             emit('valuesChange', curr)
         }, { immediate: true, deep: true })
 
-        function setModelValue (namePath: NamePath, value: any): BaseFormModel {
+        function setModelValue (namePath: NamePath, value: any): Recordable {
             return set(model.value, namePath, value)
         }
 
@@ -58,7 +58,7 @@ const BaseForm = defineComponent({
             return get(model.value, namePath, undefined)
         }
 
-        function updateModelValue (namePath: NamePath, updater: BaseFormUpdater): BaseFormModel {
+        function updateModelValue (namePath: NamePath, updater: BaseFormUpdater): Recordable {
             return update(model.value, namePath, updater)
         }
 
@@ -66,7 +66,7 @@ const BaseForm = defineComponent({
             return unset(model.value, namePath)
         }
 
-        async function validate (names?: NamePath[]): Promise<BaseFormModel> {
+        async function validate (names?: NamePath[]): Promise<Recordable> {
             const context = unref(formInstanceRef)
             if (context && context.validate) {
                 return context.validate(names)
@@ -76,7 +76,7 @@ const BaseForm = defineComponent({
             return Promise.reject(error)
         }
 
-        function onFinish (values: BaseFormModel): void {
+        function onFinish (values: Recordable): void {
             // 支持 form 的 submit 事件, html-type="submit"
             const nextValues = cloneProxyToRaw(values)
             if (props.transform && isFunction(props.transform)) {

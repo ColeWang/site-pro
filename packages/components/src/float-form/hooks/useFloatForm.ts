@@ -1,8 +1,8 @@
 import type { Ref } from 'vue'
 import { ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
+import type { Recordable } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
-import type { BaseFormModel } from '../../base-form'
 import type { FloatFormProps } from '../typings'
 
 interface UseFloatFormOptions {
@@ -16,7 +16,7 @@ interface UseFloatFormResult {
     loading: Ref<boolean>;
     onOpen: () => void;
     onCancel: () => void;
-    onFinish: (values: BaseFormModel) => Promise<void>;
+    onFinish: (values: Recordable) => Promise<void>;
 }
 
 function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): UseFloatFormResult {
@@ -43,7 +43,7 @@ function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): Use
         options.onCancel && options.onCancel()
     }
 
-    async function onFinish (values: BaseFormModel): Promise<void> {
+    async function onFinish (values: Recordable): Promise<void> {
         if (!isFunction(props.onFinish) || unref(loading)) return
         loading.value = true
         try {
