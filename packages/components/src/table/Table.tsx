@@ -36,11 +36,8 @@ export default defineComponent({
         const {
             context: requestProps,
             onReload,
-            getQueryData,
             setParams,
             setPaginate,
-            setFilter,
-            setSort
         } = useFetchData(props.request, props, {
             onLoad: (dataSource: any[]) => emit('load', dataSource),
             onRequestError: (err: Error) => emit('requestError', err)
@@ -76,47 +73,30 @@ export default defineComponent({
             emit('change', paginate, filters, sorter, extra)
             const finalAction: Record<TableAction, Function> = {
                 paginate: () => {
-                    onPaginateChange(paginate)
+                    const nextPaginate: TablePagination = pick(paginate, ['current', 'pageSize'])
+                    setPaginate && setPaginate(nextPaginate)
+                    emit('paginateChange', nextPaginate)
                 },
                 /* v8 ignore next 3 */
                 filter: () => {
-                    onFilterChange(filters)
+                    emit('filterChange', omitNil(filters))
                 },
                 sort: () => {
                     if (isArray(sorter)) {
                         const data: Recordable<TableSortOrder> = reduce(sorter, (result, value) => {
                             return { ...result, [`${value.field}`]: value.order }
                         }, {})
-                        onSortChange(data)
+                        emit('sortChange', omitNil(data))
                     } else {
                         const sorterOfColumn = sorter.column && sorter.column.sorter
                         const isSortByField = sorterOfColumn && sorterOfColumn.toString() === sorterOfColumn
                         const key: string = `${isSortByField ? sorterOfColumn : sorter.field}`
                         const data: Recordable<TableSortOrder> = { [key]: sorter.order! }
-                        onSortChange(data)
+                        emit('sortChange', omitNil(data))
                     }
                 }
             }
             finalAction[extra.action] && finalAction[extra.action]()
-        }
-
-        function onPaginateChange (paginate: TablePagination) {
-            const nextPaginate: TablePagination = pick(paginate, ['current', 'pageSize'])
-            setPaginate && setPaginate(nextPaginate)
-            emit('paginateChange', nextPaginate)
-        }
-
-        /* v8 ignore next 5 */
-        function onFilterChange (filter: Recordable<TableFilterValue>) {
-            const nextFilter: Recordable<TableFilterValue> = omitNil(filter)
-            setFilter && setFilter(nextFilter)
-            emit('filterChange', nextFilter)
-        }
-
-        function onSortChange (sort: Recordable<TableSortOrder>) {
-            const nextSort: Recordable<TableSortOrder> = omitNil(sort)
-            setSort && setSort(nextSort)
-            emit('sortChange', nextSort)
         }
 
         function onFinish (values) {
@@ -141,13 +121,13 @@ export default defineComponent({
             const exportParams = {
                 pageData: requestProps.dataSource,
                 tableEl: unref(tableRef),
-                queryData: data || {}
+                params: data || {}
             }
             emit('export', exportParams)
         }
 
         /* v8 ignore next 4 */
-        function setTableSize (value) {
+        function setTableSize (value: TableSize): void {
             tableSize.value = value
             emit('sizeChange', value)
         }

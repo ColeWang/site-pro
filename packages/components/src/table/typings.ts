@@ -10,7 +10,7 @@ import type {
     TablePagination,
     TableRowSelection,
     TableSorterResult,
-    TableSortOrder
+    TableSortOrder,
 } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 import { BaseFormModel } from '../base-form'
@@ -50,15 +50,35 @@ export interface TableScroll {
 }
 
 export interface TableRequest {
-    (params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>): Promise<any>;
+    (
+        params: BaseFormModel,
+        ctx: {
+            paginate: TablePagination,
+            filter: Recordable<TableFilterValue>,
+            sort: Recordable<TableSortOrder>
+        }
+    ): Promise<any>;
 }
 
 export interface TablePostData {
-    (data: any[], params: BaseFormModel, paginate: TablePagination, filter: Recordable<TableFilterValue>, sort: Recordable<TableSortOrder>): any[];
+    (
+        data: any[],
+        params: BaseFormModel,
+        ctx: {
+            paginate: TablePagination,
+            filter: Recordable<TableFilterValue>,
+            sort: Recordable<TableSortOrder>
+        }
+    ): any[];
 }
 
 export interface TableOnChange {
-    (paginate: TablePagination, filters: Recordable<TableFilterValue>, sorter: TableSorterResult | TableSorterResult[], extra: TableCurrentDataSource): void;
+    (
+        paginate: TablePagination,
+        filters: Recordable<TableFilterValue>,
+        sorter: TableSorterResult | TableSorterResult[],
+        extra: TableCurrentDataSource
+    ): void;
 }
 
 export type TableSize = 'small' | 'large' | 'middle'
@@ -90,7 +110,7 @@ export const tableProps = () => ({
         default: '-'
     },
     search: {
-        type: [Boolean, Object],
+        type: [Boolean, Object] as PropType<boolean | {}>,
         default: undefined
     },
     manualRequest: {
@@ -114,31 +134,31 @@ export const tableProps = () => ({
         default: undefined
     },
     toolbar: {
-        type: [Boolean, Object],
+        type: [Boolean, Object] as PropType<boolean | {}>,
         default: true
     },
     actions: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     settings: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     extra: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     alert: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     alertOptions: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     table: {
-        type: Function,
+        type: Function as PropType<BaseSlot>,
         default: undefined
     },
     onChange: {
@@ -146,31 +166,31 @@ export const tableProps = () => ({
         default: undefined
     },
     onPaginateChange: {
-        type: Function,
+        type: Function as PropType<(paginate: TablePagination) => void>,
         default: undefined
     },
     onFilterChange: {
-        type: Function,
+        type: Function as PropType<(filter: Recordable<TableFilterValue>) => void>,
         default: undefined
     },
     onSortChange: {
-        type: Function,
+        type: Function as PropType<(sort: Recordable<TableSortOrder>) => void>,
         default: undefined
     },
     onLoadingChange: {
-        type: Function,
+        type: Function as PropType<(value: boolean) => void>,
         default: undefined
     },
     onExport: {
-        type: Function,
+        type: Function as PropType<() => void>,
         default: undefined
     },
     onSizeChange: {
-        type: Function,
+        type: Function as PropType<(value: TableSize) => void>,
         default: undefined
     },
     onColumnsChange: {
-        type: Function,
+        type: Function as PropType<(columns: TableColumns) => void>,
         default: undefined
     },
     onLoad: {

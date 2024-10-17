@@ -1,24 +1,32 @@
-import { shallowReactive, watch } from 'vue'
+import type { Ref } from 'vue'
+import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import type { NamePath, TablePagination } from '@site-pro/utils'
-import { isFunction, pick } from 'lodash-es'
+import type { TablePagination } from '@site-pro/utils'
+import { isEqual, isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale-provider'
-import type { TableRequest } from '../typings'
+import type { BaseFormModel } from '../../base-form'
+import type { TableProps, TableRequest } from '../typings'
 
-function mergePagination (pagination: false | TablePagination, t: (namePath: NamePath) => string | undefined) {
+interface Context {
+    loading: boolean;
+    dataSource: any[];
+    pagination: TablePagination | false;
+}
+
+function mergePagination (
+    pagination: TablePagination | false | undefined,
+    defaultShowTotal: TablePagination['showTotal']
+): TablePagination | false {
     if (pagination === false) return false
     const { current, pageSize, showTotal, total } = pagination || {}
-    const loopShowTotal = (total: number, range: [number, number]) => {
-        return `${t('range')} ${range[0]}-${range[1]} ${t('total')} ${total} ${t('item')}`
-    }
-    return {
-        ...pagination,
+    const basePaginate: TablePagination = {
         total: total || 0,
         current: current || 1,
         pageSize: pageSize || 10,
         showSizeChanger: true,
-        showTotal: showTotal || loopShowTotal
+        showTotal: showTotal || defaultShowTotal
     }
+    return { ...pagination, ...basePaginate }
 }
 
 function validatePaginate (paginate: TablePagination): TablePagination {
@@ -29,27 +37,26 @@ function validatePaginate (paginate: TablePagination): TablePagination {
     return { ...paginate, current: nextCurrent }
 }
 
-function useFetchData (request: TableRequest | undefined, props, options) {
+function useFetchData (request: TableRequest | undefined, props: TableProps, options) {
     const { t } = useLocaleReceiver(['Table', 'pagination'])
     const { onLoad, onRequestError } = options || {}
 
-    const context = shallowReactive({
+    const defaultShowTotal = (total: number, range: [number, number]) => {
+        return `${t('range')} ${range[0]}-${range[1]} ${t('total')} ${total} ${t('item')}`
+    }
+
+    const context: Context = shallowReactive({
         loading: false,
         dataSource: props.dataSource || [],
-        pagination: mergePagination(props.pagination, t)
+        pagination: mergePagination(props.pagination, defaultShowTotal)
     })
 
-    const query = shallowReactive({ params: {}, filter: {}, sort: {} })
+    const sParams: Ref<BaseFormModel> = shallowRef({})
 
     const stopWatchDataSource = watch(() => props.dataSource, (value) => {
         // 手动请求时 更新 dataSource
         context.dataSource = value || []
     }, { immediate: true })
-
-    const stopWatchParams = watch([() => query.params, () => props.params], () => {
-        setPaginate({ current: 1 })
-        fetchData()
-    })
 
     const stopWatchPagination = watch(() => context.pagination, (value, oldValue) => {
         if (value && oldValue && (value.current !== oldValue.current || value.pageSize !== oldValue.pageSize)) {
@@ -58,23 +65,24 @@ function useFetchData (request: TableRequest | undefined, props, options) {
         }
     })
 
-    function getQueryData () {
-        const { params, filter, sort } = query
-        const nextParams = { ...props.params, ...params }
-        const paginate = pick(context.pagination, ['current', 'pageSize'])
-        return { params: nextParams, paginate, filter, sort }
-    }
+    const stopWatchParams = watch([() => props.params, sParams], (current, previous) => {
+        if (!isEqual(current, previous)) {
+            setPaginate({ current: 1 })
+            fetchData()
+        }
+    })
 
-    async function fetchData () {
+    async function fetchData (): Promise<void> {
         if (!isFunction(request) || context.loading) return
         context.loading = true
         try {
-            const { params, paginate, filter, sort } = getQueryData()
-            const { success, data, total } = await request(params, paginate, filter, sort)
+            const params = { ...unref(sParams), ...props.params }
+            const paginate = pick(context.pagination, ['current', 'pageSize'])
+            const { success, data, total } = await request(params, paginate)
             if (success !== false) {
                 // postData 不应导致 data 的长度变化, total
                 if (props.postData && isFunction(props.postData)) {
-                    const nextData = props.postData(data, params, paginate, filter, sort)
+                    const nextData = props.postData(data, params, paginate)
                     context.dataSource = nextData || []
                     onLoad && onLoad(nextData)
                 } else {
@@ -83,39 +91,30 @@ function useFetchData (request: TableRequest | undefined, props, options) {
                 }
                 setPaginate({ total: total || data.length })
             }
-        } catch (err) {
-            if (!onRequestError) throw new Error(err)
+        } catch (err: unknown) {
+            if (!onRequestError) throw new Error(err as string)
             onRequestError && onRequestError(err)
         } finally {
             context.loading = false
         }
     }
 
-    function setPaginate (paginate) {
+    function setPaginate (paginate: TablePagination | false): void {
         if (context.pagination === false) return
-        const needPaginate = { ...context.pagination, ...paginate }
+        const needPaginate: TablePagination = { ...context.pagination, ...paginate }
         context.pagination = validatePaginate(needPaginate)
     }
 
-    function setParams (params) {
-        query.params = params
+    function setParams (params: BaseFormModel): void {
+        sParams.value = params
     }
 
-    /* v8 ignore next 3 */
-    function setFilter (filter) {
-        query.filter = filter
-    }
-
-    function setSort (sort) {
-        query.sort = sort
-    }
-
-    function onReload (resetCurrent = false) {
+    function onReload (resetCurrent: boolean = false): void {
         resetCurrent && setPaginate({ current: 1 })
         fetchData()
     }
 
-    function onStopHandle () {
+    function onStopHandle (): void {
         stopWatchDataSource && stopWatchDataSource()
         stopWatchPagination && stopWatchPagination()
         stopWatchParams && stopWatchParams()
@@ -123,7 +122,7 @@ function useFetchData (request: TableRequest | undefined, props, options) {
 
     tryOnScopeDispose(onStopHandle)
 
-    return { context, onReload, getQueryData, setParams, setPaginate, setFilter, setSort }
+    return { context, onReload, setPaginate, setParams }
 }
 
 export default useFetchData
