@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import type { TablePagination, Recordable } from '@site-pro/utils'
+import type { Recordable, TablePagination } from '@site-pro/utils'
 import { isEqual, isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale-provider'
 import type { TableProps, TableRequest } from '../typings'
@@ -10,6 +10,11 @@ interface Context {
     loading: boolean;
     dataSource: any[];
     pagination: TablePagination | false;
+}
+
+interface UseFetchDataOptions {
+    onLoad?: (dataSource: any[]) => void;
+    onRequestError?: (err: Error) => void;
 }
 
 function mergePagination (
@@ -36,7 +41,7 @@ function validatePaginate (paginate: Required<TablePagination>): TablePagination
     return { ...paginate, current: nextCurrent }
 }
 
-function useFetchData (request: TableRequest | undefined, props: TableProps, options) {
+function useFetchData (request: TableRequest | undefined, props: TableProps, options?: UseFetchDataOptions) {
     const { t } = useLocaleReceiver(['Table', 'pagination'])
     const { onLoad, onRequestError } = options || {}
 
@@ -75,13 +80,13 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
         if (!isFunction(request) || context.loading) return
         context.loading = true
         try {
-            const params = { ...unref(sParams), ...props.params }
-            const paginate = pick(context.pagination, ['current', 'pageSize'])
+            const params: Recordable = { ...unref(sParams), ...props.params }
+            const paginate: TablePagination = pick(context.pagination, ['current', 'pageSize'])
             const { success, data, total } = await request(params, paginate)
             if (success !== false) {
                 // postData 不应导致 data 的长度变化, total
                 if (props.postData && isFunction(props.postData)) {
-                    const nextData = props.postData(data, params, paginate)
+                    const nextData: any[] = props.postData(data, params, paginate)
                     context.dataSource = nextData || []
                     onLoad && onLoad(nextData)
                 } else {
@@ -101,7 +106,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
     function setPaginate (paginate: TablePagination | false): void {
         if (context.pagination === false) return
         const needPaginate: TablePagination = { ...context.pagination, ...paginate }
-        context.pagination = validatePaginate(needPaginate)
+        context.pagination = validatePaginate(needPaginate as Required<TablePagination>)
     }
 
     function setParams (params: Recordable): void {

@@ -49,11 +49,11 @@ export interface TableScroll {
 }
 
 export interface TableRequest {
-    (params: Recordable, paginate: TablePagination): Promise<any>;
+    (params: Recordable, paginate: false | TablePagination): Promise<any>;
 }
 
 export interface TablePostData {
-    (data: any[], params: Recordable, paginate: TablePagination): any[];
+    (data: any[], params: Recordable, paginate: false | TablePagination): any[];
 }
 
 export interface TableOnChange {

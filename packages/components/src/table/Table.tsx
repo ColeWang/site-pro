@@ -69,7 +69,7 @@ export default defineComponent({
             filters: Recordable<TableFilterValue>,
             sorter: TableSorterResult | TableSorterResult[],
             extra: TableCurrentDataSource
-        ) {
+        ): void {
             emit('change', paginate, filters, sorter, extra)
             const finalAction: Record<TableAction, Function> = {
                 paginate: () => {
