@@ -13,7 +13,7 @@ import useFetchData from './hooks/useFetchData'
 import useTableColumns from './hooks/useTableColumns'
 import useRowSelection from './hooks/useRowSelection'
 import { createSharedContext } from './hooks/useSharedContext'
-import type { TableSize } from './typings'
+import type { TableSize, TableSlots } from './typings'
 import { tableProps } from './typings'
 import useStyle from './style'
 
@@ -21,7 +21,7 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTable',
     props: tableProps(),
-    slots: Object as SlotsType<{}>,
+    slots: Object as SlotsType<TableSlots>,
     emits: ['change', 'paginateChange', 'filterChange', 'sortChange', 'loadingChange', 'export', 'sizeChange', 'columnsChange', 'load', 'requestError', 'finish', 'reset'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-table', props)
@@ -150,7 +150,6 @@ export default defineComponent({
             size: tableSize,
             columns: tableColumns,
             reload: onReload,
-            getQueryData: getQueryData,
             cleanSelected: onCleanSelected
         })
 

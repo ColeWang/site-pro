@@ -20,7 +20,7 @@ function useRowSelection (props) {
     const rowSelection = shallowReactive(needRowSelection)
 
     /* v8 ignore next 14 */
-    function setSelectedRowKeys (keys, rows) {
+    function setSelectedRowKeys (keys, rows): void {
         rowSelection.selectedRowKeys = keys
         if (keys.length !== rows.length) {
             const { rowKey = 'key' } = props
@@ -36,7 +36,7 @@ function useRowSelection (props) {
     }
 
     /* v8 ignore next 7 */
-    function onChange (keys, rows, info) {
+    function onChange (keys, rows, info): void {
         const { rowSelection } = props
         if (isObject(rowSelection) && isFunction(rowSelection.onChange)) {
             rowSelection.onChange(keys, rows, info)
@@ -44,7 +44,7 @@ function useRowSelection (props) {
         setSelectedRowKeys(keys, rows)
     }
 
-    function onCleanSelected () {
+    function onCleanSelected (): void {
         setSelectedRowKeys([], [])
     }
 

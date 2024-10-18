@@ -195,11 +195,33 @@ export const tableProps = () => ({
     }
 })
 
+export interface TableSlots {
+    search?: any;
+    title?: any;
+    actions?: any;
+    settings?: any;
+    alert?: any;
+    alertOptions?: any;
+    extra?: any;
+    bodyCell?: any;
+    customFilterDropdown?: any;
+    customFilterIcon?: any;
+    emptyText?: any;
+    expandedRowRender?: any;
+    expandColumnTitle?: any;
+    expandIcon?: any;
+    footer?: any;
+    headerCell?: any;
+    summary?: any;
+}
+
 export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;
 
 export interface TableExpose {
     size: Ref<TableSize>;
     columns: Ref<TableColumns>;
+    reload: (resetCurrent: boolean) => void;
+    cleanSelected: () => void;
 }
 
 export type TableInstance = ComponentPublicInstance<TableProps, TableExpose>;
