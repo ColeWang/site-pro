@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
 import type {
     BaseEnumType,
@@ -166,7 +166,7 @@ export const tableProps = () => ({
         default: undefined
     },
     onExport: {
-        type: Function as PropType<() => void>,
+        type: Function as PropType<(params: { pageData: any[], tableEl: HTMLElement, params: Recordable }) => void>,
         default: undefined
     },
     onSizeChange: {

@@ -1,10 +1,18 @@
 import type { Ref, SlotsType } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table, theme } from 'ant-design-vue'
-import type { TablePagination, TableFilterValue, TableSorterResult, TableCurrentDataSource, TableAction, TableSortOrder, Recordable } from '@site-pro/utils'
+import type {
+    Recordable,
+    TableAction,
+    TableCurrentDataSource,
+    TableFilterValue,
+    TablePagination,
+    TableSorterResult,
+    TableSortOrder
+} from '@site-pro/utils'
 import { getElement, getSlot, getSlotVNode, omitNil } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { isArray, isFunction, omit, pick, toPlainObject, reduce } from 'lodash-es'
+import { isArray, isFunction, omit, pick, reduce, toPlainObject } from 'lodash-es'
 import Search from './components/search'
 import Extra from './components/extra'
 import Toolbar from './components/toolbar'
@@ -35,9 +43,10 @@ export default defineComponent({
 
         const {
             context: requestProps,
-            onReload,
-            setParams,
             setPaginate,
+            getParams,
+            setParams,
+            onReload
         } = useFetchData(props.request, props, {
             onLoad: (dataSource: any[]) => emit('load', dataSource),
             onRequestError: (err: Error) => emit('requestError', err)
@@ -74,7 +83,7 @@ export default defineComponent({
             const finalAction: Record<TableAction, Function> = {
                 paginate: () => {
                     const nextPaginate: TablePagination = pick(paginate, ['current', 'pageSize'])
-                    setPaginate && setPaginate(nextPaginate)
+                    setPaginate(nextPaginate)
                     emit('paginateChange', nextPaginate)
                 },
                 /* v8 ignore next 3 */
@@ -103,9 +112,9 @@ export default defineComponent({
             const nextValues = omitNil(values)
             if (isFunction(props.beforeSearchSubmit)) {
                 const result: Recordable = props.beforeSearchSubmit(nextValues)
-                setParams && setParams(result || {})
+                setParams(result || {})
             } else {
-                setParams && setParams(nextValues)
+                setParams(nextValues)
             }
             emit('finish', nextValues)
         }
@@ -114,14 +123,12 @@ export default defineComponent({
             emit('reset', values)
         }
 
-        function onExport () {
-            // 当点击查询后 表单数据才会同步到这里, 否则返回的是旧的数据
-            // 实时数据需要 Search 传入 model , 此时 model 会响应的更新
-            const data = getQueryData && getQueryData()
+        function onExport (): void {
+            const params: Recordable = getParams()
             const exportParams = {
                 pageData: requestProps.dataSource,
                 tableEl: unref(tableRef),
-                params: data || {}
+                params: params
             }
             emit('export', exportParams)
         }

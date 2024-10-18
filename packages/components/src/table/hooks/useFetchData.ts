@@ -22,12 +22,12 @@ function mergePagination (
     defaultShowTotal: TablePagination['showTotal']
 ): TablePagination | false {
     if (pagination === false) return false
-    const { current, pageSize, showTotal, total } = pagination || {}
+    const { current, pageSize, showTotal, total, showSizeChanger } = pagination || {}
     const basePaginate: TablePagination = {
         total: total || 0,
         current: current || 1,
         pageSize: pageSize || 10,
-        showSizeChanger: true,
+        showSizeChanger: showSizeChanger !== false,
         showTotal: showTotal || defaultShowTotal
     }
     return { ...pagination, ...basePaginate }
@@ -109,6 +109,10 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
         context.pagination = validatePaginate(needPaginate as Required<TablePagination>)
     }
 
+    function getParams (): Recordable {
+        return { ...unref(sParams), ...props.params }
+    }
+
     function setParams (params: Recordable): void {
         sParams.value = params
     }
@@ -126,7 +130,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
 
     tryOnScopeDispose(onStopHandle)
 
-    return { context, onReload, setPaginate, setParams }
+    return { context, onReload, setPaginate, getParams, setParams }
 }
 
 export default useFetchData
