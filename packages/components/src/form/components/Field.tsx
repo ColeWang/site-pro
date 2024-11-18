@@ -22,6 +22,7 @@ import { BaseField, baseFieldProps } from '../../base-field'
 
 
 // @todo 紧凑模式 还需要考虑到 非 grid 模式下 怎么使用
+// @todo 考虑去除这部分逻辑
 // 正常模式下
 const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
     xs: 104,
