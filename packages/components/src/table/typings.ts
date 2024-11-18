@@ -10,17 +10,21 @@ import type {
     TablePagination,
     TableRowSelection,
     TableSorterResult,
-    TableSortOrder,
+    TableSortOrder
 } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
-export interface TableColumnType extends AntTableColumnType {
+export interface TableColumn extends AntTableColumnType {
+    key?: string | number; // 占用
+    dataIndex?: string | number | (string | number)[];
+    children?: TableColumn[];
+    // table
     search?: false | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
     hideInSetting?: boolean;
     hideInDescriptions?: boolean;
-    // customRender
+    // @todo customRender
     ellipsis?: boolean;
     copyable?: boolean;
     // field
@@ -35,12 +39,6 @@ export interface TableColumnType extends AntTableColumnType {
     checked?: boolean;
     disable?: boolean;
 }
-
-export interface TableColumnGroup extends Omit<TableColumnType, 'dataIndex'> {
-    children: TableColumns;
-}
-
-export type TableColumns = (TableColumnGroup | TableColumnType)[];
 
 export interface TableScroll {
     x?: number | true | string;
@@ -78,7 +76,7 @@ export const tableProps = () => ({
         default: undefined
     },
     columns: {
-        type: Array as PropType<TableColumns>,
+        type: Array as PropType<TableColumn[]>,
         default: () => ([])
     },
     rowSelection: {
@@ -174,7 +172,7 @@ export const tableProps = () => ({
         default: undefined
     },
     onColumnsChange: {
-        type: Function as PropType<(columns: TableColumns) => void>,
+        type: Function as PropType<(columns: TableColumn[]) => void>,
         default: undefined
     },
     onLoad: {
@@ -219,7 +217,7 @@ export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>
 
 export interface TableExpose {
     size: Ref<TableSize>;
-    columns: Ref<TableColumns>;
+    columns: Ref<TableColumn[]>;
     reload: (resetCurrent: boolean) => void;
     cleanSelected: () => void;
 }

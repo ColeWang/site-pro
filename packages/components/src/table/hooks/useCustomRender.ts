@@ -1,16 +1,18 @@
+import type { ComputedRef } from 'vue'
 import { computed, h } from 'vue'
 import { TypographyText } from 'ant-design-vue'
-import { enumToText, isEmpty } from '@site-pro/utils'
+import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject } from 'lodash-es'
+import { TableColumn, TableProps } from '../typings'
 
-function getEllipsis (column) {
+function getEllipsis (column: TableColumn) {
     if (column.ellipsis && column.ellipsis.showTitle === false) {
         return false
     }
     return column.ellipsis
 }
 
-function getCopyable (column, text) {
+function getCopyable (column: TableColumn, text) {
     if (column.copyable && text) {
         if (isObject(column.copyable)) {
             return { text, ...column.copyable }
@@ -20,7 +22,7 @@ function getCopyable (column, text) {
     return false
 }
 
-function customRender (oldColumn, emptyText) {
+function customRender (oldColumn: TableColumn, emptyText?: string) {
     return function ({ text, ...restArgs }) {
         if (oldColumn.customRender && isFunction(oldColumn.customRender)) {
             const oldCustomRender = oldColumn.customRender
@@ -38,22 +40,24 @@ function customRender (oldColumn, emptyText) {
     }
 }
 
-function useCustomRender (props) {
-    const columns = computed(() => {
+function useCustomRender (props: TableProps) {
+    const columns: ComputedRef<TableColumn[]> = computed(() => {
         return genCustomRenderColumns(props.columns || [])
     })
 
-    function genCustomRenderColumns (columns) {
-        return columns.map((column, index) => {
-            const key = column.dataIndex || column.key || String(index)
-            const tempColumns = { ...column, key: key }
-            if (column.children && isArray(column.children)) {
-                tempColumns.children = genCustomRenderColumns(column.children)
-            } else {
-                tempColumns.customRender = customRender(column, props.emptyText)
-            }
-            return tempColumns
-        }).filter((column) => !column.hideInTable)
+    function genCustomRenderColumns (columns: TableColumn[]) {
+        return columns
+            .map((column, index) => {
+                const key: string = namePathToString(column.dataIndex || column.key || index)
+                const tempColumns: TableColumn = { ...column, key: key }
+                if (column.children && isArray(column.children)) {
+                    tempColumns.children = genCustomRenderColumns(column.children)
+                } else {
+                    tempColumns.customRender = customRender(column, props.emptyText)
+                }
+                return tempColumns
+            })
+            .filter((column) => !column.hideInTable)
     }
 
     return { columns }

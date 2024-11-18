@@ -1,41 +1,43 @@
+import type { ComputedRef, Ref } from 'vue'
 import { computed, ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import { isBoolean, isObject, map, reduce, set } from 'lodash-es'
+import type { Recordable } from '@site-pro/utils'
+import { isBoolean, map, reduce, set } from 'lodash-es'
 import useCustomRender from './useCustomRender'
-import { TableColumns } from '../typings'
+import { TableColumn, TableProps } from '../typings'
 
-function genColumnsMap (columns: TableColumns) {
+function genColumnsMap (columns: TableColumn[]): Recordable<TableColumn> {
     return reduce(columns, (result, column, index) => {
-        const checked = isBoolean(column.checked) ? column.checked : true
-        const disable = (column.filters || column.sorter) ? true : column.disable
-        const key = column.dataIndex || column.key || String(index)
-        const value = { ...column, checked, disable, order: index }
-        return set(result, key, value)
+        const checked: boolean = isBoolean(column.checked) ? column.checked : true
+        const disable: boolean = (column.filters || column.sorter) ? true : !!column.disable
+        const value: TableColumn = { ...column, checked, disable, order: index }
+        return set(result, column.key!, value)
     }, {})
 }
 
-function useTableColumns (props) {
+function useTableColumns (props: TableProps) {
     const { columns: baseColumns } = useCustomRender(props)
 
-    const columnsMap = ref({})
+    const columnsMap: Ref<Recordable<TableColumn>> = ref({})
 
-    const columns = computed(() => {
-        const values = map(columnsMap.value, (column) => column)
-        return values.sort((a, b) => a.order - b.order)
+    const columns: ComputedRef<TableColumn[]> = computed(() => {
+        return map(columnsMap.value, (column) => column).sort((a, b) => {
+            return a.order! - b.order!
+        })
     })
 
     const stopWatchColumns = watch(baseColumns, (columns) => {
         columnsMap.value = genColumnsMap(columns)
     }, { immediate: true })
 
-    /* v8 ignore next 8 */
-    function setColumnsMap (values) {
+    /* v8 ignore next 3 */
+    function setColumnsMap (values: Recordable<TableColumn>): void {
+        columnsMap.value = values
+    }
+
+    function resetColumnsMap (): void {
         const columns = unref(baseColumns)
-        if (values && isObject(values)) {
-            columnsMap.value = values
-        } else {
-            columnsMap.value = genColumnsMap(columns)
-        }
+        columnsMap.value = genColumnsMap(columns)
     }
 
     function onStopHandle () {
@@ -44,7 +46,7 @@ function useTableColumns (props) {
 
     tryOnScopeDispose(onStopHandle)
 
-    return { columns, columnsMap, setColumnsMap }
+    return { columns, columnsMap, setColumnsMap, resetColumnsMap }
 }
 
 export default useTableColumns

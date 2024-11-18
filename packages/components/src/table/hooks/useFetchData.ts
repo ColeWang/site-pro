@@ -81,7 +81,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
         context.loading = true
         try {
             const params: Recordable = { ...unref(sParams), ...props.params }
-            const paginate: TablePagination = pick(context.pagination, ['current', 'pageSize'])
+            const paginate: TablePagination | false = pick(context.pagination, ['current', 'pageSize'])
             const { success, data, total } = await request(params, paginate)
             if (success !== false) {
                 // postData 不应导致 data 的长度变化, total
@@ -97,7 +97,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
             }
         } catch (err: unknown) {
             if (!onRequestError) throw new Error(err as string)
-            onRequestError && onRequestError(err)
+            onRequestError && onRequestError(err as Error)
         } finally {
             context.loading = false
         }

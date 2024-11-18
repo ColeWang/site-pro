@@ -52,7 +52,7 @@ export default defineComponent({
             onRequestError: (err: Error) => emit('requestError', err)
         })
 
-        const { columns, columnsMap, setColumnsMap } = useTableColumns(props)
+        const { columns, columnsMap, setColumnsMap, resetColumnsMap } = useTableColumns(props)
         const { rowSelection, onCleanSelected } = useRowSelection(props)
 
         const tableColumns = computed(() => {
@@ -150,6 +150,7 @@ export default defineComponent({
             columns,
             columnsMap,
             setColumnsMap,
+            resetColumnsMap,
             onReload: onReload
         })
 
