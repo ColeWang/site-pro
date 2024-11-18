@@ -16,7 +16,7 @@ function genColumnsMap (columns: TableColumn[]): Recordable<TableColumn> {
 }
 
 function useTableColumns (props: TableProps) {
-    const { columns: baseColumns } = useCustomRender(props)
+    const { columns: sColumns } = useCustomRender(props)
 
     const columnsMap: Ref<Recordable<TableColumn>> = ref({})
 
@@ -26,7 +26,7 @@ function useTableColumns (props: TableProps) {
         })
     })
 
-    const stopWatchColumns = watch(baseColumns, (columns) => {
+    const stopWatchColumns = watch(sColumns, (columns) => {
         columnsMap.value = genColumnsMap(columns)
     }, { immediate: true })
 
@@ -36,7 +36,7 @@ function useTableColumns (props: TableProps) {
     }
 
     function resetColumnsMap (): void {
-        const columns = unref(baseColumns)
+        const columns = unref(sColumns)
         columnsMap.value = genColumnsMap(columns)
     }
 

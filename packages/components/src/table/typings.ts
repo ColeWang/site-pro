@@ -213,6 +213,17 @@ export interface TableSlots {
     summary?: any;
 }
 
+export interface TableShared {
+    requestProps: any;
+    tableSize: any;
+    setTableSize: any;
+    columns: any;
+    columnsMap: any;
+    setColumnsMap: any;
+    resetColumnsMap: any;
+    onReload: any;
+}
+
 export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;
 
 export interface TableExpose {
