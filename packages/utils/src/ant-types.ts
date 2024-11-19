@@ -59,6 +59,11 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProAction?: {};
         ProLoadingPlugin?: {};
         ProProgressPlugin?: {};
+        ProTable?: {};
+        ProTableExtra?: {};
+        ProTableToolbar?: {};
+        ProTableAlert?: {};
+        ProTableSetting?: {};
     }
 }
 

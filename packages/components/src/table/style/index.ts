@@ -1,6 +1,11 @@
-import { genComponentStyleHook } from '../../theme'
+import type { CSSInterpolation, FullToken } from '../../theme'
+import { genComponentStyleHook, mergeToken } from '../../theme'
 
-function genBaseStyle (token) {
+interface ProTableToken extends FullToken<'ProTable'> {
+    // ---
+}
+
+function genBaseStyle (token: ProTableToken): CSSInterpolation {
     const { componentCls } = token
     return {
         [componentCls]: {
@@ -12,6 +17,9 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTable', (token) => {
-    return [genBaseStyle(token)]
-})
+function styleFn (token: FullToken<'ProTable'>): CSSInterpolation {
+    const proTableToken = mergeToken<ProTableToken>(token, {})
+    return genBaseStyle(proTableToken)
+}
+
+export default genComponentStyleHook('ProTable', styleFn)

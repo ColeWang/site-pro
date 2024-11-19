@@ -1,10 +1,15 @@
+import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, extraMarginBottom } = token
+interface ProTableExtraToken extends FullToken<'ProTableExtra'> {
+    proTableExtraMarginBottom: number;
+}
+
+function genBaseStyle (token: ProTableExtraToken): CSSInterpolation {
+    const { componentCls, proTableExtraMarginBottom } = token
     return {
         [componentCls]: {
-            marginBlockEnd: extraMarginBottom,
+            marginBlockEnd: proTableExtraMarginBottom,
             [`${componentCls}-popup-container`]: {
                 position: 'relative'
             },
@@ -13,11 +18,13 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableExtra', (token) => {
-    const extraMarginBottom = token.sizeMS
-
-    const extraToken = mergeToken(token, {
-        extraMarginBottom
+function styleFn (token: FullToken<'ProTableExtra'>): CSSInterpolation {
+    const proTableExtraMarginBottom = token.sizeMS
+    const proTableExtraToken = mergeToken<ProTableExtraToken>(token, {
+        proTableExtraMarginBottom
     })
-    return [genBaseStyle(extraToken)]
-})
+    return genBaseStyle(proTableExtraToken)
+}
+
+export default genComponentStyleHook('ProTableExtra', styleFn)
+

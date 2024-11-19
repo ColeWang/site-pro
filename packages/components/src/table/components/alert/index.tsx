@@ -1,5 +1,7 @@
+import type { PropType } from 'vue'
 import { defineComponent, Fragment, ref, unref } from 'vue'
 import { ConfigProvider, Space, theme } from 'ant-design-vue'
+import type { BaseSlot } from '@site-pro/utils'
 import { getElement, getSlotVNode } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { Action } from '../../../action'
@@ -10,19 +12,19 @@ export default defineComponent({
     inheritAttrs: false,
     props: {
         selectedRowKeys: {
-            type: Array,
+            type: Array as PropType<(string | number)[]>,
             default: () => ([])
         },
         selectedRows: {
-            type: Array,
+            type: Array as PropType<any[]>,
             default: () => ([])
         },
         options: {
-            type: Function,
+            type: Function as PropType<BaseSlot>,
             default: undefined
         },
         onCleanSelected: {
-            type: Function,
+            type: Function as PropType<() => void>,
             default: undefined
         }
     },
@@ -35,7 +37,7 @@ export default defineComponent({
 
         const popupContainer = ref(null)
 
-        function onCleanSelected () {
+        function onCleanSelected (): void {
             emit('cleanSelected')
         }
 
@@ -59,7 +61,7 @@ export default defineComponent({
                 </Space>
             )
 
-            const slotScope = {
+            const slotScope: any = {
                 keys: selectedRowKeys,
                 rows: selectedRows,
                 cleanSelected: onCleanSelected

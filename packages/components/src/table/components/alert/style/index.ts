@@ -1,10 +1,15 @@
+import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, alertMarginBottom } = token
+interface ProTableAlertToken extends FullToken<'ProTableAlert'> {
+    proTableAlertMarginBottom: number;
+}
+
+function genBaseStyle (token: ProTableAlertToken): CSSInterpolation {
+    const { componentCls, proTableAlertMarginBottom } = token
     return {
         [componentCls]: {
-            marginBlockEnd: alertMarginBottom,
+            marginBlockEnd: proTableAlertMarginBottom,
             border: 'none',
             [`${componentCls}-popup-container`]: {
                 position: 'relative'
@@ -38,11 +43,12 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableAlert', (token) => {
-    const alertMarginBottom = token.sizeMS
-
-    const alertToken = mergeToken(token, {
-        alertMarginBottom
+function styleFn (token: FullToken<'ProTableAlert'>): CSSInterpolation {
+    const proTableAlertMarginBottom = token.sizeMS
+    const proTableAlertToken = mergeToken<ProTableAlertToken>(token, {
+        proTableAlertMarginBottom
     })
-    return [genBaseStyle(alertToken)]
-})
+    return genBaseStyle(proTableAlertToken)
+}
+
+export default genComponentStyleHook('ProTableAlert', styleFn)

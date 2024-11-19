@@ -58,16 +58,16 @@ export const baseFormProps = () => ({
 
 export type BaseFormProps = Partial<ExtractPropTypes<ReturnType<typeof baseFormProps>>>;
 
-export interface BaseFormExpose {
+export interface BaseFormExpose<RecordType = Recordable> {
     formInstanceRef: Ref<FormInstance | null>;
-    model: Ref<Recordable>;
+    model: Ref<RecordType>;
     formProps: ComputedRef<BaseFormProps>;
-    setModelValue: (namePath: NamePath, value: any) => Recordable;
-    getModelValue: (namePath: NamePath) => Recordable;
-    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => Recordable;
+    setModelValue: (namePath: NamePath, value: any) => RecordType;
+    getModelValue: (namePath: NamePath) => RecordType;
+    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => RecordType;
     deleteModelValue: (namePath: NamePath) => boolean;
     submit: () => void;
-    validate: (names?: NamePath[]) => Promise<Recordable>;
+    validate: (names?: NamePath[]) => Promise<RecordType>;
     resetFields: (names?: NamePath[]) => void;
 }
 
