@@ -8,32 +8,35 @@ import {
 import { useConfigInject } from '@site-pro/hooks'
 import Tooltip from './Tooltip.tsx'
 import { useLocaleReceiver } from '../../../../locale-provider'
-import useStyle from '../style/tree-node.ts'
+import useStyle from '../style/node'
+
+export const nodeProps = () => ({
+    columnKey: {
+        type: String,
+        default: undefined
+    },
+    title: {
+        type: String,
+        default: undefined
+    },
+    fixed: {
+        type: String,
+        default: undefined
+    },
+    disabledSettingIcon: {
+        type: Boolean,
+        default: false
+    },
+    onChange: {
+        type: Function,
+        default: undefined
+    }
+})
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        columnKey: {
-            type: String,
-            default: undefined
-        },
-        title: {
-            type: String,
-            default: undefined
-        },
-        fixed: {
-            type: String,
-            default: undefined
-        },
-        disabledSettingIcon: {
-            type: Boolean,
-            default: false
-        },
-        onChange: {
-            type: Function,
-            default: undefined
-        }
-    },
+    name: 'ProTableSettingNode',
+    props: nodeProps(),
     emits: ['change'],
     setup (props, { emit }) {
         const { prefixCls } = useConfigInject('pro-table-setting-node', props)
@@ -42,7 +45,7 @@ export default defineComponent({
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
 
         /* v8 ignore next 3 */
-        function onChange (fixed) {
+        function onChange (fixed: boolean): void {
             emit('change', props.columnKey, fixed)
         }
 

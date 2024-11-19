@@ -1,7 +1,12 @@
+import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, listMinWidth } = token
+interface ProTableSettingToken extends FullToken<'ProTableSetting'> {
+    proTableSettingListMinWidth: number;
+}
+
+function genBaseStyle (token: ProTableSettingToken): CSSInterpolation {
+    const { componentCls, proTableSettingListMinWidth } = token
     return {
         [componentCls]: {
             position: 'relative',
@@ -15,7 +20,7 @@ function genBaseStyle (token) {
                 fontWeight: token.fontWeightStrong
             },
             [`${componentCls}-tree-list-group`]: {
-                minWidth: listMinWidth,
+                minWidth: proTableSettingListMinWidth,
                 display: 'flex',
                 flexDirection: 'column'
             }
@@ -23,11 +28,12 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableSetting', (token) => {
-    const listMinWidth = token.controlHeightSM * 8
-
-    const columnSettingToken = mergeToken(token, {
-        listMinWidth
+function styleFn (token: FullToken<'ProTableSetting'>): CSSInterpolation {
+    const proTableSettingListMinWidth = token.sizeMS
+    const proTableSettingToken = mergeToken<ProTableSettingToken>(token, {
+        proTableSettingListMinWidth
     })
-    return [genBaseStyle(columnSettingToken)]
-})
+    return genBaseStyle(proTableSettingToken)
+}
+
+export default genComponentStyleHook('ProTableSetting', styleFn)

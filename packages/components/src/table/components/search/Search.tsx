@@ -1,25 +1,31 @@
+import type { PropType, ComputedRef } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
-import { namePathToString, isEmpty } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
+import { isEmpty, namePathToString } from '@site-pro/utils'
 import { pick, reduce, set } from 'lodash-es'
-import BaseSearch from './BaseSearch'
+import BaseSearch, { baseSearchProps } from './BaseSearch'
+import type { TableColumn } from '../../typings'
 import { Field } from '../../../form'
 
-function filterSearchColumns (columns) {
+function filterSearchColumns (columns: TableColumn[]): TableColumn[] {
     return columns.filter((column) => column.search)
 }
 
+export const searchProps = () => ({
+    ...baseSearchProps(),
+    columns: {
+        type: Array as PropType<TableColumn[]>,
+        default: () => ([])
+    }
+})
+
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        ...BaseSearch.props,
-        columns: {
-            type: Array,
-            default: () => ([])
-        }
-    },
+    name: 'ProTableSearch',
+    props: searchProps(),
     setup (props, { attrs }) {
-        const defaultColumns = filterSearchColumns(props.columns)
-        const initialValues = reduce(defaultColumns, (result, column) => {
+        const defaultColumns: TableColumn[] = filterSearchColumns(props.columns)
+        const initialValues: Recordable = reduce(defaultColumns, (result, column) => {
             const namePath = column.dataIndex || column.key
             if (namePath && !isEmpty(column.initialValue)) {
                 return set(result, namePath, column.initialValue)
@@ -27,7 +33,7 @@ export default defineComponent({
             return result
         }, {})
 
-        const searchColumns = computed(() => filterSearchColumns(props.columns))
+        const searchColumns: ComputedRef<TableColumn[]> = computed(() => filterSearchColumns(props.columns))
 
         return () => {
             const baseSearchProps = {
@@ -53,7 +59,7 @@ export default defineComponent({
                             fieldProps: { ...fieldProps, style: { width: '100%' } },
                             formItemProps: needFormItemProps
                         }
-                        const key = namePathToString(namePath)
+                        const key = namePathToString(namePath!)
                         return <Field {...needFieldProps} key={key}/>
                     })}
                 </BaseSearch>

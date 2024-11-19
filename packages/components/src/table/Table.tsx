@@ -1,6 +1,6 @@
-import type { Ref, SlotsType } from 'vue'
+import type { App, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
-import { Card, ConfigProvider, Table, theme } from 'ant-design-vue'
+import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
 import type {
     Recordable,
     TableAction,
@@ -25,7 +25,7 @@ import type { TableSize, TableSlots } from './typings'
 import { tableProps } from './typings'
 import useStyle from './style'
 
-export default defineComponent({
+const Table = defineComponent({
     inheritAttrs: false,
     name: 'ProTable',
     props: tableProps(),
@@ -69,7 +69,7 @@ export default defineComponent({
 
         // 没搜索的时候 发起请求
         onMounted(() => {
-            const ifReload = !props.manualRequest && props.search === false
+            const ifReload: boolean = !props.manualRequest && props.search === false
             ifReload && onReload(true)
         })
 
@@ -223,7 +223,7 @@ export default defineComponent({
 
             const needTableSlots = omit(slots, ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions'])
 
-            const baseTableDom = <Table {...needTableProps} v-slots={needTableSlots}/>
+            const baseTableDom = <AntTable {...needTableProps} v-slots={needTableSlots}/>
 
             const tableDom = getSlotVNode(slots, props, 'table', {
                 props: needTableProps,
@@ -257,3 +257,10 @@ export default defineComponent({
         }
     }
 })
+
+Table.install = function (app: App): App {
+    app.component(Table.name as string, Table)
+    return app
+}
+
+export default Table

@@ -1,50 +1,53 @@
 import { defineComponent, unref } from 'vue'
 import { theme, Tree } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import TreeNode from './TreeNode.tsx'
-import DraggableOutlined from '../DraggableOutlined.tsx'
-import useStyle from '../style/tree-list.ts'
+import Node from './Node'
+import DraggableOutlined from '../DraggableOutlined'
+import useStyle from '../style/list'
+
+export const listProps = () => ({
+    showTitle: {
+        type: Boolean,
+        default: true
+    },
+    title: {
+        type: String,
+        default: undefined
+    },
+    fixed: {
+        type: String,
+        default: undefined
+    },
+    columns: {
+        type: Array,
+        default: () => ([])
+    },
+    checkable: {
+        type: Boolean,
+        default: true
+    },
+    draggable: {
+        type: Boolean,
+        default: true
+    },
+    onCheckChange: {
+        type: Function,
+        default: undefined
+    },
+    onDropChange: {
+        type: Function,
+        default: undefined
+    },
+    onFixedChange: {
+        type: Function,
+        default: undefined
+    }
+})
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        showTitle: {
-            type: Boolean,
-            default: true
-        },
-        title: {
-            type: String,
-            default: undefined
-        },
-        fixed: {
-            type: String,
-            default: undefined
-        },
-        columns: {
-            type: Array,
-            default: () => ([])
-        },
-        checkable: {
-            type: Boolean,
-            default: true
-        },
-        draggable: {
-            type: Boolean,
-            default: true
-        },
-        onCheckChange: {
-            type: Function,
-            default: undefined
-        },
-        onDropChange: {
-            type: Function,
-            default: undefined
-        },
-        onFixedChange: {
-            type: Function,
-            default: undefined
-        }
-    },
+    name: 'ProTableSettingList',
+    props: listProps(),
     emits: ['checkChange', 'dropChange', 'fixedChange'],
     setup (props, { emit }) {
         const { prefixCls } = useConfigInject('pro-table-setting-list', props)
@@ -93,7 +96,7 @@ export default defineComponent({
                         onChange: onChangeFixed
                     }
                     return (
-                        <TreeNode {...checkboxItemProps}/>
+                        <Node {...checkboxItemProps}/>
                     )
                 }
             }

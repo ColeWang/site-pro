@@ -11,7 +11,7 @@ import type {
     TableRowSelection,
     TableSorterResult,
     TableSortOrder,
-    TypographyEllipsis
+    TypographyCopyable
 } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
@@ -26,7 +26,7 @@ export interface TableColumn<RecordType = any> extends AntTableColumnType<Record
     hideInSetting?: boolean;
     hideInDescriptions?: boolean;
     ellipsis?: boolean | { showTitle?: boolean };
-    copyable?: boolean | TypographyEllipsis;
+    copyable?: boolean | TypographyCopyable;
     // field
     valueType?: BaseFieldValueType;
     initialValue?: any;
