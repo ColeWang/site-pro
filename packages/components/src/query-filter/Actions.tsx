@@ -67,8 +67,8 @@ const QueryFilterActions = defineComponent({
                 </Button>
             )
             const submitterProps: SubmitterProps = {
-                ...(pick(props, Object.keys(Submitter.props)) as SubmitterProps),
-                ...(pick(submitter, Object.keys(Submitter.props)) as SubmitterProps),
+                ...pick(props, Object.keys(Submitter.props)) as SubmitterProps,
+                ...pick(submitter, Object.keys(Submitter.props)) as SubmitterProps,
                 submitText: submitter.submitText || t('search')
             }
             return (

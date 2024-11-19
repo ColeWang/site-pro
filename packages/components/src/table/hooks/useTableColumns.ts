@@ -9,7 +9,7 @@ import { TableColumn, TableProps } from '../typings'
 interface UseTableColumnsResult {
     columns: ComputedRef<TableColumn[]>;
     columnsMap: Ref<Recordable<TableColumn>>;
-    setColumnsMap: (values: Recordable<TableColumn>) => void;
+    setColumnsMap: (values: Recordable<TableColumn> | undefined) => void;
     resetColumnsMap: () => void;
 }
 
@@ -43,7 +43,7 @@ function useTableColumns (props: TableProps): UseTableColumnsResult {
     }
 
     function resetColumnsMap (): void {
-        const columns = unref(sColumns)
+        const columns: TableColumn[] = unref(sColumns)
         columnsMap.value = genColumnsMap(columns)
     }
 

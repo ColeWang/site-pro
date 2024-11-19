@@ -1,4 +1,4 @@
-import type { App, CSSProperties, Ref, SlotsType } from 'vue'
+import type { App, ComputedRef, CSSProperties, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
 import type {
@@ -15,7 +15,8 @@ import type {
 import { getElement, getSlot, getSlotVNode, omitNil } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { isArray, isFunction, omit, pick, reduce, toPlainObject } from 'lodash-es'
-import Search from './components/search'
+import type { SearchProps } from './components/search'
+import { Search } from './components/search'
 import Extra from './components/extra'
 import type { ToolbarProps } from './components/toolbar'
 import Toolbar from './components/toolbar'
@@ -24,7 +25,7 @@ import useFetchData from './hooks/useFetchData'
 import useTableColumns from './hooks/useTableColumns'
 import useRowSelection from './hooks/useRowSelection'
 import { createSharedContext } from './hooks/useSharedContext'
-import type { TableSize, TableSlots } from './typings'
+import type { TableColumn, TableSize, TableSlots } from './typings'
 import { tableProps } from './typings'
 import useStyle from './style'
 
@@ -58,7 +59,7 @@ const Table = defineComponent({
         const { columns, columnsMap, setColumnsMap, resetColumnsMap } = useTableColumns(props)
         const { rowSelection, selectedRows, onCleanSelected } = useRowSelection(props)
 
-        const tableColumns = computed(() => {
+        const tableColumns: ComputedRef<TableColumn[]> = computed(() => {
             return unref(columns).filter((column) => column.checked)
         })
 
@@ -126,13 +127,13 @@ const Table = defineComponent({
             emit('reset', values)
         }
 
-        function onToolbarReload (): void {
+        function onSharedReload (): void {
             onReload && onReload()
         }
 
-        function onToolbarExport (): void {
+        function onExport (): void {
             const params: Recordable = getParams()
-            const exportParams = {
+            const exportParams: any = {
                 pageData: requestProps.dataSource,
                 tableEl: unref(tableRef),
                 params: params
@@ -141,8 +142,13 @@ const Table = defineComponent({
         }
 
         /* v8 ignore next 3 */
-        function onToolbarDensity (size: TableSize): void {
+        function onSizeChange (size: TableSize): void {
             tableSize.value = size
+        }
+
+        function onColumnsMapChange (values: Recordable<TableColumn> | undefined): void {
+            const actionFunc = values ? setColumnsMap : resetColumnsMap
+            actionFunc && actionFunc(values)
         }
 
         function getPopupContainer (): HTMLElement {
@@ -154,12 +160,13 @@ const Table = defineComponent({
             tableSize,
             columns,
             columnsMap,
-            setColumnsMap,
-            resetColumnsMap
+            onReload: onSharedReload,
+            onExport,
+            onSizeChange,
+            onColumnsMapChange
         })
 
         expose({
-            size: tableSize,
             columns: tableColumns,
             reload: onReload,
             cleanSelected: onCleanSelected
@@ -171,8 +178,8 @@ const Table = defineComponent({
             const { sizeMS } = unref(token)
 
             const renderSearch = () => {
-                const searchProps = {
-                    ...toPlainObject(propsSearch),
+                const searchProps: SearchProps = {
+                    ...toPlainObject(propsSearch) as SearchProps,
                     loading: requestProps.loading,
                     columns: propsColumns,
                     manualRequest: manualRequest,
@@ -191,10 +198,7 @@ const Table = defineComponent({
                     settings: getSlot(slots, props, 'settings')
                 }
                 const toolbarProps: ToolbarProps = {
-                    ...omit(toPlainObject(propsToolbar), ['title', 'actions', 'settings']),
-                    onReload: onToolbarReload,
-                    onExport: onToolbarExport,
-                    onDensity: onToolbarDensity
+                    ...omit(toPlainObject(propsToolbar), ['title', 'actions', 'settings']) as ToolbarProps,
                 }
                 return <Toolbar {...toolbarProps} v-slots={toolbarSlots}/>
             }

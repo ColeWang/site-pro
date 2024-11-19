@@ -141,7 +141,7 @@ const Field = defineComponent({
             }, extraFormItemProps)
 
             const needBaseFieldProps: BaseFieldProps = {
-                ...(pick(props, Object.keys(BaseField.props)) as BaseFieldProps),
+                ...pick(props, Object.keys(BaseField.props)) as BaseFieldProps,
                 fieldProps: needFieldProps,
                 formItemProps: needFormItemProps
             }

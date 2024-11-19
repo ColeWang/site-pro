@@ -64,12 +64,12 @@ const ModalForm = defineComponent({
             const { extraProps, submitter } = props
 
             const baseFormProps: BaseFormProps = {
-                ...(pick(props, Object.keys(BaseForm.props)) as BaseFormProps),
+                ...pick(props, Object.keys(BaseForm.props)) as BaseFormProps,
                 onFinish: onFinish
             }
 
             const needModalProps: ModalProps = {
-                ...(pick(props, Object.keys(Modal.props)) as ModalProps),
+                ...pick(props, Object.keys(Modal.props)) as ModalProps,
                 ...extraProps,
                 ...attrs,
                 open: unref(sOpen),
@@ -80,7 +80,7 @@ const ModalForm = defineComponent({
             const modalSlots: Recordable<BaseSlot> = {
                 footer: () => {
                     const submitterProps: SubmitterProps = {
-                        ...(pick(submitter, Object.keys(Submitter.props)) as SubmitterProps),
+                        ...pick(submitter, Object.keys(Submitter.props)) as SubmitterProps,
                         submitText: submitter.submitText || t('okText'),
                         resetText: submitter.resetText || t('cancelText'),
                         loading: unref(loading),

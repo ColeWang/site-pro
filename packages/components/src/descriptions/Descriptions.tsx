@@ -56,7 +56,7 @@ const Descriptions = defineComponent({
                     model: requestProps.dataSource
                 }
                 const needFieldProps: BaseFieldProps = {
-                    ...(pick(item, Object.keys(BaseField.props)) as BaseFieldProps),
+                    ...pick(item, Object.keys(BaseField.props)) as BaseFieldProps,
                     mode: 'read',
                     emptyText: emptyText,
                     fieldProps: fieldProps,

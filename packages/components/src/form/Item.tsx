@@ -41,7 +41,7 @@ const FormItem = defineComponent({
             }
 
             const formItemProps = {
-                ...(pick(props, Object.keys(Form.Item.props)) as FormItemProps),
+                ...pick(props, Object.keys(Form.Item.props)) as FormItemProps,
                 ...attrs
             }
             return (

@@ -219,14 +219,15 @@ export interface TableSharedContext {
     tableSize: Ref<TableSize>;
     columns: Ref<TableColumn[]>;
     columnsMap: Ref<Recordable<TableColumn>>;
-    setColumnsMap: (values: Recordable<TableColumn>) => void;
-    resetColumnsMap: () => void;
+    onReload: (resetCurrent?: boolean) => void;
+    onExport: () => void;
+    onSizeChange: (size: TableSize) => void;
+    onColumnsMapChange: (values?: Recordable<TableColumn>) => void;
 }
 
 export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;
 
 export interface TableExpose {
-    size: Ref<TableSize>;
     columns: Ref<TableColumn[]>;
     reload: (resetCurrent: boolean) => void;
     cleanSelected: () => void;

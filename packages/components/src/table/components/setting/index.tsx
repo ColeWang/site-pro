@@ -36,8 +36,7 @@ export default defineComponent({
         const {
             columns = [] as TableColumn[],
             columnsMap = {} as Recordable<TableColumn>,
-            setColumnsMap,
-            resetColumnsMap
+            onColumnsMapChange
         } = useSharedContext()
 
         /* v8 ignore next 8 */
@@ -48,24 +47,24 @@ export default defineComponent({
                 const checked = hideInSetting || disable ? column.checked : targetChecked
                 return set(result, key, { ...column, checked: checked })
             }, {})
-            setColumnsMap && setColumnsMap(values)
+            onColumnsMapChange && onColumnsMapChange(values)
         }
 
         /* v8 ignore next 3 */
         function onClearClick () {
-            resetColumnsMap && resetColumnsMap()
+            onColumnsMapChange && onColumnsMapChange(undefined)
         }
 
         /* v8 ignore next 4 */
         function onFixedChange (key: string, column: TableColumn): void {
             const values: Recordable<TableColumn> = { ...unref(columnsMap), [key]: column }
-            setColumnsMap && setColumnsMap(values)
+            onColumnsMapChange && onColumnsMapChange(values)
         }
 
         /* v8 ignore next 4 */
         function onCheckChange (key: string, column: TableColumn): void {
             const values: Recordable<TableColumn> = { ...unref(columnsMap), [key]: column }
-            setColumnsMap && setColumnsMap(values)
+            onColumnsMapChange && onColumnsMapChange(values)
         }
 
         /* v8 ignore next 17 */

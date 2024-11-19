@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Menu, theme } from 'ant-design-vue'
 import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
@@ -8,11 +8,7 @@ import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
 
 export const densityProps = () => ({
-    ...menuProps(),
-    onClick: {
-        type: Function as PropType<(key: TableSize) => void>,
-        default: undefined
-    }
+    ...menuProps()
 })
 
 export type DensityProps = Partial<ExtractPropTypes<ReturnType<typeof densityProps>>>;
@@ -22,12 +18,11 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableDensity',
     props: densityProps(),
-    emits: ['click'],
-    setup (props, { emit, attrs }) {
+    setup (props, { attrs }) {
         const { token } = theme.useToken()
 
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
-        const { tableSize } = useSharedContext()
+        const { tableSize, onSizeChange } = useSharedContext()
 
         const selectedKeys: ComputedRef<string[]> = computed(() => {
             return [unref(tableSize)].filter((_) => !!_)
@@ -35,7 +30,7 @@ export default defineComponent({
 
         function onMenuClick (params: MenuInfo): void {
             if (unref(tableSize) !== params.key) {
-                emit('click', params.key)
+                onSizeChange && onSizeChange(params.key as TableSize)
             }
         }
 

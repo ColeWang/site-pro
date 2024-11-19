@@ -1,10 +1,13 @@
-import type { PropType, ComputedRef } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
-import type { Recordable } from '@site-pro/utils'
+import type { BaseAttrs, NamePath, Recordable } from '@site-pro/utils'
 import { isEmpty, namePathToString } from '@site-pro/utils'
 import { pick, reduce, set } from 'lodash-es'
+import type { BaseSearchProps } from './BaseSearch'
 import BaseSearch, { baseSearchProps } from './BaseSearch'
 import type { TableColumn } from '../../typings'
+import type { BaseFieldFormItemProps } from '../../../base-field'
+import type { FieldProps } from '../../../form'
 import { Field } from '../../../form'
 
 function filterSearchColumns (columns: TableColumn[]): TableColumn[] {
@@ -19,6 +22,9 @@ export const searchProps = () => ({
     }
 })
 
+export type SearchProps = Partial<ExtractPropTypes<ReturnType<typeof searchProps>>>;
+export type SearchInstance = ComponentPublicInstance<SearchProps>;
+
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableSearch',
@@ -26,7 +32,7 @@ export default defineComponent({
     setup (props, { attrs }) {
         const defaultColumns: TableColumn[] = filterSearchColumns(props.columns)
         const initialValues: Recordable = reduce(defaultColumns, (result, column) => {
-            const namePath = column.dataIndex || column.key
+            const namePath: NamePath = column.dataIndex || column.key as string
             if (namePath && !isEmpty(column.initialValue)) {
                 return set(result, namePath, column.initialValue)
             }
@@ -36,7 +42,7 @@ export default defineComponent({
         const searchColumns: ComputedRef<TableColumn[]> = computed(() => filterSearchColumns(props.columns))
 
         return () => {
-            const baseSearchProps = {
+            const baseSearchProps: BaseSearchProps & BaseAttrs = {
                 ...attrs,
                 ...pick(props, Object.keys(BaseSearch.props)),
                 initialValues: initialValues
@@ -46,20 +52,20 @@ export default defineComponent({
                 <BaseSearch {...baseSearchProps}>
                     {unref(searchColumns).map((column) => {
                         const { fieldProps, formItemProps } = column
-                        const namePath = column.dataIndex || column.key
+                        const namePath: NamePath = column.dataIndex || column.key as string
 
-                        const needFormItemProps = {
+                        const needFormItemProps: BaseFieldFormItemProps = {
                             ...formItemProps,
                             name: namePath,
                             label: column.title
                         }
-                        const needFieldProps = {
-                            ...pick(column, Object.keys(Field.props)),
+                        const needFieldProps: FieldProps = {
+                            ...pick(column, Object.keys(Field.props)) as FieldProps,
                             hidden: !!column.hideInSearch,
                             fieldProps: { ...fieldProps, style: { width: '100%' } },
                             formItemProps: needFormItemProps
                         }
-                        const key = namePathToString(namePath!)
+                        const key: string = namePathToString(namePath!)
                         return <Field {...needFieldProps} key={key}/>
                     })}
                 </BaseSearch>

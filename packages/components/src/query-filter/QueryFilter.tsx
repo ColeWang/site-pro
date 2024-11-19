@@ -40,12 +40,12 @@ const QueryFilter = defineComponent({
         }
 
         function onSubmit (): void {
-            const context = unref(baseFormRef)
+            const context: BaseFormInstance | null = unref(baseFormRef)
             context && context.submit()
         }
 
         function onReset (): void {
-            const context = unref(baseFormRef)
+            const context: BaseFormInstance | null = unref(baseFormRef)
             context && context.resetFields()
         }
 
@@ -83,13 +83,13 @@ const QueryFilter = defineComponent({
             })
 
             const baseFormProps: BaseFormProps = {
-                ...(pick(props, Object.keys(BaseForm.props)) as BaseFormProps),
+                ...pick(props, Object.keys(BaseForm.props)) as BaseFormProps,
                 layout: unref(layout),
                 grid: false
             }
 
             const actionsProps: QueryFilterActionsProps = {
-                ...(pick(props, Object.keys(Actions.props)) as QueryFilterActionsProps),
+                ...pick(props, Object.keys(Actions.props)) as QueryFilterActionsProps,
                 collapsed: unref(collapsed),
                 onSubmit: onSubmit,
                 onReset: onReset,

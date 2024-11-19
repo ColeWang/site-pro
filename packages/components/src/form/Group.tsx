@@ -52,7 +52,7 @@ const FormGroup = defineComponent({
             const { layout, grid, rowProps } = unref(formProps) || {}
 
             const titleDom = getPropsSlot(slots, props, 'title')
-            const titleStyle = genTitleStyle(layout || 'vertical', unref(token))
+            const titleStyle: CSSProperties = genTitleStyle(layout || 'vertical', unref(token))
 
             const rowWrapperProps: RowWrapperProps = { ...rowProps, grid: grid }
 

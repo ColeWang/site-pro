@@ -15,7 +15,6 @@ import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import Density from '../density'
 import Setting from '../setting'
-import type { TableSize } from '../../typings'
 import type { UseFetchDataContext } from '../../hooks/useFetchData'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
@@ -44,18 +43,6 @@ export const toolbarProps = () => ({
     settings: {
         type: Function as PropType<BaseSlot>,
         default: undefined
-    },
-    onReload: {
-        type: Function as PropType<() => void>,
-        default: undefined
-    },
-    onExport: {
-        type: Function as PropType<() => void>,
-        default: undefined
-    },
-    onDensity: {
-        type: Function as PropType<(size: TableSize) => void>,
-        default: undefined
     }
 })
 
@@ -66,12 +53,11 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableToolbar',
     props: toolbarProps(),
-    emits: ['reload', 'export', 'density'],
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-toolbar', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
-        const { requestProps = {} as Partial<UseFetchDataContext> } = useSharedContext()
+        const { requestProps = {} as Partial<UseFetchDataContext>, onReload, onExport } = useSharedContext()
 
         const popupContainer: Ref<HTMLElement | null> = ref(null)
 
@@ -82,15 +68,11 @@ export default defineComponent({
         }
 
         function onReloadClick (): void {
-            emit('reload')
+            onReload && onReload()
         }
 
         function onExportClick (): void {
-            emit('export')
-        }
-
-        function onDensityClick (size: TableSize): void {
-            emit('density', size)
+            onExport && onExport()
         }
 
         function getPopupContainer (): HTMLElement {
@@ -127,7 +109,7 @@ export default defineComponent({
                     density: (
                         <Tooltip title={t('density')}>
                             <Dropdown trigger={['click']} placement={'bottomRight'} v-slots={{
-                                overlay: () => <Density onClick={onDensityClick}/>
+                                overlay: () => <Density/>
                             }}>
                                 <Button>
                                     <ColumnHeightOutlined/>

@@ -35,7 +35,7 @@ const DateWeek = defineComponent({
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
             const needFormItemProps: BaseFieldFormItemProps = {
-                ...(pick(props, Object.keys(Form.Item.props)) as BaseFieldFormItemProps),
+                ...pick(props, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
                 ...propsFormItemProps,
             }
             const needFieldProps: FieldProps = {

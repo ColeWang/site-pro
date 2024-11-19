@@ -1,6 +1,10 @@
-import Search from './Search'
-import BaseSearch from './BaseSearch'
+import type { SearchInstance, SearchProps } from './Search'
+import Search, { searchProps } from './Search'
+import type { BaseSearchInstance, BaseSearchProps } from './BaseSearch'
+import BaseSearch, { baseSearchProps } from './BaseSearch'
 
-export { BaseSearch }
+export { Search, searchProps }
+export { BaseSearch, baseSearchProps }
 
-export default Search
+export type { SearchProps, SearchInstance }
+export type { BaseSearchProps, BaseSearchInstance }

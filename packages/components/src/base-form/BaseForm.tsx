@@ -1,7 +1,7 @@
 import type { App, ComputedRef, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
-import type { FormInstance, FormProps, NamePath, RowProps, ValidateErrorEntity, Recordable } from '@site-pro/utils'
+import type { FormInstance, FormProps, NamePath, Recordable, RowProps, ValidateErrorEntity } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodash-es'
@@ -72,15 +72,15 @@ const BaseForm = defineComponent({
                 return context.validate(names)
             }
             /* v8 ignore next 3 */
-            const error = new Error('Error: context is not defined')
+            const error: Error = new Error('Error: context is not defined')
             return Promise.reject(error)
         }
 
         function onFinish (values: Recordable): void {
             // 支持 form 的 submit 事件, html-type="submit"
-            const nextValues = cloneProxyToRaw(values)
+            const nextValues: Recordable = cloneProxyToRaw(values)
             if (props.transform && isFunction(props.transform)) {
-                const resultValues = props.transform(nextValues) || {}
+                const resultValues: Recordable = props.transform(nextValues) || {}
                 emit('finish', resultValues)
             } else {
                 emit('finish', nextValues)
@@ -88,7 +88,7 @@ const BaseForm = defineComponent({
         }
 
         function onScrollToField (namePath: NamePath, options: any): void {
-            const context = unref(formInstanceRef)
+            const context: FormInstance | null = unref(formInstanceRef)
             context && context.scrollToField(namePath, options)
         }
 
@@ -143,7 +143,7 @@ const BaseForm = defineComponent({
             const { layout, grid, rowProps } = unref(formProps)
 
             const needFormProps: FormProps = {
-                ...(pick(props, Object.keys(Form.props)) as FormProps),
+                ...pick(props, Object.keys(Form.props)) as FormProps,
                 layout: layout,
                 model: unref(model),
                 onFinish: onFinish
