@@ -1,3 +1,4 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Space, theme } from 'ant-design-vue'
 import {
@@ -6,32 +7,36 @@ import {
     VerticalAlignTopOutlined
 } from '@ant-design/icons-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import Tooltip from './Tooltip.tsx'
+import type { TooltipProps } from './Tooltip'
+import Tooltip from './Tooltip'
 import { useLocaleReceiver } from '../../../../locale-provider'
 import useStyle from '../style/node'
 
 export const nodeProps = () => ({
     columnKey: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     title: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     fixed: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     disabledSettingIcon: {
-        type: Boolean,
+        type: Boolean as PropType<boolean>,
         default: false
     },
     onChange: {
-        type: Function,
+        type: Function as PropType<(key: string, fixed: boolean) => void>,
         default: undefined
     }
 })
+
+export type NodeProps = Partial<ExtractPropTypes<ReturnType<typeof nodeProps>>>;
+export type NodeInstance = ComponentPublicInstance<NodeProps>;
 
 export default defineComponent({
     inheritAttrs: false,
@@ -53,7 +58,7 @@ export default defineComponent({
             const { title, fixed, columnKey, disabledSettingIcon } = props
             const { sizeXXS } = unref(token)
 
-            const iconProps = {
+            const tooltipProps: TooltipProps = {
                 columnKey: columnKey,
                 onChange: onChange
             }
@@ -61,17 +66,17 @@ export default defineComponent({
             const iconDom = (
                 <Space size={sizeXXS}>
                     {fixed !== 'left' && (
-                        <Tooltip title={t('leftPin')} fixed={'left'} {...iconProps}>
+                        <Tooltip title={t('leftPin')} fixed={'left'} {...tooltipProps}>
                             <VerticalAlignTopOutlined/>
                         </Tooltip>
                     )}
                     {!!fixed && (
-                        <Tooltip title={t('noPin')} {...iconProps}>
+                        <Tooltip title={t('noPin')} {...tooltipProps}>
                             <VerticalAlignMiddleOutlined/>
                         </Tooltip>
                     )}
                     {fixed !== 'right' && (
-                        <Tooltip title={t('rightPin')} fixed={'right'} {...iconProps}>
+                        <Tooltip title={t('rightPin')} fixed={'right'} {...tooltipProps}>
                             <VerticalAlignBottomOutlined/>
                         </Tooltip>
                     )}

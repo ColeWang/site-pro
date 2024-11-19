@@ -39,8 +39,12 @@ import type {
     TableRowSelection
 } from 'ant-design-vue/es/table/interface'
 import type { CopyConfig as TypographyCopyable } from 'ant-design-vue/es/typography/Base'
-import type { MenuProps } from 'ant-design-vue/es/menu/src/Menu'
+import type { MenuProps } from 'ant-design-vue/es/menu'
 import type { MenuInfo } from 'ant-design-vue/es/menu/src/interface'
+import type { DataNode as TreeDataNode, TreeProps } from 'ant-design-vue/es/tree'
+import type { CheckInfo as TreeCheckInfo } from 'ant-design-vue/es/vc-tree/props'
+import type { EventDataNode as TreeEventDataNode } from 'ant-design-vue/es/vc-tree/interface'
+import type { NodeDragEventParams as TreeNodeDragEventParams } from 'ant-design-vue/es/vc-tree/contextTypes'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -66,6 +70,8 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProTableToolbar?: {};
         ProTableAlert?: {};
         ProTableSetting?: {};
+        ProTableSettingList?: {};
+        ProTableSettingNode?: {};
     }
 }
 
@@ -124,5 +130,10 @@ export type {
     ValidateErrorEntity,
     TypographyCopyable,
     MenuProps,
-    MenuInfo
+    MenuInfo,
+    TreeProps,
+    TreeDataNode,
+    TreeCheckInfo,
+    TreeEventDataNode,
+    TreeNodeDragEventParams
 }

@@ -13,6 +13,7 @@ import type {
     TableSortOrder,
     TypographyCopyable
 } from '@site-pro/utils'
+import type { UseFetchDataContext } from './hooks/useFetchData'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
 export interface TableColumn<RecordType = any> extends AntTableColumnType<RecordType> {
@@ -217,15 +218,15 @@ export interface TableSlots {
     summary?: any;
 }
 
-export interface TableShared {
-    requestProps: any;
-    tableSize: any;
-    setTableSize: any;
-    columns: any;
-    columnsMap: any;
-    setColumnsMap: any;
-    resetColumnsMap: any;
-    onReload: any;
+export interface TableSharedContext {
+    requestProps: UseFetchDataContext;
+    tableSize: Ref<TableSize>;
+    setTableSize: (value: TableSize) => void;
+    columns: Ref<TableColumn[]>;
+    columnsMap: Ref<Recordable<TableColumn>>;
+    setColumnsMap: (values: Recordable<TableColumn>) => void;
+    resetColumnsMap: () => void;
+    onReload: (resetCurrent?: boolean) => void;
 }
 
 export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;

@@ -1,7 +1,20 @@
+import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, antCls, listTitleMargin, listHolderPadding, listCheckboxMargin } = token
+interface ProTableSettingListToken extends FullToken<'ProTableSettingList'> {
+    proTableSettingListTitleMargin: number;
+    proTableSettingListHolderPadding: number;
+    proTableSettingListCheckboxMargin: number;
+}
+
+function genBaseStyle (token: ProTableSettingListToken): CSSInterpolation {
+    const {
+        componentCls,
+        antCls,
+        proTableSettingListTitleMargin,
+        proTableSettingListHolderPadding,
+        proTableSettingListCheckboxMargin
+    } = token
     return {
         [componentCls]: {
             paddingBlockStart: token.paddingXS,
@@ -9,13 +22,13 @@ function genBaseStyle (token) {
                 fontSize: token.fontSizeSM,
                 color: token.colorTextSecondary,
                 lineHeight: token.lineHeightSM,
-                marginBlock: listTitleMargin,
+                marginBlock: proTableSettingListTitleMargin,
                 paddingInlineStart: token.controlHeightSM
             },
             [`${antCls}-tree`]: {
                 background: token.colorFillQuaternary,
                 [`${antCls}-tree-list-holder`]: {
-                    paddingBlockStart: listHolderPadding
+                    paddingBlockStart: proTableSettingListHolderPadding
                 },
                 [`${antCls}-tree-node-content-wrapper`]: {
                     backgroundColor: 'transparent !important',
@@ -29,7 +42,7 @@ function genBaseStyle (token) {
                 [`${antCls}-tree-treenode`]: {
                     alignItems: 'center',
                     [`${antCls}-tree-checkbox`]: {
-                        margin: `0 ${listCheckboxMargin}px 0 0`,
+                        margin: `0 ${proTableSettingListCheckboxMargin}px 0 0`,
                         insetBlockStart: 0
                     }
                 },
@@ -42,15 +55,17 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableSettingList', (token) => {
-    const listTitleMargin = token.controlHeightSM - token.fontSizeSM * token.lineHeightSM
-    const listHolderPadding = token.sizeXS / 2
-    const listCheckboxMargin = (token.controlHeightSM - token.controlHeight / 2) / 2
+function styleFn (token: FullToken<'ProTableSettingList'>): CSSInterpolation {
+    const proTableSettingListTitleMargin = token.controlHeightSM - token.fontSizeSM * token.lineHeightSM
+    const proTableSettingListHolderPadding = token.sizeXS / 2
+    const proTableSettingListCheckboxMargin = (token.controlHeightSM - token.controlHeight / 2) / 2
 
-    const treeListToken = mergeToken(token, {
-        listTitleMargin,
-        listHolderPadding,
-        listCheckboxMargin
+    const proTableSettingListToken = mergeToken<ProTableSettingListToken>(token, {
+        proTableSettingListTitleMargin,
+        proTableSettingListHolderPadding,
+        proTableSettingListCheckboxMargin
     })
-    return [genBaseStyle(treeListToken)]
-})
+    return genBaseStyle(proTableSettingListToken)
+}
+
+export default genComponentStyleHook('ProTableSettingList', styleFn)

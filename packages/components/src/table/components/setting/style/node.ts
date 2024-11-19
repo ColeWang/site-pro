@@ -1,14 +1,27 @@
+import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, iconCls, nodeTitleMaxWidth, nodeOptionWidth, nodeOptionPaddingInline } = token
+interface ProTableSettingNodeToken extends FullToken<'ProTableSettingNode'> {
+    proTableSettingNodeTitleMaxWidth: number;
+    proTableSettingNodeOptionWidth: number;
+    proTableSettingNodeOptionPaddingInline: number;
+}
+
+function genBaseStyle (token: ProTableSettingNodeToken): CSSInterpolation {
+    const {
+        componentCls,
+        iconCls,
+        proTableSettingNodeTitleMaxWidth,
+        proTableSettingNodeOptionWidth,
+        proTableSettingNodeOptionPaddingInline
+    } = token
     return {
         [componentCls]: {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             [`${componentCls}-title`]: {
-                maxWidth: nodeTitleMaxWidth,
+                maxWidth: proTableSettingNodeTitleMaxWidth,
                 fontSize: token.fontSize,
                 color: token.colorText,
                 lineHeight: `${token.controlHeightSM}px`,
@@ -17,9 +30,9 @@ function genBaseStyle (token) {
                 overflow: 'hidden'
             },
             [`${componentCls}-option`]: {
-                width: nodeOptionWidth,
+                width: proTableSettingNodeOptionWidth,
                 [`${componentCls}-option-icon`]: {
-                    paddingInline: nodeOptionPaddingInline,
+                    paddingInline: proTableSettingNodeOptionPaddingInline,
                     display: 'none',
                     [`${iconCls}`]: {
                         width: token.fontSize,
@@ -36,15 +49,17 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableSettingNode', (token) => {
-    const nodeTitleMaxWidth = token.controlHeightSM * 7
-    const nodeOptionWidth = token.fontSize * 2 + token.sizeMS + token.sizeXXS
-    const nodeOptionPaddingInline = token.sizeMS / 2
+function styleFn (token: FullToken<'ProTableSettingNode'>): CSSInterpolation {
+    const proTableSettingNodeTitleMaxWidth = token.controlHeightSM * 7
+    const proTableSettingNodeOptionWidth = token.fontSize * 2 + token.sizeMS + token.sizeXXS
+    const proTableSettingNodeOptionPaddingInline = token.sizeMS / 2
 
-    const treeNodeToken = mergeToken(token, {
-        nodeTitleMaxWidth,
-        nodeOptionWidth,
-        nodeOptionPaddingInline
+    const proTableSettingNodeToken = mergeToken<ProTableSettingNodeToken>(token, {
+        proTableSettingNodeTitleMaxWidth,
+        proTableSettingNodeOptionWidth,
+        proTableSettingNodeOptionPaddingInline
     })
-    return [genBaseStyle(treeNodeToken)]
-})
+    return genBaseStyle(proTableSettingNodeToken)
+}
+
+export default genComponentStyleHook('ProTableSettingNode', styleFn)

@@ -1,48 +1,70 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { theme, Tree } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import Node from './Node'
+import type {
+    BaseSlot,
+    Recordable,
+    TreeCheckInfo,
+    TreeDataNode,
+    TreeEventDataNode,
+    TreeNodeDragEventParams,
+    TreeProps
+} from '@site-pro/utils'
+import type { NodeProps } from './Node'
+import TreeNode from './Node'
 import DraggableOutlined from '../DraggableOutlined'
+import type { TableColumn } from '../../../typings'
 import useStyle from '../style/list'
+
+interface TreeNodeDropInfo extends TreeNodeDragEventParams {
+    dragNode: TreeEventDataNode;
+    dragNodesKeys: (string | number)[];
+    dropPosition: number;
+    dropToGap: boolean;
+}
 
 export const listProps = () => ({
     showTitle: {
-        type: Boolean,
+        type: Boolean as PropType<boolean>,
         default: true
     },
     title: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     fixed: {
-        type: String,
+        type: String as PropType<string>,
         default: undefined
     },
     columns: {
-        type: Array,
+        type: Array as PropType<TableColumn[]>,
         default: () => ([])
     },
     checkable: {
-        type: Boolean,
+        type: Boolean as PropType<boolean>,
         default: true
     },
     draggable: {
-        type: Boolean,
+        type: Boolean as PropType<boolean>,
         default: true
     },
     onCheckChange: {
-        type: Function,
+        type: Function as PropType<(key: string, column: TableColumn) => void>,
         default: undefined
     },
     onDropChange: {
-        type: Function,
+        type: Function as PropType<(dragKey: string, dropKey: string, trueDropPosition: number, dropPosition: number) => void>,
         default: undefined
     },
     onFixedChange: {
-        type: Function,
+        type: Function as PropType<(key: string, column: TableColumn) => void>,
         default: undefined
     }
 })
+
+export type ListProps = Partial<ExtractPropTypes<ReturnType<typeof listProps>>>;
+export type ListInstance = ComponentPublicInstance<ListProps>;
 
 export default defineComponent({
     inheritAttrs: false,
@@ -55,24 +77,26 @@ export default defineComponent({
         const { token } = theme.useToken()
 
         /* v8 ignore next 5 */
-        function onTreeNodeCheck (_, info) {
+        function onTreeNodeCheck (_: any, info: TreeCheckInfo): void {
             const { node, checked } = info
-            const column = props.columns.find((item) => item.key === node.key)
-            emit('checkChange', node.key, { ...column, checked: checked })
+            const column: TableColumn | undefined = props.columns.find((item) => item.key === node.key)
+            column && emit('checkChange', node.key, { ...column, checked: checked })
         }
 
         /* v8 ignore next 6 */
-        function onTreeNodeDrop (info) {
+        function onTreeNodeDrop (info: TreeNodeDropInfo): void {
             const { node, dragNode, dropPosition } = info
-            const dragKey = dragNode.key, dropKey = node.key, dropPos = node.pos.split('-')
-            const trueDropPosition = dropPosition - Number(dropPos[dropPos.length - 1])
+            const dragKey: string = (dragNode.key as string)
+            const dropKey: string = (node.key as string)
+            const dropPos: string[] = node.pos!.split('-')
+            const trueDropPosition: number = dropPosition - Number(dropPos[dropPos.length - 1])
             emit('dropChange', dragKey, dropKey, trueDropPosition, dropPosition)
         }
 
         /* v8 ignore next 4 */
-        function onChangeFixed (key, fixed) {
-            const column = props.columns.find((item) => item.key === key)
-            emit('fixedChange', key, { ...column, fixed: fixed })
+        function onChangeFixed (key: string, fixed: boolean): void {
+            const column: TableColumn | undefined = props.columns.find((item) => item.key === key)
+            column && emit('fixedChange', key, { ...column, fixed: fixed })
         }
 
         return () => {
@@ -81,38 +105,37 @@ export default defineComponent({
             const { columns, showTitle, title, fixed, checkable, draggable } = props
             const { controlHeightSM } = unref(token)
 
-            const checkedKeys = columns.filter((item) => {
-                return item.checked !== false
-            }).map((item) => {
-                return item.key
-            })
+            const checkedKeys: string[] = columns
+                .filter((item) => item.checked !== false)
+                .map((item) => item.key as string)
 
-            const treeSlots = {
-                title: (slotScope) => {
-                    const checkboxItemProps = {
+            const treeSlots: Recordable<BaseSlot> = {
+                title: (slotScope: any) => {
+                    const treeNodeProps: NodeProps = {
                         ...slotScope,
                         fixed: fixed,
                         columnKey: slotScope.key,
                         onChange: onChangeFixed
                     }
                     return (
-                        <Node {...checkboxItemProps}/>
+                        <TreeNode {...treeNodeProps}/>
                     )
                 }
             }
 
-            const loopTreeData = columns.map((item) => {
+            const loopTreeData: TreeDataNode[] = columns.map((item) => {
                 return {
-                    key: item.key,
+                    key: item.key as string,
+                    disableCheckbox: item.disable === true,
                     title: item.title,
-                    selectable: false,
-                    disableCheckbox: item.disable === true
+                    selectable: false
                 }
             })
 
-            const needDraggable = draggable ? { icon: <DraggableOutlined/> } : false
+            // FIX: icon 没对外暴露
+            const needDraggable: any = draggable ? { icon: <DraggableOutlined/> } : false
 
-            const needTreeProps = {
+            const needTreeProps: TreeProps = {
                 height: controlHeightSM * 10,
                 blockNode: true,
                 checkStrictly: true,

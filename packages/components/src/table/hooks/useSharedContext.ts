@@ -1,10 +1,10 @@
 import type { InjectionKey } from 'vue'
 import { inject, provide } from 'vue'
-import type { TableShared } from '../typings'
+import type { TableSharedContext } from '../typings'
 
-const BaseKey: InjectionKey<Partial<TableShared>> = Symbol('TableShared')
+const BaseKey: InjectionKey<Partial<TableSharedContext>> = Symbol('TableSharedContext')
 
-export function createSharedContext (instance: TableShared) {
+export function createSharedContext (instance: TableSharedContext) {
     provide(BaseKey, instance)
 }
 
