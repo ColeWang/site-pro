@@ -1,12 +1,18 @@
-import { type ComponentPublicInstance, defineComponent, type ExtractPropTypes, unref } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import { computed, defineComponent, unref } from 'vue'
 import { Menu, theme } from 'ant-design-vue'
 import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
 import type { BaseAttrs, MenuInfo, MenuProps } from '@site-pro/utils'
+import type { TableSize } from '../../typings'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
 
 export const densityProps = () => ({
-    ...menuProps()
+    ...menuProps(),
+    onClick: {
+        type: Function as PropType<(params: MenuInfo) => void>,
+        default: undefined
+    }
 })
 
 export type DensityProps = Partial<ExtractPropTypes<ReturnType<typeof densityProps>>>;
@@ -16,17 +22,22 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableDensity',
     props: densityProps(),
-    setup (props, { attrs }) {
+    emits: ['click'],
+    setup (props, { emit, attrs }) {
         const { token } = theme.useToken()
 
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
         const { tableSize, setTableSize } = useSharedContext()
 
-        function onMenuClick (params: MenuInfo) {
+        const selectedKeys: ComputedRef<string[]> = computed(() => {
+            return [unref(tableSize)].filter((_) => !!_)
+        })
+
+        function onMenuClick (params: MenuInfo): void {
             if (unref(tableSize) !== params.key) {
-                setTableSize && setTableSize(params.key)
+                setTableSize && setTableSize(params.key as TableSize)
             }
-            props.onClick && props.onClick(params)
+            emit('click', params)
         }
 
         return () => {
@@ -35,7 +46,7 @@ export default defineComponent({
             const menuProps: MenuProps & BaseAttrs = {
                 ...props,
                 style: { minWidth: `${fontSize * 7}px` },
-                selectedKeys: [unref(tableSize)],
+                selectedKeys: unref(selectedKeys),
                 onClick: onMenuClick
             }
             return (

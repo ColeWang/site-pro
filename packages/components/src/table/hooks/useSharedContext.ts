@@ -8,6 +8,6 @@ export function createSharedContext (instance: TableSharedContext) {
     provide(BaseKey, instance)
 }
 
-export function useSharedContext () {
+export function useSharedContext (): Partial<TableSharedContext> {
     return inject(BaseKey, {})
 }

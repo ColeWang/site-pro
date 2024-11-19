@@ -47,7 +47,7 @@ function useTableColumns (props: TableProps): UseTableColumnsResult {
         columnsMap.value = genColumnsMap(columns)
     }
 
-    function onStopHandle () {
+    function onStopHandle (): void {
         stopWatchColumns && stopWatchColumns()
     }
 
