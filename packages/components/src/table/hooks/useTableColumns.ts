@@ -9,8 +9,8 @@ import { TableColumn, TableProps } from '../typings'
 interface UseTableColumnsResult {
     columns: ComputedRef<TableColumn[]>;
     columnsMap: Ref<Recordable<TableColumn>>;
-    setColumnsMap: any;
-    resetColumnsMap: any;
+    setColumnsMap: (values: Recordable<TableColumn>) => void;
+    resetColumnsMap: () => void;
 }
 
 function genColumnsMap (columns: TableColumn[]): Recordable<TableColumn> {

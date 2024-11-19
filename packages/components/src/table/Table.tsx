@@ -1,20 +1,23 @@
-import type { App, Ref, SlotsType } from 'vue'
+import type { App, CSSProperties, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
 import type {
+    BaseSlot,
     Recordable,
     TableAction,
     TableCurrentDataSource,
     TableFilterValue,
     TablePagination,
+    TableProps as AntTableProps,
     TableSorterResult,
-    TableSortOrder
+    TableSortOrder,
 } from '@site-pro/utils'
 import { getElement, getSlot, getSlotVNode, omitNil } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { isArray, isFunction, omit, pick, reduce, toPlainObject } from 'lodash-es'
 import Search from './components/search'
 import Extra from './components/extra'
+import type { ToolbarProps } from './components/toolbar'
 import Toolbar from './components/toolbar'
 import Alert from './components/alert'
 import useFetchData from './hooks/useFetchData'
@@ -30,7 +33,7 @@ const Table = defineComponent({
     name: 'ProTable',
     props: tableProps(),
     slots: Object as SlotsType<TableSlots>,
-    emits: ['change', 'paginateChange', 'filterChange', 'sortChange', 'loadingChange', 'export', 'sizeChange', 'columnsChange', 'load', 'requestError', 'finish', 'reset'],
+    emits: ['change', 'paginateChange', 'filterChange', 'sortChange', 'loadingChange', 'export', 'columnsChange', 'load', 'requestError', 'finish', 'reset'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-table', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
@@ -123,7 +126,11 @@ const Table = defineComponent({
             emit('reset', values)
         }
 
-        function onExport (): void {
+        function onToolbarReload (): void {
+            onReload && onReload()
+        }
+
+        function onToolbarExport (): void {
             const params: Recordable = getParams()
             const exportParams = {
                 pageData: requestProps.dataSource,
@@ -133,10 +140,9 @@ const Table = defineComponent({
             emit('export', exportParams)
         }
 
-        /* v8 ignore next 4 */
-        function setTableSize (value: TableSize): void {
-            tableSize.value = value
-            emit('sizeChange', value)
+        /* v8 ignore next 3 */
+        function onToolbarDensity (size: TableSize): void {
+            tableSize.value = size
         }
 
         function getPopupContainer (): HTMLElement {
@@ -146,12 +152,10 @@ const Table = defineComponent({
         createSharedContext({
             requestProps,
             tableSize,
-            setTableSize,
             columns,
             columnsMap,
             setColumnsMap,
-            resetColumnsMap,
-            onReload: onReload
+            resetColumnsMap
         })
 
         expose({
@@ -181,20 +185,22 @@ const Table = defineComponent({
             }
 
             const renderToolbar = () => {
-                const toolbarSlots = {
+                const toolbarSlots: Recordable<BaseSlot | false> = {
                     title: getSlot(slots, props, 'title'),
                     actions: getSlot(slots, props, 'actions'),
                     settings: getSlot(slots, props, 'settings')
                 }
-                const toolbarProps = {
+                const toolbarProps: ToolbarProps = {
                     ...omit(toPlainObject(propsToolbar), ['title', 'actions', 'settings']),
-                    onExport: onExport
+                    onReload: onToolbarReload,
+                    onExport: onToolbarExport,
+                    onDensity: onToolbarDensity
                 }
                 return <Toolbar {...toolbarProps} v-slots={toolbarSlots}/>
             }
 
             const renderAlert = () => {
-                const alertSlots = {
+                const alertSlots: Recordable<BaseSlot | false> = {
                     default: getSlot(slots, props, 'alert'),
                     options: getSlot(slots, props, 'alertOptions')
                 }
@@ -212,16 +218,16 @@ const Table = defineComponent({
                 pagination: requestProps.pagination
             })
 
-            const needTableProps = {
+            const needTableProps: AntTableProps = {
                 ...pick(props, Object.keys(Table.props)),
                 ...requestProps,
                 size: unref(tableSize),
                 columns: unref(tableColumns),
                 rowSelection: propsRowSelection !== false ? rowSelection : undefined,
-                onChange: onChange
+                onChange: onChange as any
             }
 
-            const needTableSlots = omit(slots, ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions'])
+            const needTableSlots: Recordable<BaseSlot> = omit(slots, ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions'])
 
             const baseTableDom = <AntTable {...needTableProps} v-slots={needTableSlots}/>
 
@@ -230,7 +236,7 @@ const Table = defineComponent({
                 dom: baseTableDom
             })
 
-            const cardBodyStyle = propsToolbar !== false ? ({
+            const cardBodyStyle: CSSProperties = propsToolbar !== false ? ({
                 paddingBlock: `${sizeMS}px`,
                 paddingBlockStart: '0'
             }) : ({

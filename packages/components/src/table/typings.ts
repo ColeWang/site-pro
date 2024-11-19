@@ -172,10 +172,6 @@ export const tableProps = () => ({
         type: Function as PropType<(params: { pageData: any[], tableEl: HTMLElement, params: Recordable }) => void>,
         default: undefined
     },
-    onSizeChange: {
-        type: Function as PropType<(value: TableSize) => void>,
-        default: undefined
-    },
     onColumnsChange: {
         type: Function as PropType<(columns: TableColumn[]) => void>,
         default: undefined
@@ -221,12 +217,10 @@ export interface TableSlots {
 export interface TableSharedContext {
     requestProps: UseFetchDataContext;
     tableSize: Ref<TableSize>;
-    setTableSize: (value: TableSize) => void;
     columns: Ref<TableColumn[]>;
     columnsMap: Ref<Recordable<TableColumn>>;
     setColumnsMap: (values: Recordable<TableColumn>) => void;
     resetColumnsMap: () => void;
-    onReload: (resetCurrent?: boolean) => void;
 }
 
 export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;

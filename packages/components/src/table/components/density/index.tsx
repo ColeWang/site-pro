@@ -10,7 +10,7 @@ import { useLocaleReceiver } from '../../../locale-provider'
 export const densityProps = () => ({
     ...menuProps(),
     onClick: {
-        type: Function as PropType<(params: MenuInfo) => void>,
+        type: Function as PropType<(key: TableSize) => void>,
         default: undefined
     }
 })
@@ -27,7 +27,7 @@ export default defineComponent({
         const { token } = theme.useToken()
 
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
-        const { tableSize, setTableSize } = useSharedContext()
+        const { tableSize } = useSharedContext()
 
         const selectedKeys: ComputedRef<string[]> = computed(() => {
             return [unref(tableSize)].filter((_) => !!_)
@@ -35,9 +35,8 @@ export default defineComponent({
 
         function onMenuClick (params: MenuInfo): void {
             if (unref(tableSize) !== params.key) {
-                setTableSize && setTableSize(params.key as TableSize)
+                emit('click', params.key)
             }
-            emit('click', params)
         }
 
         return () => {
