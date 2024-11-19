@@ -6,7 +6,7 @@ import { isEqual, isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale-provider'
 import type { TableProps, TableRequest } from '../typings'
 
-interface Context {
+export interface UseFetchDataContext {
     loading: boolean;
     dataSource: any[];
     pagination: TablePagination | false;
@@ -15,6 +15,14 @@ interface Context {
 interface UseFetchDataOptions {
     onLoad?: (dataSource: any[]) => void;
     onRequestError?: (err: Error) => void;
+}
+
+interface UseFetchDataResult {
+    context: UseFetchDataContext;
+    onReload: (resetCurrent?: boolean) => void;
+    setPaginate: (paginate: TablePagination | false) => void;
+    setParams: (params: Recordable) => void;
+    getParams: () => Recordable;
 }
 
 function mergePagination (
@@ -41,7 +49,11 @@ function validatePaginate (paginate: Required<TablePagination>): TablePagination
     return { ...paginate, current: nextCurrent }
 }
 
-function useFetchData (request: TableRequest | undefined, props: TableProps, options?: UseFetchDataOptions) {
+function useFetchData (
+    request: TableRequest | undefined,
+    props: TableProps,
+    options?: UseFetchDataOptions
+): UseFetchDataResult {
     const { t } = useLocaleReceiver(['Table', 'pagination'])
     const { onLoad, onRequestError } = options || {}
 
@@ -49,7 +61,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
         return `${t('range')} ${range[0]}-${range[1]} ${t('total')} ${total} ${t('item')}`
     }
 
-    const context: Context = shallowReactive({
+    const context: UseFetchDataContext = shallowReactive({
         loading: false,
         dataSource: props.dataSource || [],
         pagination: mergePagination(props.pagination, defaultShowTotal)
@@ -130,7 +142,7 @@ function useFetchData (request: TableRequest | undefined, props: TableProps, opt
 
     tryOnScopeDispose(onStopHandle)
 
-    return { context, onReload, setPaginate, getParams, setParams }
+    return { context, onReload, setPaginate, setParams, getParams }
 }
 
 export default useFetchData

@@ -53,7 +53,7 @@ export default defineComponent({
         })
 
         const { columns, columnsMap, setColumnsMap, resetColumnsMap } = useTableColumns(props)
-        const { rowSelection, onCleanSelected } = useRowSelection(props)
+        const { rowSelection, selectedRows, onCleanSelected } = useRowSelection(props)
 
         const tableColumns = computed(() => {
             return unref(columns).filter((column) => column.checked)
@@ -200,7 +200,7 @@ export default defineComponent({
                 }
                 const alertProps = {
                     selectedRowKeys: rowSelection.selectedRowKeys,
-                    selectedRows: rowSelection.selectedRows,
+                    selectedRows: unref(selectedRows),
                     onCleanSelected: onCleanSelected
                 }
                 return <Alert {...alertProps} v-slots={alertSlots}/>

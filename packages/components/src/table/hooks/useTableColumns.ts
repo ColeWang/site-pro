@@ -6,6 +6,13 @@ import { isBoolean, map, reduce, set } from 'lodash-es'
 import useCustomRender from './useCustomRender'
 import { TableColumn, TableProps } from '../typings'
 
+interface UseTableColumnsResult {
+    columns: ComputedRef<TableColumn[]>;
+    columnsMap: Ref<Recordable<TableColumn>>;
+    setColumnsMap: any;
+    resetColumnsMap: any;
+}
+
 function genColumnsMap (columns: TableColumn[]): Recordable<TableColumn> {
     return reduce(columns, (result, column, index) => {
         const checked: boolean = isBoolean(column.checked) ? column.checked : true
@@ -15,7 +22,7 @@ function genColumnsMap (columns: TableColumn[]): Recordable<TableColumn> {
     }, {})
 }
 
-function useTableColumns (props: TableProps) {
+function useTableColumns (props: TableProps): UseTableColumnsResult {
     const { columns: sColumns } = useCustomRender(props)
 
     const columnsMap: Ref<Recordable<TableColumn>> = ref({})

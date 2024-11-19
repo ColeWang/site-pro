@@ -30,14 +30,15 @@ import type { DrawerProps } from 'ant-design-vue/es/drawer'
 import type { TableProps } from 'ant-design-vue/es/table/Table'
 import type {
     ColumnType as TableColumnType,
-    TablePaginationConfig as TablePagination,
     FilterValue as TableFilterValue,
     SorterResult as TableSorterResult,
     SortOrder as TableSortOrder,
     TableAction,
     TableCurrentDataSource,
+    TablePaginationConfig as TablePagination,
     TableRowSelection
 } from 'ant-design-vue/es/table/interface'
+import { CopyConfig as TypographyCopyable } from 'ant-design-vue/es/typography/Base'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -113,5 +114,6 @@ export type {
     TableRowSelection,
     TableCurrentDataSource,
     // --
-    ValidateErrorEntity
+    ValidateErrorEntity,
+    TypographyCopyable
 }

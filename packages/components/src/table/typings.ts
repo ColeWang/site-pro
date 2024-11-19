@@ -10,23 +10,23 @@ import type {
     TablePagination,
     TableRowSelection,
     TableSorterResult,
-    TableSortOrder
+    TableSortOrder,
+    TypographyEllipsis
 } from '@site-pro/utils'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
-export interface TableColumn extends AntTableColumnType {
+export interface TableColumn<RecordType = any> extends AntTableColumnType<RecordType> {
     key?: string | number; // 占用
     dataIndex?: string | number | (string | number)[];
-    children?: TableColumn[];
+    children?: TableColumn<RecordType>[];
     // table
     search?: false | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
     hideInSetting?: boolean;
     hideInDescriptions?: boolean;
-    // @todo customRender
-    ellipsis?: boolean;
-    copyable?: boolean;
+    ellipsis?: boolean | { showTitle?: boolean };
+    copyable?: boolean | TypographyEllipsis;
     // field
     valueType?: BaseFieldValueType;
     initialValue?: any;
@@ -67,6 +67,10 @@ export type TableSize = 'small' | 'large' | 'middle'
 
 export const tableProps = () => ({
     ...antTableProps(),
+    rowKey: {
+        type: String as PropType<string>,
+        default: undefined
+    },
     size: {
         type: String as PropType<TableSize>,
         default: 'middle'
