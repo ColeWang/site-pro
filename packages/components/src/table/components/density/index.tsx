@@ -1,18 +1,28 @@
-import { defineComponent, unref } from 'vue'
+import { type ComponentPublicInstance, defineComponent, type ExtractPropTypes, unref } from 'vue'
 import { Menu, theme } from 'ant-design-vue'
+import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
+import type { BaseAttrs, MenuInfo, MenuProps } from '@site-pro/utils'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
 
+export const densityProps = () => ({
+    ...menuProps()
+})
+
+export type DensityProps = Partial<ExtractPropTypes<ReturnType<typeof densityProps>>>;
+export type DensityInstance = ComponentPublicInstance<DensityProps>;
+
 export default defineComponent({
     inheritAttrs: false,
-    props: { ...Menu.props },
+    name: 'ProTableDensity',
+    props: densityProps(),
     setup (props, { attrs }) {
         const { token } = theme.useToken()
 
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
         const { tableSize, setTableSize } = useSharedContext()
 
-        function onMenuClick (params) {
+        function onMenuClick (params: MenuInfo) {
             if (unref(tableSize) !== params.key) {
                 setTableSize && setTableSize(params.key)
             }
@@ -22,15 +32,14 @@ export default defineComponent({
         return () => {
             const { fontSize } = unref(token)
 
-            const menuProps = {
-                ...attrs,
+            const menuProps: MenuProps & BaseAttrs = {
                 ...props,
                 style: { minWidth: `${fontSize * 7}px` },
                 selectedKeys: [unref(tableSize)],
                 onClick: onMenuClick
             }
             return (
-                <Menu {...menuProps}>
+                <Menu {...menuProps} {...attrs}>
                     <Menu.Item key={'large'}>
                         {t('densityLarger')}
                     </Menu.Item>

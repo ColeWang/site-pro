@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, Fragment, ref, unref } from 'vue'
 import { ConfigProvider, Space, theme } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
@@ -8,26 +8,32 @@ import { Action } from '../../../action'
 import { useLocaleReceiver } from '../../../locale-provider'
 import useStyle from './style'
 
+export const alertProps = () => ({
+    selectedRowKeys: {
+        type: Array as PropType<(string | number)[]>,
+        default: () => ([])
+    },
+    selectedRows: {
+        type: Array as PropType<any[]>,
+        default: () => ([])
+    },
+    options: {
+        type: Function as PropType<BaseSlot>,
+        default: undefined
+    },
+    onCleanSelected: {
+        type: Function as PropType<() => void>,
+        default: undefined
+    }
+})
+
+export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;
+export type AlertInstance = ComponentPublicInstance<AlertProps>;
+
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        selectedRowKeys: {
-            type: Array as PropType<(string | number)[]>,
-            default: () => ([])
-        },
-        selectedRows: {
-            type: Array as PropType<any[]>,
-            default: () => ([])
-        },
-        options: {
-            type: Function as PropType<BaseSlot>,
-            default: undefined
-        },
-        onCleanSelected: {
-            type: Function as PropType<() => void>,
-            default: undefined
-        }
-    },
+    name: 'ProTableAlert',
+    props: alertProps(),
     emits: ['cleanSelected'],
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-alert', props)
@@ -51,7 +57,7 @@ export default defineComponent({
             const { selectedRowKeys, selectedRows } = props
             const { sizeMS } = unref(token)
 
-            const contentText = `${t('selected')} ${selectedRowKeys.length} ${t('item')}`
+            const contentText: string = `${t('selected')} ${selectedRowKeys.length} ${t('item')}`
             const defaultContent = (
                 <Space size={sizeMS / 2}>
                     <Fragment>{contentText}</Fragment>

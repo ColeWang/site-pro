@@ -38,7 +38,9 @@ import type {
     TablePaginationConfig as TablePagination,
     TableRowSelection
 } from 'ant-design-vue/es/table/interface'
-import { CopyConfig as TypographyCopyable } from 'ant-design-vue/es/typography/Base'
+import type { CopyConfig as TypographyCopyable } from 'ant-design-vue/es/typography/Base'
+import type { MenuProps } from 'ant-design-vue/es/menu/src/Menu'
+import type { MenuInfo } from 'ant-design-vue/es/menu/src/interface'
 import type { Dayjs } from 'dayjs'
 
 declare module 'vue-types' {
@@ -120,5 +122,7 @@ export type {
     TableCurrentDataSource,
     // --
     ValidateErrorEntity,
-    TypographyCopyable
+    TypographyCopyable,
+    MenuProps,
+    MenuInfo
 }

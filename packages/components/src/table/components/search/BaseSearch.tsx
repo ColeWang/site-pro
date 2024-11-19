@@ -1,20 +1,28 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
 import { flattenChildren, isValidElement } from '@site-pro/utils'
-import { QueryFilter } from '../../../query-filter'
+import type { QueryFilterInstance, QueryFilterProps } from '../../../query-filter'
+import { QueryFilter, queryFilterProps } from '../../../query-filter'
 import { merge, pick } from 'lodash-es'
+
+export const baseSearchProps = () => ({
+    ...queryFilterProps(),
+    manualRequest: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    }
+})
+
+export type BaseSearchProps = Partial<ExtractPropTypes<ReturnType<typeof baseSearchProps>>>;
+export type BaseSearchInstance = ComponentPublicInstance<BaseSearchProps>;
 
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        ...QueryFilter.props,
-        manualRequest: {
-            type: Boolean,
-            default: false
-        }
-    },
+    name: 'ProTableBaseSearch',
+    props: baseSearchProps(),
     setup (props, { slots, attrs }) {
-        const queryFilterRef = ref(null)
+        const queryFilterRef: Ref<QueryFilterInstance | null> = ref(null)
 
         const { token } = theme.useToken()
 
@@ -35,15 +43,14 @@ export default defineComponent({
 
             const children = flattenChildren(slots.default ? slots.default() : [])
 
-            const cardProps = { style: { marginBlockEnd: `${sizeMS}px` }, ...attrs }
-            const queryFilterProps = pick(props, Object.keys(QueryFilter.props))
+            const queryFilterProps: QueryFilterProps = pick(props, Object.keys(QueryFilter.props))
             return (
-                <Card {...cardProps}>
+                <Card style={{ marginBlockEnd: `${sizeMS}px` }} {...attrs}>
                     <QueryFilter {...queryFilterProps} ref={queryFilterRef}>
-                        {(slotScope) => {
+                        {(slotScope: any) => {
                             return children.map((vNode) => {
                                 if (!isValidElement(vNode)) return vNode
-                                const { fieldProps, formItemProps } = vNode.props
+                                const { fieldProps, formItemProps } = vNode.props as any
                                 const extraProps = {
                                     fieldProps: merge({ style: { width: '100%' } }, fieldProps),
                                     formItemProps: { ...formItemProps, ...slotScope.props }

@@ -1,31 +1,37 @@
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { Tooltip } from 'ant-design-vue'
 import { preventDefault } from '@site-pro/utils'
 
+export const tooltipProps = () => ({
+    columnKey: {
+        type: String as PropType<string>,
+        default: undefined
+    },
+    title: {
+        type: String as PropType<string>,
+        default: undefined
+    },
+    fixed: {
+        type: String as PropType<string>,
+        default: undefined
+    },
+    onChange: {
+        type: Function as PropType<(fixed: boolean) => void>,
+        default: undefined
+    }
+})
+
+export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
+export type TooltipInstance = ComponentPublicInstance<TooltipProps>;
+
 export default defineComponent({
     inheritAttrs: false,
-    props: {
-        columnKey: {
-            type: String,
-            default: undefined
-        },
-        title: {
-            type: String,
-            default: undefined
-        },
-        fixed: {
-            type: String,
-            default: undefined
-        },
-        onChange: {
-            type: Function,
-            default: undefined
-        }
-    },
+    props: tooltipProps(),
     emits: ['change'],
     setup (props, { emit, slots }) {
         /* v8 ignore next 4 */
-        function onClick (evt) {
+        function onClick (evt: Event): void {
             preventDefault(evt, true)
             emit('change', props.fixed)
         }
