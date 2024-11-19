@@ -1,7 +1,12 @@
+import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
-function genBaseStyle (token) {
-    const { componentCls, antCls, toolbarSettingsPaddingLeft } = token
+interface ProTableToolbarToken extends FullToken<'ProTableToolbar'> {
+    proTableToolbarSettingsPaddingLeft: number;
+}
+
+function genBaseStyle (token: ProTableToolbarToken): CSSInterpolation {
+    const { componentCls, antCls, proTableToolbarSettingsPaddingLeft } = token
     return {
         [componentCls]: {
             position: 'relative',
@@ -40,7 +45,7 @@ function genBaseStyle (token) {
                 [`${componentCls}-settings`]: {
                     textAlign: 'end',
                     whiteSpace: 'nowrap',
-                    paddingInlineStart: toolbarSettingsPaddingLeft
+                    paddingInlineStart: proTableToolbarSettingsPaddingLeft
                 },
                 [`&__word-wrap`]: {
                     display: 'block',
@@ -56,11 +61,12 @@ function genBaseStyle (token) {
     }
 }
 
-export default genComponentStyleHook('ProTableToolbar', (token) => {
-    const toolbarSettingsPaddingLeft = token.sizeMS / 2
-
-    const toolbarToken = mergeToken(token, {
-        toolbarSettingsPaddingLeft
+function styleFn (token: FullToken<'ProTableToolbar'>): CSSInterpolation {
+    const proTableToolbarSettingsPaddingLeft = token.sizeMS / 2
+    const proTableToolbarToken = mergeToken<ProTableToolbarToken>(token, {
+        proTableToolbarSettingsPaddingLeft
     })
-    return [genBaseStyle(toolbarToken)]
-})
+    return genBaseStyle(proTableToolbarToken)
+}
+
+export default genComponentStyleHook('ProTableToolbar', styleFn)

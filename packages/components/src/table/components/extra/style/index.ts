@@ -27,4 +27,3 @@ function styleFn (token: FullToken<'ProTableExtra'>): CSSInterpolation {
 }
 
 export default genComponentStyleHook('ProTableExtra', styleFn)
-
