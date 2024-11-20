@@ -34,10 +34,10 @@ const FieldNumber = defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom = <InputNumber {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <InputNumber {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

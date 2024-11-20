@@ -44,9 +44,9 @@ function genBaseStyle (token: ProDescriptionsToken): CSSInterpolation {
 export default genComponentStyleHook('ProDescriptions', (token) => {
     const { antCls } = token
 
-    const proFieldTextareaReadCls = `${antCls}-pro-field-textarea__read`
+    const proFieldTextareaReadCls: string = `${antCls}-pro-field-textarea__read`
 
-    const descriptionsToken = mergeToken<ProDescriptionsToken>(token, {
+    const descriptionsToken: ProDescriptionsToken = mergeToken<ProDescriptionsToken>(token, {
         proFieldTextareaReadCls
     })
     return genBaseStyle(descriptionsToken)

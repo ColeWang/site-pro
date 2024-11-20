@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType } from 'vue'
+import type { App, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { omit, pick } from 'lodash-es'
@@ -28,7 +28,7 @@ const ModalForm = defineComponent({
         const { sOpen, loading, onOpen, onCancel, onFinish } = useFloatForm(props, {
             onOpen: () => emit('open'),
             onCancel: () => emit('cancel'),
-            onUpdateOpen: (value) => emit('update:open', value)
+            onUpdateOpen: (value: boolean) => emit('update:open', value)
         })
 
         watch(sOpen, (value) => {
@@ -45,7 +45,7 @@ const ModalForm = defineComponent({
         }
 
         function onSubmit (): void {
-            const context = unref(baseFormRef)
+            const context: BaseFormInstance | null = unref(baseFormRef)
             context && context.submit()
         }
 
@@ -91,8 +91,8 @@ const ModalForm = defineComponent({
                 }
             }
 
-            const triggerDom = getSlotVNode(slots, props, 'trigger')
-            const baseFormSlots = omit(slots, ['trigger'])
+            const triggerDom: VNodeChild = getSlotVNode(slots, props, 'trigger')
+            const baseFormSlots: Recordable<BaseSlot> = omit(slots, ['trigger'])
 
             return (
                 <Fragment>

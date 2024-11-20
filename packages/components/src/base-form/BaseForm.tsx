@@ -67,7 +67,7 @@ const BaseForm = defineComponent({
         }
 
         async function validate (names?: NamePath[]): Promise<Recordable> {
-            const context = unref(formInstanceRef)
+            const context: FormInstance | null = unref(formInstanceRef)
             if (context && context.validate) {
                 return context.validate(names)
             }
@@ -96,7 +96,7 @@ const BaseForm = defineComponent({
             const { scrollToFirstError } = props
             if (scrollToFirstError && errorInfo.errorFields.length) {
                 const headField: any = head(errorInfo.errorFields)
-                const options = isObject(scrollToFirstError) ? scrollToFirstError : {}
+                const options: any = isObject(scrollToFirstError) ? scrollToFirstError : {}
                 onScrollToField(headField.name, options)
             }
             emit('finishFailed', errorInfo)

@@ -1,3 +1,4 @@
+import type { WatchStopHandle  from 'vue'
 import { shallowReactive, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isFunction } from 'lodash-es'
@@ -51,7 +52,7 @@ function useFetchData (
         }
     }
 
-    const stopWatchDataSource = watch(() => props.dataSource, (value) => {
+    const stopWatchDataSource: WatchStopHandle = watch(() => props.dataSource, (value) => {
         // 手动请求时 更新 dataSource
         context.dataSource = value || {}
     }, { immediate: true })

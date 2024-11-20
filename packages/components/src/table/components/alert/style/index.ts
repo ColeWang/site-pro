@@ -44,8 +44,8 @@ function genBaseStyle (token: ProTableAlertToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTableAlert'>): CSSInterpolation {
-    const proTableAlertMarginBottom = token.sizeMS
-    const proTableAlertToken = mergeToken<ProTableAlertToken>(token, {
+    const proTableAlertMarginBottom: number = token.sizeMS
+    const proTableAlertToken: ProTableAlertToken = mergeToken<ProTableAlertToken>(token, {
         proTableAlertMarginBottom
     })
     return genBaseStyle(proTableAlertToken)

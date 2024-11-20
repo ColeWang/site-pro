@@ -56,11 +56,11 @@ function genBaseStyle (token: ProTableSettingListToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTableSettingList'>): CSSInterpolation {
-    const proTableSettingListTitleMargin = token.controlHeightSM - token.fontSizeSM * token.lineHeightSM
-    const proTableSettingListHolderPadding = token.sizeXS / 2
-    const proTableSettingListCheckboxMargin = (token.controlHeightSM - token.controlHeight / 2) / 2
+    const proTableSettingListTitleMargin: number = token.controlHeightSM - token.fontSizeSM * token.lineHeightSM
+    const proTableSettingListHolderPadding: number = token.sizeXS / 2
+    const proTableSettingListCheckboxMargin: number = (token.controlHeightSM - token.controlHeight / 2) / 2
 
-    const proTableSettingListToken = mergeToken<ProTableSettingListToken>(token, {
+    const proTableSettingListToken: ProTableSettingListToken = mergeToken<ProTableSettingListToken>(token, {
         proTableSettingListTitleMargin,
         proTableSettingListHolderPadding,
         proTableSettingListCheckboxMargin

@@ -26,9 +26,9 @@ function genBaseStyle (token: ProQueryFilterToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProQueryFilter'>): CSSInterpolation {
-    const proQueryFilterVerticalMargin = token.fontSize * token.lineHeight + token.sizeXS
+    const proQueryFilterVerticalMargin: number = token.fontSize * token.lineHeight + token.sizeXS
 
-    const proQueryFilterToken = mergeToken<ProQueryFilterToken>(token, {
+    const proQueryFilterToken: ProQueryFilterToken = mergeToken<ProQueryFilterToken>(token, {
         proQueryFilterVerticalMargin
     })
     return genBaseStyle(proQueryFilterToken)

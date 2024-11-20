@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, Ref, WatchStopHandle } from 'vue'
 import { computed, ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
@@ -33,7 +33,7 @@ function useTableColumns (props: TableProps): UseTableColumnsResult {
         })
     })
 
-    const stopWatchColumns = watch(sColumns, (columns) => {
+    const stopWatchColumns: WatchStopHandle = watch(sColumns, (columns) => {
         columnsMap.value = genColumnsMap(columns)
     }, { immediate: true })
 

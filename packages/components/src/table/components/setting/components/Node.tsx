@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Space, theme } from 'ant-design-vue'
 import {
@@ -63,7 +63,7 @@ export default defineComponent({
                 onChange: onChange
             }
 
-            const iconDom = (
+            const iconDom: VNodeChild = (
                 <Space size={sizeXXS}>
                     {fixed !== 'left' && (
                         <Tooltip title={t('leftPin')} fixed={'left'} {...tooltipProps}>

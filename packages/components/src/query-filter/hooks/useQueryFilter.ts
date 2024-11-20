@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref, VNode } from 'vue'
+import type { ComputedRef, Ref, VNode, WatchStopHandle } from 'vue'
 import { computed, ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isValidElement } from '@site-pro/utils'
@@ -32,7 +32,7 @@ interface UseQueryFilterResult {
 }
 
 function getOffset (length: number, span: number): number {
-    const cols = 24 / span
+    const cols: number = 24 / span
     return (cols - 1 - (length % cols)) * span
 }
 
@@ -50,7 +50,7 @@ function useQueryFilter (
         return Math.max(1, cols - 1)
     })
 
-    const stopWatchCollapsed = watch(() => props.collapsed, (value) => {
+    const stopWatchCollapsed: WatchStopHandle = watch(() => props.collapsed, (value) => {
         collapsed.value = value!
     }, { immediate: true })
 

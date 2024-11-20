@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, WatchStopHandle } from 'vue'
 import { ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
@@ -23,7 +23,7 @@ function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): Use
     const sOpen: Ref<boolean> = ref(props.open!)
     const loading: Ref<boolean> = ref(false)
 
-    const stopWatchOpen = watch(() => props.open, (value) => {
+    const stopWatchOpen: WatchStopHandle = watch(() => props.open, (value) => {
         sOpen.value = value!
     }, { immediate: true })
 

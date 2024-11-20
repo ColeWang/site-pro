@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Slider } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -32,10 +32,10 @@ const FieldSlider = defineComponent({
                 style: { minWidth: 100, ...fieldProps.style },
                 ...fieldProps
             }
-            const fieldDom = <Slider {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <Slider {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

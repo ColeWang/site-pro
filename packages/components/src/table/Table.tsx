@@ -1,4 +1,4 @@
-import type { App, ComputedRef, CSSProperties, Ref, SlotsType } from 'vue'
+import type { App, ComputedRef, CSSProperties, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
 import type {
@@ -20,6 +20,7 @@ import Search from './components/search'
 import Extra from './components/extra'
 import type { ToolbarProps } from './components/toolbar'
 import Toolbar from './components/toolbar'
+import type { AlertProps } from './components/alert'
 import Alert from './components/alert'
 import useFetchData from './hooks/useFetchData'
 import useTableColumns from './hooks/useTableColumns'
@@ -113,7 +114,7 @@ const Table = defineComponent({
         }
 
         function onFinish (values: Recordable): void {
-            const nextValues = omitNil(values)
+            const nextValues: Recordable = omitNil(values)
             if (isFunction(props.beforeSearchSubmit)) {
                 const result: Recordable = props.beforeSearchSubmit(nextValues)
                 setParams(result || {})
@@ -186,7 +187,7 @@ const Table = defineComponent({
                     onReset: onReset
                 }
                 // custom search 只有插槽的形式
-                const customSearch = getSlotVNode(slots, {}, 'search', searchProps)
+                const customSearch: VNodeChild = getSlotVNode(slots, {}, 'search', searchProps)
                 return customSearch || <Search {...searchProps}/>
             }
 
@@ -207,7 +208,7 @@ const Table = defineComponent({
                     default: getSlot(slots, props, 'alert'),
                     options: getSlot(slots, props, 'alertOptions')
                 }
-                const alertProps = {
+                const alertProps: AlertProps = {
                     selectedRowKeys: rowSelection.selectedRowKeys,
                     selectedRows: unref(selectedRows),
                     onCleanSelected: onCleanSelected
@@ -215,14 +216,14 @@ const Table = defineComponent({
                 return <Alert {...alertProps} v-slots={alertSlots}/>
             }
 
-            const extraDom = getSlotVNode(slots, props, 'extra', {
+            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', {
                 pageData: requestProps.dataSource,
                 loading: requestProps.loading,
                 pagination: requestProps.pagination
             })
 
             const needTableProps: AntTableProps = {
-                ...pick(props, Object.keys(Table.props)),
+                ...pick(props, Object.keys(Table.props)) as AntTableProps,
                 ...requestProps,
                 size: unref(tableSize),
                 columns: unref(tableColumns),
@@ -232,9 +233,9 @@ const Table = defineComponent({
 
             const needTableSlots: Recordable<BaseSlot> = omit(slots, ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions'])
 
-            const baseTableDom = <AntTable {...needTableProps} v-slots={needTableSlots}/>
+            const baseTableDom: VNodeChild = <AntTable {...needTableProps} v-slots={needTableSlots}/>
 
-            const tableDom = getSlotVNode(slots, props, 'table', {
+            const tableDom: VNodeChild = getSlotVNode(slots, props, 'table', {
                 props: needTableProps,
                 dom: baseTableDom
             })

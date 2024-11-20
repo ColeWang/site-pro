@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
+import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button, Space, theme } from 'ant-design-vue'
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'
@@ -60,7 +60,7 @@ const QueryFilterActions = defineComponent({
             const { sizeMS, sizeXXS } = unref(token)
 
             const iconStyle: CSSProperties = { marginInlineStart: toPx(sizeXXS) }
-            const collapseDom = showCollapse && (
+            const collapseDom: false | VNodeChild = showCollapse && (
                 <Button style={{ padding: 0 }} type={'link'} onClick={onCollapse}>
                     <span>{!collapsed ? t('expand') : t('collapsed')}</span>
                     {collapsed ? <DownOutlined style={iconStyle}/> : <UpOutlined style={iconStyle}/>}

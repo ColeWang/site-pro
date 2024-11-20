@@ -62,8 +62,8 @@ function genBaseStyle (token: ProTableToolbarToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTableToolbar'>): CSSInterpolation {
-    const proTableToolbarSettingsPaddingLeft = token.sizeMS / 2
-    const proTableToolbarToken = mergeToken<ProTableToolbarToken>(token, {
+    const proTableToolbarSettingsPaddingLeft: number = token.sizeMS / 2
+    const proTableToolbarToken: ProTableToolbarToken = mergeToken<ProTableToolbarToken>(token, {
         proTableToolbarSettingsPaddingLeft
     })
     return genBaseStyle(proTableToolbarToken)

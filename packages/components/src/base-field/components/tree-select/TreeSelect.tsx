@@ -32,10 +32,10 @@ const FieldTreeSelect = defineComponent({
                 ...restFieldProps,
                 placeholder: placeholder
             }
-            const fieldDom = <TreeSelect {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <TreeSelect {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

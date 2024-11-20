@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { TimeRangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -38,10 +38,10 @@ const FieldTimeRangePicker = defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

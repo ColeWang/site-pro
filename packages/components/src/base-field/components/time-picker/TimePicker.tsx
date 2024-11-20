@@ -29,10 +29,10 @@ const FieldTimePicker = defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom = <TimePicker {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <TimePicker {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

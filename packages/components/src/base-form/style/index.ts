@@ -24,7 +24,7 @@ function genBaseStyle (token: ProBaseFormToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProBaseForm'>): CSSInterpolation {
-    const proBaseFormToken = mergeToken<ProBaseFormToken>(token, {})
+    const proBaseFormToken: ProBaseFormToken = mergeToken<ProBaseFormToken>(token, {})
     return genBaseStyle(proBaseFormToken)
 }
 

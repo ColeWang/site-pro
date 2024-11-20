@@ -50,11 +50,11 @@ function genBaseStyle (token: ProTableSettingNodeToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTableSettingNode'>): CSSInterpolation {
-    const proTableSettingNodeTitleMaxWidth = token.controlHeightSM * 7
-    const proTableSettingNodeOptionWidth = token.fontSize * 2 + token.sizeMS + token.sizeXXS
-    const proTableSettingNodeOptionPaddingInline = token.sizeMS / 2
+    const proTableSettingNodeTitleMaxWidth: number = token.controlHeightSM * 7
+    const proTableSettingNodeOptionWidth: number = token.fontSize * 2 + token.sizeMS + token.sizeXXS
+    const proTableSettingNodeOptionPaddingInline: number = token.sizeMS / 2
 
-    const proTableSettingNodeToken = mergeToken<ProTableSettingNodeToken>(token, {
+    const proTableSettingNodeToken: ProTableSettingNodeToken = mergeToken<ProTableSettingNodeToken>(token, {
         proTableSettingNodeTitleMaxWidth,
         proTableSettingNodeOptionWidth,
         proTableSettingNodeOptionPaddingInline

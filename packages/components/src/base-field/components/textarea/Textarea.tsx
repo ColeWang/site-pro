@@ -1,4 +1,4 @@
-import type { App, CSSProperties, SlotsType } from 'vue'
+import type { App, CSSProperties, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
 import { getSlotVNode, toPx } from '@site-pro/utils'
@@ -44,10 +44,10 @@ const FieldTextarea = defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom = <Input.TextArea {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <Input.TextArea {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

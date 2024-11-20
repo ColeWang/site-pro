@@ -3,7 +3,7 @@ import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction, isObject } from 'lodash-es'
 import useBaseFieldProvider from './hooks/useBaseFieldProvider'
-import type { BaseFieldProps, BaseFieldValueType } from './typings'
+import type { BaseFieldProps, BaseFieldProviderValueTypeMap, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
 // ---
 import {
@@ -205,8 +205,8 @@ const BaseField = defineComponent({
                 fieldProps: needFieldProps
             }
 
-            const types = unref(valueTypeMap)
-            const customRenderText = isObject(types) && types[valueType]
+            const types: BaseFieldProviderValueTypeMap | undefined = unref(valueTypeMap)
+            const customRenderText: false | BaseSlot = isObject(types) && types[valueType]
             if (customRenderText && isFunction(customRenderText)) {
                 // valueType: ({ props, slots }) => {}
                 return customRenderText({ props: needBaseFieldProps, slots: slots as Recordable<BaseSlot> })

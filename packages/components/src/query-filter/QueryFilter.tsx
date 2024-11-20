@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNode } from 'vue'
+import type { App, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { cloneVNode, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
@@ -104,7 +104,7 @@ const QueryFilter = defineComponent({
             const formItemClass: BaseClass = {
                 [`${prefixCls.value}-form-item__vertical`]: unref(layout) === 'vertical' && !haveRow
             }
-            const actionDom = (
+            const actionDom: VNodeChild = (
                 <Col class={`${prefixCls.value}-action-col`} span={unref(span)} offset={offset} key={'action'}>
                     <Form.Item class={formItemClass} colon={false}>
                         <Actions {...actionsProps}/>

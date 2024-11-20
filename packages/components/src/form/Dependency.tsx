@@ -1,6 +1,6 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import type { NamePath } from '@site-pro/utils'
+import type { NamePath, Recordable } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
 import type { ColWrapperProps } from '../base-form'
@@ -36,7 +36,7 @@ const FormDependency = defineComponent({
 
             const slotScope: any = reduce(namePathList, (result, namePath) => {
                 if (namePath && getModelValue && isFunction(getModelValue)) {
-                    const value = getModelValue(namePath)
+                    const value: Recordable = getModelValue(namePath)
                     return set(result, namePath, cloneProxyToRaw(value))
                 }
                 return result

@@ -50,9 +50,9 @@ function genBaseStyle (token: ProActionToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProAction'>): CSSInterpolation {
-    const proActionTransition = `all ${token.motionDurationMid} ${token.motionEaseInOut}`
+    const proActionTransition: string = `all ${token.motionDurationMid} ${token.motionEaseInOut}`
 
-    const proActionToken = mergeToken<ProActionToken>(token, {
+    const proActionToken: ProActionToken = mergeToken<ProActionToken>(token, {
         proActionTransition
     })
     return genBaseStyle(proActionToken)

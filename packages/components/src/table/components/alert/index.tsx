@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref } from 'vue'
 import { ConfigProvider, Space, theme } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
@@ -58,7 +58,7 @@ export default defineComponent({
             const { sizeMS } = unref(token)
 
             const contentText: string = `${t('selected')} ${selectedRowKeys.length} ${t('item')}`
-            const defaultContent = (
+            const defaultContent: VNodeChild = (
                 <Space size={sizeMS / 2}>
                     <Fragment>{contentText}</Fragment>
                     <Action onClick={onCleanSelected}>
@@ -73,8 +73,8 @@ export default defineComponent({
                 cleanSelected: onCleanSelected
             }
 
-            const customContent = getSlotVNode(slots, props, 'default', slotScope)
-            const optionsDom = getSlotVNode(slots, props, 'options', slotScope)
+            const customContent: VNodeChild = getSlotVNode(slots, props, 'default', slotScope)
+            const optionsDom: VNodeChild = getSlotVNode(slots, props, 'options', slotScope)
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>

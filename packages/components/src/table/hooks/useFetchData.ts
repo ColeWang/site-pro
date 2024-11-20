@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, WatchStopHandle } from 'vue'
 import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { Recordable, TablePagination } from '@site-pro/utils'
@@ -69,19 +69,19 @@ function useFetchData (
 
     const sParams: Ref<Recordable> = shallowRef({})
 
-    const stopWatchDataSource = watch(() => props.dataSource, (value) => {
+    const stopWatchDataSource: WatchStopHandle = watch(() => props.dataSource, (value) => {
         // 手动请求时 更新 dataSource
         context.dataSource = value || []
     }, { immediate: true })
 
-    const stopWatchPagination = watch(() => context.pagination, (value, oldValue) => {
+    const stopWatchPagination: WatchStopHandle = watch(() => context.pagination, (value, oldValue) => {
         if (value && oldValue && (value.current !== oldValue.current || value.pageSize !== oldValue.pageSize)) {
             oldValue.pageSize !== value.pageSize && setPaginate({ current: 1 })
             fetchData()
         }
     })
 
-    const stopWatchParams = watch([() => props.params, sParams], (current, previous) => {
+    const stopWatchParams: WatchStopHandle = watch([() => props.params, sParams], (current, previous) => {
         if (!isEqual(current, previous)) {
             setPaginate({ current: 1 })
             fetchData()

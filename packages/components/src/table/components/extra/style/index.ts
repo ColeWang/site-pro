@@ -19,8 +19,8 @@ function genBaseStyle (token: ProTableExtraToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTableExtra'>): CSSInterpolation {
-    const proTableExtraMarginBottom = token.sizeMS
-    const proTableExtraToken = mergeToken<ProTableExtraToken>(token, {
+    const proTableExtraMarginBottom: number = token.sizeMS
+    const proTableExtraToken: ProTableExtraToken = mergeToken<ProTableExtraToken>(token, {
         proTableExtraMarginBottom
     })
     return genBaseStyle(proTableExtraToken)

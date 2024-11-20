@@ -1,7 +1,8 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, VNode } from 'vue'
 import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
 import { flattenChildren, isValidElement } from '@site-pro/utils'
+import type { BaseFieldProps } from '../../../base-field'
 import type { BaseFormInstance } from '../../../base-form'
 import type { QueryFilterProps } from '../../../query-filter'
 import { QueryFilter, queryFilterProps } from '../../../query-filter'
@@ -43,7 +44,7 @@ export default defineComponent({
         return () => {
             const { sizeMS } = unref(token)
 
-            const children = flattenChildren(slots.default ? slots.default() : [])
+            const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
 
             const queryFilterProps: QueryFilterProps = pick(props, Object.keys(QueryFilter.props))
             return (
@@ -53,7 +54,7 @@ export default defineComponent({
                             return children.map((vNode) => {
                                 if (!isValidElement(vNode)) return vNode
                                 const { fieldProps, formItemProps } = vNode.props as any
-                                const extraProps = {
+                                const extraProps: Partial<BaseFieldProps> = {
                                     fieldProps: merge({ style: { width: '100%' } }, fieldProps),
                                     formItemProps: { ...formItemProps, ...slotScope.props }
                                 }

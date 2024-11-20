@@ -18,7 +18,7 @@ function genBaseStyle (token: ProTableToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTable'>): CSSInterpolation {
-    const proTableToken = mergeToken<ProTableToken>(token, {})
+    const proTableToken: ProTableToken = mergeToken<ProTableToken>(token, {})
     return genBaseStyle(proTableToken)
 }
 

@@ -39,10 +39,10 @@ const FieldSelect = defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom = <Select {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <Select {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

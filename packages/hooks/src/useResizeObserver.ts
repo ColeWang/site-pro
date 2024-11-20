@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref } from 'vue'
+import type { ComputedRef, Ref, WatchStopHandle } from 'vue'
 import { computed, watch } from 'vue'
 import type { BaseRefType } from '@site-pro/utils'
 import { getElement } from '@site-pro/utils'
@@ -22,7 +22,7 @@ function useResizeObserver (
 
     const elTarget: ComputedRef<HTMLElement | null> = computed(() => getElement(target))
 
-    const stopWatch = watch(elTarget, (el) => {
+    const stopWatch: WatchStopHandle = watch(elTarget, (el) => {
         cleanup()
         if (window && 'ResizeObserver' in window) {
             observer = new ResizeObserver(callback)

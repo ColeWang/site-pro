@@ -2,6 +2,7 @@ import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsTyp
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
+import type { BaseAttrs } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ColWrapperProps } from '../base-form'
 import { ColWrapper, useFormInstance } from '../base-form'
@@ -40,7 +41,7 @@ const FormItem = defineComponent({
                 grid: grid
             }
 
-            const formItemProps = {
+            const formItemProps: FormItemProps & BaseAttrs = {
                 ...pick(props, Object.keys(Form.Item.props)) as FormItemProps,
                 ...attrs
             }

@@ -33,10 +33,10 @@ const FieldRadio = defineComponent({
                 options: unref(options) as any,
                 ...fieldProps
             }
-            const fieldDom = <Radio.Group {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <Radio.Group {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

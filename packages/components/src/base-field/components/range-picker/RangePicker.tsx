@@ -39,10 +39,10 @@ const FieldRangePicker = defineComponent({
                 // -- placeholder 类型有问题 string | [string, string]
                 placeholder: placeholder
             }
-            const fieldDom = <RangePicker {...needFieldProps} v-slots={slots}/>
+            const fieldDom: VNodeChild = <RangePicker {...needFieldProps} v-slots={slots}/>
             // ----
             const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom = getSlotVNode(slots, props, 'renderField', slotScope)
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
 
             return renderFieldDom || fieldDom
         }

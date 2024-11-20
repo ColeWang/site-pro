@@ -88,7 +88,7 @@ export default defineComponent({
                 const column: TableColumn = unref(columnsMap)[key] || {}
                 return set(result, key, { ...column, order })
             }, {})
-            setColumnsMap && setColumnsMap(values)
+            onColumnsMapChange && onColumnsMapChange(values)
         }
 
         return () => {

@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, VNodeChild } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { Button, ConfigProvider, Dropdown, Popover, Space, Tooltip } from 'ant-design-vue'
 import {
@@ -87,11 +87,11 @@ export default defineComponent({
                 pagination: requestProps.pagination,
                 pageData: requestProps.dataSource
             }
-            const titleDom = getSlotVNode(slots, props, 'title', slotScope)
-            const actionsDom = getSlotVNode(slots, props, 'actions', slotScope)
+            const titleDom: VNodeChild = getSlotVNode(slots, props, 'title', slotScope)
+            const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', slotScope)
 
             const renderSettings = () => {
-                const vNodeCatalog: Record<string, any> = {
+                const vNodeCatalog: Record<string, VNodeChild> = {
                     reload: (
                         <Tooltip title={t('reload')}>
                             <Button onClick={onReloadClick}>
@@ -135,7 +135,7 @@ export default defineComponent({
                     .filter((key) => options[key])
                     .map((key) => vNodeCatalog[key])
 
-                const customSettings = getSlotVNode(slots, props, 'settings', slotScope)
+                const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', slotScope)
                 return (
                     <Space.Compact>{customSettings || defaultSettings}</Space.Compact>
                 )

@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, WatchStopHandle } from 'vue'
 import { ref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { ResizeObserverRectSize } from '../../resize-observer'
@@ -80,8 +80,8 @@ function useBreakPoint (
     const span: Ref<number> = ref(24)
     const layout: Ref<QueryFilterLayout> = ref('horizontal')
 
-    const stopWatchSize = watch(size, (value) => {
-        const result = getBreakPointConfig(value.width, props)
+    const stopWatchSize: WatchStopHandle = watch(size, (value) => {
+        const result: GetBreakPointConfigResult = getBreakPointConfig(value.width, props)
         // ---
         span.value = result.span || 24
         layout.value = result.layout || 'horizontal'
