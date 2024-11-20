@@ -13,6 +13,8 @@ import type {
     TableSortOrder,
     TypographyCopyable
 } from '@site-pro/utils'
+import type { SearchProps } from './components/search'
+import type { ToolbarProps } from './components/toolbar'
 import type { UseFetchDataContext } from './hooks/useFetchData'
 import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 
@@ -97,7 +99,7 @@ export const tableProps = () => ({
         default: '-'
     },
     search: {
-        type: [Boolean, Object] as PropType<boolean | {}>,
+        type: [Boolean, Object] as PropType<boolean | SearchProps>,
         default: undefined
     },
     manualRequest: {
@@ -121,7 +123,7 @@ export const tableProps = () => ({
         default: undefined
     },
     toolbar: {
-        type: [Boolean, Object] as PropType<boolean | {}>,
+        type: [Boolean, Object] as PropType<boolean | ToolbarProps>,
         default: true
     },
     actions: {
