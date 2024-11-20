@@ -3,7 +3,7 @@ import { cloneVNode, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseClass, RowProps } from '@site-pro/utils'
-import { flattenChildren } from '@site-pro/utils'
+import { flattenChildren, getPropByKebabOrCamel } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../resize-observer'
 import { ResizeObserver } from '../resize-observer'
@@ -66,9 +66,7 @@ const QueryFilter = defineComponent({
             const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child, hidden, key } = item
-                const fieldLabelWidth: number | 'auto' | undefined = child.props &&
-                    (child.props as any)['label-width'] ||
-                    (child.props as any)['labelWidth']
+                const fieldLabelWidth: number | 'auto' | undefined = child.props && getPropByKebabOrCamel(child.props, 'label-width')
 
                 // 默认宽度 80px sizeMD * 4
                 const fieldNode: VNode = cloneVNode(child, {
