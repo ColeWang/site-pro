@@ -1,3 +1,4 @@
+import type { App, Ref } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
 import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
@@ -18,12 +19,12 @@ const Descriptions = defineComponent({
         const { prefixCls } = useConfigInject('pro-descriptions', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
 
-        const popupContainer = ref(null)
+        const popupContainer: Ref<HTMLElement | null> = ref(null)
 
         const { context: requestProps, onReload } = useFetchData(props.request, props, {
             manualRequest: !props.request,
-            onLoad: (dataSource) => emit('load', dataSource),
-            onRequestError: (err) => emit('requestError', err)
+            onLoad: (dataSource: any[]) => emit('load', dataSource),
+            onRequestError: (err: Error) => emit('requestError', err)
         })
 
         function schemaToDescsItem (columns, emptyText) {
@@ -81,6 +82,10 @@ const Descriptions = defineComponent({
                 .sort((a, b) => (a.order || 0) - (b.order || 0))
         }
 
+        function getPopupContainer (): HTMLElement {
+            return getElement(popupContainer) || document.body
+        }
+
         expose({ reload: onReload })
 
         return () => {
@@ -102,7 +107,7 @@ const Descriptions = defineComponent({
             const needDescsProps = { ...pick(restProps, Object.keys(Descriptions.props)) }
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <ConfigProvider getPopupContainer={getElement.bind(null, popupContainer)}>
+                    <ConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                             <div class={`${prefixCls.value}-container`}>
                                 {(titleDom || extraDom) && (
@@ -129,5 +134,9 @@ const Descriptions = defineComponent({
     }
 })
 
+Descriptions.install = function (app: App): App {
+    app.component(Descriptions.name as string, Descriptions)
+    return app
+}
 
 export default Descriptions

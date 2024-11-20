@@ -1,5 +1,7 @@
 import Table from './Table'
-import EditableTable from '../editable-table'
-import { BaseSearch } from './components/search'
+import type { TableColumn, TableExpose, TableInstance, TableProps } from './typings'
+import { tableProps } from './typings'
 
-export { Table, EditableTable, BaseSearch }
+export { Table, tableProps }
+
+export type { TableColumn, TableProps, TableExpose, TableInstance }

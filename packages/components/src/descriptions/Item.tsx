@@ -1,26 +1,21 @@
+import type { App } from 'vue'
 import { defineComponent } from 'vue'
-import { Descriptions, Form } from 'ant-design-vue'
-import { BaseField } from '../base-field'
+import { descriptionsItemProps } from './typings'
 
-export default defineComponent({
+const DescriptionsItem = defineComponent({
     inheritAttrs: false,
-    name: 'SDescriptionsItem',
-    props: {
-        ...BaseField.props,
-        ...Form.Item.props,
-        ...Descriptions.Item.props,
-        hide: {
-            type: Boolean,
-            default: false
-        },
-        order: {
-            type: Number,
-            default: undefined
-        }
-    },
+    name: 'ProDescriptionsItem',
+    props: descriptionsItemProps(),
     setup (_, { slots }) {
         return () => {
             return slots.default && slots.default()
         }
     }
 })
+
+DescriptionsItem.install = function (app: App): App {
+    app.component(DescriptionsItem.name as string, DescriptionsItem)
+    return app
+}
+
+export default DescriptionsItem

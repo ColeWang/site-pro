@@ -57,14 +57,12 @@ declare module 'scroll-into-view-if-needed' {
 
 declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
+        // form
         ProFieldTextarea?: {};
         ProBaseForm?: {};
         ProQueryFilter?: {};
         ProQueryFilterActions?: {};
-        ProDescriptions?: {};
-        ProAction?: {};
-        ProLoadingPlugin?: {};
-        ProProgressPlugin?: {};
+        // table
         ProTable?: {};
         ProTableExtra?: {};
         ProTableToolbar?: {};
@@ -72,6 +70,12 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProTableSetting?: {};
         ProTableSettingList?: {};
         ProTableSettingNode?: {};
+        ProAction?: {};
+        // descriptions
+        ProDescriptions?: {};
+        // plugin
+        ProLoadingPlugin?: {};
+        ProProgressPlugin?: {};
     }
 }
 
