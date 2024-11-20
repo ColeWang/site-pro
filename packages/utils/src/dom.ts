@@ -6,7 +6,7 @@ export function hasClass (node: HTMLElement, className: string): boolean {
     if (node.classList) {
         return node.classList.contains(className)
     }
-    const originClass = node.className
+    const originClass: string = node.className
     return ` ${originClass} `.indexOf(` ${className} `) > -1
 }
 

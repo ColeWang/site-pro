@@ -63,7 +63,7 @@ const plugin: FullscreenPlugin = {
         const el: HTMLElement = target || document.documentElement
         if (this.activeEl === el) return Promise.resolve()
         // --
-        const result = this.activeEl && el.contains(this.activeEl)
+        const result: Promise<void> = this.activeEl && el.contains(this.activeEl)
             ? this.exit()
             : Promise.resolve()
 

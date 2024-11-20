@@ -50,7 +50,7 @@ export function enumToText (text: BaseOptionType | VNodeChild, valueEnum: BaseEn
         })
     }
     if (isString(text) || isNumber(text)) {
-        const plain = valueEnum[text]
+        const plain: string | number | BaseEnumType = valueEnum[text]
         if (plain && isObject(plain)) {
             return h(Badge, { ...plain })
         }

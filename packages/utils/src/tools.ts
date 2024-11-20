@@ -24,8 +24,8 @@ export function omitUndefined<T extends Recordable> (object?: T): T {
 
 export function namePathToString (namePath: NamePath): string {
     if (namePath && isArray(namePath)) {
-        const pathString = reduce(namePath, (total, value, index) => {
-            const result = isNumber(value) && index > 0 ? `[${value}]` : `.${value}`
+        const pathString: string = reduce(namePath, (total, value, index) => {
+            const result: string = isNumber(value) && index > 0 ? `[${value}]` : `.${value}`
             return total + result
         }, '')
         return pathString.replace(/^\./, '')
