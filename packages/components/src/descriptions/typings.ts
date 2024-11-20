@@ -5,10 +5,16 @@ import type { Recordable } from '@site-pro/utils'
 import { baseFieldProps } from '../base-field'
 import type { TableColumn } from '../table'
 
+export interface DescriptionsRequest {
+    (params: Recordable): Promise<any>;
+}
+
+export type DescriptionsColumn = DescriptionsItemProps & TableColumn;
+
 export const descriptionsProps = () => ({
     ...antDescriptionsProps(),
     request: {
-        type: Function,
+        type: Function as PropType<DescriptionsRequest>,
         default: undefined
     },
     params: {
@@ -20,7 +26,7 @@ export const descriptionsProps = () => ({
         default: () => ({})
     },
     columns: {
-        type: Array as PropType<TableColumn[]>,
+        type: Array as PropType<DescriptionsColumn[]>,
         default: () => ([])
     },
     emptyText: {

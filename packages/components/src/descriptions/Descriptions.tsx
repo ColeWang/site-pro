@@ -1,14 +1,17 @@
 import type { App, Ref } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
-import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
-import type { BaseFieldProps } from '../base-field'
-import { BaseField } from '../base-field'
-import useFetchData from './hooks/useFetchData'
 import { useConfigInject } from '@site-pro/hooks'
-import useStyle from './style'
+import type { BaseAttrs, BaseSlot, Recordable } from '@site-pro/utils'
+import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { isFunction, omit, pick } from 'lodash-es'
+import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
+import { BaseField } from '../base-field'
+import type { TableColumn } from '../table'
+import useFetchData from './hooks/useFetchData.ts'
+import type { DescriptionsItemProps } from './typings'
 import { descriptionsProps } from './typings'
+import useStyle from './style'
 
 const Descriptions = defineComponent({
     inheritAttrs: false,
@@ -27,7 +30,7 @@ const Descriptions = defineComponent({
             onRequestError: (err: Error) => emit('requestError', err)
         })
 
-        function schemaToDescsItem (columns, emptyText) {
+        function schemaToDescsItem (columns: (TableColumn & DescriptionsItemProps)[], emptyText?: string) {
             return columns.map((item, index) => {
                 const { fieldProps, formItemProps, __SLOTS__: itemSlots } = item
                 const { valueType, dataIndex, name, label } = item
@@ -35,12 +38,12 @@ const Descriptions = defineComponent({
                 const namePath = name || dataIndex || item.key
                 const title = isFunction(item.title) ? item.title() : (item.title || label)
 
-                const descsItemProps = {
-                    ...pick(item, Object.keys(Descriptions.Item.props)),
+                const descsItemProps: DescriptionsItemProps = {
+                    ...pick(item, Object.keys(Descriptions.Item.props)) as DescriptionsItemProps,
                     key: item.key || label || index,
                     label: title
                 }
-                const needItemSlots = pick(itemSlots, ['label'])
+                const needItemSlots: Recordable<BaseSlot> = pick(itemSlots, ['label'])
                 if (!valueType && !namePath) {
                     const children = itemSlots.default && itemSlots.default(requestProps.dataSource)
                     return (
@@ -50,8 +53,8 @@ const Descriptions = defineComponent({
                     )
                 }
 
-                const needFormItemProps = {
-                    ...pick(item, Object.keys(Form.Item.props)),
+                const needFormItemProps: BaseFieldFormItemProps = {
+                    ...pick(item, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
                     ...formItemProps,
                     name: namePath,
                     model: requestProps.dataSource
@@ -63,7 +66,7 @@ const Descriptions = defineComponent({
                     fieldProps: fieldProps,
                     formItemProps: needFormItemProps
                 }
-                const fieldSlots = omit(itemSlots, ['label'])
+                const fieldSlots: Recordable<BaseSlot> = omit(itemSlots, ['label'])
                 return (
                     <Descriptions.Item {...descsItemProps} v-slots={needItemSlots}>
                         <BaseField {...needFieldProps} v-slots={fieldSlots}/>

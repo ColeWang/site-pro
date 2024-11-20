@@ -53,7 +53,7 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableToolbar',
     props: toolbarProps(),
-    setup (props, { emit, slots, attrs }) {
+    setup (props, { slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-toolbar', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { t } = useLocaleReceiver(['Table', 'toolbar'])

@@ -9,8 +9,8 @@ import { TableColumn, TableProps } from '../typings'
 interface UseTableColumnsResult {
     columns: ComputedRef<TableColumn[]>;
     columnsMap: Ref<Recordable<TableColumn>>;
-    setColumnsMap: (values: Recordable<TableColumn> | undefined) => void;
-    resetColumnsMap: () => void;
+    assignColumnsMap: (values: Recordable<TableColumn>) => void;
+    nullifyColumnsMap: () => void;
 }
 
 function genColumnsMap (columns: TableColumn[]): Recordable<TableColumn> {
@@ -38,11 +38,11 @@ function useTableColumns (props: TableProps): UseTableColumnsResult {
     }, { immediate: true })
 
     /* v8 ignore next 3 */
-    function setColumnsMap (values: Recordable<TableColumn>): void {
+    function assignColumnsMap (values: Recordable<TableColumn>): void {
         columnsMap.value = values
     }
 
-    function resetColumnsMap (): void {
+    function nullifyColumnsMap (): void {
         const columns: TableColumn[] = unref(sColumns)
         columnsMap.value = genColumnsMap(columns)
     }
@@ -53,7 +53,7 @@ function useTableColumns (props: TableProps): UseTableColumnsResult {
 
     tryOnScopeDispose(onStopHandle)
 
-    return { columns, columnsMap, setColumnsMap, resetColumnsMap }
+    return { columns, columnsMap, assignColumnsMap, nullifyColumnsMap }
 }
 
 export default useTableColumns

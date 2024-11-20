@@ -228,7 +228,6 @@ export interface TableSharedContext {
 export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>>;
 
 export interface TableExpose {
-    columns: Ref<TableColumn[]>;
     reload: (resetCurrent: boolean) => void;
     cleanSelected: () => void;
 }

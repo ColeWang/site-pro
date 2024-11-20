@@ -1,11 +1,32 @@
 import { shallowReactive, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isFunction } from 'lodash-es'
+import type { DescriptionsProps, DescriptionsRequest } from '../typings'
 
-function useFetchData (request, props, options) {
+interface UseFetchDataOptions {
+    manualRequest?: boolean;
+    onLoad?: (dataSource: any[]) => void;
+    onRequestError?: (err: Error) => void;
+}
+
+interface UseFetchDataContext {
+    loading: boolean;
+    dataSource: any;
+}
+
+interface UseFetchDataResult {
+    context: UseFetchDataContext;
+    onReload: () => void;
+}
+
+function useFetchData (
+    request: DescriptionsRequest | undefined,
+    props: DescriptionsProps,
+    options: UseFetchDataOptions
+): UseFetchDataResult {
     const { manualRequest, onLoad, onRequestError } = options || {}
 
-    const context = shallowReactive({
+    const context: UseFetchDataContext = shallowReactive({
         loading: false,
         dataSource: props.dataSource || {}
     })
@@ -13,18 +34,18 @@ function useFetchData (request, props, options) {
     // 主动发起一次请求
     !manualRequest && fetchData()
 
-    async function fetchData () {
+    async function fetchData (): Promise<void> {
         if (!isFunction(request) || context.loading) return
         context.loading = true
         try {
-            const { success, data } = await request(props.params)
+            const { success, data } = await request(props.params || {})
             if (success !== false) {
                 context.dataSource = data || {}
                 onLoad && onLoad(data)
             }
-        } catch (err) {
-            if (!onRequestError) throw new Error(err)
-            onRequestError && onRequestError(err)
+        } catch (err: unknown) {
+            if (!onRequestError) throw new Error(err as string)
+            onRequestError && onRequestError(err as Error)
         } finally {
             context.loading = false
         }
@@ -35,11 +56,11 @@ function useFetchData (request, props, options) {
         context.dataSource = value || {}
     }, { immediate: true })
 
-    function onReload () {
+    function onReload (): void {
         fetchData()
     }
 
-    function onStopHandle () {
+    function onStopHandle (): void {
         stopWatchDataSource && stopWatchDataSource()
     }
 

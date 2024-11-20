@@ -56,7 +56,7 @@ const Table = defineComponent({
             onRequestError: (err: Error) => emit('requestError', err)
         })
 
-        const { columns, columnsMap, setColumnsMap, resetColumnsMap } = useTableColumns(props)
+        const { columns, columnsMap, assignColumnsMap, nullifyColumnsMap } = useTableColumns(props)
         const { rowSelection, selectedRows, onCleanSelected } = useRowSelection(props)
 
         const tableColumns: ComputedRef<TableColumn[]> = computed(() => {
@@ -127,10 +127,7 @@ const Table = defineComponent({
             emit('reset', values)
         }
 
-        function onSharedReload (): void {
-            onReload && onReload()
-        }
-
+        // toolbar
         function onExport (): void {
             const params: Recordable = getParams()
             const exportParams: any = {
@@ -146,9 +143,12 @@ const Table = defineComponent({
             tableSize.value = size
         }
 
-        function onColumnsMapChange (values: Recordable<TableColumn> | undefined): void {
-            const actionFunc = values ? setColumnsMap : resetColumnsMap
-            actionFunc && actionFunc(values)
+        function onColumnsMapChange (values?: Recordable<TableColumn>): void {
+            if (values) {
+                assignColumnsMap(values)
+            } else {
+                nullifyColumnsMap()
+            }
         }
 
         function getPopupContainer (): HTMLElement {
@@ -160,14 +160,13 @@ const Table = defineComponent({
             tableSize,
             columns,
             columnsMap,
-            onReload: onSharedReload,
+            onReload,
             onExport,
             onSizeChange,
             onColumnsMapChange
         })
 
         expose({
-            columns: tableColumns,
             reload: onReload,
             cleanSelected: onCleanSelected
         })
