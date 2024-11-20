@@ -6,7 +6,7 @@ import type { BaseEnumType, BaseFieldNames, BaseOptionType } from './types'
 import { isEmpty } from './is'
 
 export function enumToOptions (valueEnum?: BaseEnumType): BaseOptionType[] {
-    const result = map(valueEnum || ({} as BaseEnumType), (item, key) => {
+    const result: (BaseOptionType | undefined)[] = map(valueEnum || {} as BaseEnumType, (item, key) => {
         if (isEmpty(item)) return undefined
         if (isObject(item) && item.text) {
             const { text, disabled } = item
@@ -14,7 +14,7 @@ export function enumToOptions (valueEnum?: BaseEnumType): BaseOptionType[] {
         }
         return { value: key, label: item }
     })
-    return compact(result) as BaseOptionType[]
+    return compact(result)
 }
 
 export function optionsToEnum (options?: BaseOptionType[], fieldNames?: BaseFieldNames): BaseEnumType {
@@ -41,7 +41,7 @@ export function enumToText (text: BaseOptionType | VNodeChild, valueEnum: BaseEn
     if (isEmpty(text) || isVNode(text)) return text
     if (isObject(text) && (text as BaseOptionType).label) return (text as BaseOptionType).label
     if (isArray(text)) {
-        const children = compact(text).map((value) => {
+        const children: VNodeChild[] = compact(text).map((value) => {
             return enumToText(value, valueEnum)
         })
         return h(Space, { size: 2, wrap: true }, {
