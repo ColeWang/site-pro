@@ -1,6 +1,7 @@
-import type { WatchStopHandle  from 'vue'
+import type { WatchStopHandle } from 'vue'
 import { shallowReactive, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
+import type { Recordable } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
 import type { DescriptionsProps, DescriptionsRequest } from '../typings'
 
@@ -12,7 +13,7 @@ interface UseFetchDataOptions {
 
 interface UseFetchDataContext {
     loading: boolean;
-    dataSource: any;
+    record: Recordable;
 }
 
 interface UseFetchDataResult {
@@ -29,7 +30,7 @@ function useFetchData (
 
     const context: UseFetchDataContext = shallowReactive({
         loading: false,
-        dataSource: props.dataSource || {}
+        record: props.record || {}
     })
 
     // 主动发起一次请求
@@ -41,7 +42,7 @@ function useFetchData (
         try {
             const { success, data } = await request(props.params || {})
             if (success !== false) {
-                context.dataSource = data || {}
+                context.record = data || {}
                 onLoad && onLoad(data)
             }
         } catch (err: unknown) {
@@ -52,9 +53,9 @@ function useFetchData (
         }
     }
 
-    const stopWatchDataSource: WatchStopHandle = watch(() => props.dataSource, (value) => {
+    const stopWatchRecord: WatchStopHandle = watch(() => props.record, (value) => {
         // 手动请求时 更新 dataSource
-        context.dataSource = value || {}
+        context.record = value || {}
     }, { immediate: true })
 
     function onReload (): void {
@@ -62,7 +63,7 @@ function useFetchData (
     }
 
     function onStopHandle (): void {
-        stopWatchDataSource && stopWatchDataSource()
+        stopWatchRecord && stopWatchRecord()
     }
 
     tryOnScopeDispose(onStopHandle)

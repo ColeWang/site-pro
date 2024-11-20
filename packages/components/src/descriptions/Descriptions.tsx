@@ -1,15 +1,14 @@
-import type { App, Ref } from 'vue'
+import type { App, Ref, VNode, VNodeChild } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import type { BaseAttrs, BaseSlot, Recordable } from '@site-pro/utils'
+import type { BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
 import { isFunction, omit, pick } from 'lodash-es'
+import useFetchData from './hooks/useFetchData'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
 import { BaseField } from '../base-field'
-import type { TableColumn } from '../table'
-import useFetchData from './hooks/useFetchData.ts'
-import type { DescriptionsItemProps } from './typings'
+import type { DescriptionsColumn, DescriptionsItemProps, DescriptionsProps } from './typings'
 import { descriptionsProps } from './typings'
 import useStyle from './style'
 
@@ -30,24 +29,25 @@ const Descriptions = defineComponent({
             onRequestError: (err: Error) => emit('requestError', err)
         })
 
-        function schemaToDescsItem (columns: (TableColumn & DescriptionsItemProps)[], emptyText?: string) {
+        function schemaToDescsItem (columns: DescriptionsColumn[], emptyText?: string) {
             return columns.map((item, index) => {
                 const { fieldProps, formItemProps, __SLOTS__: itemSlots } = item
                 const { valueType, dataIndex, name, label } = item
 
-                const namePath = name || dataIndex || item.key
-                const title = isFunction(item.title) ? item.title() : (item.title || label)
+                const key: string | number = item.key || label || index
+                const namePath: NamePath = name || dataIndex || item.key as string
+                const title: string = isFunction(item.title) ? (item.title as any)() : (item.title || label)
 
                 const descsItemProps: DescriptionsItemProps = {
                     ...pick(item, Object.keys(Descriptions.Item.props)) as DescriptionsItemProps,
-                    key: item.key || label || index,
                     label: title
                 }
-                const needItemSlots: Recordable<BaseSlot> = pick(itemSlots, ['label'])
+                const needItemSlots: Recordable<BaseSlot> = pick(itemSlots!, ['label'])
+
                 if (!valueType && !namePath) {
-                    const children = itemSlots.default && itemSlots.default(requestProps.dataSource)
+                    const children: VNodeChild = getSlotVNode(needItemSlots, {}, 'default', requestProps.record)
                     return (
-                        <Descriptions.Item {...descsItemProps} v-slots={needItemSlots}>
+                        <Descriptions.Item {...descsItemProps} key={key} v-slots={needItemSlots}>
                             {children ?? emptyText}
                         </Descriptions.Item>
                     )
@@ -57,7 +57,7 @@ const Descriptions = defineComponent({
                     ...pick(item, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
                     ...formItemProps,
                     name: namePath,
-                    model: requestProps.dataSource
+                    model: requestProps.record
                 }
                 const needFieldProps: BaseFieldProps = {
                     ...pick(item, Object.keys(BaseField.props)) as BaseFieldProps,
@@ -68,17 +68,17 @@ const Descriptions = defineComponent({
                 }
                 const fieldSlots: Recordable<BaseSlot> = omit(itemSlots, ['label'])
                 return (
-                    <Descriptions.Item {...descsItemProps} v-slots={needItemSlots}>
+                    <Descriptions.Item {...descsItemProps} key={key} v-slots={needItemSlots}>
                         <BaseField {...needFieldProps} v-slots={fieldSlots}/>
                     </Descriptions.Item>
                 )
             })
         }
 
-        function getColumns (children, columns) {
-            const childrenColumns = children.map((item) => {
-                const slots = omit((item.children || {}), ['_ctx'])
-                return { ...item.props, __SLOTS__: slots }
+        function getColumns (children: VNode[], columns: DescriptionsColumn[]): DescriptionsColumn[] {
+            const childrenColumns: DescriptionsColumn[] = children.map((item) => {
+                const slots: Recordable<BaseSlot> = omit((item.children as any || {}), ['_ctx'])
+                return { ...item.props, __SLOTS__: slots } as DescriptionsColumn
             })
             return [...columns, ...childrenColumns]
                 .filter((item) => !item.hide && !item.hideInDescriptions)
@@ -94,20 +94,23 @@ const Descriptions = defineComponent({
         return () => {
             const { columns, emptyText } = props
 
-            const nodes = flattenChildren(slots.default ? slots.default() : [])
+            const nodes: VNode[] = flattenChildren(slots.default ? slots.default() : [])
 
-            const schemaColumns = getColumns(nodes, columns)
-            const children = schemaToDescsItem(schemaColumns, emptyText)
+            const schemaColumns: DescriptionsColumn[] = getColumns(nodes, columns)
+            const children: VNodeChild = schemaToDescsItem(schemaColumns, emptyText)
 
-            const slotScope = {
+            const slotScope: any = {
                 loading: requestProps.loading,
-                data: requestProps.dataSource
+                record: requestProps.record
             }
-            const titleDom = getPropsSlot(slots, props, 'title', slotScope)
-            const extraDom = getSlotVNode(slots, props, 'extra', slotScope)
+            const titleDom: VNodeChild = getPropsSlot(slots, props, 'title', slotScope)
+            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', slotScope)
 
-            const restProps = omit(props, ['title', 'extra'])
-            const needDescsProps = { ...pick(restProps, Object.keys(Descriptions.props)) }
+            const restProps: DescriptionsProps = omit(props, ['title', 'extra'])
+            const needDescsProps: DescriptionsProps = {
+                ...pick(restProps, Object.keys(Descriptions.props)) as DescriptionsProps
+            }
+
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     <ConfigProvider getPopupContainer={getPopupContainer}>
