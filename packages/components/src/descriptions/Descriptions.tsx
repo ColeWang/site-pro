@@ -36,7 +36,7 @@ const Descriptions = defineComponent({
 
                 const key: string | number = item.key || label || index
                 const namePath: NamePath = name || dataIndex || item.key as string
-                const title: string = isFunction(item.title) ? (item.title as any)() : (item.title || label)
+                const title: string = isFunction(item.title) ? (item.title as any)(requestProps.record) : (item.title || label)
 
                 const descsItemProps: DescriptionsItemProps = {
                     ...pick(item, Object.keys(Descriptions.Item.props)) as DescriptionsItemProps,
