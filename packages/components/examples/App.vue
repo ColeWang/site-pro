@@ -7,11 +7,11 @@
 <script setup lang="ts">
     import { computed } from 'vue'
     import { RouterView } from 'vue-router'
-    import { ConfigProvider, theme } from 'ant-design-vue'
+    import { ConfigProvider } from 'ant-design-vue'
     
     const providerTheme = computed(() => {
         return {
-            algorithm: [theme.compactAlgorithm],
+            // algorithm: [theme.compactAlgorithm],
         }
     })
 </script>

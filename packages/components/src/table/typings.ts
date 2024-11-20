@@ -23,7 +23,7 @@ export interface TableColumn<RecordType = any> extends AntTableColumnType<Record
     dataIndex?: string | number | (string | number)[];
     children?: TableColumn<RecordType>[];
     // table
-    search?: false | { transform: (value: any) => any };
+    search?: boolean | { transform: (value: any) => any };
     hideInSearch?: boolean;
     hideInTable?: boolean;
     hideInSetting?: boolean;

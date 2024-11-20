@@ -50,17 +50,16 @@ export default defineComponent({
             return (
                 <Card style={{ marginBlockEnd: `${sizeMS}px` }} {...attrs}>
                     <QueryFilter {...queryFilterProps} onFormRef={onBaseFormRef}>
-                        {(slotScope: any) => {
-                            return children.map((vNode) => {
-                                if (!isValidElement(vNode)) return vNode
-                                const { fieldProps, formItemProps } = vNode.props as any
-                                const extraProps: Partial<BaseFieldProps> = {
-                                    fieldProps: merge({ style: { width: '100%' } }, fieldProps),
-                                    formItemProps: { ...formItemProps, ...slotScope.props }
-                                }
-                                return cloneVNode(vNode, extraProps)
-                            })
-                        }}
+                        {children.map((vNode) => {
+                            if (!isValidElement(vNode)) return vNode
+                            const { fieldProps } = vNode.props as any
+                            const extraProps: Partial<BaseFieldProps> = {
+                                fieldProps: merge({
+                                    style: { width: '100%' }
+                                }, fieldProps)
+                            }
+                            return cloneVNode(vNode, extraProps)
+                        })}
                     </QueryFilter>
                 </Card>
             )

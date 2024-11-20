@@ -33,9 +33,9 @@ export function getSlot<T = any, Slot = BaseSlot<T>> (
     slots: Recordable,
     props: Recordable,
     name: string = 'default'
-): Slot | false {
+): Slot | undefined {
     const result: any = props[name] || slots[name]
-    return isFunction(result) ? result as Slot : false
+    return isFunction(result) ? result as Slot : undefined
 }
 
 export function getSlotVNode<T extends VNodeChild> (
@@ -53,7 +53,7 @@ export function getPropsSlot<T extends VNodeChild> (
     props: Recordable,
     name: string = 'default',
     slotScope?: Recordable
-): T | false {
+): T | undefined {
     const result: any = props[name] ?? slots[name]
-    return isFunction(result) ? result(slotScope) as T : (result || false)
+    return isFunction(result) ? result(slotScope) as T : (result || undefined)
 }

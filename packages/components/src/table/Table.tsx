@@ -194,7 +194,7 @@ const Table = defineComponent({
             }
 
             const renderToolbar = () => {
-                const toolbarSlots: Recordable<BaseSlot | false> = {
+                const toolbarSlots: Recordable<BaseSlot | undefined> = {
                     title: getSlot(slots, props, 'title'),
                     actions: getSlot(slots, props, 'actions'),
                     settings: getSlot(slots, props, 'settings')
@@ -206,7 +206,7 @@ const Table = defineComponent({
             }
 
             const renderAlert = () => {
-                const alertSlots: Recordable<BaseSlot | false> = {
+                const alertSlots: Recordable<BaseSlot | undefined> = {
                     default: getSlot(slots, props, 'alert'),
                     options: getSlot(slots, props, 'alertOptions')
                 }
