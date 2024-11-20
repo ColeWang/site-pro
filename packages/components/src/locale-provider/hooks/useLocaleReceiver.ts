@@ -1,7 +1,7 @@
 import type { ComputedRef, InjectionKey } from 'vue'
 import { computed, inject, unref } from 'vue'
 import type { NamePath } from '@site-pro/utils'
-import zhCN from '@site-pro/locale/zh-CN'
+import { zhCN } from '@site-pro/locale'
 import { get, has } from 'lodash-es'
 import type { LocaleProviderExpose, LocaleType } from '../typings'
 
