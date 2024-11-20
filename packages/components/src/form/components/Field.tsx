@@ -3,36 +3,11 @@ import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, FormItemProps, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { get, has, isArray, isString, merge, omit, pick } from 'lodash-es'
+import { has, isArray, isString, merge, omit, pick } from 'lodash-es'
 import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
 import { ColWrapper, useFormInstance } from '../../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
-// 88
-// 88 * 2 + 8 = 184
-// 88 * 3 + 16 = 280
-// 88 * 4 + 24 = 376
-// 88 * 5 + 32 = 472
-
-// 104
-// 104 * 2 + 16 = 224
-// 104 * 3 + 32 = 344
-// 104 * 4 + 48 = 464
-// 104 * 5 + 64 = 584
-
-
-// @todo 紧凑模式 还需要考虑到 非 grid 模式下 怎么使用
-// @todo 考虑去除这部分逻辑
-// 正常模式下
-const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
-    xs: 104,
-    sm: 216,
-    md: 328,
-    lg: 440,
-    xl: 552
-}
-
-export type FieldSizeType = keyof typeof SIZE_ENUM | number;
 
 export interface FieldSlots {
     default?: any;
@@ -45,7 +20,7 @@ export interface FieldSlots {
 export const fieldProps = () => ({
     ...baseFieldProps(),
     width: {
-        type: [String, Number] as PropType<FieldSizeType>,
+        type: [String, Number] as PropType<string | number>,
         default: undefined
     },
     labelWidth: {
@@ -67,18 +42,15 @@ export type FieldInstance = ComponentPublicInstance<FieldProps>;
 
 function genFieldStyle (
     style: CSSProperties | undefined,
-    fieldWidth: FieldSizeType,
+    fieldWidth: string | number | undefined
 ): CSSProperties {
     const { maxWidth, minWidth, width, ...restStyle } = style || {}
-    const fieldSize: number | undefined = isString(fieldWidth)
-        ? get(SIZE_ENUM, fieldWidth)
-        : fieldWidth
 
     return {
         ...restStyle,
         maxWidth: maxWidth || '100%',
-        minWidth: minWidth || toPx(SIZE_ENUM['xs']),
-        width: width || toPx(fieldSize) || '100%'
+        minWidth: minWidth || toPx(104),
+        width: width || toPx(fieldWidth || 104) || '100%'
     }
 }
 
@@ -111,7 +83,7 @@ const Field = defineComponent({
         fieldNamePath && setDefaultValue(fieldNamePath)
 
         function setDefaultValue (namePath: NamePath): void {
-            const hasValue = has(unref(model), namePath)
+            const hasValue: boolean = has(unref(model), namePath)
             !hasValue && onUpdateValue(namePath, undefined)
         }
 
@@ -130,7 +102,7 @@ const Field = defineComponent({
 
             const needFieldProps: any = {
                 ...fieldProps,
-                style: genFieldStyle(fieldProps.style, fieldWidth!),
+                style: genFieldStyle(fieldProps.style, fieldWidth),
                 ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
             }
 

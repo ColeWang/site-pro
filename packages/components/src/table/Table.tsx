@@ -37,6 +37,8 @@ const Table = defineComponent({
     slots: Object as SlotsType<TableSlots>,
     emits: ['change', 'paginateChange', 'filterChange', 'sortChange', 'loadingChange', 'export', 'columnsChange', 'load', 'requestError', 'finish', 'reset'],
     setup (props, { emit, slots, attrs, expose }) {
+        const OMIT_SLOTS_KEYS: string[] = ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions']
+
         const { prefixCls } = useConfigInject('pro-table', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { token } = theme.useToken()
@@ -231,7 +233,7 @@ const Table = defineComponent({
                 onChange: onChange as any
             }
 
-            const needTableSlots: Recordable<BaseSlot> = omit(slots, ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions'])
+            const needTableSlots: Recordable<BaseSlot> = omit(slots, OMIT_SLOTS_KEYS)
 
             const baseTableDom: VNodeChild = <AntTable {...needTableProps} v-slots={needTableSlots}/>
 
