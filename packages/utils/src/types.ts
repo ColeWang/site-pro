@@ -16,7 +16,7 @@ export type BaseRefType = HTMLElement | ComponentPublicInstance | null;
 
 export type BaseClass = string | Recordable<boolean> | Array<BaseClass>;
 
-export interface BaseSlot<T extends any = any> {
+export interface BaseSlot<T = any> {
     (...args: IfAny<T, any[], [T] | (T extends undefined ? [] : never)>): VNodeChild;
 }
 
