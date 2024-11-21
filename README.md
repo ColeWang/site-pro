@@ -20,5 +20,3 @@ return (
     </ConfigProvider>
 )
 ```
-
-最近炒股被套 忙着解套 T_T
