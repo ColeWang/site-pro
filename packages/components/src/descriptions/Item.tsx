@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type { App, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { descriptionsItemProps } from './typings'
 
@@ -6,6 +6,9 @@ const DescriptionsItem = defineComponent({
     inheritAttrs: false,
     name: 'ProDescriptionsItem',
     props: descriptionsItemProps(),
+    slots: Object as SlotsType<{
+        default?: any;
+    }>,
     setup (_, { slots }) {
         return () => {
             return slots.default && slots.default()

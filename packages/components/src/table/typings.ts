@@ -13,6 +13,7 @@ import type {
     TableSortOrder,
     TypographyCopyable
 } from '@site-pro/utils'
+import type { QueryFilterBreakPoint } from '../query-filter'
 import type { SearchProps } from './components/search'
 import type { ToolbarProps } from './components/toolbar'
 import type { UseFetchDataContext } from './hooks/useFetchData'
@@ -68,7 +69,7 @@ export interface TableOnChange {
 
 export type TableSize = 'small' | 'large' | 'middle'
 
-export const tableProps = () => ({
+const baseTableProps = () => ({
     ...antTableProps(),
     rowKey: {
         type: String as PropType<string>,
@@ -97,10 +98,18 @@ export const tableProps = () => ({
     emptyText: {
         type: String as PropType<string>,
         default: '-'
-    },
+    }
+})
+
+export const tableProps = () => ({
+    ...baseTableProps(),
     compact: {
         type: Boolean as PropType<boolean>,
         default: false
+    },
+    breakPoints: {
+        type: Array as PropType<QueryFilterBreakPoint[]>,
+        default: undefined
     },
     search: {
         type: [Boolean, Object] as PropType<boolean | SearchProps>,

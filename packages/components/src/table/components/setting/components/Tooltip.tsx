@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Tooltip } from 'ant-design-vue'
 import { preventDefault } from '@site-pro/utils'
@@ -29,6 +29,9 @@ export default defineComponent({
     inheritAttrs: false,
     props: tooltipProps(),
     emits: ['change'],
+    slots: Object as SlotsType<{
+        default?: any;
+    }>,
     setup (props, { emit, slots }) {
         /* v8 ignore next 4 */
         function onClick (evt: Event): void {

@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, VNode } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, SlotsType, VNode } from 'vue'
 import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
 import { flattenChildren, isValidElement, toPx } from '@site-pro/utils'
@@ -23,6 +23,9 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableBaseSearch',
     props: baseSearchProps(),
+    slots: Object as SlotsType<{
+        default?: any;
+    }>,
     setup (props, { slots, attrs }) {
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
 

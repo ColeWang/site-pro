@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import type { BaseAttrs, NamePath, Recordable } from '@site-pro/utils'
 import { isEmpty, namePathToString } from '@site-pro/utils'
@@ -29,6 +29,9 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableSearch',
     props: searchProps(),
+    slots: Object as SlotsType<{
+        default?: any;
+    }>,
     setup (props, { attrs }) {
         const defaultColumns: TableColumn[] = filterSearchColumns(props.columns)
         const initialValues: Recordable = reduce(defaultColumns, (result, column) => {

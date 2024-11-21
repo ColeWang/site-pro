@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, ref, unref } from 'vue'
 import { Button, ConfigProvider, Dropdown, Popover, Space, Tooltip } from 'ant-design-vue'
 import {
@@ -15,6 +15,7 @@ import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import Density from '../density'
 import Setting from '../setting'
+import type { QueryFilterBreakPoint } from '../../../query-filter'
 import useBreakPoint from '../../../query-filter/hooks/useBreakPoint'
 import type { UseFetchDataContext } from '../../hooks/useFetchData'
 import { useSharedContext } from '../../hooks/useSharedContext'
@@ -37,6 +38,10 @@ export const toolbarProps = () => ({
         type: Boolean as PropType<boolean>,
         default: false
     },
+    breakPoints: {
+        type: Array as PropType<QueryFilterBreakPoint[]>,
+        default: undefined
+    },
     title: {
         type: [String, Function] as PropType<string | BaseSlot>,
         default: undefined
@@ -58,6 +63,11 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableToolbar',
     props: toolbarProps(),
+    slots: Object as SlotsType<{
+        title?: UseFetchDataContext;
+        actions?: UseFetchDataContext;
+        settings?: UseFetchDataContext;
+    }>,
     setup (props, { slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-toolbar', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)

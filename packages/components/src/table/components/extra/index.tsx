@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { Ref, SlotsType } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider } from 'ant-design-vue'
 import { getElement } from '@site-pro/utils'
@@ -8,6 +8,9 @@ import useStyle from './style'
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableExtra',
+    slots: Object as SlotsType<{
+        default?: any;
+    }>,
     setup (props, { slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-extra', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)

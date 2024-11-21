@@ -1,4 +1,4 @@
-import type { App, Ref, VNode, VNodeChild } from 'vue'
+import type { App, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
@@ -16,6 +16,11 @@ const Descriptions = defineComponent({
     inheritAttrs: false,
     name: 'ProDescriptions',
     props: descriptionsProps(),
+    slots: Object as SlotsType<{
+        default?: any;
+        title?: any;
+        extra?: any;
+    }>,
     emits: ['load', 'requestError'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-descriptions', props)

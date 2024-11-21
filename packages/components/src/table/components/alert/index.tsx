@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref } from 'vue'
 import { ConfigProvider, Space, theme } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
@@ -34,6 +34,10 @@ export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableAlert',
     props: alertProps(),
+    slots: Object as SlotsType<{
+        default?: any;
+        options?: any;
+    }>,
     emits: ['cleanSelected'],
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-alert', props)
