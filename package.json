@@ -2,8 +2,8 @@
     "name": "site-pro-monorepo",
     "scripts": {
         "clean": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
-        "preinstall": "npx only-allow pnpm",
         "build": "pnpm --filter \"./packages/*\" build",
+        "publish": "pnpm --filter \"./packages/*\" publish --no-git-checks",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     },
     "dependencies": {
@@ -35,6 +35,11 @@
     },
     "engines": {
         "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+    },
+    "author": "ColeWang",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ColeWang/site-pro"
     },
     "license": "MIT"
 }

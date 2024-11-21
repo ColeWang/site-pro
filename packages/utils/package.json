@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/utils",
-    "version": "0.3.0",
+    "version": "0.3.3",
     "description": "Vue3 Admin Pro Utils of Vue",
     "scripts": {
         "dev": "vite",
@@ -24,6 +24,11 @@
     "files": [
         "lib",
         "es",
+        "types",
         "package.json"
-    ]
+    ],
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    }
 }

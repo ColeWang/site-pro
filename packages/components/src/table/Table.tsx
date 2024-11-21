@@ -200,7 +200,7 @@ const Table = defineComponent({
                     settings: getSlot(slots, props, 'settings')
                 }
                 const toolbarProps: ToolbarProps = {
-                    ...toPlainObject(propsToolbar) as ToolbarProps,
+                    ...toPlainObject(propsToolbar) as ToolbarProps
                 }
                 return <Toolbar {...toolbarProps} v-slots={toolbarSlots}/>
             }
