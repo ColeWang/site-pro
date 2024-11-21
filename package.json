@@ -1,5 +1,6 @@
 {
     "name": "site-pro-monorepo",
+    "description": "Vue3 Admin Pro",
     "scripts": {
         "clean": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
         "build": "pnpm --filter=./packages/* run build",
@@ -36,10 +37,18 @@
     "engines": {
         "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
     },
-    "author": "ColeWang",
+    "keywords": [
+        "site-pro",
+        "admin-pro",
+        "vue",
+        "antd",
+        "vue-antd",
+        "ant-design-vue"
+    ],
+    "license": "MIT",
+    "author": "ColeWang (https://github.com/ColeWang)",
     "repository": {
         "type": "git",
         "url": "https://github.com/ColeWang/site-pro"
-    },
-    "license": "MIT"
+    }
 }

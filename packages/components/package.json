@@ -32,6 +32,12 @@
         "types",
         "package.json"
     ],
+    "license": "MIT",
+    "author": "ColeWang (https://github.com/ColeWang)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ColeWang/site-pro"
+    },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org/"
