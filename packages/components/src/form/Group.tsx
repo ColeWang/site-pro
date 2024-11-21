@@ -23,7 +23,7 @@ function genTitleStyle (layout: BaseFormLayout, token: GlobalToken): CSSProperti
         fontWeight: token.fontWeightStrong,
     }
     if (layout === 'inline') {
-        const needPadding = token.size / 2
+        const needPadding: number = token.size / 2
         return { ...baseStyle, paddingBlock: toPx(needPadding) }
     }
     return { ...baseStyle, paddingBlockEnd: toPx(token.size) }

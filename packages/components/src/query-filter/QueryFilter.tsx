@@ -67,7 +67,6 @@ const QueryFilter = defineComponent({
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child, hidden, key } = item
                 const fieldLabelWidth: number | 'auto' | undefined = child.props && getPropByKebabOrCamel(child.props, 'label-width')
-
                 // 默认宽度 80px sizeMD * 4
                 const fieldNode: VNode = cloneVNode(child, {
                     labelWidth: fieldLabelWidth || labelWidth || sizeMD * 4
