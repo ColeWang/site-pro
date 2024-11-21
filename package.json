@@ -1,7 +1,9 @@
 {
     "name": "site-pro-monorepo",
     "scripts": {
-        "build": "pnpm run build --filter ./packages",
+        "clean": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
+        "preinstall": "npx only-allow pnpm",
+        "build": "pnpm --filter \"./packages/*\" build",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     },
     "dependencies": {
@@ -24,6 +26,7 @@
         "eslint": "^8.57.0",
         "eslint-plugin-vue": "^9.27.0",
         "jsdom": "^24.1.1",
+        "rimraf": "^6.0.1",
         "typescript": "^5.5.4",
         "vite": "^5.4.6",
         "vite-plugin-dts": "^4.0.3",
