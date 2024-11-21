@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, VNode } from 'vue'
 import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
-import { flattenChildren, isValidElement } from '@site-pro/utils'
+import { flattenChildren, isValidElement, toPx } from '@site-pro/utils'
 import type { BaseFieldProps } from '../../../base-field'
 import type { BaseFormInstance } from '../../../base-form'
 import type { QueryFilterProps } from '../../../query-filter'
@@ -48,7 +48,7 @@ export default defineComponent({
 
             const queryFilterProps: QueryFilterProps = pick(props, Object.keys(QueryFilter.props))
             return (
-                <Card style={{ marginBlockEnd: `${sizeMS}px` }} {...attrs}>
+                <Card style={{ marginBlockEnd: toPx(sizeMS) }} {...attrs}>
                     <QueryFilter {...queryFilterProps} onFormRef={onBaseFormRef}>
                         {children.map((vNode) => {
                             if (!isValidElement(vNode)) return vNode

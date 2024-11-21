@@ -12,7 +12,7 @@ import type {
     TableSorterResult,
     TableSortOrder,
 } from '@site-pro/utils'
-import { getElement, getSlot, getSlotVNode, omitNil } from '@site-pro/utils'
+import { getElement, getSlot, getSlotVNode, omitNil, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { isArray, isFunction, omit, pick, reduce, toPlainObject } from 'lodash-es'
 import type { SearchProps } from './components/search'
@@ -249,10 +249,10 @@ const Table = defineComponent({
             })
 
             const cardBodyStyle: CSSProperties = propsToolbar !== false ? ({
-                paddingBlock: `${sizeMS}px`,
+                paddingBlock: toPx(sizeMS),
                 paddingBlockStart: '0'
             }) : ({
-                paddingBlock: `${sizeMS}px`
+                paddingBlock: toPx(sizeMS)
             })
 
             return wrapSSR(

@@ -2,6 +2,7 @@ import { type ComponentPublicInstance, defineComponent, type ExtractPropTypes, u
 import { Button, Checkbox, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
+import { toPx } from '@site-pro/utils'
 import { reduce, set } from 'lodash-es'
 import type { ListProps } from './components/List'
 import TreeList from './components/List'
@@ -126,7 +127,7 @@ export default defineComponent({
                             {t('columnDisplay')}
                         </Checkbox>
                         <Button
-                            style={{ padding: `${sizeXXS}px` }}
+                            style={{ padding: toPx(sizeXXS) }}
                             type={'link'}
                             onClick={onClearClick}
                         >

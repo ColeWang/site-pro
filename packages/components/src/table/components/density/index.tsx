@@ -3,6 +3,7 @@ import { computed, defineComponent, unref } from 'vue'
 import { Menu, theme } from 'ant-design-vue'
 import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
 import type { BaseAttrs, MenuInfo, MenuProps } from '@site-pro/utils'
+import { toPx } from '@site-pro/utils'
 import type { TableSize } from '../../typings'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
@@ -39,7 +40,7 @@ export default defineComponent({
 
             const menuProps: MenuProps & BaseAttrs = {
                 ...props,
-                style: { minWidth: `${fontSize * 7}px` },
+                style: { minWidth: toPx(fontSize * 7) },
                 selectedKeys: unref(selectedKeys),
                 onClick: onMenuClick
             }
