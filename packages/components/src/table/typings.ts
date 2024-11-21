@@ -210,7 +210,7 @@ export const tableProps = () => ({
 })
 
 export interface TableSlots {
-    search?: any;
+    search?: SearchProps;
     title?: any;
     actions?: any;
     settings?: any;

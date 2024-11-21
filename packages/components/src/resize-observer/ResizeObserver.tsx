@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType } from 'vue'
+import type { App, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
@@ -10,7 +10,7 @@ const ResizeObserver = defineComponent({
     name: 'ProResizeObserver',
     props: resizeObserverProps(),
     slots: Object as SlotsType<{
-        default?: any;
+        default?: { size: ResizeObserverRectSize };
     }>,
     emits: ['resize'],
     setup (props, { emit, slots, attrs }) {
@@ -18,7 +18,7 @@ const ResizeObserver = defineComponent({
 
         const rectSize: Ref<ResizeObserverRectSize> = ref({ width: 0, height: 0 })
 
-        function setRectSize (size: ResizeObserverRectSize) {
+        function setRectSize (size: ResizeObserverRectSize): void {
             rectSize.value = size
             emit('resize', size)
         }
@@ -28,13 +28,13 @@ const ResizeObserver = defineComponent({
             setRectSize(contentRect || { width: 0, height: 0 })
         }
 
-        const debounceCallback = debounce(onResizeCallback, props.debounce, { leading: true })
+        const debounceCallback: ResizeObserverCallback = debounce(onResizeCallback, props.debounce, { leading: true })
 
         useResizeObserver(elRef, debounceCallback)
 
         return () => {
             const slotScope: any = { size: unref(rectSize) }
-            const children = slots.default && slots.default(slotScope)
+            const children: VNodeChild = slots.default && slots.default(slotScope)
 
             return (
                 <div {...attrs} ref={elRef}>
