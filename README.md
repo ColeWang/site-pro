@@ -23,6 +23,7 @@ return (
 ## TODO
 
 - [ ] Slots Type
+- [ ] Theme 开启紧凑模式的全局注入
 - [ ] 表单列表 FormList
 - [ ] 可编辑表格 EditableTable
 
