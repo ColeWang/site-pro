@@ -175,8 +175,9 @@ const Table = defineComponent({
         })
 
         return () => {
-            const { search: propsSearch, columns: propsColumns, manualRequest } = props
-            const { toolbar: propsToolbar, rowSelection: propsRowSelection } = props
+            const { manualRequest, columns: propsColumns, rowSelection: propsRowSelection } = props
+            // restProps 去除 title 等
+            const { title: propsTitle, search: propsSearch, toolbar: propsToolbar, ...restProps } = props
             const { sizeMS } = unref(token)
 
             const renderSearch = () => {
@@ -195,12 +196,12 @@ const Table = defineComponent({
 
             const renderToolbar = () => {
                 const toolbarSlots: Recordable<BaseSlot | undefined> = {
-                    title: getSlot(slots, props, 'title'),
                     actions: getSlot(slots, props, 'actions'),
                     settings: getSlot(slots, props, 'settings')
                 }
                 const toolbarProps: ToolbarProps = {
-                    ...toPlainObject(propsToolbar) as ToolbarProps
+                    ...toPlainObject(propsToolbar) as ToolbarProps,
+                    title: propsTitle
                 }
                 return <Toolbar {...toolbarProps} v-slots={toolbarSlots}/>
             }
@@ -225,7 +226,7 @@ const Table = defineComponent({
             })
 
             const needTableProps: AntTableProps = {
-                ...pick(props, Object.keys(Table.props)) as AntTableProps,
+                ...pick(restProps, Object.keys(Table.props)) as AntTableProps,
                 ...requestProps,
                 size: unref(tableSize),
                 columns: unref(tableColumns),

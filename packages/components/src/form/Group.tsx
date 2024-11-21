@@ -10,7 +10,7 @@ import type {
 import { defineComponent, unref } from 'vue'
 import { Col, theme } from 'ant-design-vue'
 import type { BaseSlot } from '@site-pro/utils'
-import { getPropsSlot, toPx } from '@site-pro/utils'
+import { getPropsSlotVNode, toPx } from '@site-pro/utils'
 import type { BaseFormLayout, RowWrapperProps } from '../base-form'
 import { ColWrapper, RowWrapper, useFormInstance } from '../base-form'
 import type { GlobalToken } from '../theme'
@@ -59,7 +59,7 @@ const FormGroup = defineComponent({
             const { noStyle } = props
             const { layout, grid, rowProps } = unref(formProps) || {}
 
-            const titleDom: VNodeChild = getPropsSlot(slots, props, 'title')
+            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title')
             const titleStyle: CSSProperties = genTitleStyle(layout || 'vertical', unref(token))
 
             const rowWrapperProps: RowWrapperProps = { ...rowProps, grid: grid }

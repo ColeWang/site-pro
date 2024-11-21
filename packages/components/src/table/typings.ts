@@ -79,7 +79,7 @@ export const tableProps = () => ({
         default: 'middle'
     },
     title: {
-        type: Function as PropType<BaseSlot>,
+        type: [String, Function] as PropType<string | BaseSlot>,
         default: undefined
     },
     columns: {

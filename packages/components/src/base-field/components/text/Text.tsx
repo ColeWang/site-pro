@@ -1,7 +1,7 @@
 import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Input } from 'ant-design-vue'
-import { getPropsSlot, getSlotVNode } from '@site-pro/utils'
+import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldTextFieldProps, FieldTextSlots } from './typings'
 import { fieldTextProps } from './typings'
@@ -19,8 +19,8 @@ const FieldText = defineComponent({
             const placeholder: string | number = fieldProps.placeholder || t('inputPlaceholder')!
 
             if (mode === 'read') {
-                const prefixDom: VNodeChild = getPropsSlot(slots, fieldProps, 'prefix')
-                const suffixDom: VNodeChild = getPropsSlot(slots, fieldProps, 'suffix')
+                const prefixDom: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'prefix')
+                const suffixDom: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'suffix')
                 return (
                     <Fragment>
                         {prefixDom}

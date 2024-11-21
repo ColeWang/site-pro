@@ -48,7 +48,7 @@ export function getSlotVNode<T extends VNodeChild> (
     return isFunction(result) ? result(slotScope) as T : undefined
 }
 
-export function getPropsSlot<T extends VNodeChild> (
+export function getPropsSlotVNode<T extends VNodeChild> (
     slots: Recordable,
     props: Recordable,
     name: string = 'default',

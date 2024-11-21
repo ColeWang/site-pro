@@ -3,7 +3,7 @@ import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseSlot, NamePath, Recordable } from '@site-pro/utils'
-import { flattenChildren, getElement, getPropsSlot, getSlotVNode } from '@site-pro/utils'
+import { flattenChildren, getElement, getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { isFunction, omit, pick } from 'lodash-es'
 import useFetchData from './hooks/useFetchData'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
@@ -106,7 +106,7 @@ const Descriptions = defineComponent({
                 loading: requestProps.loading,
                 record: requestProps.record
             }
-            const titleDom: VNodeChild = getPropsSlot(slots, props, 'title', slotScope)
+            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotScope)
             const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', slotScope)
 
             const restProps: DescriptionsProps = omit(props, ['title', 'extra'])

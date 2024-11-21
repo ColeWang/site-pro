@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Table :columns="columns"/>
+        <Table title="Title" :columns="columns"/>
     </div>
 </template>
 

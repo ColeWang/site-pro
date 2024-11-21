@@ -8,7 +8,7 @@ import {
     VerticalAlignBottomOutlined
 } from '@ant-design/icons-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
-import { getElement, getSlotVNode } from '@site-pro/utils'
+import { getElement, getSlotVNode, getPropsSlotVNode } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { pick, toPlainObject } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../../resize-observer'
@@ -33,7 +33,7 @@ export const toolbarProps = () => ({
         default: () => ({})
     },
     title: {
-        type: Function as PropType<BaseSlot>,
+        type: [String, Function] as PropType<string | BaseSlot>,
         default: undefined
     },
     actions: {
@@ -87,7 +87,7 @@ export default defineComponent({
                 pagination: requestProps.pagination,
                 pageData: requestProps.dataSource
             }
-            const titleDom: VNodeChild = getSlotVNode(slots, props, 'title', slotScope)
+            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotScope)
             const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', slotScope)
 
             const renderSettings = () => {
