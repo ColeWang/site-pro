@@ -13,7 +13,7 @@ interface UseFetchDataOptions {
 
 interface UseFetchDataContext {
     loading: boolean;
-    record: Recordable;
+    dataSource: Recordable;
 }
 
 interface UseFetchDataResult {
@@ -30,7 +30,7 @@ function useFetchData (
 
     const context: UseFetchDataContext = shallowReactive({
         loading: false,
-        record: props.record || {}
+        dataSource: props.dataSource || {}
     })
 
     // 主动发起一次请求
@@ -42,7 +42,7 @@ function useFetchData (
         try {
             const { success, data } = await request(props.params || {})
             if (success !== false) {
-                context.record = data || {}
+                context.dataSource = data || {}
                 onLoad && onLoad(data)
             }
         } catch (err: unknown) {
@@ -53,9 +53,9 @@ function useFetchData (
         }
     }
 
-    const stopWatchRecord: WatchStopHandle = watch(() => props.record, (value) => {
+    const stopWatchDataSource: WatchStopHandle = watch(() => props.dataSource, (value) => {
         // 手动请求时 更新 dataSource
-        context.record = value || {}
+        context.dataSource = value || {}
     }, { immediate: true })
 
     function onReload (): void {
@@ -63,7 +63,7 @@ function useFetchData (
     }
 
     function onStopHandle (): void {
-        stopWatchRecord && stopWatchRecord()
+        stopWatchDataSource && stopWatchDataSource()
     }
 
     tryOnScopeDispose(onStopHandle)

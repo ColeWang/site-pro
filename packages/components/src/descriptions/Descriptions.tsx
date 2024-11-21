@@ -38,7 +38,7 @@ const Descriptions = defineComponent({
                 const namePath: NamePath = name || dataIndex || item.key as string
 
                 const title: string | undefined = isFunction(item.title) ?
-                    (item.title as any)(requestProps.record) :
+                    (item.title as any)(requestProps.dataSource) :
                     (item.title || label)
 
                 const descsItemProps: DescriptionsItemProps = {
@@ -48,7 +48,7 @@ const Descriptions = defineComponent({
                 const needItemSlots: Recordable<BaseSlot> = pick(itemSlots!, ['label'])
 
                 if (!valueType && !namePath) {
-                    const children: VNodeChild = getSlotVNode(needItemSlots, {}, 'default', requestProps.record)
+                    const children: VNodeChild = getSlotVNode(needItemSlots, {}, 'default', requestProps.dataSource)
                     return (
                         <Descriptions.Item {...descsItemProps} key={key} v-slots={needItemSlots}>
                             {children ?? emptyText}
@@ -60,7 +60,7 @@ const Descriptions = defineComponent({
                     ...pick(item, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
                     ...formItemProps,
                     name: namePath,
-                    model: requestProps.record
+                    model: requestProps.dataSource
                 }
                 const needFieldProps: BaseFieldProps = {
                     ...pick(item, Object.keys(BaseField.props)) as BaseFieldProps,
@@ -102,10 +102,7 @@ const Descriptions = defineComponent({
             const schemaColumns: DescriptionsColumn[] = getColumns(nodes, columns)
             const children: VNodeChild = schemaToDescsItem(schemaColumns, emptyText)
 
-            const slotScope: any = {
-                loading: requestProps.loading,
-                record: requestProps.record
-            }
+            const slotScope: any = { ...requestProps }
             const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotScope)
             const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', slotScope)
 

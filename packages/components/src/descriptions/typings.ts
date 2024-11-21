@@ -23,7 +23,7 @@ export const descriptionsProps = () => ({
         type: Object as PropType<Recordable>,
         default: () => ({})
     },
-    record: {
+    dataSource: {
         type: Object as PropType<Recordable>,
         default: () => ({})
     },

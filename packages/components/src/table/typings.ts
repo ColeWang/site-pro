@@ -98,6 +98,10 @@ export const tableProps = () => ({
         type: String as PropType<string>,
         default: '-'
     },
+    compact: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
     search: {
         type: [Boolean, Object] as PropType<boolean | SearchProps>,
         default: undefined

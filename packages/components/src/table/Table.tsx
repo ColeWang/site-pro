@@ -134,7 +134,7 @@ const Table = defineComponent({
         function onExport (): void {
             const params: Recordable = getParams()
             const exportParams: any = {
-                pageData: requestProps.dataSource,
+                dataSource: requestProps.dataSource,
                 tableEl: unref(tableRef),
                 params: params
             }
@@ -175,9 +175,16 @@ const Table = defineComponent({
         })
 
         return () => {
-            const { manualRequest, columns: propsColumns, rowSelection: propsRowSelection } = props
+            const { columns: propsColumns, rowSelection: propsRowSelection } = props
             // restProps 去除 title 等
-            const { title: propsTitle, search: propsSearch, toolbar: propsToolbar, ...restProps } = props
+            const {
+                compact,
+                manualRequest,
+                title: propsTitle,
+                search: propsSearch,
+                toolbar: propsToolbar,
+                ...restProps
+            } = props
             const { sizeMS } = unref(token)
 
             const renderSearch = () => {
@@ -185,6 +192,7 @@ const Table = defineComponent({
                     ...toPlainObject(propsSearch) as SearchProps,
                     loading: requestProps.loading,
                     columns: propsColumns,
+                    compact: compact,
                     manualRequest: manualRequest,
                     onFinish: onFinish,
                     onReset: onReset
@@ -201,6 +209,7 @@ const Table = defineComponent({
                 }
                 const toolbarProps: ToolbarProps = {
                     ...toPlainObject(propsToolbar) as ToolbarProps,
+                    compact: compact,
                     title: propsTitle
                 }
                 return <Toolbar {...toolbarProps} v-slots={toolbarSlots}/>
@@ -219,11 +228,7 @@ const Table = defineComponent({
                 return <Alert {...alertProps} v-slots={alertSlots}/>
             }
 
-            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', {
-                pageData: requestProps.dataSource,
-                loading: requestProps.loading,
-                pagination: requestProps.pagination
-            })
+            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', { ...requestProps })
 
             const needTableProps: AntTableProps = {
                 ...pick(restProps, Object.keys(Table.props)) as AntTableProps,

@@ -1,5 +1,5 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, VNodeChild } from 'vue'
-import { defineComponent, ref } from 'vue'
+import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref, VNodeChild } from 'vue'
+import { computed, defineComponent, ref, unref } from 'vue'
 import { Button, ConfigProvider, Dropdown, Popover, Space, Tooltip } from 'ant-design-vue'
 import {
     ColumnHeightOutlined,
@@ -7,14 +7,15 @@ import {
     SettingOutlined,
     VerticalAlignBottomOutlined
 } from '@ant-design/icons-vue'
-import type { BaseSlot, Recordable } from '@site-pro/utils'
-import { getElement, getSlotVNode, getPropsSlotVNode } from '@site-pro/utils'
+import type { BaseAttrs, BaseSlot, Recordable } from '@site-pro/utils'
+import { getElement, getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { pick, toPlainObject } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import Density from '../density'
 import Setting from '../setting'
+import useBreakPoint from '../../../query-filter/hooks/useBreakPoint'
 import type { UseFetchDataContext } from '../../hooks/useFetchData'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
@@ -31,6 +32,10 @@ export const toolbarProps = () => ({
     options: {
         type: [Boolean, Object],
         default: () => ({})
+    },
+    compact: {
+        type: Boolean as PropType<boolean>,
+        default: false
     },
     title: {
         type: [String, Function] as PropType<string | BaseSlot>,
@@ -63,6 +68,13 @@ export default defineComponent({
 
         const size: Ref<ResizeObserverRectSize> = ref({ width: 0, height: 0 })
 
+        const { span } = useBreakPoint(size, props as any)
+
+        // 换行
+        const wrapCls: ComputedRef<BaseAttrs> = computed(() => {
+            return { [`${prefixCls.value}-container__word-wrap`]: unref(span) === 24 }
+        })
+
         function onResize (value: ResizeObserverRectSize): void {
             size.value = value
         }
@@ -82,11 +94,7 @@ export default defineComponent({
         return () => {
             const { options: propsOptions } = props
 
-            const slotScope: any = {
-                loading: requestProps.loading,
-                pagination: requestProps.pagination,
-                pageData: requestProps.dataSource
-            }
+            const slotScope: any = { ...requestProps }
             const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotScope)
             const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', slotScope)
 
@@ -146,7 +154,7 @@ export default defineComponent({
                     <ResizeObserver onResize={onResize}>
                         <ConfigProvider getPopupContainer={getPopupContainer}>
                             <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
-                                <div class={[`${prefixCls.value}-container`]}>
+                                <div class={[`${prefixCls.value}-container`, wrapCls.value]}>
                                     {titleDom || actionsDom ? (
                                         <div class={`${prefixCls.value}-header`}>
                                             <div class={`${prefixCls.value}-title`}>
