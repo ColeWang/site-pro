@@ -1,4 +1,4 @@
-## Plugins
+<h1 align="center">Site Pro Plugins</h1>
 
 ## Install
 
@@ -6,5 +6,7 @@
 # yarn
 yarn add @site-pro/plugins
 # npm
-npm i @site-pro/plugins -S
+npm install @site-pro/plugins --save
 ```
+
+

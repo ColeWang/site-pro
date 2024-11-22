@@ -1,4 +1,4 @@
-## Hooks
+<h1 align="center">Site Pro Hooks</h1>
 
 ## Install
 
@@ -6,5 +6,5 @@
 # yarn
 yarn add @site-pro/hooks
 # npm
-npm i @site-pro/hooks -S
+npm install @site-pro/hooks --save
 ```

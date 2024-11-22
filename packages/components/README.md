@@ -1,4 +1,4 @@
-## Components
+<h1 align="center">Site Pro Components</h1>
 
 ## Install
 
@@ -6,5 +6,5 @@
 # yarn
 yarn add @site-pro/components
 # npm
-npm i @site-pro/components -S
+npm install @site-pro/components --save
 ```

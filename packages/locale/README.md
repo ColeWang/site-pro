@@ -1,4 +1,4 @@
-## Locale
+<h1 align="center">Site Pro Locale</h1>
 
 ## Install
 
@@ -6,5 +6,6 @@
 # yarn
 yarn add @site-pro/locale
 # npm
-npm i @site-pro/locale -S
+npm install @site-pro/locale --save
 ```
+

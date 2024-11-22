@@ -34,13 +34,19 @@
         "vitest": "^2.0.5",
         "vue-tsc": "^2.0.29"
     },
+    "peerDependencies": {
+        "vue": ">=3.2.0",
+        "ant-design-vue": ">=4.2.0",
+        "@ant-design/icons-vue": ">=7.0.0"
+    },
     "engines": {
-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"
+        "node": "^18.0.0 || >=20.0.0"
     },
     "keywords": [
-        "site-pro",
-        "admin-pro",
         "vue",
+        "site-pro",
+        "admin",
+        "admin-pro",
         "antd",
         "vue-antd",
         "ant-design-vue"

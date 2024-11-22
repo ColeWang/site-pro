@@ -1,4 +1,4 @@
-## Utils
+<h1 align="center">Site Pro Utils</h1>
 
 ## Install
 
@@ -6,5 +6,8 @@
 # yarn
 yarn add @site-pro/utils
 # npm
-npm i @site-pro/utils -S
+npm install @site-pro/utils --save
 ```
+
+
+

@@ -28,7 +28,17 @@
         "lib",
         "es",
         "types",
+        "README.md",
         "package.json"
+    ],
+    "keywords": [
+        "vue",
+        "site-pro",
+        "admin",
+        "admin-pro",
+        "antd",
+        "vue-antd",
+        "ant-design-vue"
     ],
     "license": "MIT",
     "author": "ColeWang (https://github.com/ColeWang)",
