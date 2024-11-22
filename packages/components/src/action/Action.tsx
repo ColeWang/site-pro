@@ -3,6 +3,7 @@ import { defineComponent } from 'vue'
 import type { BaseClass } from '@site-pro/utils'
 import { preventDefault } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
+import type { ActionSlots } from './typings'
 import { actionProps } from './typings'
 import useStyle from './style'
 
@@ -10,9 +11,7 @@ const Action = defineComponent({
     inheritAttrs: false,
     name: 'ProAction',
     props: actionProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<ActionSlots>,
     emits: ['click'],
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-action', props)

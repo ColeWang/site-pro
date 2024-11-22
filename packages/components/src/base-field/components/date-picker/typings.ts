@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldDatePickerFieldProps = BaseFieldFieldProps<'date'>;
@@ -12,7 +12,7 @@ export const fieldDatePickerProps = () => ({
     }
 })
 
-export interface FieldDatePickerSlots {
+export interface FieldDatePickerSlots extends BaseFieldSlots {
     dateRender?: any;
     nextIcon?: any;
     prevIcon?: any;

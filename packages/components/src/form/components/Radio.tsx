@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const radioProps = () => ({
     }
 })
 
+export type RadioSlots = FieldSlots & FieldRadioSlots;
 export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>>;
 export type RadioInstance = ComponentPublicInstance<RadioProps>;
 
@@ -30,7 +31,7 @@ const Radio = defineComponent({
     inheritAttrs: false,
     name: 'ProRadio',
     props: radioProps(),
-    slots: Object as SlotsType<FieldSlots & FieldRadioSlots>,
+    slots: Object as SlotsType<RadioSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

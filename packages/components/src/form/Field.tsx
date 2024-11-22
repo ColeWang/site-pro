@@ -4,18 +4,10 @@ import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, FormItemProps, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isString, merge, omit, pick } from 'lodash-es'
-import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
-import { ColWrapper, useFormInstance } from '../../base-form'
-import type { BaseFieldFormItemProps, BaseFieldProps } from '../../base-field'
-import { BaseField, baseFieldProps } from '../../base-field'
-
-export interface FieldSlots {
-    default?: any;
-    extra?: any;
-    help?: any;
-    label?: any;
-    tooltip?: any;
-}
+import type { BaseFormLayout, ColWrapperProps } from '../base-form'
+import { ColWrapper, useFormInstance } from '../base-form'
+import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../base-field'
+import { BaseField, baseFieldProps } from '../base-field'
 
 export const fieldProps = () => ({
     ...baseFieldProps(),
@@ -36,6 +28,14 @@ export const fieldProps = () => ({
         default: () => ({})
     }
 })
+
+export interface FieldSlots extends BaseFieldSlots {
+    default?: any;
+    extra?: any;
+    help?: any;
+    label?: any;
+    tooltip?: any;
+}
 
 export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>>;
 export type FieldInstance = ComponentPublicInstance<FieldProps>;

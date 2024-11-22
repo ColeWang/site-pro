@@ -11,7 +11,7 @@ export { FieldRangePicker, fieldRangePickerProps }
 
 export type {
     FieldRangePickerFieldProps,
+    FieldRangePickerSlots,
     FieldRangePickerProps,
-    FieldRangePickerInstance,
-    FieldRangePickerSlots
+    FieldRangePickerInstance
 }

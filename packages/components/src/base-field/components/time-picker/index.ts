@@ -11,7 +11,7 @@ export { FieldTimePicker, fieldTimePickerProps }
 
 export type {
     FieldTimePickerFieldProps,
+    FieldTimePickerSlots,
     FieldTimePickerProps,
-    FieldTimePickerInstance,
-    FieldTimePickerSlots
+    FieldTimePickerInstance
 }

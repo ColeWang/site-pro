@@ -4,4 +4,4 @@ import { fieldTextareaProps } from './typings'
 
 export { FieldTextarea, fieldTextareaProps }
 
-export type { FieldTextareaFieldProps, FieldTextareaProps, FieldTextareaInstance, FieldTextareaSlots }
+export type { FieldTextareaFieldProps, FieldTextareaSlots, FieldTextareaProps, FieldTextareaInstance }

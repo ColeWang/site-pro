@@ -1,9 +1,9 @@
-import type { App, VNode } from 'vue'
+import type { App, SlotsType, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction, isObject } from 'lodash-es'
 import useBaseFieldProvider from './hooks/useBaseFieldProvider'
-import type { BaseFieldProps, BaseFieldProviderValueTypeMap, BaseFieldValueType } from './typings'
+import type { BaseFieldProps, BaseFieldProviderValueTypeMap, BaseFieldSlots, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
 // ---
 import {
@@ -176,6 +176,7 @@ const BaseField = defineComponent({
     inheritAttrs: false,
     name: 'ProBaseField',
     props: baseFieldProps(),
+    slots: Object as SlotsType<BaseFieldSlots>,
     setup (props, { slots }) {
         const { valueTypeMap } = useBaseFieldProvider()
 

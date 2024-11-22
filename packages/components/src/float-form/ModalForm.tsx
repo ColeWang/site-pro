@@ -8,17 +8,14 @@ import { useLocaleReceiver } from '../locale-provider'
 import useFloatForm from './hooks/useFloatForm'
 import type { BaseFormInstance, BaseFormProps, SubmitterProps } from '../base-form'
 import { BaseForm, Submitter } from '../base-form'
-import type { ModalFormExpose } from './typings'
+import type { ModalFormExpose, ModalFormSlots } from './typings'
 import { modalFormProps } from './typings'
 
 const ModalForm = defineComponent({
     inheritAttrs: false,
     name: 'ProModalForm',
     props: modalFormProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-        trigger?: any;
-    }>,
+    slots: Object as SlotsType<ModalFormSlots>,
     emits: ['update:open', 'formRef', 'open', 'cancel', 'afterClose', 'openChange', 'loadingChange'],
     setup (props, { emit, slots, attrs, expose }) {
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)

@@ -1,31 +1,20 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref, SlotsType, VNode } from 'vue'
+import type { Ref, SlotsType, VNode } from 'vue'
 import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
 import { flattenChildren, isValidElement, toPx } from '@site-pro/utils'
+import { merge, pick } from 'lodash-es'
 import type { BaseFieldProps } from '../../../base-field'
 import type { BaseFormInstance } from '../../../base-form'
 import type { QueryFilterProps } from '../../../query-filter'
-import { QueryFilter, queryFilterProps } from '../../../query-filter'
-import { merge, pick } from 'lodash-es'
-
-export const baseSearchProps = () => ({
-    ...queryFilterProps(),
-    manualRequest: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    }
-})
-
-export type BaseSearchProps = Partial<ExtractPropTypes<ReturnType<typeof baseSearchProps>>>;
-export type BaseSearchInstance = ComponentPublicInstance<BaseSearchProps>;
+import { QueryFilter } from '../../../query-filter'
+import type { BaseSearchSlots } from './typings'
+import { baseSearchProps } from './typings'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableBaseSearch',
     props: baseSearchProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<BaseSearchSlots>,
     setup (props, { slots, attrs }) {
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
 

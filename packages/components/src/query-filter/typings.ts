@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { ResizeObserverRectSize } from '../resize-observer'
-import type { BaseFormInstance } from '../base-form'
+import type { BaseFormInstance, BaseFormSlots } from '../base-form'
 import { baseFormProps } from '../base-form'
 import { queryFilterActionsProps } from './Actions'
 
@@ -44,5 +44,6 @@ export const queryFilterProps = () => ({
     }
 })
 
+export type QueryFilterSlots = BaseFormSlots;
 export type QueryFilterProps = Partial<ExtractPropTypes<ReturnType<typeof queryFilterProps>>>;
 export type QueryFilterInstance = ComponentPublicInstance<QueryFilterProps>;

@@ -4,4 +4,4 @@ import { fieldNumberProps } from './typings'
 
 export { FieldNumber, fieldNumberProps }
 
-export type { FieldNumberFieldProps, FieldNumberProps, FieldNumberInstance, FieldNumberSlots }
+export type { FieldNumberFieldProps, FieldNumberSlots, FieldNumberProps, FieldNumberInstance }

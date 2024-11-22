@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldNumberFieldProps = BaseFieldFieldProps<'number'>;
@@ -12,7 +12,7 @@ export const fieldNumberProps = () => ({
     }
 })
 
-export interface FieldNumberSlots {
+export interface FieldNumberSlots extends BaseFieldSlots {
     addonAfter?: any;
     addonBefore?: any;
     prefix?: any;

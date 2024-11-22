@@ -8,17 +8,14 @@ import { useLocaleReceiver } from '../locale-provider'
 import useFloatForm from './hooks/useFloatForm'
 import type { BaseFormInstance, BaseFormProps, SubmitterProps } from '../base-form'
 import { BaseForm, Submitter } from '../base-form'
-import type { DrawerFormExpose } from './typings'
+import type { DrawerFormExpose, DrawerFormSlots } from './typings'
 import { drawerFormProps } from './typings'
 
 const DrawerForm = defineComponent({
     inheritAttrs: false,
     name: 'ProDrawerForm',
     props: drawerFormProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-        trigger?: any;
-    }>,
+    slots: Object as SlotsType<DrawerFormSlots>,
     emits: ['update:open', 'formRef', 'open', 'cancel', 'afterClose', 'openChange', 'loadingChange'],
     setup (props, { emit, slots, attrs, expose }) {
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)

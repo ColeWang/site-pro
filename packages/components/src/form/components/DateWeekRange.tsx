@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const dateWeekRangeProps = () => ({
     }
 })
 
+export type DateWeekRangeSlots = FieldSlots & FieldRangePickerSlots;
 export type DateWeekRangeProps = Partial<ExtractPropTypes<ReturnType<typeof dateWeekRangeProps>>>;
 export type DateWeekRangeInstance = ComponentPublicInstance<DateWeekRangeProps>;
 
@@ -30,7 +31,7 @@ const DateWeekRange = defineComponent({
     inheritAttrs: false,
     name: 'ProDateWeekRange',
     props: dateWeekRangeProps(),
-    slots: Object as SlotsType<FieldSlots & FieldRangePickerSlots>,
+    slots: Object as SlotsType<DateWeekRangeSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

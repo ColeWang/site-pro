@@ -1,6 +1,11 @@
 import ResizeObserver from './ResizeObserver'
-import type { ResizeObserverInstance, ResizeObserverProps, ResizeObserverRectSize } from './typings'
+import type {
+    ResizeObserverInstance,
+    ResizeObserverProps,
+    ResizeObserverRectSize,
+    ResizeObserverSlots
+} from './typings'
 import { resizeObserverProps } from './typings'
 
 export { ResizeObserver, resizeObserverProps }
-export type { ResizeObserverRectSize, ResizeObserverProps, ResizeObserverInstance }
+export type { ResizeObserverRectSize, ResizeObserverSlots, ResizeObserverProps, ResizeObserverInstance }

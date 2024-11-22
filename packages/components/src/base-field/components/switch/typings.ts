@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseAttrs } from '@site-pro/utils'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldSwitchFieldProps = BaseFieldFieldProps<'switch'>;
@@ -16,7 +16,7 @@ export const fieldSwitchProps = () => ({
     }
 })
 
-export interface FieldSwitchSlots {
+export interface FieldSwitchSlots extends BaseFieldSlots {
     checkedChildren?: any;
     unCheckedChildren?: any;
 }

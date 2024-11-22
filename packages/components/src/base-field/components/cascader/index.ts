@@ -4,4 +4,4 @@ import { fieldCascaderProps } from './typings'
 
 export { FieldCascader, fieldCascaderProps }
 
-export type { FieldCascaderFieldProps, FieldCascaderProps, FieldCascaderInstance, FieldCascaderSlots }
+export type { FieldCascaderFieldProps, FieldCascaderSlots, FieldCascaderProps, FieldCascaderInstance }

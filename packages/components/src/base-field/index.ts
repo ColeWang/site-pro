@@ -8,7 +8,9 @@ import type {
     BaseFieldProviderExpose,
     BaseFieldProviderInstance,
     BaseFieldProviderProps,
+    BaseFieldProviderSlots,
     BaseFieldProviderValueTypeMap,
+    BaseFieldSlots,
     BaseFieldValueType
 } from './typings'
 import { baseFieldProps, baseFieldProviderProps } from './typings'
@@ -20,12 +22,14 @@ export type {
     BaseFieldValueType,
     BaseFieldFieldProps,
     BaseFieldFormItemProps,
+    BaseFieldSlots,
     BaseFieldProps,
     BaseFieldInstance
 }
 
 export type {
     BaseFieldProviderValueTypeMap,
+    BaseFieldProviderSlots,
     BaseFieldProviderProps,
     BaseFieldProviderExpose,
     BaseFieldProviderInstance

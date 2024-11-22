@@ -45,6 +45,12 @@ export const descriptionsProps = () => ({
     }
 })
 
+export interface DescriptionsSlots {
+    default?: any;
+    title?: any;
+    extra?: any;
+}
+
 export type DescriptionsProps = Partial<ExtractPropTypes<ReturnType<typeof descriptionsProps>>>;
 
 export interface DescriptionsExpose {
@@ -85,6 +91,10 @@ export const descriptionsItemProps = () => ({
         default: undefined
     }
 })
+
+export interface DescriptionsItemSlots {
+    default?: any;
+}
 
 export type DescriptionsItemProps = Partial<ExtractPropTypes<ReturnType<typeof descriptionsItemProps>>>;
 export type DescriptionsItemInstance = ComponentPublicInstance<DescriptionsItemProps>;

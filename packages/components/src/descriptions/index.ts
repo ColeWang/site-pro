@@ -6,7 +6,9 @@ import type {
     DescriptionsInstance,
     DescriptionsItemInstance,
     DescriptionsItemProps,
-    DescriptionsProps
+    DescriptionsItemSlots,
+    DescriptionsProps,
+    DescriptionsSlots
 } from './typings'
 import { descriptionsItemProps, descriptionsProps } from './typings'
 
@@ -15,5 +17,5 @@ Descriptions.Item = DescriptionsItem
 export { Descriptions, descriptionsProps }
 export { DescriptionsItem, descriptionsItemProps }
 
-export type { DescriptionsColumn, DescriptionsProps, DescriptionsExpose, DescriptionsInstance }
-export type { DescriptionsItemProps, DescriptionsItemInstance }
+export type { DescriptionsColumn, DescriptionsSlots, DescriptionsProps, DescriptionsExpose, DescriptionsInstance }
+export type { DescriptionsItemSlots, DescriptionsItemProps, DescriptionsItemInstance }

@@ -4,4 +4,4 @@ import { fieldPasswordProps } from './typings'
 
 export { FieldPassword, fieldPasswordProps }
 
-export type { FieldPasswordFieldProps, FieldPasswordProps, FieldPasswordInstance, FieldPasswordSlots }
+export type { FieldPasswordFieldProps, FieldPasswordSlots, FieldPasswordProps, FieldPasswordInstance }

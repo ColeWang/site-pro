@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const treeSelectProps = () => ({
     }
 })
 
+export type TreeSelectSlots = FieldSlots & FieldTreeSelectSlots;
 export type TreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof treeSelectProps>>>;
 export type TreeSelectInstance = ComponentPublicInstance<TreeSelectProps>;
 
@@ -30,7 +31,7 @@ const TreeSelect = defineComponent({
     inheritAttrs: false,
     name: 'ProTreeSelect',
     props: treeSelectProps(),
-    slots: Object as SlotsType<FieldSlots & FieldTreeSelectSlots>,
+    slots: Object as SlotsType<TreeSelectSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

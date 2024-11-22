@@ -12,6 +12,7 @@ import { BaseForm } from '../base-form'
 import type { QueryFilterActionsProps } from './Actions'
 import Actions from './Actions'
 import useQueryFilter from './hooks/useQueryFilter'
+import type { QueryFilterSlots } from './typings'
 import { queryFilterProps } from './typings'
 import useStyle from './style'
 
@@ -19,9 +20,7 @@ const QueryFilter = defineComponent({
     inheritAttrs: false,
     name: 'ProQueryFilter',
     props: queryFilterProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<QueryFilterSlots>,
     emits: ['formRef', 'resize', 'collapse'],
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-query-filter', props)

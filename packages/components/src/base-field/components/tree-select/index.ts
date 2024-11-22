@@ -11,7 +11,7 @@ export { FieldTreeSelect, fieldTreeSelectProps }
 
 export type {
     FieldTreeSelectFieldProps,
+    FieldTreeSelectSlots,
     FieldTreeSelectProps,
-    FieldTreeSelectInstance,
-    FieldTreeSelectSlots
+    FieldTreeSelectInstance
 }

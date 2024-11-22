@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const passwordProps = () => ({
     }
 })
 
+export type PasswordSlots = FieldSlots & FieldPasswordSlots;
 export type PasswordProps = Partial<ExtractPropTypes<ReturnType<typeof passwordProps>>>;
 export type PasswordInstance = ComponentPublicInstance<PasswordProps>;
 
@@ -30,7 +31,7 @@ const Password = defineComponent({
     inheritAttrs: false,
     name: 'ProPassword',
     props: passwordProps(),
-    slots: Object as SlotsType<FieldSlots & FieldPasswordSlots>,
+    slots: Object as SlotsType<PasswordSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

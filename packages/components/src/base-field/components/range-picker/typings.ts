@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldRangePickerFieldProps = BaseFieldFieldProps<'dateRange'>;
@@ -12,7 +12,7 @@ export const fieldRangePickerProps = () => ({
     }
 })
 
-export interface FieldRangePickerSlots {
+export interface FieldRangePickerSlots extends BaseFieldSlots {
     dateRender?: any;
     nextIcon?: any;
     prevIcon?: any;

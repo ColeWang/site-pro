@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const cascaderProps = () => ({
     }
 })
 
+export type CascaderSlots = FieldSlots & FieldCascaderSlots;
 export type CascaderProps = Partial<ExtractPropTypes<ReturnType<typeof cascaderProps>>>;
 export type CascaderInstance = ComponentPublicInstance<CascaderProps>;
 
@@ -30,7 +31,7 @@ const Cascader = defineComponent({
     inheritAttrs: false,
     name: 'ProCascader',
     props: cascaderProps(),
-    slots: Object as SlotsType<FieldSlots & FieldCascaderSlots>,
+    slots: Object as SlotsType<CascaderSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

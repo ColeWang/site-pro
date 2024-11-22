@@ -11,7 +11,7 @@ export { FieldDatePicker, fieldDatePickerProps }
 
 export type {
     FieldDatePickerFieldProps,
+    FieldDatePickerSlots,
     FieldDatePickerProps,
-    FieldDatePickerInstance,
-    FieldDatePickerSlots
+    FieldDatePickerInstance
 }

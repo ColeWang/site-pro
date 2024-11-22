@@ -12,6 +12,10 @@ export const localeProviderProps = () => ({
     }
 })
 
+export interface LocaleProviderSlots {
+    default?: any;
+}
+
 export type LocaleProviderProps = Partial<ExtractPropTypes<ReturnType<typeof localeProviderProps>>>;
 
 export interface LocaleProviderExpose {

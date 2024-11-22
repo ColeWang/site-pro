@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const dateQuarterRangeProps = () => ({
     }
 })
 
+export type DateQuarterRangeSlots = FieldSlots & FieldRangePickerSlots;
 export type DateQuarterRangeProps = Partial<ExtractPropTypes<ReturnType<typeof dateQuarterRangeProps>>>;
 export type DateQuarterRangeInstance = ComponentPublicInstance<DateQuarterRangeProps>;
 
@@ -30,7 +31,7 @@ const DateQuarterRange = defineComponent({
     inheritAttrs: false,
     name: 'ProDateQuarterRange',
     props: dateQuarterRangeProps(),
-    slots: Object as SlotsType<FieldSlots & FieldRangePickerSlots>,
+    slots: Object as SlotsType<DateQuarterRangeSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

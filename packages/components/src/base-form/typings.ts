@@ -56,6 +56,10 @@ export const baseFormProps = () => ({
     }
 })
 
+export interface BaseFormSlots {
+    default?: any;
+}
+
 export type BaseFormProps = Partial<ExtractPropTypes<ReturnType<typeof baseFormProps>>>;
 
 export interface BaseFormExpose<RecordType = Recordable> {

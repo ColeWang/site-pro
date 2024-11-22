@@ -8,7 +8,7 @@ import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodas
 import { createFromInstance } from './hooks/useFormInstance'
 import type { RowWrapperProps } from './helpers'
 import { RowWrapper } from './helpers'
-import type { BaseFormExpose, BaseFormLayout, BaseFormProps, BaseFormUpdater } from './typings'
+import type { BaseFormExpose, BaseFormLayout, BaseFormProps, BaseFormSlots, BaseFormUpdater } from './typings'
 import { baseFormProps } from './typings'
 import useStyle from './style'
 
@@ -16,9 +16,7 @@ const BaseForm = defineComponent({
     inheritAttrs: false,
     name: 'ProBaseForm',
     props: baseFormProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<BaseFormSlots>,
     emits: ['submit', 'finish', 'finishFailed', 'reset', 'valuesChange'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-base-form', props)

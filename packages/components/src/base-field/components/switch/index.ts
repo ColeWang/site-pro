@@ -4,4 +4,4 @@ import { fieldSwitchProps } from './typings'
 
 export { FieldSwitch, fieldSwitchProps }
 
-export type { FieldSwitchFieldProps, FieldSwitchProps, FieldSwitchInstance, FieldSwitchSlots }
+export type { FieldSwitchFieldProps, FieldSwitchSlots, FieldSwitchProps, FieldSwitchInstance }

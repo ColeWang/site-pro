@@ -15,6 +15,14 @@ export const formItemProps = () => ({
     }
 })
 
+export interface FormItemSlots {
+    default?: any;
+    extra?: any;
+    help?: any;
+    label?: any;
+    tooltip?: any;
+}
+
 export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
 export type FormItemInstance = ComponentPublicInstance<FormItemProps>;
 
@@ -22,13 +30,7 @@ const FormItem = defineComponent({
     inheritAttrs: false,
     name: 'ProFormItem',
     props: formItemProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-        extra?: any;
-        help?: any;
-        label?: any;
-        tooltip?: any;
-    }>,
+    slots: Object as SlotsType<FormItemSlots>,
     setup (props, { slots, attrs }) {
         const { formProps } = useFormInstance()
 

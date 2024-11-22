@@ -4,4 +4,4 @@ import { fieldSliderProps } from './typings'
 
 export { FieldSlider, fieldSliderProps }
 
-export type { FieldSliderFieldProps, FieldSliderProps, FieldSliderInstance, FieldSliderSlots }
+export type { FieldSliderFieldProps, FieldSliderSlots, FieldSliderProps, FieldSliderInstance }

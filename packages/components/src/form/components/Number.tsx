@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const numberProps = () => ({
     }
 })
 
+export type NumberSlots = FieldSlots & FieldNumberSlots;
 export type NumberProps = Partial<ExtractPropTypes<ReturnType<typeof numberProps>>>;
 export type NumberInstance = ComponentPublicInstance<NumberProps>;
 
@@ -30,7 +31,7 @@ const Number = defineComponent({
     inheritAttrs: false,
     name: 'ProNumber',
     props: numberProps(),
-    slots: Object as SlotsType<FieldSlots & FieldNumberSlots>,
+    slots: Object as SlotsType<NumberSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

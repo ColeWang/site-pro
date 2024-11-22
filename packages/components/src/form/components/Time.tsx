@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const timeProps = () => ({
     }
 })
 
+export type TimeSlots = FieldSlots & FieldTimePickerSlots;
 export type TimeProps = Partial<ExtractPropTypes<ReturnType<typeof timeProps>>>;
 export type TimeInstance = ComponentPublicInstance<TimeProps>;
 
@@ -30,7 +31,7 @@ const Time = defineComponent({
     inheritAttrs: false,
     name: 'ProTime',
     props: timeProps(),
-    slots: Object as SlotsType<FieldSlots & FieldTimePickerSlots>,
+    slots: Object as SlotsType<TimeSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

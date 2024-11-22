@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const sliderProps = () => ({
     }
 })
 
+export type SliderSlots = FieldSlots & FieldSliderSlots;
 export type SliderProps = Partial<ExtractPropTypes<ReturnType<typeof sliderProps>>>;
 export type SliderInstance = ComponentPublicInstance<SliderProps>;
 
@@ -30,7 +31,7 @@ const Slider = defineComponent({
     inheritAttrs: false,
     name: 'ProSlider',
     props: sliderProps(),
-    slots: Object as SlotsType<FieldSlots & FieldSliderSlots>,
+    slots: Object as SlotsType<SliderSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

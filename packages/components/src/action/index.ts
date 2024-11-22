@@ -1,6 +1,13 @@
 import Action from './Action'
 import ActionGroup from './Group'
-import type { ActionGroupInstance, ActionGroupProps, ActionInstance, ActionProps } from './typings'
+import type {
+    ActionGroupInstance,
+    ActionGroupProps,
+    ActionGroupSlots,
+    ActionInstance,
+    ActionProps,
+    ActionSlots
+} from './typings'
 import { actionGroupProps, actionProps } from './typings'
 
 Action.Group = ActionGroup
@@ -8,5 +15,5 @@ Action.Group = ActionGroup
 export { Action, actionProps }
 export { ActionGroup, actionGroupProps }
 
-export type { ActionProps, ActionInstance }
-export type { ActionGroupProps, ActionGroupInstance }
+export type { ActionSlots, ActionProps, ActionInstance }
+export type { ActionGroupSlots, ActionGroupProps, ActionGroupInstance }

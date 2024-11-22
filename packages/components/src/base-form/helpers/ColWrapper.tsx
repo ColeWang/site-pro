@@ -17,6 +17,10 @@ export const colWrapperProps = () => ({
     }
 })
 
+export interface ColWrapperSlots {
+    default?: any;
+}
+
 export type ColWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof colWrapperProps>>>;
 export type ColWrapperInstance = ComponentPublicInstance<ColWrapperProps>;
 
@@ -24,9 +28,7 @@ const ColWrapper = defineComponent({
     inheritAttrs: false,
     name: 'ProColWrapper',
     props: colWrapperProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<ColWrapperSlots>,
     setup (props, { slots }) {
         return () => {
             const { grid } = props

@@ -4,4 +4,4 @@ import { fieldCheckboxProps } from './typings'
 
 export { FieldCheckbox, fieldCheckboxProps }
 
-export type { FieldCheckboxFieldProps, FieldCheckboxProps, FieldCheckboxInstance, FieldCheckboxSlots }
+export type { FieldCheckboxFieldProps, FieldCheckboxSlots, FieldCheckboxProps, FieldCheckboxInstance }

@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldSelectFieldProps = BaseFieldFieldProps<'select'>;
@@ -12,7 +12,7 @@ export const fieldSelectProps = () => ({
     }
 })
 
-export interface FieldSelectSlots {
+export interface FieldSelectSlots extends BaseFieldSlots {
     clearIcon?: any;
     dropdownRender?: any;
     maxTagPlaceholder?: any;

@@ -4,4 +4,4 @@ import { fieldTextProps } from './typings'
 
 export { FieldText, fieldTextProps }
 
-export type { FieldTextFieldProps, FieldTextProps, FieldTextInstance, FieldTextSlots }
+export type { FieldTextFieldProps, FieldTextSlots, FieldTextProps, FieldTextInstance }

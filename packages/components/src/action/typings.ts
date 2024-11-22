@@ -13,6 +13,10 @@ export const actionProps = () => ({
     }
 })
 
+export interface ActionSlots {
+    default?: any;
+}
+
 export type ActionProps = Partial<ExtractPropTypes<ReturnType<typeof actionProps>>>;
 export type ActionInstance = ComponentPublicInstance<ActionProps>;
 
@@ -26,6 +30,10 @@ export const actionGroupProps = () => ({
         default: undefined
     }
 })
+
+export interface ActionGroupSlots {
+    default?: any;
+}
 
 export type ActionGroupProps = Partial<ExtractPropTypes<ReturnType<typeof actionGroupProps>>>;
 export type ActionGroupInstance = ComponentPublicInstance<ActionGroupProps>;

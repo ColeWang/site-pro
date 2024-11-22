@@ -4,4 +4,4 @@ import { fieldRadioProps } from './typings'
 
 export { FieldRadio, fieldRadioProps }
 
-export type { FieldRadioFieldProps, FieldRadioProps, FieldRadioInstance, FieldRadioSlots }
+export type { FieldRadioFieldProps, FieldRadioSlots, FieldRadioProps, FieldRadioInstance }

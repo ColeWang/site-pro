@@ -40,6 +40,11 @@ export const formGroupProps = () => ({
     }
 })
 
+export interface FormGroupSlots {
+    default?: any;
+    title?: any;
+}
+
 export type FormGroupProps = Partial<ExtractPropTypes<ReturnType<typeof formGroupProps>>>;
 export type FormGroupInstance = ComponentPublicInstance<FormGroupProps>;
 
@@ -47,10 +52,7 @@ const FormGroup = defineComponent({
     inheritAttrs: false,
     name: 'ProFormGroup',
     props: formGroupProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-        title?: any;
-    }>,
+    slots: Object as SlotsType<FormGroupSlots>,
     setup (props, { slots, attrs }) {
         const { token } = theme.useToken()
         const { formProps } = useFormInstance()

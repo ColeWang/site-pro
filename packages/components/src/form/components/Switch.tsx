@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from '../Field'
+import Field, { fieldProps } from '../Field'
 import type {
     BaseFieldFormItemProps,
     BaseFieldValueType,
@@ -23,6 +23,7 @@ export const switchProps = () => ({
     }
 })
 
+export type SwitchSlots = FieldSlots & FieldSwitchSlots;
 export type SwitchProps = Partial<ExtractPropTypes<ReturnType<typeof switchProps>>>;
 export type SwitchInstance = ComponentPublicInstance<SwitchProps>;
 
@@ -30,7 +31,7 @@ const Switch = defineComponent({
     inheritAttrs: false,
     name: 'ProSwitch',
     props: switchProps(),
-    slots: Object as SlotsType<FieldSlots & FieldSwitchSlots>,
+    slots: Object as SlotsType<SwitchSlots>,
     setup (props, { slots }) {
         return () => {
             const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props

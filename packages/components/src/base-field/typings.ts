@@ -13,6 +13,7 @@ import type {
     InputTextareaProps,
     RadioGroupProps,
     RangePickerProps,
+    Recordable,
     SelectProps,
     SliderProps,
     SwitchProps,
@@ -92,6 +93,10 @@ export const baseFieldProps = () => ({
     }
 })
 
+export interface BaseFieldSlots extends Recordable {
+    renderField?: any;
+}
+
 export type BaseFieldProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProps>>>;
 export type BaseFieldInstance = ComponentPublicInstance<BaseFieldProps>;
 
@@ -106,6 +111,10 @@ export const baseFieldProviderProps = () => ({
         default: () => ({})
     }
 })
+
+export interface BaseFieldProviderSlots {
+    default?: any;
+}
 
 export type BaseFieldProviderProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProviderProps>>>;
 

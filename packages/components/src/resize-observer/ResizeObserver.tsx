@@ -2,16 +2,14 @@ import type { App, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
-import type { ResizeObserverRectSize } from './typings'
+import type { ResizeObserverRectSize, ResizeObserverSlots } from './typings'
 import { resizeObserverProps } from './typings'
 
 const ResizeObserver = defineComponent({
     inheritAttrs: false,
     name: 'ProResizeObserver',
     props: resizeObserverProps(),
-    slots: Object as SlotsType<{
-        default?: { size: ResizeObserverRectSize };
-    }>,
+    slots: Object as SlotsType<ResizeObserverSlots>,
     emits: ['resize'],
     setup (props, { emit, slots, attrs }) {
         const elRef: Ref<HTMLElement | null> = ref(null)

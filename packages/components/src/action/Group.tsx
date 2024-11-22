@@ -5,15 +5,14 @@ import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { flattenChildren } from '@site-pro/utils'
 import { drop, take } from 'lodash-es'
 import Action from './Action'
+import type { ActionGroupSlots } from './typings'
 import { actionGroupProps } from './typings'
 
 const ActionGroup = defineComponent({
     inheritAttrs: false,
     name: 'ProActionGroup',
     props: actionGroupProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<ActionGroupSlots>,
     setup (props, { slots, attrs }) {
         const { token } = theme.useToken()
         return () => {

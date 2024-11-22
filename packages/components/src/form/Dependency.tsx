@@ -17,6 +17,10 @@ export const formDependencyProps = () => ({
     }
 })
 
+export interface FormDependencySlots {
+    default?: any;
+}
+
 export type FormDependencyProps = Partial<ExtractPropTypes<ReturnType<typeof formDependencyProps>>>;
 export type FormDependencyInstance = ComponentPublicInstance<FormDependencyProps>;
 
@@ -24,9 +28,7 @@ const FormDependency = defineComponent({
     inheritAttrs: false,
     name: 'ProFormDependency',
     props: formDependencyProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<FormDependencySlots>,
     setup (props, { slots }) {
         const { formProps, getModelValue } = useFormInstance()
 

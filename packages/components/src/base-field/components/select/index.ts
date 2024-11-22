@@ -4,4 +4,4 @@ import { fieldSelectProps } from './typings'
 
 export { FieldSelect, fieldSelectProps }
 
-export type { FieldSelectFieldProps, FieldSelectProps, FieldSelectInstance, FieldSelectSlots }
+export type { FieldSelectFieldProps, FieldSelectSlots, FieldSelectProps, FieldSelectInstance }

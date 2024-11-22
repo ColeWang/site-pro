@@ -8,7 +8,7 @@ import { isFunction, omit, pick } from 'lodash-es'
 import useFetchData from './hooks/useFetchData'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
 import { BaseField } from '../base-field'
-import type { DescriptionsColumn, DescriptionsItemProps, DescriptionsProps } from './typings'
+import type { DescriptionsColumn, DescriptionsItemProps, DescriptionsProps, DescriptionsSlots } from './typings'
 import { descriptionsProps } from './typings'
 import useStyle from './style'
 
@@ -16,11 +16,7 @@ const Descriptions = defineComponent({
     inheritAttrs: false,
     name: 'ProDescriptions',
     props: descriptionsProps(),
-    slots: Object as SlotsType<{
-        default?: any;
-        title?: any;
-        extra?: any;
-    }>,
+    slots: Object as SlotsType<DescriptionsSlots>,
     emits: ['load', 'requestError'],
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-descriptions', props)

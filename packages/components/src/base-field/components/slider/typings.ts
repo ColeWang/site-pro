@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseAttrs } from '@site-pro/utils'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldSliderFieldProps = BaseFieldFieldProps<'slider'>;
@@ -13,7 +13,7 @@ export const fieldSliderProps = () => ({
     }
 })
 
-export interface FieldSliderSlots {
+export interface FieldSliderSlots extends BaseFieldSlots {
     mark?: any;
 }
 

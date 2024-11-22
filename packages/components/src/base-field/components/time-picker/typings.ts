@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseFieldFieldProps } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldTimePickerFieldProps = BaseFieldFieldProps<'time'>;
@@ -12,7 +12,7 @@ export const fieldTimePickerProps = () => ({
     }
 })
 
-export interface FieldTimePickerSlots {
+export interface FieldTimePickerSlots extends BaseFieldSlots {
     clearIcon?: any;
     renderExtraFooter?: any;
     suffixIcon?: any;

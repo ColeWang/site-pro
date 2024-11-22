@@ -4,14 +4,16 @@ import type {
     DrawerFormExpose,
     DrawerFormInstance,
     DrawerFormProps,
+    DrawerFormSlots,
     ModalFormExpose,
     ModalFormInstance,
-    ModalFormProps
+    ModalFormProps,
+    ModalFormSlots
 } from './typings'
 import { drawerFormProps, modalFormProps } from './typings'
 
 export { ModalForm, modalFormProps }
 export { DrawerForm, drawerFormProps }
 
-export type { ModalFormProps, ModalFormExpose, ModalFormInstance }
-export type { DrawerFormProps, DrawerFormExpose, DrawerFormInstance }
+export type { ModalFormSlots, ModalFormProps, ModalFormExpose, ModalFormInstance }
+export type { DrawerFormSlots, DrawerFormProps, DrawerFormExpose, DrawerFormInstance }
