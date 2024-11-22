@@ -8,4 +8,3 @@ yarn add @site-pro/locale
 # npm
 npm install @site-pro/locale --save
 ```
-

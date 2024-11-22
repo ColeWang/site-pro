@@ -8,5 +8,3 @@ yarn add @site-pro/plugins
 # npm
 npm install @site-pro/plugins --save
 ```
-
-
