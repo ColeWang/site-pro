@@ -57,6 +57,8 @@ declare module 'scroll-into-view-if-needed' {
 
 declare module 'ant-design-vue/es/theme/interface' {
     interface ComponentTokenMap {
+        // action
+        ProAction?: {};
         // form
         ProFieldTextarea?: {};
         ProBaseForm?: {};
@@ -70,7 +72,6 @@ declare module 'ant-design-vue/es/theme/interface' {
         ProTableSetting?: {};
         ProTableSettingList?: {};
         ProTableSettingNode?: {};
-        ProAction?: {};
         // descriptions
         ProDescriptions?: {};
         // plugin
