@@ -1,14 +1,15 @@
-import { type ComponentPublicInstance, defineComponent, type ExtractPropTypes, unref } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
+import { defineComponent, unref } from 'vue'
 import { Button, Checkbox, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
 import { toPx } from '@site-pro/utils'
 import { reduce, set } from 'lodash-es'
+import { useLocaleReceiver } from '../../../locale-provider'
+import { useSharedContext } from '../../hooks/useSharedContext'
 import type { ListProps } from './components/List'
 import TreeList from './components/List'
 import type { TableColumn } from '../../typings'
-import { useSharedContext } from '../../hooks/useSharedContext'
-import { useLocaleReceiver } from '../../../locale-provider'
 import useStyle from './style'
 
 export const settingProps = () => ({

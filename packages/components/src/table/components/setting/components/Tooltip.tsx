@@ -22,6 +22,10 @@ export const tooltipProps = () => ({
     }
 })
 
+export interface TooltipSlots {
+    default?: any;
+}
+
 export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
 export type TooltipInstance = ComponentPublicInstance<TooltipProps>;
 
@@ -29,9 +33,7 @@ export default defineComponent({
     inheritAttrs: false,
     props: tooltipProps(),
     emits: ['change'],
-    slots: Object as SlotsType<{
-        default?: any;
-    }>,
+    slots: Object as SlotsType<TooltipSlots>,
     setup (props, { emit, slots }) {
         /* v8 ignore next 4 */
         function onClick (evt: Event): void {

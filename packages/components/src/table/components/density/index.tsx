@@ -4,9 +4,9 @@ import { Menu, theme } from 'ant-design-vue'
 import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
 import type { BaseAttrs, MenuInfo, MenuProps } from '@site-pro/utils'
 import { toPx } from '@site-pro/utils'
-import type { TableSize } from '../../typings'
-import { useSharedContext } from '../../hooks/useSharedContext'
 import { useLocaleReceiver } from '../../../locale-provider'
+import { useSharedContext } from '../../hooks/useSharedContext'
+import type { TableSize } from '../../typings'
 
 export const densityProps = () => ({
     ...menuProps()
