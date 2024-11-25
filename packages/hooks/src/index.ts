@@ -1,3 +1,5 @@
+import version from './version'
+// --
 import tryOnScopeDispose from './tryOnScopeDispose'
 import type { UseConfigInjectResult } from './useConfigInject'
 import useConfigInject from './useConfigInject'
@@ -7,9 +9,8 @@ import useResizeObserver from './useResizeObserver'
 import type { UseRefsResult } from './useRefs'
 import useRefs from './useRefs'
 
-const version: string = __VERSION__
-
 export { version }
+
 export { tryOnScopeDispose }
 export { useConfigInject }
 export { useGlobalProperties }

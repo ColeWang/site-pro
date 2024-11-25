@@ -1,6 +1,8 @@
 import type { App, InjectionKey, ObjectPlugin } from 'vue'
 import { inject } from 'vue'
 import { get } from 'lodash-es'
+import version from './version'
+// --
 import type { FullscreenPlugin, FullscreenPluginInstallOptions, FullscreenState } from './fullscreen'
 import Fullscreen from './fullscreen'
 import type { LoadingPlugin, LoadingPluginInstallOptions, LoadingState } from './loading'
@@ -33,8 +35,6 @@ interface BaseSitePluginsExpose extends BaseDefaultPlugins {
     version: string;
     options: BaseSitePluginsOptions;
 }
-
-const version: string = __VERSION__
 
 const SitePluginsInstanceKey: InjectionKey<BaseSitePluginsExpose> = Symbol('SitePlugins')
 

@@ -1,7 +1,4 @@
-const version: string = __VERSION__
-
-export { version }
-
+export * from './version'
 export * from './is'
 export * from './tools'
 export * from './dom'

@@ -3,16 +3,39 @@ import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, FormItemProps, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { has, isArray, isString, merge, omit, pick } from 'lodash-es'
+import { get, has, isArray, isString, merge, omit, pick } from 'lodash-es'
 import type { BaseFormLayout, ColWrapperProps } from '../base-form'
 import { ColWrapper, useFormInstance } from '../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../base-field'
 import { BaseField, baseFieldProps } from '../base-field'
 
+// 88
+// 88 * 2 + 8 = 184
+// 88 * 3 + 16 = 280
+// 88 * 4 + 24 = 376
+// 88 * 5 + 32 = 472
+
+// 104
+// 104 * 2 + 16 = 224
+// 104 * 3 + 32 = 344
+// 104 * 4 + 48 = 464
+// 104 * 5 + 64 = 584
+
+// 正常模式下
+const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
+    xs: 104,
+    sm: 216,
+    md: 328,
+    lg: 440,
+    xl: 552
+}
+
+export type FieldSizeType = keyof typeof SIZE_ENUM | number;
+
 export const fieldProps = () => ({
     ...baseFieldProps(),
     width: {
-        type: [String, Number] as PropType<string | number>,
+        type: [String, Number] as PropType<FieldSizeType>,
         default: undefined
     },
     labelWidth: {
@@ -42,15 +65,18 @@ export type FieldInstance = ComponentPublicInstance<FieldProps>;
 
 function genFieldStyle (
     style: CSSProperties | undefined,
-    fieldWidth: string | number | undefined
+    fieldWidth: FieldSizeType | undefined,
 ): CSSProperties {
     const { maxWidth, minWidth, width, ...restStyle } = style || {}
+    const fieldSize: number | undefined = isString(fieldWidth)
+        ? get(SIZE_ENUM, fieldWidth)
+        : fieldWidth
 
     return {
         ...restStyle,
         maxWidth: maxWidth || '100%',
-        minWidth: minWidth || toPx(104),
-        width: width || toPx(fieldWidth || 104) || '100%'
+        minWidth: minWidth || toPx(SIZE_ENUM['xs']),
+        width: width || toPx(fieldSize) || '100%'
     }
 }
 
