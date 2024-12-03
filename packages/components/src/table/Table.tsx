@@ -12,9 +12,9 @@ import type {
     TableSorterResult,
     TableSortOrder,
 } from '@site-pro/utils'
-import { getElement, getSlot, getSlotVNode, omitNil, toPx } from '@site-pro/utils'
+import { getElement, getSlot, getSlotVNode, omitNil, safeDestructureObject, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { isArray, isFunction, omit, pick, reduce, toPlainObject } from 'lodash-es'
+import { isArray, isFunction, omit, pick, reduce } from 'lodash-es'
 import type { SearchProps } from './components/search'
 import { Search } from './components/search'
 import { Extra } from './components/extra'
@@ -190,7 +190,7 @@ const Table = defineComponent({
 
             const renderSearch = () => {
                 const searchProps: SearchProps = {
-                    ...toPlainObject(propsSearch) as SearchProps,
+                    ...safeDestructureObject(propsSearch),
                     loading: requestProps.loading,
                     columns: propsColumns,
                     compact: compact,
@@ -210,7 +210,7 @@ const Table = defineComponent({
                     settings: getSlot(slots, props, 'settings')
                 }
                 const toolbarProps: ToolbarProps = {
-                    ...toPlainObject(propsToolbar) as ToolbarProps,
+                    ...safeDestructureObject(propsToolbar),
                     compact: compact,
                     breakPoints: breakPoints,
                     title: propsTitle

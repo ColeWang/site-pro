@@ -8,9 +8,9 @@ import {
     VerticalAlignBottomOutlined
 } from '@ant-design/icons-vue'
 import type { BaseAttrs, Recordable } from '@site-pro/utils'
-import { getElement, getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
+import { getElement, getPropsSlotVNode, getSlotVNode, safeDestructureObject } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { pick, toPlainObject } from 'lodash-es'
+import { pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import Density from '../density'
@@ -115,7 +115,11 @@ export default defineComponent({
                     )
                 }
 
-                const options: Recordable<boolean> = pick({ ...defaultOptions, ...toPlainObject(propsOptions) }, Object.keys(defaultOptions))
+                const options: Recordable<boolean> = pick({
+                    ...defaultOptions,
+                    ...safeDestructureObject(propsOptions)
+                }, Object.keys(defaultOptions))
+
                 const defaultSettings: any[] = Object.keys(options)
                     .filter((key) => options[key])
                     .map((key) => vNodeCatalog[key])

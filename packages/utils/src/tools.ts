@@ -1,7 +1,11 @@
 import { isProxy, toRaw } from 'vue'
-import { cloneDeep, cloneWith, isArray, isNumber, isUndefined, omitBy, reduce, toString } from 'lodash-es'
+import { cloneDeep, cloneWith, isArray, isNumber, isObject, isUndefined, omitBy, reduce, toString } from 'lodash-es'
 import type { NamePath, Recordable } from './types'
 import { isEmpty } from './is'
+
+export function safeDestructureObject<T = any> (value: T, defaultValue?: Recordable): Recordable {
+    return isObject(value) ? value : (defaultValue || {})
+}
 
 export function cloneProxyToRaw<T extends Recordable> (object?: T): T {
     return cloneWith(object || {} as T, (value) => {

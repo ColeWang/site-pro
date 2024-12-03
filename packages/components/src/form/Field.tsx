@@ -1,46 +1,24 @@
-import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import type { BaseAttrs, BaseSlot, FormItemProps, NamePath, Recordable } from '@site-pro/utils'
+import type { BaseAttrs, BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { get, has, isArray, isString, merge, omit, pick } from 'lodash-es'
-import type { BaseFormLayout, ColWrapperProps } from '../base-form'
+import { has, isArray, isString, omit, pick } from 'lodash-es'
+import type { ColWrapperProps } from '../base-form'
 import { ColWrapper, useFormInstance } from '../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../base-field'
 import { BaseField, baseFieldProps } from '../base-field'
 
-// 88
-// 88 * 2 + 8 = 184
-// 88 * 3 + 16 = 280
-// 88 * 4 + 24 = 376
-// 88 * 5 + 32 = 472
-
-// 104
-// 104 * 2 + 16 = 224
-// 104 * 3 + 32 = 344
-// 104 * 4 + 48 = 464
-// 104 * 5 + 64 = 584
-
-// 正常模式下
-const SIZE_ENUM: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number> = {
-    xs: 104,
-    sm: 216,
-    md: 328,
-    lg: 440,
-    xl: 552
-}
-
-export type FieldSizeType = keyof typeof SIZE_ENUM | number;
-
 export const fieldProps = () => ({
     ...baseFieldProps(),
     width: {
-        type: [String, Number] as PropType<FieldSizeType>,
+        type: [Number, String] as PropType<number | string>,
         default: undefined
     },
+    // 只适用 QueryFilter
     labelWidth: {
         type: [String, Number] as PropType<'auto' | number>,
-        default: 'auto'
+        default: undefined
     },
     hidden: {
         type: Boolean as PropType<boolean>,
@@ -62,37 +40,6 @@ export interface FieldSlots extends BaseFieldSlots {
 
 export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>>;
 export type FieldInstance = ComponentPublicInstance<FieldProps>;
-
-function genFieldStyle (
-    style: CSSProperties | undefined,
-    fieldWidth: FieldSizeType | undefined,
-): CSSProperties {
-    const { maxWidth, minWidth, width, ...restStyle } = style || {}
-    const fieldSize: number | undefined = isString(fieldWidth)
-        ? get(SIZE_ENUM, fieldWidth)
-        : fieldWidth
-
-    return {
-        ...restStyle,
-        maxWidth: maxWidth || '100%',
-        minWidth: minWidth || toPx(SIZE_ENUM['xs']),
-        width: width || toPx(fieldSize) || '100%'
-    }
-}
-
-function genFormItemLabelWidth (
-    labelWidth: 'auto' | number | undefined,
-    layout: BaseFormLayout
-): FormItemProps & BaseAttrs {
-    if (labelWidth && layout !== 'vertical' && labelWidth !== 'auto') {
-        return {
-            labelCol: { flex: `0 0 ${labelWidth}px` },
-            wrapperCol: { style: { maxWidth: `calc(100% - ${labelWidth}px)` } },
-            style: { flexWrap: 'nowrap' }
-        }
-    }
-    return {}
-}
 
 const Field = defineComponent({
     inheritAttrs: false,
@@ -120,23 +67,24 @@ const Field = defineComponent({
         }
 
         return () => {
-            const { fieldProps, formItemProps, width: fieldWidth, labelWidth, hidden, colProps } = props
-            const { layout, grid } = unref(formProps) || {}
+            const { fieldProps, formItemProps, width: fieldWidth, hidden, colProps } = props
+            const { grid } = unref(formProps) || {}
 
-            const extraFormItemProps: BaseFieldFormItemProps = genFormItemLabelWidth(labelWidth, layout || 'vertical')
             const key: string = namePathToString(formItemProps.name!)
+
+            const needWidth: string | undefined = fieldWidth ? toPx(fieldWidth) : grid ? '100%' : undefined
 
             const needFieldProps: any = {
                 ...fieldProps,
-                style: genFieldStyle(fieldProps.style, fieldWidth),
-                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
+                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!),
+                style: { width: needWidth, ...fieldProps.style }
             }
 
-            const needFormItemProps: BaseFieldFormItemProps = merge({
+            const needFormItemProps: BaseFieldFormItemProps & BaseAttrs = {
                 ...formItemProps,
-                key: key,
-                model: unref(model)
-            }, extraFormItemProps)
+                model: unref(model),
+                key: key
+            }
 
             const needBaseFieldProps: BaseFieldProps = {
                 ...pick(props, Object.keys(BaseField.props)) as BaseFieldProps,

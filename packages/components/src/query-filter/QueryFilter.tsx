@@ -2,7 +2,7 @@ import type { App, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { cloneVNode, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import type { BaseClass, RowProps } from '@site-pro/utils'
+import type { BaseAttrs, BaseClass, FormItemProps, RowProps } from '@site-pro/utils'
 import { flattenChildren, getPropByKebabOrCamel } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../resize-observer'
@@ -12,9 +12,23 @@ import { BaseForm } from '../base-form'
 import type { QueryFilterActionsProps } from './Actions'
 import Actions from './Actions'
 import useQueryFilter from './hooks/useQueryFilter'
-import type { QueryFilterSlots } from './typings'
+import type { QueryFilterLayout, QueryFilterSlots } from './typings'
 import { queryFilterProps } from './typings'
 import useStyle from './style'
+
+function genFormItemFixStyle (
+    labelWidth: 'auto' | number | undefined,
+    layout: QueryFilterLayout
+): FormItemProps & BaseAttrs {
+    if (labelWidth && layout !== 'vertical' && labelWidth !== 'auto') {
+        return {
+            labelCol: { flex: `0 0 ${labelWidth}px` },
+            wrapperCol: { style: { maxWidth: `calc(100% - ${labelWidth}px)` } },
+            style: { flexWrap: 'nowrap' }
+        }
+    }
+    return {}
+}
 
 const QueryFilter = defineComponent({
     inheritAttrs: false,
@@ -66,10 +80,8 @@ const QueryFilter = defineComponent({
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child, hidden, key } = item
                 const fieldLabelWidth: number | 'auto' | undefined = child.props && getPropByKebabOrCamel(child.props, 'label-width')
-                // 默认宽度 80px sizeMD * 4
-                const fieldNode: VNode = cloneVNode(child, {
-                    labelWidth: fieldLabelWidth || labelWidth || sizeMD * 4
-                })
+                const needWidth: number | 'auto' = fieldLabelWidth || labelWidth || sizeMD * 4
+                const fieldNode: VNode = cloneVNode(child, genFormItemFixStyle(needWidth, unref(layout)))
                 const colClass: BaseClass = { [`${prefixCls.value}-col-hidden`]: hidden }
                 return (
                     <Col key={key} class={colClass} span={unref(span)}>

@@ -1,7 +1,8 @@
 import type { Ref, ShallowReactive } from 'vue'
 import { ref, shallowReactive, unref } from 'vue'
 import type { TableRowSelection } from '@site-pro/utils'
-import { isFunction, isObject, toPlainObject } from 'lodash-es'
+import { safeDestructureObject } from '@site-pro/utils'
+import { isFunction, isObject } from 'lodash-es'
 import type { TableProps } from '../typings'
 
 interface UseRowSelectionResult {
@@ -17,7 +18,7 @@ function mergeRowSelection (
     const { selectedRowKeys, ...restValue } = defaultValue
     return {
         selectedRowKeys,
-        ...toPlainObject(rowSelection),
+        ...safeDestructureObject(rowSelection),
         ...restValue
     }
 }
