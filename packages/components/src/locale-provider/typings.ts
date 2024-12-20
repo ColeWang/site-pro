@@ -24,4 +24,3 @@ export interface LocaleProviderExpose {
 }
 
 export type LocaleProviderInstance = ComponentPublicInstance<LocaleProviderProps, LocaleProviderExpose>;
-

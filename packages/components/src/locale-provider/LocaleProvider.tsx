@@ -1,6 +1,6 @@
 import type { App, Ref, SlotsType } from 'vue'
-import { defineComponent, provide, ref, watch } from 'vue'
-import { LocaleReceiverKey } from './hooks/useLocaleReceiver'
+import { defineComponent, ref, watch } from 'vue'
+import { createLocaleReceiver } from './hooks/useLocaleReceiver'
 import type { LocaleProviderExpose, LocaleProviderSlots, LocaleType } from './typings'
 import { localeProviderProps } from './typings'
 
@@ -21,7 +21,8 @@ const LocaleProvider = defineComponent({
             __MARK__: 'internal'
         }
 
-        provide(LocaleReceiverKey, localeProviderExpose)
+        createLocaleReceiver(localeProviderExpose)
+
         expose(localeProviderExpose)
 
         return () => {

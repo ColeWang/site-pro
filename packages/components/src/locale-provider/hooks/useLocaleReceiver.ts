@@ -1,5 +1,6 @@
 import type { ComputedRef, InjectionKey } from 'vue'
-import { computed, inject, unref } from 'vue'
+import { computed, inject, provide, unref } from 'vue'
+import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { NamePath } from '@site-pro/utils'
 import { zhCN } from '@site-pro/locale'
 import { get, has } from 'lodash-es'
@@ -12,7 +13,11 @@ interface UseLocaleReceiverResult {
 
 export const LocaleReceiverKey: InjectionKey<Partial<LocaleProviderExpose>> = Symbol('LocaleReceiver')
 
-function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverResult {
+export function createLocaleReceiver (value: LocaleProviderExpose): void {
+    provide(LocaleReceiverKey, value)
+}
+
+export function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverResult {
     const { locale } = inject(LocaleReceiverKey, {})
 
     const mergeLocale: ComputedRef<LocaleType> = computed(() => {
@@ -28,7 +33,9 @@ function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseL
         return get(unref(mergeLocale), namePath, namePath)
     }
 
+    tryOnScopeDispose(() => {
+        mergeLocale && mergeLocale.effect.stop()
+    })
+
     return { locale: mergeLocale, t: translate }
 }
-
-export default useLocaleReceiver

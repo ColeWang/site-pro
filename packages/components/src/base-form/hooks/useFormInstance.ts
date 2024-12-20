@@ -4,8 +4,8 @@ import type { BaseFormExpose } from '../typings'
 
 export const FormInstanceKey: InjectionKey<Partial<BaseFormExpose>> = Symbol('FormInstance')
 
-export function createFromInstance (instance: BaseFormExpose): void {
-    provide(FormInstanceKey, instance)
+export function createFromInstance (value: BaseFormExpose): void {
+    provide(FormInstanceKey, value)
 }
 
 export function useFormInstance (): Partial<BaseFormExpose> {

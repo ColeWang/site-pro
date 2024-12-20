@@ -62,11 +62,9 @@ function useFetchData (
         fetchData()
     }
 
-    function onStopHandle (): void {
+    tryOnScopeDispose(() => {
         stopWatchDataSource && stopWatchDataSource()
-    }
-
-    tryOnScopeDispose(onStopHandle)
+    })
 
     return { context, onReload }
 }

@@ -87,11 +87,9 @@ function useBreakPoint (
         layout.value = result.layout || 'horizontal'
     })
 
-    function onStopHandle (): void {
+    tryOnScopeDispose(() => {
         stopWatchSize && stopWatchSize()
-    }
-
-    tryOnScopeDispose(onStopHandle)
+    })
 
     return { layout, span }
 }

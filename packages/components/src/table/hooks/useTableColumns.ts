@@ -47,11 +47,9 @@ function useTableColumns (props: TableProps): UseTableColumnsResult {
         columnsMap.value = genColumnsMap(columns)
     }
 
-    function onStopHandle (): void {
+    tryOnScopeDispose(() => {
         stopWatchColumns && stopWatchColumns()
-    }
-
-    tryOnScopeDispose(onStopHandle)
+    })
 
     return { columns, columnsMap, assignColumnsMap, nullifyColumnsMap }
 }

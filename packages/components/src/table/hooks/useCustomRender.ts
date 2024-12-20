@@ -3,6 +3,7 @@ import { computed, h } from 'vue'
 import { TypographyText } from 'ant-design-vue'
 import type { TypographyCopyable } from '@site-pro/utils'
 import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
+import { tryOnScopeDispose } from '@site-pro/hooks'
 import { isArray, isFunction, isObject } from 'lodash-es'
 import { TableColumn, TableProps } from '../typings'
 
@@ -68,6 +69,10 @@ function useCustomRender (props: TableProps): UseCustomRenderResult {
             })
             .filter((column) => !column.hideInTable)
     }
+
+    tryOnScopeDispose(() => {
+        columns && columns.effect.stop()
+    })
 
     return { columns }
 }

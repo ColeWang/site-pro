@@ -23,11 +23,12 @@ function genBaseStyle (token: ProTableToolbarToken): CSSInterpolation {
                 }
             },
             [`${componentCls}-container`]: {
+                position: 'relative',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 paddingBlock: token.sizeMS,
-                overflow: 'hidden',
+                // overflow: 'hidden',
                 [`${componentCls}-header`]: {
                     flex: 'auto',
                     display: 'flex',

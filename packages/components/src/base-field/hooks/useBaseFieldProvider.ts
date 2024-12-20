@@ -1,11 +1,13 @@
 import type { InjectionKey } from 'vue'
-import { inject } from 'vue'
+import { inject, provide } from 'vue'
 import type { BaseFieldProviderExpose } from '../typings'
 
 export const BaseFieldProviderKey: InjectionKey<Partial<BaseFieldProviderExpose>> = Symbol('BaseFieldProvider')
 
-function useBaseFieldProvider (): Partial<BaseFieldProviderExpose> {
-    return inject(BaseFieldProviderKey, {})
+export function createBaseFieldProvider (value: BaseFieldProviderExpose): void {
+    provide(BaseFieldProviderKey, value)
 }
 
-export default useBaseFieldProvider
+export function useBaseFieldProvider (): Partial<BaseFieldProviderExpose> {
+    return inject(BaseFieldProviderKey, {})
+}

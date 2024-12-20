@@ -74,7 +74,7 @@ const Field = defineComponent({
 
             const needWidth: string | undefined = fieldWidth ? toPx(fieldWidth) : grid ? '100%' : undefined
 
-            const needFieldProps: any = {
+            const needFieldProps: any & BaseAttrs = {
                 ...fieldProps,
                 ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!),
                 style: { width: needWidth, ...fieldProps.style }

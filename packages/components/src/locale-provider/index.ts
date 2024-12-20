@@ -7,7 +7,7 @@ import type {
     LocaleType
 } from './typings'
 import { localeProviderProps } from './typings'
-import useLocaleReceiver from './hooks/useLocaleReceiver'
+import { useLocaleReceiver } from './hooks/useLocaleReceiver'
 
 export { LocaleProvider, localeProviderProps }
 export { useLocaleReceiver }

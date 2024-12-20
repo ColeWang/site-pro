@@ -1,6 +1,6 @@
 import type { App, ComputedRef, SlotsType } from 'vue'
-import { computed, defineComponent, provide, unref } from 'vue'
-import useBaseFieldProvider, { BaseFieldProviderKey } from './hooks/useBaseFieldProvider'
+import { computed, defineComponent, unref } from 'vue'
+import { createBaseFieldProvider, useBaseFieldProvider } from './hooks/useBaseFieldProvider'
 import type { BaseFieldProviderExpose, BaseFieldProviderSlots, BaseFieldProviderValueTypeMap } from './typings'
 import { baseFieldProviderProps } from './typings'
 
@@ -20,7 +20,8 @@ const BaseFieldProvider = defineComponent({
             valueTypeMap: valueTypeMap
         }
 
-        provide(BaseFieldProviderKey, baseFieldProviderExpose)
+        createBaseFieldProvider(baseFieldProviderExpose)
+
         expose(baseFieldProviderExpose)
 
         return () => {

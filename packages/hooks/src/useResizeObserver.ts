@@ -5,7 +5,7 @@ import { getElement } from '@site-pro/utils'
 import tryOnScopeDispose from './tryOnScopeDispose'
 
 export interface UseResizeObserverResult {
-    onStop: () => void;
+    stop: () => void;
 }
 
 function useResizeObserver (
@@ -31,13 +31,15 @@ function useResizeObserver (
     }, { immediate: true, flush: 'post', deep: true })
 
     function onStopHandle (): void {
+        elTarget && elTarget.effect.stop()
         stopWatch && stopWatch()
+        // --
         cleanup()
     }
 
     tryOnScopeDispose(onStopHandle)
 
-    return { onStop: onStopHandle }
+    return { stop: onStopHandle }
 }
 
 export default useResizeObserver

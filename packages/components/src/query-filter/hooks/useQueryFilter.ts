@@ -84,11 +84,10 @@ function useQueryFilter (
         return { nodes: map(dealNodes, iteratee), offset, haveRow }
     }
 
-    function onStopHandle (): void {
+    tryOnScopeDispose(() => {
+        showNumber && showNumber.effect.stop()
         stopWatchCollapsed && stopWatchCollapsed()
-    }
-
-    tryOnScopeDispose(onStopHandle)
+    })
 
     return { layout, span, collapsed, setCollapse, genColNodes }
 }

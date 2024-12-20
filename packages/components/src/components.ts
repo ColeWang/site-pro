@@ -1,6 +1,9 @@
 export type { LocaleProviderProps, LocaleProviderInstance } from './locale-provider'
 export { LocaleProvider } from './locale-provider'
 
+export type { ThemeProviderProps, ThemeProviderInstance } from './theme-provider'
+export { ThemeProvider } from './theme-provider'
+
 export type { ResizeObserverProps, ResizeObserverInstance } from './resize-observer'
 export { ResizeObserver } from './resize-observer'
 
@@ -94,4 +97,3 @@ export type { TextareaProps, TextareaInstance } from './form'
 export { Textarea } from './form'
 export type { PasswordProps, PasswordInstance } from './form'
 export { Password } from './form'
-
