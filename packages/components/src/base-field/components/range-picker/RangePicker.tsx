@@ -4,10 +4,10 @@ import { RangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { CustomFormat } from '../../../share-utils'
-import { formatDate } from '../../../share-utils'
 import type { FieldRangePickerFieldProps, FieldRangePickerSlots } from './typings'
 import { fieldRangePickerProps } from './typings'
+import type { Format } from '../share-utils'
+import { formatDate } from '../share-utils'
 
 const FieldRangePicker = defineComponent({
     inheritAttrs: false,
@@ -23,8 +23,8 @@ const FieldRangePicker = defineComponent({
 
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : []
-                const valueStartText: VNodeChild = formatDate(startText, fieldProps.format as CustomFormat)
-                const valueEndText: VNodeChild = formatDate(endText, fieldProps.format as CustomFormat)
+                const valueStartText: VNodeChild = formatDate(startText, fieldProps.format as Format)
+                const valueEndText: VNodeChild = formatDate(endText, fieldProps.format as Format)
                 return (
                     <Fragment>
                         {valueStartText ?? emptyText}

@@ -3,10 +3,10 @@ import { defineComponent } from 'vue'
 import { DatePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { CustomFormat } from '../../../share-utils'
-import { formatDate } from '../../../share-utils'
 import type { FieldDatePickerFieldProps, FieldDatePickerSlots } from './typings'
 import { fieldDatePickerProps } from './typings'
+import type { Format } from '../share-utils'
+import { formatDate } from '../share-utils'
 
 const FieldDatePicker = defineComponent({
     inheritAttrs: false,
@@ -21,7 +21,7 @@ const FieldDatePicker = defineComponent({
             const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
-                const valueText: VNodeChild = formatDate(text, fieldProps.format as CustomFormat)
+                const valueText: VNodeChild = formatDate(text, fieldProps.format as Format)
                 return valueText ?? emptyText
             }
             const needFieldProps: FieldDatePickerFieldProps = {

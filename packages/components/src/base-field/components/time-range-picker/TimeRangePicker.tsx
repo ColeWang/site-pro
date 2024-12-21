@@ -4,10 +4,10 @@ import { TimeRangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
-import type { CustomFormat } from '../../../share-utils'
-import { formatDate } from '../../../share-utils'
 import type { FieldTimeRangePickerFieldProps, FieldTimeRangePickerSlots } from './typings'
 import { fieldTimeRangePickerProps } from './typings'
+import type { Format } from '../share-utils'
+import { formatDate } from '../share-utils'
 
 const FieldTimeRangePicker = defineComponent({
     inheritAttrs: false,
@@ -19,12 +19,12 @@ const FieldTimeRangePicker = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder: [string, string] = fieldProps.placeholder || [t('selectPlaceholder')!, t('selectPlaceholder')!]
+            const placeholder: [string, string] = fieldProps.placeholder|| [t('selectPlaceholder')!, t('selectPlaceholder')!]
 
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : []
-                const valueStartText = formatDate(startText, fieldProps.format as CustomFormat)
-                const valueEndText = formatDate(endText, fieldProps.format as CustomFormat)
+                const valueStartText: VNodeChild = formatDate(startText, fieldProps.format as Format)
+                const valueEndText: VNodeChild = formatDate(endText, fieldProps.format as Format)
                 return (
                     <Fragment>
                         {valueStartText ?? emptyText}
