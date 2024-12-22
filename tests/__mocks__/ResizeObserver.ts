@@ -1,19 +1,44 @@
-class ResizeObserver {
-    constructor (callback) {
-        const entry = {
-            contentRect: { width: 1024, height: 768 }
-        }
-        callback([entry])
+export default class ResizeObserver<T extends Element = Element> {
+    readonly callback: ResizeObserverCallback
+    observations: T[] = []
+
+    constructor (callback: ResizeObserverCallback) {
+        this.callback = callback
     }
 
-    observe () {
+    observe (element: T): void {
+        this.observations.push(element)
     }
 
-    unobserve () {
+    unobserve (element: T): void {
+        this.observations = this.observations.filter((obs) => obs !== element)
     }
 
-    disconnect () {
+    disconnect (): void {
+        this.observations = []
+    }
+
+    notify (entries: ResizeObserverEntry[]): void {
+        this.callback(entries, this)
     }
 }
 
-export default ResizeObserver
+// describe('MyComponent.vue', () => {
+//     it('updates width and height when ResizeObserver notifies', async () => {
+//         const wrapper = mount(MyComponent);
+//         const resizeObserver = global.ResizeObserver.instances[0]; // 获取模拟的 ResizeObserver 实例
+//
+//         // 手动触发 ResizeObserver 的回调
+//         resizeObserver.notify([
+//             {
+//                 contentRect: { width: 200, height: 300 },
+//                 target: wrapper.find('.resize-element').element,
+//             },
+//         ]);
+//
+//         await wrapper.vm.$nextTick(); // 等待 Vue 的 DOM 更新队列清空
+//
+//         expect(wrapper.vm.width).toBe(200);
+//         expect(wrapper.vm.height).toBe(300);
+//     });
+// });

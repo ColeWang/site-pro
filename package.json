@@ -5,6 +5,7 @@
         "clean": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
         "build": "pnpm --filter=./packages/* run build",
         "publish": "pnpm --filter=./packages/* publish --no-git-checks",
+        "test": "vitest --config vitest.config.ts",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     },
     "dependencies": {
