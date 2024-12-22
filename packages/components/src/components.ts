@@ -1,8 +1,8 @@
-export type { LocaleProviderProps, LocaleProviderInstance } from './locale-provider'
-export { LocaleProvider } from './locale-provider'
+export type { LocaleProviderProps, LocaleProviderInstance } from './locale'
+export { LocaleProvider } from './locale'
 
-export type { ThemeProviderProps, ThemeProviderInstance } from './theme-provider'
-export { ThemeProvider } from './theme-provider'
+export type { ThemeProviderProps, ThemeProviderInstance } from './theme'
+export { ThemeProvider } from './theme'
 
 export type { ResizeObserverProps, ResizeObserverInstance } from './resize-observer'
 export { ResizeObserver } from './resize-observer'

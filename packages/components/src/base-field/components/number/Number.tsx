@@ -2,7 +2,7 @@ import type { App, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { InputNumber } from 'ant-design-vue'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../../locale-provider'
+import { useLocaleReceiver } from '../../../locale'
 import type { FieldNumberFieldProps, FieldNumberSlots } from './typings'
 import { fieldNumberProps } from './typings'
 

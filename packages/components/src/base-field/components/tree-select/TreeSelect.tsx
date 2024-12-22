@@ -3,7 +3,7 @@ import { defineComponent } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
 import type { BaseEnumType } from '@site-pro/utils'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../../locale-provider'
+import { useLocaleReceiver } from '../../../locale'
 import type { FieldTreeSelectFieldProps, FieldTreeSelectSlots } from './typings'
 import { fieldTreeSelectProps } from './typings'
 

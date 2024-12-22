@@ -3,7 +3,7 @@ import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
-import { useLocaleReceiver } from '../../../locale-provider'
+import { useLocaleReceiver } from '../../../locale'
 import type { FieldSwitchFieldProps, FieldSwitchSlots } from './typings'
 import { fieldSwitchProps } from './typings'
 

@@ -7,7 +7,7 @@ import {
     VerticalAlignTopOutlined
 } from '@ant-design/icons-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import { useLocaleReceiver } from '../../../../locale-provider'
+import { useLocaleReceiver } from '../../../../locale'
 import type { TooltipProps } from './Tooltip'
 import Tooltip from './Tooltip'
 import useStyle from '../style/node'

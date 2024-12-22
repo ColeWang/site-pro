@@ -3,7 +3,7 @@ import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
 import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { useLocaleReceiver } from '../../../locale-provider'
+import { useLocaleReceiver } from '../../../locale'
 import type { FieldTextareaFieldProps, FieldTextareaSlots } from './typings'
 import { fieldTextareaProps } from './typings'
 

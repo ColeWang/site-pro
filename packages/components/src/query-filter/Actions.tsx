@@ -4,7 +4,7 @@ import { Button, Space, theme } from 'ant-design-vue'
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'
 import { toPx } from '@site-pro/utils'
 import { pick } from 'lodash-es'
-import { useLocaleReceiver } from '../locale-provider'
+import { useLocaleReceiver } from '../locale'
 import type { SubmitterProps } from '../base-form'
 import { Submitter } from '../base-form'
 

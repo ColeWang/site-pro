@@ -23,10 +23,11 @@ export default class ResizeObserver<T extends Element = Element> {
     }
 }
 
-// describe('MyComponent.vue', () => {
+// describe('Component', () => {
 //     it('updates width and height when ResizeObserver notifies', async () => {
-//         const wrapper = mount(MyComponent);
-//         const resizeObserver = global.ResizeObserver.instances[0]; // 获取模拟的 ResizeObserver 实例
+//         const wrapper = mount(Component)
+//         // 获取模拟的 ResizeObserver 实例
+//         const resizeObserver = global.ResizeObserver.instances[0]
 //
 //         // 手动触发 ResizeObserver 的回调
 //         resizeObserver.notify([
@@ -34,11 +35,12 @@ export default class ResizeObserver<T extends Element = Element> {
 //                 contentRect: { width: 200, height: 300 },
 //                 target: wrapper.find('.resize-element').element,
 //             },
-//         ]);
+//         ])
 //
-//         await wrapper.vm.$nextTick(); // 等待 Vue 的 DOM 更新队列清空
+//         // 等待 Vue 的 DOM 更新队列清空
+//         await wrapper.vm.$nextTick()
 //
-//         expect(wrapper.vm.width).toBe(200);
-//         expect(wrapper.vm.height).toBe(300);
-//     });
-// });
+//         expect(wrapper.vm.width).toBe(200)
+//         expect(wrapper.vm.height).toBe(300)
+//     })
+// })

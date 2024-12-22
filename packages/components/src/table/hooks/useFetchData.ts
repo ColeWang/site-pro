@@ -3,7 +3,7 @@ import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { Recordable, TablePagination } from '@site-pro/utils'
 import { isEqual, isFunction, pick } from 'lodash-es'
-import { useLocaleReceiver } from '../../locale-provider'
+import { useLocaleReceiver } from '../../locale'
 import type { TableProps, TableRequest } from '../typings'
 
 export interface UseFetchDataContext {
