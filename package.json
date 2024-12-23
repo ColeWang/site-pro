@@ -9,10 +9,7 @@
         "docs:build": "vitepress build docs",
         "docs:preview": "vitepress preview docs",
         "test": "vitest --config ./vitest.config.ts",
-        "test:coverage": "vitest run --config ./vitest.config.ts --coverage",
-        "version:patch": "pnpm --filter=./packages/* version patch",
-        "version:minor": "pnpm --filter=./packages/* version minor",
-        "version:major": "pnpm --filter=./packages/* version major"
+        "test:coverage": "vitest run --config ./vitest.config.ts --coverage"
     },
     "dependencies": {
         "@ant-design/icons-vue": "^7.0.1",
@@ -64,6 +61,5 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/ColeWang/site-pro"
-    },
-    "version": "0.4.2"
+    }
 }

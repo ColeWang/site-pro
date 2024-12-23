@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/hooks",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "description": "Vue3 Admin Pro Hooks of Vue",
     "scripts": {
         "dev": "vite",
