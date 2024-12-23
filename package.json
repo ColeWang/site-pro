@@ -9,7 +9,10 @@
         "docs:build": "vitepress build docs",
         "docs:preview": "vitepress preview docs",
         "test": "vitest --config ./vitest.config.ts",
-        "test:coverage": "vitest run --config ./vitest.config.ts --coverage"
+        "test:coverage": "vitest run --config ./vitest.config.ts --coverage",
+        "version:patch": "pnpm version patch",
+        "version:minor": "pnpm version minor",
+        "version:major": "pnpm version major"
     },
     "dependencies": {
         "@ant-design/icons-vue": "^7.0.1",
