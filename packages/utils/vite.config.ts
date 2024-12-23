@@ -54,14 +54,14 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@': resolve(__dirname, 'examples'),
-                '@site-pro/utils': resolve(__dirname, 'src')
+                '@': resolve(__dirname, './examples'),
+                '@site-pro/utils': resolve(__dirname, './src')
             }
         },
         build: {
             minify: false,
             lib: {
-                entry: readChunksEntry(globSync('src/**/*.{ts,tsx}', {
+                entry: readChunksEntry(globSync('./src/**/*.{ts,tsx}', {
                     ignore: ['src/**/__tests__/*.{ts,tsx}']
                 }), 'src')
             },

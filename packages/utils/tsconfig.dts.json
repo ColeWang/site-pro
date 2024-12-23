@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
+        "target": "ESNext",
+        "module": "ESNext",
         "moduleResolution": "node",
         "strict": true,
         "jsx": "preserve",
@@ -10,8 +10,8 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "lib": [
-            "esnext",
-            "dom"
+            "ESNext",
+            "DOM"
         ],
         "types": [
             "vite/client",
@@ -24,8 +24,5 @@
         "vite-env.d.ts",
         "src/**/*",
         "src/**/*.vue"
-    ],
-    "exclude": [
-        "src/**/__tests__/*"
     ]
 }

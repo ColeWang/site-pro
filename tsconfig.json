@@ -1,0 +1,64 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "useDefineForClassFields": true,
+        "skipLibCheck": true,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "noEmit": true,
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "types": [
+            "vitest",
+            "node",
+            "jsdom"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@site-pro/components": [
+                "./packages/components/src/index"
+            ],
+            "@site-pro/components/*": [
+                "./packages/components/src/*"
+            ],
+            "@site-pro/hooks": [
+                "./packages/hooks/src/index"
+            ],
+            "@site-pro/hooks/*": [
+                "./packages/hooks/src/*"
+            ],
+            "@site-pro/locale": [
+                "./packages/locale/src/index"
+            ],
+            "@site-pro/locale/*": [
+                "./packages/locale/src/*"
+            ],
+            "@site-pro/plugins": [
+                "./packages/plugins/src/index"
+            ],
+            "@site-pro/plugins/*": [
+                "./packages/plugins/src/*"
+            ],
+            "@site-pro/utils": [
+                "./packages/utils/src/index"
+            ],
+            "@site-pro/utils/*": [
+                "./packages/utils/src/*"
+            ]
+        }
+    },
+    "include": [
+        "vitest.config.ts",
+        "./packages/**/src/**/*",
+        "./tests/**/*",
+        "./docs/**/*"
+    ]
+}
