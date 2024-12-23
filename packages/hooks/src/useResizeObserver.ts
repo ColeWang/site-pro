@@ -31,7 +31,6 @@ function useResizeObserver (
     }, { immediate: true, flush: 'post', deep: true })
 
     function onStopHandle (): void {
-        elTarget && elTarget.effect.stop()
         stopWatch && stopWatch()
         // --
         cleanup()

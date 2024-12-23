@@ -85,7 +85,6 @@ function useQueryFilter (
     }
 
     tryOnScopeDispose(() => {
-        showNumber && showNumber.effect.stop()
         stopWatchCollapsed && stopWatchCollapsed()
     })
 

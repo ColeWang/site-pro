@@ -1,6 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue'
 import { computed, inject, provide, unref } from 'vue'
-import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { NamePath } from '@site-pro/utils'
 import { zhCN } from '@site-pro/locale'
 import { get, has } from 'lodash-es'
@@ -32,10 +31,6 @@ export function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType
     function translate (namePath: NamePath): string | undefined {
         return get(unref(mergeLocale), namePath, namePath)
     }
-
-    tryOnScopeDispose(() => {
-        mergeLocale && mergeLocale.effect.stop()
-    })
 
     return { locale: mergeLocale, t: translate }
 }
