@@ -1,9 +1,9 @@
 import type { ComputedRef } from 'vue'
 import { computed, h } from 'vue'
 import { TypographyText } from 'ant-design-vue'
-import type { TypographyCopyable } from '@site-pro/utils'
 import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject } from 'lodash-es'
+import type { TypographyCopyable } from '../../ant-typings'
 import { TableColumn, TableProps } from '../typings'
 
 interface UseCustomRenderResult {

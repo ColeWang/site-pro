@@ -1,8 +1,8 @@
 import type { App, Ref } from 'vue'
 import { defineComponent, toRef, unref } from 'vue'
 import { ConfigProvider, theme } from 'ant-design-vue'
-import type { ThemeAlgorithm, ThemeConfig } from '@site-pro/utils'
 import { createThemeProvider } from './hooks/useThemeProvider'
+import type { ThemeAlgorithm, ThemeConfig } from '../ant-typings'
 import type { ThemeProviderExpose } from './typings'
 import { themeProviderProps } from './typings'
 

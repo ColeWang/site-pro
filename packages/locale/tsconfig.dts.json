@@ -21,8 +21,8 @@
         "forceConsistentCasingInFileNames": true
     },
     "include": [
-        "vite-env.d.ts",
-        "src/**/*",
-        "src/**/*.vue"
+        "./vite-env.d.ts",
+        "./src/**/*",
+        "./src/**/*.vue"
     ]
 }

@@ -1,6 +1,13 @@
 import type { CSSInterpolation, FullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
+declare module 'ant-design-vue/es/theme/interface' {
+    export interface ComponentTokenMap {
+        ProAction?: {};
+    }
+}
+
+
 interface ProActionToken extends FullToken<'ProAction'> {
     proActionTransition: string;
 }

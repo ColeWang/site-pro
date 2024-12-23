@@ -12,19 +12,14 @@
         "@site-pro/hooks": "workspace:*",
         "@site-pro/utils": "workspace:*"
     },
-    "types": "./types/index.d.ts",
-    "module": "./es/index.js",
     "main": "./lib/index.js",
+    "module": "./es/index.js",
+    "types": "./types/index.d.ts",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts",
+            "require": "./lib/index.js",
             "import": "./es/index.js",
-            "require": "./lib/index.js"
-        },
-        "./*": {
-            "types": "./types/*.d.ts",
-            "import": "./es/*.js",
-            "require": "./lib/*.js"
+            "types": "./types/index.d.ts"
         }
     },
     "files": [

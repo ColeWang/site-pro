@@ -1,17 +1,7 @@
 import type { App, ComputedRef, CSSProperties, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
-import type {
-    BaseSlot,
-    Recordable,
-    TableAction,
-    TableCurrentDataSource,
-    TableFilterValue,
-    TablePagination,
-    TableProps as AntTableProps,
-    TableSorterResult,
-    TableSortOrder,
-} from '@site-pro/utils'
+import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { getElement, getSlot, getSlotVNode, omitNil, safeDestructureObject, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { isArray, isFunction, omit, pick, reduce } from 'lodash-es'
@@ -26,6 +16,15 @@ import useFetchData from './hooks/useFetchData'
 import useTableColumns from './hooks/useTableColumns'
 import useRowSelection from './hooks/useRowSelection'
 import { createSharedContext } from './hooks/useSharedContext'
+import type {
+    TableAction,
+    TableCurrentDataSource,
+    TableFilterValue,
+    TablePagination,
+    TableProps as AntTableProps,
+    TableSorterResult,
+    TableSortOrder
+} from '../ant-typings'
 import type { TableColumn, TableSize, TableSlots } from './typings'
 import { tableProps } from './typings'
 import useStyle from './style'

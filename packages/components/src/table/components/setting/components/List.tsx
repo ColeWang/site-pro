@@ -2,18 +2,17 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { theme, Tree } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
+import type { BaseSlot, Recordable } from '@site-pro/utils'
+import type { NodeProps } from './Node'
+import TreeNode from './Node'
+import DraggableOutlined from '../DraggableOutlined'
 import type {
-    BaseSlot,
-    Recordable,
     TreeCheckInfo,
     TreeDataNode,
     TreeEventDataNode,
     TreeNodeDragEventParams,
     TreeProps
-} from '@site-pro/utils'
-import type { NodeProps } from './Node'
-import TreeNode from './Node'
-import DraggableOutlined from '../DraggableOutlined'
+} from '../../../../ant-typings'
 import type { TableColumn } from '../../../typings'
 import useStyle from '../style/list'
 

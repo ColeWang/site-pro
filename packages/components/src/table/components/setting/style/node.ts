@@ -1,6 +1,12 @@
 import type { CSSInterpolation, FullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
+declare module 'ant-design-vue/es/theme/interface' {
+    export interface ComponentTokenMap {
+        ProTableSettingNode?: {};
+    }
+}
+
 interface ProTableSettingNodeToken extends FullToken<'ProTableSettingNode'> {
     proTableSettingNodeTitleMaxWidth: number;
     proTableSettingNodeOptionWidth: number;

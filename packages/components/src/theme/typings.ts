@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
-import type { ThemeOverrideToken, ThemeToken } from '@site-pro/utils'
+import type { ThemeOverrideToken, ThemeToken } from '../ant-typings'
 
 export const themeProviderProps = () => ({
     dark: {

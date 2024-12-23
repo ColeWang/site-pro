@@ -1,9 +1,12 @@
 import { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
+import type { BaseEnumType, BaseSlot, Recordable } from '@site-pro/utils'
+import type { QueryFilterBreakPoint } from '../query-filter'
+import type { SearchProps } from './components/search'
+import type { ToolbarProps } from './components/toolbar'
+import type { UseFetchDataContext } from './hooks/useFetchData'
+import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
 import type {
-    BaseEnumType,
-    BaseSlot,
-    Recordable,
     TableColumnType as AntTableColumnType,
     TableCurrentDataSource,
     TableFilterValue,
@@ -12,12 +15,7 @@ import type {
     TableSorterResult,
     TableSortOrder,
     TypographyCopyable
-} from '@site-pro/utils'
-import type { QueryFilterBreakPoint } from '../query-filter'
-import type { SearchProps } from './components/search'
-import type { ToolbarProps } from './components/toolbar'
-import type { UseFetchDataContext } from './hooks/useFetchData'
-import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
+} from '../ant-typings'
 
 export interface TableColumn<RecordType = any> extends AntTableColumnType<RecordType> {
     key?: string | number; // 占用

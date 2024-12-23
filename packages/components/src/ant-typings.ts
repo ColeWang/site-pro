@@ -50,40 +50,7 @@ import type { AliasToken as ThemeToken } from 'ant-design-vue/es/theme/interface
 import type { OverrideToken as ThemeOverrideToken } from 'ant-design-vue/es/theme/interface'
 import type { Dayjs } from 'dayjs'
 
-declare module 'vue-types' {
-    // FIX: TS2742 cannot be named without a reference to `xxx`
-}
-
-declare module 'scroll-into-view-if-needed' {
-    // FIX: TS2742 cannot be named without a reference to `xxx`
-}
-
-declare module 'ant-design-vue/es/theme/interface' {
-    interface ComponentTokenMap {
-        // action
-        ProAction?: {};
-        // form
-        ProFieldTextarea?: {};
-        ProBaseForm?: {};
-        ProQueryFilter?: {};
-        ProQueryFilterActions?: {};
-        // table
-        ProTable?: {};
-        ProTableExtra?: {};
-        ProTableToolbar?: {};
-        ProTableAlert?: {};
-        ProTableSetting?: {};
-        ProTableSettingList?: {};
-        ProTableSettingNode?: {};
-        // descriptions
-        ProDescriptions?: {};
-        // plugin
-        ProLoadingPlugin?: {};
-        ProProgressPlugin?: {};
-    }
-}
-
-const passwordProps = {
+const passwordProps = () => ({
     prefixCls: String,
     inputPrefixCls: String,
     action: { type: String, default: 'click' },
@@ -91,9 +58,9 @@ const passwordProps = {
     visible: { type: Boolean, default: undefined },
     'onUpdate:visible': Function as PropType<(visible: boolean) => void>,
     iconRender: Function,
-}
+})
 
-type InputPasswordProps = InputProps & Partial<ExtractPropTypes<typeof passwordProps>>
+type InputPasswordProps = InputProps & Partial<ExtractPropTypes<ReturnType<typeof passwordProps>>>;
 
 type DatePickerProps = CommonProps<Dayjs> & AntDatePickerProps<Dayjs>;
 type RangePickerProps = CommonProps<Dayjs> & AntRangePickerProps<Dayjs>;

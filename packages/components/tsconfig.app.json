@@ -31,17 +31,23 @@
             ],
             "@site-pro/components/*": [
                 "./src/*"
+            ],
+            "vue-types": [
+                "../../node_modules/vue-types"
+            ],
+            "scroll-into-view-if-needed": [
+                "../../node_modules/scroll-into-view-if-needed"
             ]
         }
     },
     "include": [
-        "vite-env.d.ts",
-        "src/**/*",
-        "src/**/*.vue",
-        "examples/**/*",
-        "examples/**/*.vue"
+        "./vite-env.d.ts",
+        "./src/**/*",
+        "./src/**/*.vue",
+        "./examples/**/*",
+        "./examples/**/*.vue"
     ],
     "exclude": [
-        "node_modules"
+        "./node_modules"
     ]
 }

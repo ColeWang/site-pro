@@ -1,9 +1,10 @@
 import type { Ref, WatchStopHandle } from 'vue'
 import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import type { Recordable, TablePagination } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
 import { isEqual, isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale'
+import type { TablePagination } from '../../ant-typings'
 import type { TableProps, TableRequest } from '../typings'
 
 export interface UseFetchDataContext {

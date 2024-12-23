@@ -13,19 +13,74 @@
         "@site-pro/locale": "workspace:*",
         "@site-pro/utils": "workspace:*"
     },
-    "types": "./types/index.d.ts",
-    "module": "./es/index.js",
     "main": "./lib/index.js",
+    "module": "./es/index.js",
+    "types": "./types/index.d.ts",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts",
+            "require": "./lib/index.js",
             "import": "./es/index.js",
-            "require": "./lib/index.js"
+            "types": "./types/index.d.ts"
         },
-        "./*": {
-            "types": "./types/*.d.ts",
-            "import": "./es/*.js",
-            "require": "./lib/*.js"
+        "./action": {
+            "require": "./lib/action/index.js",
+            "import": "./es/action/index.js",
+            "types": "./types/action/index.d.ts"
+        },
+        "./base-field": {
+            "require": "./lib/base-field/index.js",
+            "import": "./es/base-field/index.js",
+            "types": "./types/base-field/index.d.ts"
+        },
+        "./base-form": {
+            "require": "./lib/base-form/index.js",
+            "import": "./es/base-form/index.js",
+            "types": "./types/base-form/index.d.ts"
+        },
+        "./descriptions": {
+            "require": "./lib/descriptions/index.js",
+            "import": "./es/descriptions/index.js",
+            "types": "./types/descriptions/index.d.ts"
+        },
+        "./editable-table": {
+            "require": "./lib/editable-table/index.js",
+            "import": "./es/editable-table/index.js",
+            "types": "./types/editable-table/index.d.ts"
+        },
+        "./float-form": {
+            "require": "./lib/float-form/index.js",
+            "import": "./es/float-form/index.js",
+            "types": "./types/float-form/index.d.ts"
+        },
+        "./form": {
+            "require": "./lib/form/index.js",
+            "import": "./es/form/index.js",
+            "types": "./types/form/index.d.ts"
+        },
+        "./locale": {
+            "require": "./lib/locale/index.js",
+            "import": "./es/locale/index.js",
+            "types": "./types/locale/index.d.ts"
+        },
+        "./query-filter": {
+            "require": "./lib/query-filter/index.js",
+            "import": "./es/query-filter/index.js",
+            "types": "./types/query-filter/index.d.ts"
+        },
+        "./resize-observer": {
+            "require": "./lib/resize-observer/index.js",
+            "import": "./es/resize-observer/index.js",
+            "types": "./types/resize-observer/index.d.ts"
+        },
+        "./table": {
+            "require": "./lib/table/index.js",
+            "import": "./es/table/index.js",
+            "types": "./types/table/index.d.ts"
+        },
+        "./theme": {
+            "require": "./lib/theme/index.js",
+            "import": "./es/theme/index.js",
+            "types": "./types/theme/index.d.ts"
         }
     },
     "files": [

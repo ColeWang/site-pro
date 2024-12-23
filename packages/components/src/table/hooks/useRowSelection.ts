@@ -1,8 +1,8 @@
 import type { Ref, ShallowReactive } from 'vue'
 import { ref, shallowReactive, unref } from 'vue'
-import type { TableRowSelection } from '@site-pro/utils'
 import { safeDestructureObject } from '@site-pro/utils'
 import { isFunction, isObject } from 'lodash-es'
+import type { TableRowSelection } from '../../ant-typings'
 import type { TableProps } from '../typings'
 
 interface UseRowSelectionResult {

@@ -1,7 +1,8 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseSlot, DrawerProps, ModalProps, Recordable } from '@site-pro/utils'
+import type { BaseSlot, Recordable } from '@site-pro/utils'
 import type { BaseFormInstance, BaseFormSlots, SubmitterProps } from '../base-form'
 import { baseFormProps } from '../base-form'
+import type { DrawerProps, ModalProps } from '../ant-typings'
 
 export const floatFormProps = () => ({
     ...baseFormProps(),

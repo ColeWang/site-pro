@@ -18,11 +18,20 @@
             "node"
         ],
         "declaration": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "vue-types": [
+                "../../node_modules/vue-types"
+            ],
+            "scroll-into-view-if-needed": [
+                "../../node_modules/scroll-into-view-if-needed"
+            ]
+        }
     },
     "include": [
-        "vite-env.d.ts",
-        "src/**/*",
-        "src/**/*.vue"
+        "./vite-env.d.ts",
+        "./src/**/*",
+        "./src/**/*.vue"
     ]
 }

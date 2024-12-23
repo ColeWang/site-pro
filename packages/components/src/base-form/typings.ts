@@ -1,6 +1,7 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import { formProps as antFormProps } from 'ant-design-vue/es/form'
-import type { FormInstance, NamePath, Recordable, RowProps, ValidateErrorEntity } from '@site-pro/utils'
+import type { NamePath, Recordable } from '@site-pro/utils'
+import type { FormInstance, RowProps, ValidateErrorEntity } from '../ant-typings'
 
 export interface BaseFormUpdater {
     (value: any): any;

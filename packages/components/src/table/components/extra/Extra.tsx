@@ -4,11 +4,13 @@ import { ConfigProvider } from 'ant-design-vue'
 import { getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import type { ExtraSlots } from './typings'
+import { extraProps } from './typings'
 import useStyle from './style'
 
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableExtra',
+    props: extraProps(),
     slots: Object as SlotsType<ExtraSlots>,
     setup (props, { slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-extra', props)

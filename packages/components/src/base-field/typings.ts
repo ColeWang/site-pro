@@ -1,7 +1,6 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
+import type { BaseEnumType, BaseSlot, Recordable } from '@site-pro/utils'
 import type {
-    BaseEnumType,
-    BaseSlot,
     CascaderProps,
     CheckboxGroupProps,
     DatePickerProps,
@@ -13,14 +12,13 @@ import type {
     InputTextareaProps,
     RadioGroupProps,
     RangePickerProps,
-    Recordable,
     SelectProps,
     SliderProps,
     SwitchProps,
     TimePickerProps,
     TimeRangePickerProps,
     TreeSelectProps
-} from '@site-pro/utils'
+} from '../ant-typings'
 
 export interface BaseFieldValueTypeWithFieldProps {
     date: DatePickerProps;

@@ -2,8 +2,8 @@ import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsTyp
 import { defineComponent } from 'vue'
 import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
-import type { ColProps } from '@site-pro/utils'
 import { pick } from 'lodash-es'
+import type { ColProps } from '../../ant-typings'
 
 export const colWrapperProps = () => ({
     ...antColProps(),

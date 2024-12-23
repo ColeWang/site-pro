@@ -2,8 +2,8 @@ import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsTyp
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
-import type { RowProps } from '@site-pro/utils'
 import { pick } from 'lodash-es'
+import type { RowProps } from '../../ant-typings'
 
 export const rowWrapperProps = () => ({
     ...antRowProps(),

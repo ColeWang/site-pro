@@ -2,10 +2,11 @@ import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes } from 'vue
 import { computed, defineComponent, unref } from 'vue'
 import { Menu, theme } from 'ant-design-vue'
 import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
-import type { BaseAttrs, MenuInfo, MenuProps } from '@site-pro/utils'
+import type { BaseAttrs } from '@site-pro/utils'
 import { toPx } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
 import { useSharedContext } from '../../hooks/useSharedContext'
+import type { MenuInfo, MenuProps } from '../../../ant-typings'
 import type { TableSize } from '../../typings'
 
 export const densityProps = () => ({

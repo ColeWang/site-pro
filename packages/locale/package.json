@@ -8,19 +8,24 @@
         "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
         "lint": "TIMING=1 eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     },
-    "types": "./types/index.d.ts",
-    "module": "./es/index.js",
     "main": "./lib/index.js",
+    "module": "./es/index.js",
+    "types": "./types/index.d.ts",
     "exports": {
         ".": {
-            "types": "./types/index.d.ts",
+            "require": "./lib/index.js",
             "import": "./es/index.js",
-            "require": "./lib/index.js"
+            "types": "./types/index.d.ts"
         },
-        "./*": {
-            "types": "./types/*.d.ts",
-            "import": "./es/*.js",
-            "require": "./lib/*.js"
+        "./en-US": {
+            "require": "./lib/en-US.js",
+            "import": "./es/en-US.js",
+            "types": "./types/en-US.d.ts"
+        },
+        "./zh-CN": {
+            "require": "./lib/zh-CN.js",
+            "import": "./es/zh-CN.js",
+            "types": "./types/zh-CN.d.ts"
         }
     },
     "files": [
