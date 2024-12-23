@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref, SlotsType, VNodeChild } from 'vue'
-import { computed, defineComponent, ref, unref } from 'vue'
+import { computed, defineComponent, onUnmounted, ref, unref } from 'vue'
 import { Button, ConfigProvider, Dropdown, Popover, Space, Tooltip } from 'ant-design-vue'
 import {
     ColumnHeightOutlined,
@@ -10,7 +10,7 @@ import {
 import type { BaseAttrs, Recordable } from '@site-pro/utils'
 import { getElement, getPropsSlotVNode, getSlotVNode, safeDestructureObject } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { pick } from 'lodash-es'
+import { isString, pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import Density from '../density'
@@ -64,9 +64,26 @@ export default defineComponent({
             onExport && onExport()
         }
 
+        // 拦截
+        const originalWarn: any = console.warn
+
+        function onSettingClick () {
+            console.warn = function (message: string, ...params: any[]): void {
+                if (isString(message) && message.includes('"draggable"')) {
+                    return void 0
+                } else {
+                    return originalWarn(message, ...params)
+                }
+            }
+        }
+
         function getPopupContainer (): HTMLElement {
             return getElement(popupContainer) || document.body
         }
+
+        onUnmounted(() => {
+            console.warn = originalWarn
+        })
 
         return () => {
             const { options: propsOptions } = props
@@ -107,7 +124,7 @@ export default defineComponent({
                             <Popover trigger={'click'} placement={'bottomRight'} v-slots={{
                                 content: () => <Setting/>
                             }}>
-                                <Button>
+                                <Button onClick={onSettingClick}>
                                     <SettingOutlined/>
                                 </Button>
                             </Popover>
