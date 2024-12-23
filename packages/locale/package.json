@@ -4,7 +4,8 @@
     "description": "Vue3 Admin Pro Locale of Vue",
     "scripts": {
         "dev": "vite",
-        "build": "vue-tsc --noEmit && vite build"
+        "build": "vue-tsc --noEmit && vite build",
+        "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
     },
     "types": "./types/index.d.ts",
     "module": "./es/index.js",

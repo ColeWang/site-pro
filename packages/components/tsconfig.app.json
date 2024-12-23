@@ -27,6 +27,12 @@
         "paths": {
             "@/*": [
                 "./examples/*"
+            ],
+            "@site-pro/components": [
+                "./src/index"
+            ],
+            "@site-pro/components/*": [
+                "./src/*"
             ]
         }
     },

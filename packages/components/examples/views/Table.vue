@@ -7,8 +7,8 @@
 <script setup lang="ts">
     import type { Ref } from 'vue'
     import { ref } from 'vue'
-    import type { TableColumn } from '../../src'
-    import { Table } from '../../src'
+    import type { TableColumn } from '@site-pro/components/table'
+    import { Table } from '@site-pro/components'
     
     const columns: Ref<TableColumn[]> = ref([
         {

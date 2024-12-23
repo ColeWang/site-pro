@@ -1,9 +1,9 @@
 <template>
-  <div>
-      <ConfigProvider>
-          <Table></Table>
-      </ConfigProvider>
-  </div>
+    <div>
+        <ConfigProvider>
+            <Table></Table>
+        </ConfigProvider>
+    </div>
 </template>
 
 <script setup lang="ts">

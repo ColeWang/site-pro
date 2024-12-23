@@ -54,7 +54,8 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@': resolve(__dirname, 'examples')
+                '@': resolve(__dirname, 'examples'),
+                '@site-pro/components': resolve(__dirname, 'src')
             }
         },
         build: {

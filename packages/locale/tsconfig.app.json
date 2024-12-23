@@ -27,6 +27,12 @@
         "paths": {
             "@/*": [
                 "./examples/*"
+            ],
+            "@site-pro/locale": [
+                "./src/index"
+            ],
+            "@site-pro/locale/*": [
+                "./src/*"
             ]
         }
     },
