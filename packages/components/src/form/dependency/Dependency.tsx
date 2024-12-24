@@ -1,28 +1,12 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
+import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import type { NamePath, Recordable } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
-import type { ColWrapperProps } from '../base-form'
-import { ColWrapper, useFormInstance } from '../base-form'
-
-export const formDependencyProps = () => ({
-    name: {
-        type: Array as PropType<NamePath[]>,
-        default: () => ([])
-    },
-    colProps: {
-        type: Object as PropType<ColWrapperProps>,
-        default: () => ({})
-    }
-})
-
-export interface FormDependencySlots {
-    default?: any;
-}
-
-export type FormDependencyProps = Partial<ExtractPropTypes<ReturnType<typeof formDependencyProps>>>;
-export type FormDependencyInstance = ComponentPublicInstance<FormDependencyProps>;
+import type { ColWrapperProps } from '../../base-form'
+import { ColWrapper, useFormInstance } from '../../base-form'
+import type { FormDependencySlots } from './typings'
+import { formDependencyProps } from './typings'
 
 const FormDependency = defineComponent({
     inheritAttrs: false,

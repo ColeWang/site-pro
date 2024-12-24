@@ -1,23 +1,13 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
+import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form as AForm } from 'ant-design-vue'
-import FormItem from './Item'
-import FormGroup from './Group'
-import FormDependency from './Dependency'
-import type { BaseFormInstance, BaseFormProps, BaseFormSlots } from '../base-form'
-import { BaseForm, baseFormProps } from '../base-form'
-
-export const formProps = () => ({
-    ...baseFormProps(),
-    onFormRef: {
-        type: Function as PropType<(el: BaseFormInstance | null) => void>,
-        default: undefined
-    }
-})
-
-export type FormSlots = BaseFormSlots;
-export type FormProps = Partial<ExtractPropTypes<ReturnType<typeof formProps>>>;
-export type FormInstance = ComponentPublicInstance<FormProps>;
+import { FormItem } from '../item'
+import { FormGroup } from '../group'
+import { FormDependency } from '../dependency'
+import type { BaseFormProps } from '../../base-form'
+import { BaseForm } from '../../base-form'
+import type { FormSlots } from './typings'
+import { formProps } from './typings'
 
 const Form = defineComponent({
     inheritAttrs: false,

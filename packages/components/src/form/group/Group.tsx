@@ -1,20 +1,12 @@
-import type {
-    App,
-    ComponentPublicInstance,
-    CSSProperties,
-    ExtractPropTypes,
-    Plugin,
-    PropType,
-    SlotsType,
-    VNodeChild
-} from 'vue'
+import type { App, CSSProperties, Plugin, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Col, theme } from 'ant-design-vue'
-import type { BaseSlot } from '@site-pro/utils'
 import { getPropsSlotVNode, toPx } from '@site-pro/utils'
-import type { BaseFormLayout, RowWrapperProps } from '../base-form'
-import { ColWrapper, RowWrapper, useFormInstance } from '../base-form'
-import type { GlobalToken } from '../theme'
+import type { GlobalToken } from '../../theme'
+import type { BaseFormLayout, RowWrapperProps } from '../../base-form'
+import { ColWrapper, RowWrapper, useFormInstance } from '../../base-form'
+import type { FormGroupSlots } from './typings'
+import { formGroupProps } from './typings'
 
 function genTitleStyle (layout: BaseFormLayout, token: GlobalToken): CSSProperties {
     const baseStyle: CSSProperties = {
@@ -29,25 +21,6 @@ function genTitleStyle (layout: BaseFormLayout, token: GlobalToken): CSSProperti
     }
     return { ...baseStyle, paddingBlockEnd: toPx(token.size) }
 }
-
-export const formGroupProps = () => ({
-    title: {
-        type: [String, Function] as PropType<string | BaseSlot>,
-        default: undefined
-    },
-    noStyle: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    }
-})
-
-export interface FormGroupSlots {
-    default?: any;
-    title?: any;
-}
-
-export type FormGroupProps = Partial<ExtractPropTypes<ReturnType<typeof formGroupProps>>>;
-export type FormGroupInstance = ComponentPublicInstance<FormGroupProps>;
 
 const FormGroup = defineComponent({
     inheritAttrs: false,

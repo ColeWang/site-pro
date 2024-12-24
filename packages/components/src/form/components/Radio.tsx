@@ -34,15 +34,14 @@ const Radio = defineComponent({
     slots: Object as SlotsType<RadioSlots>,
     setup (props, { slots }) {
         return () => {
-            const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
+            const { formItemProps } = props
             const needFormItemProps: BaseFieldFormItemProps = {
                 ...pick(props, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
-                ...propsFormItemProps,
+                ...formItemProps,
             }
             const needFieldProps: FieldProps = {
                 ...props,
                 valueType: RADIO_VALUE_TYPE,
-                fieldProps: propsFieldProps,
                 formItemProps: needFormItemProps
             }
             return <Field {...needFieldProps} v-slots={slots}/>

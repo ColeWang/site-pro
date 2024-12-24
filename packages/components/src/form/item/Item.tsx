@@ -1,30 +1,12 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
+import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
-import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import type { BaseAttrs } from '@site-pro/utils'
 import { pick } from 'lodash-es'
-import type { ColWrapperProps } from '../base-form'
-import { ColWrapper, useFormInstance } from '../base-form'
-
-export const formItemProps = () => ({
-    ...antFormItemProps(),
-    colProps: {
-        type: Object as PropType<ColWrapperProps>,
-        default: () => ({})
-    }
-})
-
-export interface FormItemSlots {
-    default?: any;
-    extra?: any;
-    help?: any;
-    label?: any;
-    tooltip?: any;
-}
-
-export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
-export type FormItemInstance = ComponentPublicInstance<FormItemProps>;
+import type { ColWrapperProps } from '../../base-form'
+import { ColWrapper, useFormInstance } from '../../base-form'
+import type { FormItemProps, FormItemSlots } from './typings'
+import { formItemProps } from './typings'
 
 const FormItem = defineComponent({
     inheritAttrs: false,

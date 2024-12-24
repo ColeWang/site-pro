@@ -34,15 +34,14 @@ const DateRange = defineComponent({
     slots: Object as SlotsType<DateRangeSlots>,
     setup (props, { slots }) {
         return () => {
-            const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
+            const { formItemProps } = props
             const needFormItemProps: BaseFieldFormItemProps = {
                 ...pick(props, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
-                ...propsFormItemProps,
+                ...formItemProps,
             }
             const needFieldProps: FieldProps = {
                 ...props,
                 valueType: DATE_RANGE_VALUE_TYPE,
-                fieldProps: propsFieldProps,
                 formItemProps: needFormItemProps
             }
             return <Field {...needFieldProps} v-slots={slots}/>

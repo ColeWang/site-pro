@@ -3,8 +3,8 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './Field'
-import Field, { fieldProps } from './Field'
+import type { FieldProps, FieldSlots } from './field'
+import { Field, fieldProps } from './field'
 import type { BaseFieldFormItemProps } from '../base-field'
 
 export const userFieldProps = () => ({
@@ -23,14 +23,13 @@ const UserField = defineComponent({
     slots: Object as SlotsType<UserFieldSlots>,
     setup (props, { slots }) {
         return () => {
-            const { fieldProps: propsFieldProps, formItemProps: propsFormItemProps } = props
+            const { formItemProps } = props
             const needFormItemProps: BaseFieldFormItemProps = {
                 ...pick(props, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
-                ...propsFormItemProps,
+                ...formItemProps,
             }
             const needFieldProps: FieldProps = {
                 ...props,
-                fieldProps: propsFieldProps,
                 formItemProps: needFormItemProps
             }
             return <Field {...needFieldProps} v-slots={slots}/>
