@@ -20,7 +20,7 @@ export const themeProviderProps = () => ({
     },
     hashed: {
         type: Boolean as PropType<boolean>,
-        default: undefined
+        default: true
     },
     inherit: {
         type: Boolean as PropType<boolean>,
