@@ -8,10 +8,10 @@ export function safeDestructureObject<T = any> (value: T, defaultValue?: Recorda
 }
 
 export function cloneProxyToRaw<T extends Recordable> (object?: T): T {
-    return cloneWith(object || {} as T, (value) => {
+    const needObject: Recordable = safeDestructureObject(object)
+    return cloneWith({ ...needObject } as T, (value) => {
         if (isProxy(value)) {
-            const nextValue = toRaw(value)
-            return cloneDeep(nextValue)
+            return cloneDeep(toRaw(value))
         } else {
             return value
         }

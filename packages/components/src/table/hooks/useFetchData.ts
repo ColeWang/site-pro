@@ -2,7 +2,7 @@ import type { Ref, WatchStopHandle } from 'vue'
 import { shallowReactive, shallowRef, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
-import { isEqual, isFunction, pick } from 'lodash-es'
+import { isFunction, pick } from 'lodash-es'
 import { useLocaleReceiver } from '../../locale'
 import type { TablePagination } from '../../ant-typings'
 import type { TableProps, TableRequest } from '../typings'
@@ -82,11 +82,13 @@ function useFetchData (
         }
     })
 
-    const stopWatchParams: WatchStopHandle = watch([() => props.params, sParams], (current, previous) => {
-        if (!isEqual(current, previous)) {
-            setPaginate({ current: 1 })
-            fetchData()
-        }
+    const stopWatchParams: WatchStopHandle = watch([() => props.params, sParams], () => {
+        // if (!isEqual(current, previous)) {
+        //     setPaginate({ current: 1 })
+        //     fetchData()
+        // }
+        setPaginate({ current: 1 })
+        fetchData()
     })
 
     async function fetchData (): Promise<void> {

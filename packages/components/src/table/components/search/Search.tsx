@@ -2,7 +2,7 @@ import type { ComputedRef, SlotsType } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import type { BaseAttrs, NamePath, Recordable } from '@site-pro/utils'
 import { isEmpty, namePathToString } from '@site-pro/utils'
-import { isObject, pick, reduce, set } from 'lodash-es'
+import { pick, reduce, set } from 'lodash-es'
 import BaseSearch from './BaseSearch'
 import type { BaseFieldFormItemProps } from '../../../base-field'
 import type { FieldProps } from '../../../form'
@@ -52,9 +52,6 @@ export default defineComponent({
                         const { fieldProps, formItemProps } = column
 
                         const namePath: NamePath = column.dataIndex || column.key as string
-                        const transform: ((value: any) => any) | undefined = isObject(column.search)
-                            ? column.search.transform
-                            : undefined
 
                         const needFormItemProps: BaseFieldFormItemProps = {
                             ...formItemProps,
@@ -64,7 +61,6 @@ export default defineComponent({
                         const needFieldProps: FieldProps = {
                             ...pick(column, Object.keys(Field.props)) as FieldProps,
                             hidden: !!column.hideInSearch,
-                            transform: transform,
                             fieldProps: { ...fieldProps, style: { width: '100%' } },
                             formItemProps: needFormItemProps
                         }

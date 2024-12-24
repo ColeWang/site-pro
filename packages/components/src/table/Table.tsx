@@ -1,10 +1,10 @@
 import type { App, ComputedRef, CSSProperties, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
-import type { BaseSlot, Recordable } from '@site-pro/utils'
+import type { BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { getElement, getSlot, getSlotVNode, omitNil, safeDestructureObject, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { isArray, isFunction, omit, pick, reduce } from 'lodash-es'
+import { isArray, isFunction, isObject, omit, pick, reduce, update } from 'lodash-es'
 import type { SearchProps } from './components/search'
 import { Search } from './components/search'
 import { Extra } from './components/extra'
@@ -114,8 +114,20 @@ const Table = defineComponent({
             finalAction[extra.action] && finalAction[extra.action]()
         }
 
+        function transformValues (values: any, columns: TableColumn[]): any {
+            const nextValues = reduce(columns, (result, column) => {
+                const namePath: NamePath = column.dataIndex || column.key as string
+                const transform: ((value: any) => any) | undefined = isObject(column.search)
+                    ? column.search.transform
+                    : undefined
+
+                return transform ? update(result, namePath, transform) : result
+            }, values)
+            return omitNil(nextValues)
+        }
+
         function onFinish (values: Recordable): void {
-            const nextValues: Recordable = omitNil(values)
+            const nextValues: Recordable = transformValues(values, props.columns)
             if (isFunction(props.beforeSearchSubmit)) {
                 const result: Recordable = props.beforeSearchSubmit(nextValues)
                 setParams(result || {})
