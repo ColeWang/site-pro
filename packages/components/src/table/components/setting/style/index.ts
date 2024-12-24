@@ -35,7 +35,7 @@ function genBaseStyle (token: ProTableSettingToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProTableSetting'>): CSSInterpolation {
-    const proTableSettingListMinWidth: number = token.sizeMS
+    const proTableSettingListMinWidth: number = token.controlHeightSM * 8
     const proTableSettingToken: ProTableSettingToken = mergeToken<ProTableSettingToken>(token, {
         proTableSettingListMinWidth
     })
