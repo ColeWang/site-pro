@@ -1,6 +1,7 @@
 import type { App, Plugin, Ref } from 'vue'
 import { defineComponent, toRef, unref } from 'vue'
 import { ConfigProvider, theme } from 'ant-design-vue'
+import { omit } from 'lodash'
 import { createThemeProvider } from './hooks/useThemeProvider'
 import type { ThemeAlgorithm, ThemeConfig } from '../ant-typings'
 import type { ThemeProviderExpose } from './typings'
@@ -23,17 +24,12 @@ const ThemeProvider = defineComponent({
         expose(themeProviderExpose)
 
         return () => {
-            const { token, components, hashed, inherit } = props
-
             const darkAlgorithm: ThemeAlgorithm[] = unref(dark) ? [theme.darkAlgorithm] : []
             const compactAlgorithm: ThemeAlgorithm[] = unref(compact) ? [theme.compactAlgorithm] : []
 
             const themeConfig: ThemeConfig = {
-                algorithm: [...darkAlgorithm, ...compactAlgorithm],
-                components: components,
-                token: token,
-                hashed: hashed,
-                inherit: inherit
+                ...omit(props, ['dark', 'compact']) as ThemeConfig,
+                algorithm: [...darkAlgorithm, ...compactAlgorithm]
             }
 
             return (

@@ -24,7 +24,7 @@ export const themeProviderProps = () => ({
     },
     inherit: {
         type: Boolean as PropType<boolean>,
-        default: true
+        default: undefined
     }
 })
 
