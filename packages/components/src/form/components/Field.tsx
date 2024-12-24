@@ -4,10 +4,10 @@ import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isString, omit, pick } from 'lodash-es'
-import type { ColWrapperProps } from '../base-form'
-import { ColWrapper, useFormInstance } from '../base-form'
-import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../base-field'
-import { BaseField, baseFieldProps } from '../base-field'
+import type { ColWrapperProps } from '../../base-form'
+import { ColWrapper, useFormInstance } from '../../base-form'
+import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../../base-field'
+import { BaseField, baseFieldProps } from '../../base-field'
 
 export const fieldProps = () => ({
     ...baseFieldProps(),

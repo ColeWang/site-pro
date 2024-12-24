@@ -1,3 +1,8 @@
+import type { FieldInstance, FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type { UserFieldInstance, UserFieldProps, UserFieldSlots } from './UserField'
+import UserField, { userFieldProps } from './UserField'
+// --
 import type { DateInstance, DateProps, DateSlots } from './Date'
 import Date, { dateProps } from './Date'
 import type { DateRangeInstance, DateRangeProps, DateRangeSlots } from './DateRange'
@@ -49,6 +54,9 @@ import Textarea, { textareaProps } from './Textarea'
 import type { PasswordInstance, PasswordProps, PasswordSlots } from './Password'
 import Password, { passwordProps } from './Password'
 
+export { Field, fieldProps }
+export { UserField, userFieldProps }
+// --
 export { Date, dateProps }
 export { DateRange, dateRangeProps }
 export { DateWeek, dateWeekProps }
@@ -75,6 +83,9 @@ export { Number, numberProps }
 export { Textarea, textareaProps }
 export { Password, passwordProps }
 
+export type { FieldSlots, FieldProps, FieldInstance }
+export type { UserFieldSlots, UserFieldProps, UserFieldInstance }
+// --
 export type { DateSlots, DateProps, DateInstance }
 export type { DateRangeSlots, DateRangeProps, DateRangeInstance }
 export type { DateWeekSlots, DateWeekProps, DateWeekInstance }

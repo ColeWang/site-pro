@@ -3,9 +3,9 @@ import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
-import type { FieldProps, FieldSlots } from './field'
-import { Field, fieldProps } from './field'
-import type { BaseFieldFormItemProps } from '../base-field'
+import type { FieldProps, FieldSlots } from './Field'
+import Field, { fieldProps } from './Field'
+import type { BaseFieldFormItemProps } from '../../base-field'
 
 export const userFieldProps = () => ({
     ...fieldProps(),
