@@ -8,4 +8,6 @@ import type {
 import { resizeObserverProps } from './typings'
 
 export { ResizeObserver, resizeObserverProps }
-export type { ResizeObserverRectSize, ResizeObserverSlots, ResizeObserverProps, ResizeObserverInstance }
+
+export type { ResizeObserverRectSize }
+export type { ResizeObserverSlots, ResizeObserverProps, ResizeObserverInstance }

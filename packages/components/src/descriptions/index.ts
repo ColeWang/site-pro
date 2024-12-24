@@ -10,10 +10,12 @@ import type {
     DescriptionsProps,
     DescriptionsSlots
 } from './typings'
-import { descriptionsItemProps, descriptionsProps } from './typings'
+import { createDescriptionsColumn, descriptionsItemProps, descriptionsProps } from './typings'
 
+export { createDescriptionsColumn }
 export { Descriptions, descriptionsProps }
 export { DescriptionsItem, descriptionsItemProps }
 
-export type { DescriptionsColumn, DescriptionsSlots, DescriptionsProps, DescriptionsExpose, DescriptionsInstance }
+export type { DescriptionsColumn }
+export type { DescriptionsSlots, DescriptionsProps, DescriptionsExpose, DescriptionsInstance }
 export type { DescriptionsItemSlots, DescriptionsItemProps, DescriptionsItemInstance }

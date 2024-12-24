@@ -10,4 +10,5 @@ import { queryFilterProps } from './typings'
 
 export { QueryFilter, queryFilterProps }
 
-export type { QueryFilterLayout, QueryFilterBreakPoint, QueryFilterSlots, QueryFilterProps, QueryFilterInstance }
+export type { QueryFilterLayout, QueryFilterBreakPoint }
+export type { QueryFilterSlots, QueryFilterProps, QueryFilterInstance }

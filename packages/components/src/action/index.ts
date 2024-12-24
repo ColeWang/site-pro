@@ -6,12 +6,14 @@ import type {
     ActionGroupSlots,
     ActionInstance,
     ActionProps,
-    ActionSlots
+    ActionSlots,
+    ActionType
 } from './typings'
 import { actionGroupProps, actionProps } from './typings'
 
 export { Action, actionProps }
 export { ActionGroup, actionGroupProps }
 
+export type { ActionType }
 export type { ActionSlots, ActionProps, ActionInstance }
 export type { ActionGroupSlots, ActionGroupProps, ActionGroupInstance }

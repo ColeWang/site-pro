@@ -6,6 +6,7 @@ import { createFromInstance, useFormInstance } from './hooks/useFormInstance'
 export { BaseForm, baseFormProps }
 export { useFormInstance, createFromInstance }
 
-export type { BaseFormLayout, BaseFormSlots, BaseFormProps, BaseFormExpose, BaseFormInstance }
+export type { BaseFormLayout }
+export type { BaseFormSlots, BaseFormProps, BaseFormExpose, BaseFormInstance }
 
 export * from './helpers'

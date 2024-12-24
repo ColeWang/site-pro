@@ -12,4 +12,5 @@ import { useLocaleReceiver } from './hooks/useLocaleReceiver'
 export { LocaleProvider, localeProviderProps }
 export { useLocaleReceiver }
 
-export type { LocaleType, LocaleProviderSlots, LocaleProviderProps, LocaleProviderExpose, LocaleProviderInstance }
+export type { LocaleType }
+export type { LocaleProviderSlots, LocaleProviderProps, LocaleProviderExpose, LocaleProviderInstance }

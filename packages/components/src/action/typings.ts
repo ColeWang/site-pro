@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 
-type ActionType = 'default' | 'primary' | 'warning' | 'error';
+export type ActionType = 'default' | 'primary' | 'warning' | 'error';
 
 export const actionProps = () => ({
     type: {

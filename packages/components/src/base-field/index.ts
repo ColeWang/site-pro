@@ -18,21 +18,10 @@ import { baseFieldProps, baseFieldProviderProps } from './typings'
 export { BaseField, baseFieldProps }
 export { BaseFieldProvider, baseFieldProviderProps }
 
-export type {
-    BaseFieldValueType,
-    BaseFieldFieldProps,
-    BaseFieldFormItemProps,
-    BaseFieldSlots,
-    BaseFieldProps,
-    BaseFieldInstance
-}
+export type { BaseFieldValueType, BaseFieldFieldProps, BaseFieldFormItemProps }
+export type { BaseFieldSlots, BaseFieldProps, BaseFieldInstance }
 
-export type {
-    BaseFieldProviderValueTypeMap,
-    BaseFieldProviderSlots,
-    BaseFieldProviderProps,
-    BaseFieldProviderExpose,
-    BaseFieldProviderInstance
-}
+export type { BaseFieldProviderValueTypeMap }
+export type { BaseFieldProviderSlots, BaseFieldProviderProps, BaseFieldProviderExpose, BaseFieldProviderInstance }
 
 export * from './components'

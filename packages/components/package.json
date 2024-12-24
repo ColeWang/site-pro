@@ -85,7 +85,7 @@
         "./ant-typings": {
             "require": "./lib/ant-typings.js",
             "import": "./es/ant-typings.js",
-            "types": "./ant-typings.d.ts"
+            "types": "./types/ant-typings.d.ts"
         }
     },
     "files": [
