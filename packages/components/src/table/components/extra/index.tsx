@@ -1,5 +1,7 @@
 import Extra from './Extra'
-import type { ExtraSlots } from './typings'
+import type { ExtraInstance, ExtraProps, ExtraSlots } from './typings'
+import { extraProps } from './typings'
 
-export { Extra }
-export type { ExtraSlots }
+export { Extra, extraProps }
+
+export type { ExtraSlots, ExtraProps, ExtraInstance }

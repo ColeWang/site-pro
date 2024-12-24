@@ -1,4 +1,3 @@
-import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button, Checkbox, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
@@ -7,24 +6,11 @@ import { toPx } from '@site-pro/utils'
 import { reduce, set } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale'
 import { useSharedContext } from '../../hooks/useSharedContext'
-import type { ListProps } from './components/List'
-import TreeList from './components/List'
+import type { ListProps } from './list'
+import { List as TreeList } from './list'
 import type { TableColumn } from '../../typings'
+import { settingProps } from './typings'
 import useStyle from './style'
-
-export const settingProps = () => ({
-    checkable: {
-        type: Boolean,
-        default: true
-    },
-    draggable: {
-        type: Boolean,
-        default: true
-    }
-})
-
-export type SettingProps = Partial<ExtractPropTypes<ReturnType<typeof settingProps>>>;
-export type SettingInstance = ComponentPublicInstance<SettingProps>;
 
 export default defineComponent({
     inheritAttrs: false,

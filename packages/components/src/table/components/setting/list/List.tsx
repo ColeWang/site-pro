@@ -1,69 +1,15 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { theme, Tree } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
-import type { NodeProps } from './Node'
-import TreeNode from './Node'
-import DraggableOutlined from '../DraggableOutlined'
-import type {
-    TreeCheckInfo,
-    TreeDataNode,
-    TreeEventDataNode,
-    TreeNodeDragEventParams,
-    TreeProps
-} from '../../../../ant-typings'
+import type { NodeProps } from '../node'
+import { Node as TreeNode } from '../node'
+import DraggableOutlined from './DraggableOutlined'
+import type { TreeCheckInfo, TreeDataNode, TreeProps } from '../../../../ant-typings'
 import type { TableColumn } from '../../../typings'
-import useStyle from '../style/list'
-
-interface TreeNodeDropInfo extends TreeNodeDragEventParams {
-    dragNode: TreeEventDataNode;
-    dragNodesKeys: (string | number)[];
-    dropPosition: number;
-    dropToGap: boolean;
-}
-
-export const listProps = () => ({
-    showTitle: {
-        type: Boolean as PropType<boolean>,
-        default: true
-    },
-    title: {
-        type: String as PropType<string>,
-        default: undefined
-    },
-    fixed: {
-        type: String as PropType<string>,
-        default: undefined
-    },
-    columns: {
-        type: Array as PropType<TableColumn[]>,
-        default: () => ([])
-    },
-    checkable: {
-        type: Boolean as PropType<boolean>,
-        default: true
-    },
-    draggable: {
-        type: Boolean as PropType<boolean>,
-        default: true
-    },
-    onCheckChange: {
-        type: Function as PropType<(key: string, column: TableColumn) => void>,
-        default: undefined
-    },
-    onDropChange: {
-        type: Function as PropType<(dragKey: string, dropKey: string, trueDropPosition: number, dropPosition: number) => void>,
-        default: undefined
-    },
-    onFixedChange: {
-        type: Function as PropType<(key: string, column: TableColumn) => void>,
-        default: undefined
-    }
-})
-
-export type ListProps = Partial<ExtractPropTypes<ReturnType<typeof listProps>>>;
-export type ListInstance = ComponentPublicInstance<ListProps>;
+import type { TreeNodeDropInfo } from './typings'
+import { listProps } from './typings'
+import useStyle from './style'
 
 export default defineComponent({
     inheritAttrs: false,
