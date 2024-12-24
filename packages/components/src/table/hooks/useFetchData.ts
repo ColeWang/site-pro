@@ -137,13 +137,11 @@ function useFetchData (
         fetchData()
     }
 
-    function onStopHandle (): void {
+    tryOnScopeDispose(() => {
         stopWatchDataSource && stopWatchDataSource()
         stopWatchPagination && stopWatchPagination()
         stopWatchParams && stopWatchParams()
-    }
-
-    tryOnScopeDispose(onStopHandle)
+    })
 
     return { context, onReload, setPaginate, setParams, getParams }
 }
