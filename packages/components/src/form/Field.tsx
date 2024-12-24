@@ -3,7 +3,7 @@ import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { has, isArray, isString, omit, pick } from 'lodash-es'
+import { has, isArray, isFunction, isString, omit, pick } from 'lodash-es'
 import type { ColWrapperProps } from '../base-form'
 import { ColWrapper, useFormInstance } from '../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../base-field'
@@ -27,6 +27,10 @@ export const fieldProps = () => ({
     colProps: {
         type: Object as PropType<ColWrapperProps>,
         default: () => ({})
+    },
+    transform: {
+        type: Function as PropType<(value: any) => any>,
+        default: undefined
     }
 })
 
@@ -61,8 +65,14 @@ const Field = defineComponent({
         }
 
         function onUpdateValue (namePath: NamePath, value: any): void {
+            const { transform } = props
+
             if (isString(namePath) || isArray(namePath)) {
-                setModelValue && setModelValue(namePath, value)
+                const nextValue: any = isFunction(transform)
+                    ? transform(value)
+                    : value
+
+                setModelValue && setModelValue(namePath, nextValue)
             }
         }
 

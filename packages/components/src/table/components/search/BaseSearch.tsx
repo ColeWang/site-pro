@@ -42,15 +42,15 @@ export default defineComponent({
             return (
                 <Card style={{ marginBlockEnd: toPx(sizeMS) }} {...attrs}>
                     <QueryFilter {...queryFilterProps} onFormRef={onBaseFormRef}>
-                        {children.map((vNode) => {
-                            if (!isValidElement(vNode)) return vNode
-                            const { fieldProps } = vNode.props as any
+                        {children.map((child) => {
+                            if (!isValidElement(child)) return child
+                            const { fieldProps } = child.props as any || {}
                             const extraProps: Partial<BaseFieldProps> = {
                                 fieldProps: merge({
                                     style: { width: '100%' }
-                                }, fieldProps)
+                                }, fieldProps || {})
                             }
-                            return cloneVNode(vNode, extraProps)
+                            return cloneVNode(child, extraProps)
                         })}
                     </QueryFilter>
                 </Card>
