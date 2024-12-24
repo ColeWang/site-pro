@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
@@ -7,7 +7,7 @@ import { useLocaleReceiver } from '../../../locale'
 import type { FieldSwitchFieldProps, FieldSwitchSlots } from './typings'
 import { fieldSwitchProps } from './typings'
 
-const FieldSwitch = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSwitch',
     props: fieldSwitchProps(),
@@ -49,10 +49,3 @@ const FieldSwitch = defineComponent({
         }
     }
 })
-
-FieldSwitch.install = function (app: App): App {
-    app.component(FieldSwitch.name as string, FieldSwitch)
-    return app
-}
-
-export default FieldSwitch

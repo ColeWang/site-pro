@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button, Space, theme } from 'ant-design-vue'
 import { preventDefault } from '@site-pro/utils'
@@ -43,7 +43,7 @@ export const submitterProps = () => ({
 export type SubmitterProps = Partial<ExtractPropTypes<ReturnType<typeof submitterProps>>>;
 export type SubmitterInstance = ComponentPublicInstance<SubmitterProps>;
 
-const Submitter = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProSubmitter',
     props: submitterProps(),
@@ -91,10 +91,3 @@ const Submitter = defineComponent({
         }
     }
 })
-
-Submitter.install = function (app: App): App {
-    app.component(Submitter.name as string, Submitter)
-    return app
-}
-
-export default Submitter

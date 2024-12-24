@@ -3,6 +3,7 @@ import type {
     ComponentPublicInstance,
     CSSProperties,
     ExtractPropTypes,
+    Plugin,
     PropType,
     SlotsType,
     VNodeChild
@@ -91,4 +92,4 @@ FormGroup.install = function (app: App): App {
     return app
 }
 
-export default FormGroup
+export default FormGroup as typeof FormGroup & Plugin

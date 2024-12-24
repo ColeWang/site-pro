@@ -12,8 +12,6 @@ import type {
 } from './typings'
 import { descriptionsItemProps, descriptionsProps } from './typings'
 
-Descriptions.Item = DescriptionsItem
-
 export { Descriptions, descriptionsProps }
 export { DescriptionsItem, descriptionsItemProps }
 

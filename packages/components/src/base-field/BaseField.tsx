@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNode } from 'vue'
+import type { App, Plugin, SlotsType, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction, isObject } from 'lodash-es'
@@ -222,4 +222,4 @@ BaseField.install = function (app: App): App {
     return app
 }
 
-export default BaseField
+export default BaseField as typeof BaseField & Plugin

@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
@@ -24,7 +24,7 @@ export interface ColWrapperSlots {
 export type ColWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof colWrapperProps>>>;
 export type ColWrapperInstance = ComponentPublicInstance<ColWrapperProps>;
 
-const ColWrapper = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProColWrapper',
     props: colWrapperProps(),
@@ -45,10 +45,3 @@ const ColWrapper = defineComponent({
         }
     }
 })
-
-ColWrapper.install = function (app: App): App {
-    app.component(ColWrapper.name as string, ColWrapper)
-    return app
-}
-
-export default ColWrapper

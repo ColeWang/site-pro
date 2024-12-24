@@ -1,7 +1,11 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
+import { Form as AForm } from 'ant-design-vue/es/components'
 import type { BaseFormInstance, BaseFormProps, BaseFormSlots } from '../base-form'
 import { BaseForm, baseFormProps } from '../base-form'
+import FormItem from '@site-pro/components/form/Item.tsx'
+import FormGroup from '@site-pro/components/form/Group.tsx'
+import FormDependency from '@site-pro/components/form/Dependency.tsx'
 
 export const formProps = () => ({
     ...baseFormProps(),
@@ -41,4 +45,14 @@ Form.install = function (app: App): App {
     return app
 }
 
-export default Form
+Form.useForm = AForm.useForm
+Form.Item = FormItem
+Form.Group = FormGroup
+Form.Dependency = FormDependency
+
+export default Form as typeof Form & Plugin & {
+    readonly useForm: typeof AForm.useForm;
+    readonly Item: typeof FormItem;
+    readonly Group: typeof FormGroup;
+    readonly Dependency: typeof FormDependency;
+}

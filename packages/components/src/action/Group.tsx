@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNode } from 'vue'
+import type { App, Plugin, SlotsType, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Dropdown, Menu, Space, theme } from 'ant-design-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
@@ -59,4 +59,4 @@ ActionGroup.install = function (app: App): App {
     return app
 }
 
-export default ActionGroup
+export default ActionGroup as typeof ActionGroup & Plugin

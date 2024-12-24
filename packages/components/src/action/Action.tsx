@@ -1,8 +1,9 @@
-import type { App, SlotsType } from 'vue'
+import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import type { BaseClass } from '@site-pro/utils'
 import { preventDefault } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
+import ActionGroup from './Group'
 import type { ActionSlots } from './typings'
 import { actionProps } from './typings'
 import useStyle from './style'
@@ -44,4 +45,8 @@ Action.install = function (app: App): App {
     return app
 }
 
-export default Action
+Action.Group = ActionGroup
+
+export default Action as typeof Action & Plugin & {
+    readonly Group: typeof ActionGroup;
+}

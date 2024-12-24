@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNodeChild } from 'vue'
+import type { App, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Modal } from 'ant-design-vue'
 import { omit, pick } from 'lodash-es'
@@ -113,4 +113,4 @@ ModalForm.install = function (app: App): App {
     return app
 }
 
-export default ModalForm
+export default ModalForm as typeof ModalForm & Plugin

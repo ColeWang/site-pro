@@ -1,10 +1,11 @@
-import type { App, Ref, SlotsType, VNode, VNodeChild } from 'vue'
+import type { App, Plugin, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { flattenChildren, getElement, getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { isFunction, omit, pick } from 'lodash-es'
+import DescriptionsItem from './Item'
 import useFetchData from './hooks/useFetchData'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
 import { BaseField } from '../base-field'
@@ -146,4 +147,8 @@ Descriptions.install = function (app: App): App {
     return app
 }
 
-export default Descriptions
+Descriptions.Item = DescriptionsItem
+
+export default Descriptions as typeof Descriptions & Plugin & {
+    readonly Item: typeof DescriptionsItem;
+}

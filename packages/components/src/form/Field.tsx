@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, NamePath, Recordable } from '@site-pro/utils'
@@ -117,4 +117,4 @@ Field.install = function (app: App): App {
     return app
 }
 
-export default Field
+export default Field as typeof Field & Plugin

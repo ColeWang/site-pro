@@ -1,4 +1,4 @@
-import type { App, SlotsType } from 'vue'
+import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import type { DescriptionsItemSlots } from './typings'
 import { descriptionsItemProps } from './typings'
@@ -20,4 +20,4 @@ DescriptionsItem.install = function (app: App): App {
     return app
 }
 
-export default DescriptionsItem
+export default DescriptionsItem as typeof DescriptionsItem & Plugin

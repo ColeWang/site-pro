@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { InputNumber } from 'ant-design-vue'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
@@ -6,7 +6,7 @@ import { useLocaleReceiver } from '../../../locale'
 import type { FieldNumberFieldProps, FieldNumberSlots } from './typings'
 import { fieldNumberProps } from './typings'
 
-const FieldNumber = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldNumber',
     props: fieldNumberProps(),
@@ -43,10 +43,3 @@ const FieldNumber = defineComponent({
         }
     }
 })
-
-FieldNumber.install = function (app: App): App {
-    app.component(FieldNumber.name as string, FieldNumber)
-    return app
-}
-
-export default FieldNumber

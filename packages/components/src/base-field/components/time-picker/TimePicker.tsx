@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { TimePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -8,7 +8,7 @@ import { fieldTimePickerProps } from './typings'
 import type { Format } from '../share-utils'
 import { formatDate } from '../share-utils'
 
-const FieldTimePicker = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimePicker',
     props: fieldTimePickerProps(),
@@ -38,10 +38,3 @@ const FieldTimePicker = defineComponent({
         }
     }
 })
-
-FieldTimePicker.install = function (app: App): App {
-    app.component(FieldTimePicker.name as string, FieldTimePicker)
-    return app
-}
-
-export default FieldTimePicker

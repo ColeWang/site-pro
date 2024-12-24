@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { Slider } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -6,7 +6,7 @@ import { isArray } from 'lodash-es'
 import type { FieldSliderFieldProps, FieldSliderSlots } from './typings'
 import { fieldSliderProps } from './typings'
 
-const FieldSlider = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSlider',
     props: fieldSliderProps(),
@@ -41,10 +41,3 @@ const FieldSlider = defineComponent({
         }
     }
 })
-
-FieldSlider.install = function (app: App): App {
-    app.component(FieldSlider.name as string, FieldSlider)
-    return app
-}
-
-export default FieldSlider

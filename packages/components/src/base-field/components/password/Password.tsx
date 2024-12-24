@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNodeChild } from 'vue'
+import type { Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
@@ -7,7 +7,7 @@ import { useLocaleReceiver } from '../../../locale'
 import type { FieldPasswordFieldProps, FieldPasswordSlots } from './typings'
 import { fieldPasswordProps } from './typings'
 
-const FieldPassword = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldPassword',
     props: fieldPasswordProps(),
@@ -53,10 +53,3 @@ const FieldPassword = defineComponent({
         }
     }
 })
-
-FieldPassword.install = function (app: App): App {
-    app.component(FieldPassword.name as string, FieldPassword)
-    return app
-}
-
-export default FieldPassword

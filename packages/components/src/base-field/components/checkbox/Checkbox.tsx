@@ -1,4 +1,4 @@
-import type { App, ComputedRef, SlotsType, VNodeChild } from 'vue'
+import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Checkbox } from 'ant-design-vue'
 import type { BaseEnumType, BaseOptionType } from '@site-pro/utils'
@@ -7,7 +7,7 @@ import { isUndefined } from 'lodash-es'
 import type { FieldCheckboxFieldProps, FieldCheckboxSlots } from './typings'
 import { fieldCheckboxProps } from './typings'
 
-const FieldCheckbox = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldCheckbox',
     props: fieldCheckboxProps(),
@@ -42,10 +42,3 @@ const FieldCheckbox = defineComponent({
         }
     }
 })
-
-FieldCheckbox.install = function (app: App): App {
-    app.component(FieldCheckbox.name as string, FieldCheckbox)
-    return app
-}
-
-export default FieldCheckbox

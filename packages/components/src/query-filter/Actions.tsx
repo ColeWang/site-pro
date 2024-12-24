@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button, Space, theme } from 'ant-design-vue'
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'
@@ -42,7 +42,7 @@ export const queryFilterActionsProps = () => ({
 export type QueryFilterActionsProps = Partial<ExtractPropTypes<ReturnType<typeof queryFilterActionsProps>>>;
 export type QueryFilterActionsInstance = ComponentPublicInstance<QueryFilterActionsProps>;
 
-const QueryFilterActions = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProQueryFilterActions',
     props: queryFilterActionsProps(),
@@ -82,10 +82,3 @@ const QueryFilterActions = defineComponent({
         }
     }
 })
-
-QueryFilterActions.install = function (app: App): App {
-    app.component(QueryFilterActions.name as string, QueryFilterActions)
-    return app
-}
-
-export default QueryFilterActions

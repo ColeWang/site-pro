@@ -1,4 +1,4 @@
-import type { App, ComputedRef, SlotsType } from 'vue'
+import type { App, ComputedRef, Plugin, SlotsType } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { createBaseFieldProvider, useBaseFieldProvider } from './hooks/useBaseFieldProvider'
 import type { BaseFieldProviderExpose, BaseFieldProviderSlots, BaseFieldProviderValueTypeMap } from './typings'
@@ -35,4 +35,4 @@ BaseFieldProvider.install = function (app: App): App {
     return app
 }
 
-export default BaseFieldProvider
+export default BaseFieldProvider as typeof BaseFieldProvider & Plugin

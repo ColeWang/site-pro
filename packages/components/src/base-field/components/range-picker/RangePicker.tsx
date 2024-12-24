@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { RangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -9,7 +9,7 @@ import { fieldRangePickerProps } from './typings'
 import type { Format } from '../share-utils'
 import { formatDate } from '../share-utils'
 
-const FieldRangePicker = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldRangePicker',
     props: fieldRangePickerProps(),
@@ -48,10 +48,3 @@ const FieldRangePicker = defineComponent({
         }
     }
 })
-
-FieldRangePicker.install = function (app: App): App {
-    app.component(FieldRangePicker.name as string, FieldRangePicker)
-    return app
-}
-
-export default FieldRangePicker

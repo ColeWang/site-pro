@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Form } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
@@ -50,4 +50,4 @@ Text.install = function (app: App): App {
     return app
 }
 
-export default Text
+export default Text as typeof Text & Plugin

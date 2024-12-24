@@ -1,4 +1,4 @@
-import type { App, ComputedRef, SlotsType, VNodeChild } from 'vue'
+import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Select } from 'ant-design-vue'
 import type { BaseEnumType, BaseOptionType } from '@site-pro/utils'
@@ -8,7 +8,7 @@ import { useLocaleReceiver } from '../../../locale'
 import type { FieldSelectFieldProps, FieldSelectSlots } from './typings'
 import { fieldSelectProps } from './typings'
 
-const FieldSelect = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldSelect',
     props: fieldSelectProps(),
@@ -48,11 +48,3 @@ const FieldSelect = defineComponent({
         }
     }
 })
-
-FieldSelect.install = function (app: App): App {
-    app.component(FieldSelect.name as string, FieldSelect)
-    return app
-}
-
-
-export default FieldSelect

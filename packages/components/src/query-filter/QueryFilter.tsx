@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNode, VNodeChild } from 'vue'
+import type { App, Plugin, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { cloneVNode, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
@@ -142,4 +142,4 @@ QueryFilter.install = function (app: App): App {
     return app
 }
 
-export default QueryFilter
+export default QueryFilter as typeof QueryFilter & Plugin

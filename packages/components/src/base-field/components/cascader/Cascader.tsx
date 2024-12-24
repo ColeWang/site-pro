@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Cascader } from 'ant-design-vue'
 import type { BaseEnumType } from '@site-pro/utils'
@@ -7,7 +7,7 @@ import { useLocaleReceiver } from '../../../locale'
 import type { FieldCascaderFieldProps, FieldCascaderSlots } from './typings'
 import { fieldCascaderProps } from './typings'
 
-const FieldCascader = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldCascader',
     props: fieldCascaderProps(),
@@ -39,10 +39,3 @@ const FieldCascader = defineComponent({
         }
     }
 })
-
-FieldCascader.install = function (app: App): App {
-    app.component(FieldCascader.name as string, FieldCascader)
-    return app
-}
-
-export default FieldCascader

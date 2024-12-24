@@ -1,4 +1,4 @@
-import type { App, Ref } from 'vue'
+import type { App, Plugin, Ref } from 'vue'
 import { defineComponent, toRef, unref } from 'vue'
 import { ConfigProvider, theme } from 'ant-design-vue'
 import { createThemeProvider } from './hooks/useThemeProvider'
@@ -48,4 +48,4 @@ ThemeProvider.install = function (app: App): App {
     return app
 }
 
-export default ThemeProvider
+export default ThemeProvider as typeof ThemeProvider & Plugin

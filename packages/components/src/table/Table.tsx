@@ -1,4 +1,4 @@
-import type { App, ComputedRef, CSSProperties, Ref, SlotsType, VNodeChild } from 'vue'
+import type { App, ComputedRef, CSSProperties, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
 import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
@@ -283,4 +283,4 @@ Table.install = function (app: App): App {
     return app
 }
 
-export default Table
+export default Table as typeof Table & Plugin

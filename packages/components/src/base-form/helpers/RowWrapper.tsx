@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
@@ -20,7 +20,7 @@ export interface RowWrapperSlots {
 export type RowWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof rowWrapperProps>>>;
 export type RowWrapperInstance = ComponentPublicInstance<RowWrapperProps>;
 
-const RowWrapper = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProRowWrapper',
     props: rowWrapperProps(),
@@ -38,10 +38,3 @@ const RowWrapper = defineComponent({
         }
     }
 })
-
-RowWrapper.install = function (app: App): App {
-    app.component(RowWrapper.name as string, RowWrapper)
-    return app
-}
-
-export default RowWrapper

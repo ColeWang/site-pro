@@ -1,11 +1,10 @@
-import type { App, Plugin } from 'vue'
-import type { Recordable } from '@site-pro/utils'
+import type { App } from 'vue'
 import { forIn } from 'lodash-es'
-import * as components from './components'
 import version from './version'
+import * as components from './components'
 
 function install (app: App): App {
-    forIn(components as unknown as Recordable<Plugin>, (component) => {
+    forIn(components, (component) => {
         component.install && app.use(component)
     })
     return app

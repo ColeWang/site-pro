@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType } from 'vue'
+import type { App, Plugin, Ref, SlotsType } from 'vue'
 import { defineComponent, ref, watch } from 'vue'
 import { createLocaleReceiver } from './hooks/useLocaleReceiver'
 import type { LocaleProviderExpose, LocaleProviderSlots, LocaleType } from './typings'
@@ -36,4 +36,4 @@ LocaleProvider.install = function (app: App): App {
     return app
 }
 
-export default LocaleProvider
+export default LocaleProvider as typeof LocaleProvider & Plugin

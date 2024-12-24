@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNodeChild } from 'vue'
+import type { App, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
 import { Drawer } from 'ant-design-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
@@ -112,4 +112,4 @@ DrawerForm.install = function (app: App): App {
     return app
 }
 
-export default DrawerForm
+export default DrawerForm as typeof DrawerForm & Plugin

@@ -1,4 +1,4 @@
-import type { App, ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
+import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { NamePath, Recordable } from '@site-pro/utils'
 import { cloneProxyToRaw } from '@site-pro/utils'
@@ -62,4 +62,4 @@ FormDependency.install = function (app: App): App {
     return app
 }
 
-export default FormDependency
+export default FormDependency as typeof FormDependency & Plugin

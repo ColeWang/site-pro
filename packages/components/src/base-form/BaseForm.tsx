@@ -1,4 +1,4 @@
-import type { App, ComputedRef, Ref, SlotsType } from 'vue'
+import type { App, ComputedRef, Plugin, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
 import { ConfigProvider, Form, theme } from 'ant-design-vue'
 import type { NamePath, Recordable } from '@site-pro/utils'
@@ -170,4 +170,4 @@ BaseForm.install = function (app: App): App {
     return app
 }
 
-export default BaseForm
+export default BaseForm as typeof BaseForm & Plugin

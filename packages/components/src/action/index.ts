@@ -10,8 +10,6 @@ import type {
 } from './typings'
 import { actionGroupProps, actionProps } from './typings'
 
-Action.Group = ActionGroup
-
 export { Action, actionProps }
 export { ActionGroup, actionGroupProps }
 

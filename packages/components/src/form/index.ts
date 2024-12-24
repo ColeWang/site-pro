@@ -1,4 +1,3 @@
-import { Form as AForm } from 'ant-design-vue'
 import type { FormInstance, FormProps, FormSlots } from './Form'
 import Form, { formProps } from './Form'
 import type { FormItemInstance, FormItemProps, FormItemSlots } from './Item'
@@ -10,14 +9,7 @@ import FormDependency, { formDependencyProps } from './Dependency'
 import type { FieldInstance, FieldProps, FieldSlots } from './Field'
 import Field, { fieldProps } from './Field'
 
-const useForm = AForm.useForm
-
-Form.useForm = useForm
-Form.Item = FormItem
-Form.Group = FormGroup
-Form.Dependency = FormDependency
-
-export { Form, formProps, useForm }
+export { Form, formProps }
 export { FormItem, formItemProps }
 export { FormGroup, formGroupProps }
 export { FormDependency, formDependencyProps }

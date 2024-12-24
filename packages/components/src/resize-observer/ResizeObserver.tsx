@@ -1,4 +1,4 @@
-import type { App, Ref, SlotsType, VNodeChild } from 'vue'
+import type { App, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
@@ -48,4 +48,4 @@ ResizeObserver.install = function (app: App): App {
     return app
 }
 
-export default ResizeObserver
+export default ResizeObserver as typeof ResizeObserver & Plugin

@@ -1,4 +1,4 @@
-import type { App, SlotsType, VNodeChild } from 'vue'
+import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { TimeRangePicker } from 'ant-design-vue'
 import { getSlotVNode } from '@site-pro/utils'
@@ -9,7 +9,7 @@ import { fieldTimeRangePickerProps } from './typings'
 import type { Format } from '../share-utils'
 import { formatDate } from '../share-utils'
 
-const FieldTimeRangePicker = defineComponent({
+export default defineComponent({
     inheritAttrs: false,
     name: 'ProFieldTimeRangePicker',
     props: fieldTimeRangePickerProps(),
@@ -19,7 +19,7 @@ const FieldTimeRangePicker = defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
-            const placeholder: [string, string] = fieldProps.placeholder|| [t('selectPlaceholder')!, t('selectPlaceholder')!]
+            const placeholder: [string, string] = fieldProps.placeholder || [t('selectPlaceholder')!, t('selectPlaceholder')!]
 
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : []
@@ -47,10 +47,3 @@ const FieldTimeRangePicker = defineComponent({
         }
     }
 })
-
-FieldTimeRangePicker.install = function (app: App): App {
-    app.component(FieldTimeRangePicker.name as string, FieldTimeRangePicker)
-    return app
-}
-
-export default FieldTimeRangePicker
