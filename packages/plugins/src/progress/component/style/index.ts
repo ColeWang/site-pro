@@ -31,7 +31,7 @@ function genBaseStyle (token: ProProgressPluginToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProProgressPlugin'>): CSSInterpolation {
-    const proProgressPluginToken = mergeToken<ProProgressPluginToken>(token, {})
+    const proProgressPluginToken: ProProgressPluginToken = mergeToken<ProProgressPluginToken>(token, {})
     return genBaseStyle(proProgressPluginToken)
 }
 

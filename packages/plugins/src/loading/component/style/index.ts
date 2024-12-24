@@ -55,7 +55,7 @@ function genBaseStyle (token: ProLoadingPluginToken): CSSInterpolation {
 }
 
 function styleFn (token: FullToken<'ProLoadingPlugin'>): CSSInterpolation {
-    const proLoadingPluginToken = mergeToken<ProLoadingPluginToken>(token, {})
+    const proLoadingPluginToken: ProLoadingPluginToken = mergeToken<ProLoadingPluginToken>(token, {})
     return genBaseStyle(proLoadingPluginToken)
 }
 
