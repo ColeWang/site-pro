@@ -122,7 +122,7 @@ const Table = defineComponent({
                     : undefined
 
                 return transform ? update(result, namePath, transform) : result
-            }, values)
+            }, { ...values })
             return omitNil(nextValues)
         }
 
