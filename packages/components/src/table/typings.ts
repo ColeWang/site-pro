@@ -67,6 +67,15 @@ export interface TableOnChange {
 
 export type TableSize = 'small' | 'large' | 'middle'
 
+export function createTableColumn<T extends BaseFieldValueType, RecordType = any> (
+    column: Omit<TableColumn<RecordType>, 'valueType' | 'fieldProps'> & {
+        valueType?: T;
+        fieldProps?: BaseFieldFieldProps<T>;
+    }
+): TableColumn<RecordType> {
+    return column
+}
+
 const baseTableProps = () => ({
     ...antTableProps(),
     rowKey: {

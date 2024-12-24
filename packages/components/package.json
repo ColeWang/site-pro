@@ -81,6 +81,11 @@
             "require": "./lib/theme/index.js",
             "import": "./es/theme/index.js",
             "types": "./types/theme/index.d.ts"
+        },
+        "./ant-typings": {
+            "require": "./lib/ant-typings.js",
+            "import": "./es/ant-typings.js",
+            "types": "./ant-typings.d.ts"
         }
     },
     "files": [
