@@ -31,6 +31,8 @@ export type { FormDependencyProps, FormDependencyInstance } from './form'
 export { FormDependency } from './form'
 export type { FieldProps, FieldInstance } from './form'
 export { Field } from './form'
+export type { UserFieldProps, UserFieldInstance } from './form'
+export { UserField } from './form'
 
 export type { LocaleProviderProps, LocaleProviderInstance } from './locale'
 export { LocaleProvider } from './locale'
