@@ -1,6 +1,7 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref } from 'vue'
 import { ConfigProvider, Space, theme } from 'ant-design-vue'
+import type { Recordable } from '@site-pro/utils'
 import { getElement, getSlotVNode } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { useLocaleReceiver } from '../../../locale'
@@ -47,14 +48,14 @@ export default defineComponent({
                 </Space>
             )
 
-            const slotScope: any = {
+            const slotProps: Recordable = {
                 keys: selectedRowKeys,
                 rows: selectedRows,
                 cleanSelected: onCleanSelected
             }
 
-            const customContent: VNodeChild = getSlotVNode(slots, props, 'default', slotScope)
-            const optionsDom: VNodeChild = getSlotVNode(slots, props, 'options', slotScope)
+            const customContent: VNodeChild = getSlotVNode(slots, props, 'default', slotProps)
+            const optionsDom: VNodeChild = getSlotVNode(slots, props, 'options', slotProps)
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>

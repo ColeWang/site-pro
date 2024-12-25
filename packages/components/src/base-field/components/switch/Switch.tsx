@@ -1,6 +1,7 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { Switch } from 'ant-design-vue'
+import type { Recordable } from '@site-pro/utils'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale'
@@ -42,8 +43,8 @@ export default defineComponent({
                 </div>
             )
             // ----
-            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
+            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
 
             return renderFieldDom || fieldDom
         }

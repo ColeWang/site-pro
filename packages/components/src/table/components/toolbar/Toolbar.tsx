@@ -71,9 +71,13 @@ export default defineComponent({
         return () => {
             const { options: propsOptions } = props
 
-            const slotScope: any = { ...requestProps }
-            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotScope)
-            const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', slotScope)
+            const slotProps: Recordable = {
+                dataSource: requestProps.dataSource,
+                loading: requestProps.loading,
+                pagination: requestProps.pagination
+            }
+            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotProps)
+            const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', slotProps)
 
             const renderSettings = () => {
                 const vNodeCatalog: Record<string, VNodeChild> = {
@@ -124,7 +128,7 @@ export default defineComponent({
                     .filter((key) => options[key])
                     .map((key) => vNodeCatalog[key])
 
-                const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', slotScope)
+                const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', slotProps)
                 return (
                     <Space.Compact>{customSettings || defaultSettings}</Space.Compact>
                 )

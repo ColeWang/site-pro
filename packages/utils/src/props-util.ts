@@ -42,18 +42,18 @@ export function getSlotVNode<T extends VNodeChild> (
     slots: Recordable,
     props: Recordable,
     name: string = 'default',
-    slotScope?: Recordable
+    slotProps?: Recordable
 ): T | undefined {
     const result: any = props[name] || slots[name]
-    return isFunction(result) ? result(slotScope) as T : undefined
+    return isFunction(result) ? result(slotProps) as T : undefined
 }
 
 export function getPropsSlotVNode<T extends VNodeChild> (
     slots: Recordable,
     props: Recordable,
     name: string = 'default',
-    slotScope?: Recordable
+    slotProps?: Recordable
 ): T | undefined {
     const result: any = props[name] ?? slots[name]
-    return isFunction(result) ? result(slotScope) as T : (result || undefined)
+    return isFunction(result) ? result(slotProps) as T : (result || undefined)
 }

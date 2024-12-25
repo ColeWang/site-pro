@@ -1,5 +1,6 @@
-import type { App, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
-import { defineComponent, ref, unref } from 'vue'
+import type { App, Plugin, Ref, SlotsType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import type { Recordable } from '@site-pro/utils'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
 import type { ResizeObserverRectSize, ResizeObserverSlots } from './typings'
@@ -31,12 +32,11 @@ const ResizeObserver = defineComponent({
         useResizeObserver(elRef, debounceCallback)
 
         return () => {
-            const slotScope: any = { size: unref(rectSize) }
-            const children: VNodeChild = slots.default && slots.default(slotScope)
+            const slotProps: Recordable = { size: rectSize.value }
 
             return (
                 <div {...attrs} ref={elRef}>
-                    {children}
+                    {slots.default && slots.default(slotProps)}
                 </div>
             )
         }

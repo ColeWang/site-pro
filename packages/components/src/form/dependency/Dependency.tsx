@@ -20,7 +20,7 @@ const FormDependency = defineComponent({
             const { name: namePathList, colProps } = props
             const { grid } = unref(formProps) || {}
 
-            const slotScope: any = reduce(namePathList, (result, namePath) => {
+            const slotProps: Recordable = reduce(namePathList, (result, namePath) => {
                 if (namePath && getModelValue && isFunction(getModelValue)) {
                     const value: Recordable = getModelValue(namePath)
                     return set(result, namePath, cloneProxyToRaw(value))
@@ -34,7 +34,7 @@ const FormDependency = defineComponent({
             }
             return (
                 <ColWrapper {...colWrapperProps}>
-                    {slots.default && slots.default(slotScope)}
+                    {slots.default && slots.default(slotProps)}
                 </ColWrapper>
             )
         }

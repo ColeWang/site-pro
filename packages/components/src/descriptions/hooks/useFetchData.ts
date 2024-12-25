@@ -12,8 +12,8 @@ interface UseFetchDataOptions {
 }
 
 interface UseFetchDataContext {
-    loading: boolean;
     dataSource: Recordable;
+    loading: boolean;
 }
 
 interface UseFetchDataResult {

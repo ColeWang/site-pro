@@ -1,7 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import type { BaseSlot } from '@site-pro/utils'
 import type { QueryFilterBreakPoint } from '../../../query-filter'
-import type { UseFetchDataContext } from '../../hooks/useFetchData'
 
 export const toolbarProps = () => ({
     options: {
@@ -31,9 +30,9 @@ export const toolbarProps = () => ({
 })
 
 export interface ToolbarSlots {
-    title?: UseFetchDataContext;
-    actions?: UseFetchDataContext;
-    settings?: UseFetchDataContext;
+    title?: any;
+    actions?: any;
+    settings?: any;
 }
 
 export type ToolbarProps = Partial<ExtractPropTypes<ReturnType<typeof toolbarProps>>>;

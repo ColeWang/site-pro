@@ -1,6 +1,7 @@
 import type { CSSProperties, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Input, theme } from 'ant-design-vue'
+import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import { useLocaleReceiver } from '../../../locale'
@@ -46,8 +47,8 @@ export default defineComponent({
             }
             const fieldDom: VNodeChild = <Input.TextArea {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
+            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
 
             return renderFieldDom || fieldDom
         }

@@ -1,7 +1,7 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
-import type { BaseEnumType } from '@site-pro/utils'
+import type { BaseEnumType, Recordable } from '@site-pro/utils'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
 import type { FieldTreeSelectFieldProps, FieldTreeSelectSlots } from './typings'
@@ -34,8 +34,8 @@ export default defineComponent({
             }
             const fieldDom: VNodeChild = <TreeSelect {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
+            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
 
             return renderFieldDom || fieldDom
         }

@@ -104,9 +104,12 @@ const Descriptions = defineComponent({
             const schemaColumns: DescriptionsColumn[] = getColumns(nodes, columns)
             const children: VNodeChild = schemaToDescsItem(schemaColumns, emptyText)
 
-            const slotScope: any = { ...requestProps }
-            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotScope)
-            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', slotScope)
+            const slotProps: Recordable = {
+                dataSource: requestProps.dataSource,
+                loading: requestProps.loading
+            }
+            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotProps)
+            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', slotProps)
 
             const restProps: DescriptionsProps = omit(props, ['title', 'extra'])
             const needDescsProps: DescriptionsProps = {

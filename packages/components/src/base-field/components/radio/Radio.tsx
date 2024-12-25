@@ -1,7 +1,7 @@
 import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import { Radio } from 'ant-design-vue'
-import type { BaseEnumType, BaseOptionType } from '@site-pro/utils'
+import type { BaseEnumType, BaseOptionType, Recordable } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
 import type { FieldRadioFieldProps, FieldRadioSlots } from './typings'
@@ -35,8 +35,8 @@ export default defineComponent({
             }
             const fieldDom: VNodeChild = <Radio.Group {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
+            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
 
             return renderFieldDom || fieldDom
         }

@@ -8,8 +8,8 @@ import type { TablePagination } from '../../ant-typings'
 import type { TableProps, TableRequest } from '../typings'
 
 export interface UseFetchDataContext {
-    loading: boolean;
     dataSource: any[];
+    loading: boolean;
     pagination: TablePagination | false;
 }
 

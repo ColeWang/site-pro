@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
 import { Col } from 'ant-design-vue'
@@ -32,16 +32,19 @@ export default defineComponent({
     setup (props, { slots }) {
         return () => {
             const { grid } = props
-            const children: VNodeChild = slots.default && slots.default()
 
             if (grid) {
                 const needColProps: ColProps = pick(props, Object.keys(Col.props)) as ColProps
                 if (!needColProps.span && !needColProps.xs) {
                     needColProps.xs = 24
                 }
-                return <Col {...needColProps}>{children}</Col>
+                return (
+                    <Col {...needColProps}>
+                        {slots.default && slots.default()}
+                    </Col>
+                )
             }
-            return children
+            return slots.default && slots.default()
         }
     }
 })

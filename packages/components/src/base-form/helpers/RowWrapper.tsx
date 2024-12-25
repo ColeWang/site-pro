@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { Row } from 'ant-design-vue'
 import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
@@ -28,13 +28,16 @@ export default defineComponent({
     setup (props, { slots }) {
         return () => {
             const { grid } = props
-            const children: VNodeChild = slots.default && slots.default()
 
             if (grid) {
                 const needRowProps: RowProps = pick(props, Object.keys(Row.props)) as RowProps
-                return <Row {...needRowProps}>{children}</Row>
+                return (
+                    <Row {...needRowProps}>
+                        {slots.default && slots.default()}
+                    </Row>
+                )
             }
-            return children
+            return slots.default && slots.default()
         }
     }
 })

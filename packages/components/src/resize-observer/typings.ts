@@ -21,7 +21,7 @@ export const resizeObserverProps = () => ({
 })
 
 export interface ResizeObserverSlots {
-    default?: { size: ResizeObserverRectSize };
+    default?: any;
 }
 
 export type ResizeObserverProps = Partial<ExtractPropTypes<ReturnType<typeof resizeObserverProps>>>;

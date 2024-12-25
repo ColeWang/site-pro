@@ -2,6 +2,7 @@ import type { Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
 import { Input, Space, theme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
+import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode, isEmpty, preventDefault } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
 import type { FieldPasswordFieldProps, FieldPasswordSlots } from './typings'
@@ -46,8 +47,8 @@ export default defineComponent({
             }
             const fieldDom: VNodeChild = <Input.Password {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotScope: any = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotScope)
+            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
+            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
 
             return renderFieldDom || fieldDom
         }
