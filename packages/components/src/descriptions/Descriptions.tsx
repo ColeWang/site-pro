@@ -3,7 +3,14 @@ import { defineComponent, ref } from 'vue'
 import { ConfigProvider, Descriptions as AntDescriptions, Form, Spin } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseSlot, NamePath, Recordable } from '@site-pro/utils'
-import { flattenChildren, getElement, getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
+import {
+    convertToCamelCaseProps,
+    flatVNodeChildren,
+    getElement,
+    getPropsSlotVNode,
+    getSlotVNode,
+    safeDestructureObject
+} from '@site-pro/utils'
 import { isFunction, omit, pick } from 'lodash-es'
 import DescriptionsItem from './Item'
 import useFetchData from './hooks/useFetchData'
@@ -33,24 +40,25 @@ const Descriptions = defineComponent({
 
         function schemaToDescsItem (columns: DescriptionsColumn[], emptyText?: string) {
             return columns.map((item, index) => {
-                const { fieldProps, formItemProps, __SLOTS__: itemSlots } = item
-                const { valueType, dataIndex, name, label } = item
+                const { __SLOTS__: itemSlots } = item
+                const childProps: Recordable = convertToCamelCaseProps(item)
 
-                const key: string | number = item.key || label || index
-                const namePath: NamePath = name || dataIndex || item.key as string
+                const key: string | number = childProps.key || childProps.label || index
+                const namePath: NamePath = childProps.name || childProps.dataIndex || childProps.key as string
 
-                const title: string | undefined = isFunction(item.title) ?
-                    (item.title as any)(requestProps.dataSource) :
-                    (item.title || label)
+                const title: string | undefined = isFunction(childProps.title) ?
+                    (childProps.title as any)(requestProps.dataSource) :
+                    (childProps.title || childProps.label)
 
                 const descsItemProps: DescriptionsItemProps = {
-                    ...pick(item, Object.keys(Descriptions.Item.props)) as DescriptionsItemProps,
+                    ...pick(childProps, Object.keys(Descriptions.Item.props)) as DescriptionsItemProps,
                     label: title
                 }
                 const needItemSlots: Recordable<BaseSlot> = pick(itemSlots!, ['label'])
 
-                if (!valueType && !namePath) {
-                    const children: VNodeChild = getSlotVNode(needItemSlots, {}, 'default', requestProps.dataSource)
+                if (!childProps.valueType && !namePath) {
+                    const slotProps: Recordable = { ...requestProps.dataSource }
+                    const children: VNodeChild = getSlotVNode(needItemSlots, {}, 'default', slotProps)
                     return (
                         <Descriptions.Item {...descsItemProps} key={key} v-slots={needItemSlots}>
                             {children ?? emptyText}
@@ -59,16 +67,15 @@ const Descriptions = defineComponent({
                 }
 
                 const needFormItemProps: BaseFieldFormItemProps = {
-                    ...pick(item, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
-                    ...formItemProps,
+                    ...pick(childProps, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
+                    ...safeDestructureObject(childProps.formItemProps) as BaseFieldFormItemProps,
                     name: namePath,
                     model: requestProps.dataSource
                 }
                 const needFieldProps: BaseFieldProps = {
-                    ...pick(item, Object.keys(BaseField.props)) as BaseFieldProps,
+                    ...pick(childProps, Object.keys(BaseField.props)) as BaseFieldProps,
                     mode: 'read',
                     emptyText: emptyText,
-                    fieldProps: fieldProps,
                     formItemProps: needFormItemProps
                 }
                 const fieldSlots: Recordable<BaseSlot> = omit(itemSlots, ['label'])
@@ -99,7 +106,7 @@ const Descriptions = defineComponent({
         return () => {
             const { columns, emptyText } = props
 
-            const nodes: VNode[] = flattenChildren(slots.default ? slots.default() : [])
+            const nodes: VNode[] = flatVNodeChildren(slots.default ? slots.default() : [])
 
             const schemaColumns: DescriptionsColumn[] = getColumns(nodes, columns)
             const children: VNodeChild = schemaToDescsItem(schemaColumns, emptyText)
@@ -133,7 +140,7 @@ const Descriptions = defineComponent({
                                 )}
                                 <Spin spinning={requestProps.loading}>
                                     <AntDescriptions {...needDescsProps}>
-                                        {children}
+                                        {() => children}
                                     </AntDescriptions>
                                 </Spin>
                             </div>

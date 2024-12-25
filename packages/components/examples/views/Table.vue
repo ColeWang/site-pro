@@ -20,6 +20,7 @@
             title: 'Search',
             dataIndex: 'search',
             valueType: 'text',
+            labelWidth: 90,
             search: {
                 transform: (value: any) => {
                     console.log(value)

@@ -2,8 +2,8 @@ import type { App, Plugin, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { cloneVNode, defineComponent, ref, unref } from 'vue'
 import { Col, Form, Row, theme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
-import type { BaseClass } from '@site-pro/utils'
-import { flattenChildren, getPropByKebabOrCamel } from '@site-pro/utils'
+import type { BaseClass, Recordable } from '@site-pro/utils'
+import { convertToCamelCaseProps, flatVNodeChildren } from '@site-pro/utils'
 import { merge, pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../resize-observer'
 import { ResizeObserver } from '../resize-observer'
@@ -13,7 +13,7 @@ import type { QueryFilterActionsProps } from './Actions'
 import Actions from './Actions'
 import useQueryFilter from './hooks/useQueryFilter'
 import type { RowProps } from '../ant-typings'
-import type { QueryFilterLabelWidth, QueryFilterSlots } from './typings'
+import type { QueryFilterSlots } from './typings'
 import { queryFilterProps } from './typings'
 import useStyle from './style'
 
@@ -63,18 +63,17 @@ const QueryFilter = defineComponent({
             const { labelWidth, rowProps } = props
             const { sizeMD, sizeMS, sizeLG } = unref(token)
 
-            const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
+            const children: VNode[] = flatVNodeChildren(slots.default ? slots.default() : [])
             const { nodes: colNodes, offset, haveRow } = genColNodes(children, (item) => {
                 const { child, hidden, key } = item
 
-                const fieldFieldProps: any = getPropByKebabOrCamel(child.props || {}, 'field-props')
-                const fieldLabelWidth: QueryFilterLabelWidth | undefined = getPropByKebabOrCamel(child.props || {}, 'label-width')
+                const childProps: Recordable = convertToCamelCaseProps(child.props || {})
 
                 const fieldNode: VNode = cloneVNode(child, {
                     fieldProps: merge({
-                        style: { width: '100%' }
-                    }, fieldFieldProps || {}),
-                    labelWidth: fieldLabelWidth || labelWidth || sizeMD * 4,
+                        width: '100%'
+                    }, childProps.fieldProps || {}),
+                    labelWidth: childProps.labelWidth || labelWidth || sizeMD * 4,
                 })
 
                 const colClass: BaseClass = { [`${prefixCls.value}-col-hidden`]: hidden }

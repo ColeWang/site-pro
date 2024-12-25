@@ -1,31 +1,36 @@
 import type { VNode, VNodeChild } from 'vue'
 import { Fragment } from 'vue'
-import { isArray, isFunction, isUndefined } from 'lodash-es'
+import { get, isArray, isFunction, isUndefined, reduce, set } from 'lodash-es'
 import type { BaseSlot, Recordable } from './types'
 import { isEmptyElement } from './is'
 
-export function getPropByKebabOrCamel<T = any> (props: Recordable, kebabCaseKey: string): T | undefined {
+export function convertToCamelCaseProps<T extends Recordable> (props: T): T {
     const regExp: RegExp = /-([a-z])/g
-    const camelCaseKey: string = kebabCaseKey.replace(regExp, (_, char) => {
-        return char.toUpperCase()
-    })
-    const value: T | undefined = (props || {})[kebabCaseKey] as T
-    return isUndefined(value) ? props[camelCaseKey] : value
+
+    return reduce(props, (result, value, key) => {
+        const camelCaseKey: string = key.replace(regExp, (_, char) => {
+            return char.toUpperCase()
+        })
+
+        const originValue: any = get(props, camelCaseKey, undefined)
+        const nextValue: any = isUndefined(originValue) ? value : originValue
+
+        return set(result, camelCaseKey, nextValue)
+    }, {} as T)
 }
 
-export function flattenChildren (children?: VNode[]): VNode[] {
-    const result: Array<VNode> = []
-    if (isArray(children) && children.length !== 0) {
-        children.forEach((child) => {
-            if (child && isArray(child)) {
-                result.push(...child)
-            } else if (child && child.type === Fragment && isArray(child.children)) {
-                result.push(...flattenChildren(child.children as Array<VNode>))
-            } else if (child) {
-                result.push(child)
-            }
-        })
-    }
+export function flatVNodeChildren (children?: VNode[]): VNode[] {
+    const result: Array<VNode> = reduce(children || [], (accumulator, child) => {
+        if (child && isArray(child)) {
+            accumulator.push(...child)
+        } else if (child && child.type === Fragment && isArray(child.children)) {
+            accumulator.push(...flatVNodeChildren(child.children as Array<VNode>))
+        } else if (child) {
+            accumulator.push(child)
+        }
+        return accumulator
+    }, [] as any)
+
     return result.filter((c) => !isEmptyElement(c))
 }
 

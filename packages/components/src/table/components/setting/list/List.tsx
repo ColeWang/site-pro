@@ -55,11 +55,11 @@ export default defineComponent({
                 .map((item) => item.key as string)
 
             const treeSlots: Recordable<BaseSlot> = {
-                title: (slotScope: any) => {
+                title: (slotProps: any) => {
                     const treeNodeProps: NodeProps = {
-                        ...slotScope,
+                        ...slotProps,
                         fixed: fixed,
-                        columnKey: slotScope.key,
+                        columnKey: slotProps.key,
                         onChange: onChangeFixed
                     }
                     return (
