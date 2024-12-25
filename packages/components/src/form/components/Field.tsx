@@ -9,8 +9,6 @@ import { ColWrapper, useFormInstance } from '../../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
 
-export type FieldLabelWidth = 'auto' | number;
-
 export const fieldProps = () => ({
     ...baseFieldProps(),
     width: {
@@ -18,7 +16,7 @@ export const fieldProps = () => ({
         default: undefined
     },
     labelWidth: {
-        type: [String, Number] as PropType<FieldLabelWidth>,
+        type: [String, Number] as PropType<'auto' | number>,
         default: undefined
     },
     hidden: {
@@ -43,7 +41,7 @@ export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>
 export type FieldInstance = ComponentPublicInstance<FieldProps>;
 
 function genFormItemFixStyle (
-    labelWidth: FieldLabelWidth | undefined,
+    labelWidth: 'auto' | number | undefined,
     layout: BaseFormLayout
 ): BaseFieldFormItemProps & BaseAttrs {
     if (labelWidth && layout !== 'vertical' && labelWidth !== 'auto') {

@@ -1,7 +1,8 @@
 import type { ComputedRef, Ref, VNode, WatchStopHandle } from 'vue'
 import { computed, ref, unref, watch } from 'vue'
 import { tryOnScopeDispose } from '@site-pro/hooks'
-import { isValidElement } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
+import { convertToCamelCaseProps, isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../resize-observer'
 import useBreakPoint from './useBreakPoint'
@@ -69,7 +70,8 @@ function useQueryFilter (
         }
 
         return children.map((child, index) => {
-            const propsHidden: boolean = child.props && child.props.hidden || false
+            const childProps: Recordable = convertToCamelCaseProps(child.props || {})
+            const propsHidden: boolean = childProps.hidden || false
             const hidden: boolean = isChildHidden(propsHidden, index)
             const key: string | number | symbol = (isValidElement(child) && child.key) || index
             return { key: key, child: child, hidden: hidden }

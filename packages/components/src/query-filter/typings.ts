@@ -6,7 +6,6 @@ import { queryFilterActionsProps } from './Actions'
 
 export type QueryFilterLayout = 'horizontal' | 'vertical';
 export type QueryFilterBreakPoint = [number, number, QueryFilterLayout];
-export type QueryFilterLabelWidth = 'auto' | number;
 
 export const queryFilterProps = () => ({
     ...baseFormProps(),
@@ -16,7 +15,7 @@ export const queryFilterProps = () => ({
         default: 'horizontal'
     },
     labelWidth: {
-        type: [Number, String] as PropType<QueryFilterLabelWidth>,
+        type: [Number, String] as PropType<'auto' | number>,
         default: undefined
     },
     compact: {
