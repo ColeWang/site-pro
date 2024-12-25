@@ -17,12 +17,16 @@ import type {
     TypographyCopyable
 } from '../ant-typings'
 
+interface TableColumnSearchObject {
+    transform?: (value: any) => any;
+}
+
 export interface TableColumn<RecordType = any> extends AntTableColumnType<RecordType> {
     key?: string | number; // 占用
     dataIndex?: string | number | (string | number)[];
     children?: TableColumn<RecordType>[];
     // table
-    search?: boolean | { transform: (value: any) => any };
+    search?: boolean | TableColumnSearchObject;
     hideInSearch?: boolean;
     hideInTable?: boolean;
     hideInSetting?: boolean;

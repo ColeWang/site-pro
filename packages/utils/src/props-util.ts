@@ -4,12 +4,12 @@ import { isArray, isFunction, isUndefined } from 'lodash-es'
 import type { BaseSlot, Recordable } from './types'
 import { isEmptyElement } from './is'
 
-export function getPropByKebabOrCamel<T = any> (props: Recordable<T>, kebabCaseKey: string): T | undefined {
+export function getPropByKebabOrCamel<T = any> (props: Recordable, kebabCaseKey: string): T | undefined {
     const regExp: RegExp = /-([a-z])/g
     const camelCaseKey: string = kebabCaseKey.replace(regExp, (_, char) => {
         return char.toUpperCase()
     })
-    const value: T | undefined = (props as any)[kebabCaseKey] as T
+    const value: T | undefined = (props || {})[kebabCaseKey] as T
     return isUndefined(value) ? props[camelCaseKey] : value
 }
 

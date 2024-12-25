@@ -29,6 +29,13 @@
             hideInTable: true,
         },
         {
+            title: 'Text',
+            dataIndex: 'text',
+            valueType: 'text',
+            search: true,
+            hideInTable: true,
+        },
+        {
             title: 'Name',
             dataIndex: 'name',
         },

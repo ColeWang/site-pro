@@ -3,11 +3,13 @@ import { defineComponent, unref } from 'vue'
 import { Form } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
-import { has, isArray, isString, omit, pick } from 'lodash-es'
-import type { ColWrapperProps } from '../../base-form'
+import { has, isArray, isString, merge, omit, pick } from 'lodash-es'
+import type { BaseFormLayout, ColWrapperProps } from '../../base-form'
 import { ColWrapper, useFormInstance } from '../../base-form'
 import type { BaseFieldFormItemProps, BaseFieldProps, BaseFieldSlots } from '../../base-field'
 import { BaseField, baseFieldProps } from '../../base-field'
+
+export type FieldLabelWidth = 'auto' | number;
 
 export const fieldProps = () => ({
     ...baseFieldProps(),
@@ -15,9 +17,8 @@ export const fieldProps = () => ({
         type: [Number, String] as PropType<number | string>,
         default: undefined
     },
-    // 只适用 QueryFilter
     labelWidth: {
-        type: [String, Number] as PropType<'auto' | number>,
+        type: [String, Number] as PropType<FieldLabelWidth>,
         default: undefined
     },
     hidden: {
@@ -40,6 +41,20 @@ export interface FieldSlots extends BaseFieldSlots {
 
 export type FieldProps = Partial<ExtractPropTypes<ReturnType<typeof fieldProps>>>;
 export type FieldInstance = ComponentPublicInstance<FieldProps>;
+
+function genFormItemFixStyle (
+    labelWidth: FieldLabelWidth | undefined,
+    layout: BaseFormLayout
+): BaseFieldFormItemProps & BaseAttrs {
+    if (labelWidth && layout !== 'vertical' && labelWidth !== 'auto') {
+        return {
+            labelCol: { flex: `0 0 ${labelWidth}px` },
+            wrapperCol: { style: { maxWidth: `calc(100% - ${labelWidth}px)` } },
+            style: { flexWrap: 'nowrap' }
+        }
+    }
+    return {}
+}
 
 const Field = defineComponent({
     inheritAttrs: false,
@@ -67,8 +82,8 @@ const Field = defineComponent({
         }
 
         return () => {
-            const { fieldProps, formItemProps, width: fieldWidth, hidden, colProps } = props
-            const { grid } = unref(formProps) || {}
+            const { fieldProps, formItemProps, width: fieldWidth, labelWidth, hidden, colProps } = props
+            const { layout, grid } = unref(formProps) || {}
 
             const key: string = namePathToString(formItemProps.name!)
 
@@ -76,15 +91,15 @@ const Field = defineComponent({
 
             const needFieldProps: any & BaseAttrs = {
                 ...fieldProps,
-                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!),
-                style: { width: needWidth, ...fieldProps.style }
+                style: { width: needWidth, ...fieldProps.style },
+                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
             }
 
-            const needFormItemProps: BaseFieldFormItemProps & BaseAttrs = {
+            const needFormItemProps: BaseFieldFormItemProps & BaseAttrs = merge({
                 ...formItemProps,
-                model: unref(model),
-                key: key
-            }
+                key: key,
+                model: unref(model)
+            }, genFormItemFixStyle(labelWidth, layout || 'vertical'))
 
             const needBaseFieldProps: BaseFieldProps = {
                 ...pick(props, Object.keys(BaseField.props)) as BaseFieldProps,

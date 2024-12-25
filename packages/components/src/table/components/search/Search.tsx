@@ -1,7 +1,7 @@
-import type { ComputedRef, SlotsType } from 'vue'
+import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
 import type { BaseAttrs, NamePath, Recordable } from '@site-pro/utils'
-import { isEmpty, namePathToString } from '@site-pro/utils'
+import { isEmpty, namePathToString, safeDestructureObject } from '@site-pro/utils'
 import { pick, reduce, set } from 'lodash-es'
 import BaseSearch from './BaseSearch'
 import type { BaseFieldFormItemProps } from '../../../base-field'
@@ -35,7 +35,7 @@ export default defineComponent({
     setup (props, { attrs }) {
         const initialValues: Recordable = genInitialValues(props.columns)
 
-        const searchColumns: ComputedRef<TableColumn[]> = computed(() => {
+        const sColumns: ComputedRef<TableColumn[]> = computed(() => {
             return filterSearchColumns(props.columns)
         })
 
@@ -46,27 +46,29 @@ export default defineComponent({
                 initialValues: initialValues
             }
 
+            const children: VNodeChild = unref(sColumns).map((column) => {
+                const { formItemProps } = column
+
+                const namePath: NamePath = column.dataIndex || column.key as string
+                const key: string = namePathToString(namePath!)
+
+                const needFormItemProps: BaseFieldFormItemProps = {
+                    ...safeDestructureObject(formItemProps),
+                    name: namePath,
+                    label: column.title
+                }
+                const needFieldProps: FieldProps = {
+                    ...pick(column, Object.keys(Field.props)) as FieldProps,
+                    hidden: !!column.hideInSearch,
+                    formItemProps: needFormItemProps
+                }
+
+                return <Field {...needFieldProps} key={key}/>
+            })
+
             return (
                 <BaseSearch {...baseSearchProps}>
-                    {unref(searchColumns).map((column) => {
-                        const { fieldProps, formItemProps } = column
-
-                        const namePath: NamePath = column.dataIndex || column.key as string
-
-                        const needFormItemProps: BaseFieldFormItemProps = {
-                            ...formItemProps,
-                            name: namePath,
-                            label: column.title
-                        }
-                        const needFieldProps: FieldProps = {
-                            ...pick(column, Object.keys(Field.props)) as FieldProps,
-                            hidden: !!column.hideInSearch,
-                            fieldProps: { ...fieldProps, style: { width: '100%' } },
-                            formItemProps: needFormItemProps
-                        }
-                        const key: string = namePathToString(namePath!)
-                        return <Field {...needFieldProps} key={key}/>
-                    })}
+                    {() => children}
                 </BaseSearch>
             )
         }

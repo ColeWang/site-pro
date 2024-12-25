@@ -1,9 +1,8 @@
-import type { Ref, SlotsType, VNode } from 'vue'
-import { cloneVNode, defineComponent, onMounted, ref, unref } from 'vue'
+import type { CSSProperties, Ref, SlotsType } from 'vue'
+import { defineComponent, onMounted, ref, unref } from 'vue'
 import { Card, theme } from 'ant-design-vue'
-import { flattenChildren, isValidElement, toPx } from '@site-pro/utils'
-import { merge, pick } from 'lodash-es'
-import type { BaseFieldProps } from '../../../base-field'
+import { toPx } from '@site-pro/utils'
+import { pick } from 'lodash-es'
 import type { BaseFormInstance } from '../../../base-form'
 import type { QueryFilterProps } from '../../../query-filter'
 import { QueryFilter } from '../../../query-filter'
@@ -36,23 +35,18 @@ export default defineComponent({
         return () => {
             const { sizeMS } = unref(token)
 
-            const children: VNode[] = flattenChildren(slots.default ? slots.default() : [])
+            const cardStyle: CSSProperties = {
+                marginBlockEnd: toPx(sizeMS)
+            }
 
-            const queryFilterProps: QueryFilterProps = pick(props, Object.keys(QueryFilter.props))
+            const queryFilterProps: QueryFilterProps = {
+                ...pick(props, Object.keys(QueryFilter.props)) as QueryFilterProps,
+                onFormRef: onBaseFormRef
+            }
+
             return (
-                <Card style={{ marginBlockEnd: toPx(sizeMS) }} {...attrs}>
-                    <QueryFilter {...queryFilterProps} onFormRef={onBaseFormRef}>
-                        {children.map((child) => {
-                            if (!isValidElement(child)) return child
-                            const { fieldProps } = child.props as any || {}
-                            const extraProps: Partial<BaseFieldProps> = {
-                                fieldProps: merge({
-                                    style: { width: '100%' }
-                                }, fieldProps || {})
-                            }
-                            return cloneVNode(child, extraProps)
-                        })}
-                    </QueryFilter>
+                <Card style={cardStyle} {...attrs}>
+                    <QueryFilter {...queryFilterProps} v-slots={slots}/>
                 </Card>
             )
         }
