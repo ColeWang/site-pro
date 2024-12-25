@@ -71,13 +71,8 @@ export default defineComponent({
         return () => {
             const { options: propsOptions } = props
 
-            const slotProps: Recordable = {
-                dataSource: requestProps.dataSource,
-                loading: requestProps.loading,
-                pagination: requestProps.pagination
-            }
-            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', slotProps)
-            const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', slotProps)
+            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
+            const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', requestProps)
 
             const renderSettings = () => {
                 const vNodeCatalog: Record<string, VNodeChild> = {
