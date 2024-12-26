@@ -1,4 +1,4 @@
-<h1 align="center">Site Pro Locale</h1>
+<h1 align="center">SitePro Locale</h1>
 
 ## Install
 

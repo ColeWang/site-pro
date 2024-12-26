@@ -1,4 +1,4 @@
-<h1 align="center">Site Pro Plugins</h1>
+<h1 align="center">SitePro Plugins</h1>
 
 ## Install
 

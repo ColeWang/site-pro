@@ -1,4 +1,4 @@
-<h1 align="center">Site Pro Utils</h1>
+<h1 align="center">SitePro Utils</h1>
 
 ## Install
 

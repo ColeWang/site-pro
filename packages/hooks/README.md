@@ -1,4 +1,4 @@
-<h1 align="center">Site Pro Hooks</h1>
+<h1 align="center">SitePro Hooks</h1>
 
 ## Install
 

@@ -1,4 +1,4 @@
-<h1 align="center">Site Pro Components</h1>
+<h1 align="center">SitePro Components</h1>
 
 ## Install
 
