@@ -23,7 +23,10 @@
         "noFallthroughCasesInSwitch": true,
         "baseUrl": ".",
         "paths": {
-            "@/*": [
+            "@/": [
+                "./*"
+            ],
+            "@examples/*": [
                 "./examples/*"
             ],
             "@site-pro/hooks": [

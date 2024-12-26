@@ -48,6 +48,10 @@ export default defineConfig({
                         {
                             text: 'Table - 高级表格',
                             link: '/components/table'
+                        },
+                        {
+                            text: 'Descriptions - 定义列表',
+                            link: '/components/descriptions'
                         }
                     ]
                 },
