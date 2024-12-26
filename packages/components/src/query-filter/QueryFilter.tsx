@@ -4,7 +4,7 @@ import { Col as AntCol, Form as AntForm, Row as AntRow, theme as antTheme } from
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseClass, Recordable } from '@site-pro/utils'
 import { convertToCamelCaseProps, flatVNodeChildren } from '@site-pro/utils'
-import { merge, pick } from 'lodash-es'
+import { pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../resize-observer'
 import { ResizeObserver } from '../resize-observer'
 import type { BaseFormInstance, BaseFormProps } from '../base-form'
@@ -70,10 +70,8 @@ const QueryFilter = defineComponent({
                 const childProps: Recordable = convertToCamelCaseProps(child.props || {})
 
                 const fieldNode: VNode = cloneVNode(child, {
-                    fieldProps: merge({
-                        width: '100%'
-                    }, childProps.fieldProps || {}),
                     labelWidth: childProps.labelWidth || labelWidth || sizeMD * 4,
+                    width: '100%'
                 })
 
                 const colClass: BaseClass = { [`${prefixCls.value}-col-hidden`]: hidden }

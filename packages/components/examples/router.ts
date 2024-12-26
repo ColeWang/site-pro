@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { concat, map, reduce, set } from 'lodash-es'
 import Layout from './Layout.vue'
+import Home from './Home.vue'
 
 type GlobResult = Record<string, () => Promise<any>>;
 
@@ -12,7 +13,7 @@ function extractParts (path: string): string[] {
 }
 
 function nameToCamelCase (name: string): string {
-    const regExp: RegExp = /(?:^|_)([a-z])/g
+    const regExp: RegExp = /(?:^|-|_)([a-z])/g
     return name.toLowerCase().replace(regExp, (_, char) => {
         return char.toUpperCase()
     })
@@ -61,8 +62,16 @@ export default () => {
         routes: concat([
             {
                 path: '/',
-                name: 'Home',
-                component: Layout
+                name: '_home',
+                redirect: { name: 'Home' },
+                component: Layout,
+                children: [
+                    {
+                        path: 'Home',
+                        name: 'Home',
+                        component: Home
+                    }
+                ]
             },
             {
                 path: '/:pathMatch(.*)*',
