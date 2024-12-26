@@ -1,7 +1,7 @@
 {
     "name": "@site-pro/plugins",
     "version": "0.4.4",
-    "description": "Vue3 Admin Pro Plugins of Vue",
+    "description": "Vue3 AdminPro Plugins of Vue",
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
