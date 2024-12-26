@@ -6,9 +6,9 @@ import { createReactivePlugin } from '../plugin-utils'
 export type ScreenStateName = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export interface ScreenPluginInstallOptions {
-    sizes: Record<Exclude<ScreenStateName, 'xs'>, number>;
-    delay: number;
-    classes: boolean;
+    sizes?: Record<Exclude<ScreenStateName, 'xs'>, number>;
+    delay?: number;
+    classes?: boolean;
     $site?: any;
 }
 
