@@ -1,9 +1,9 @@
 import type { App } from 'vue'
 import { createApp } from 'vue'
 import type { Router } from 'vue-router'
-import createRouter from './router'
-import Root from './App.vue'
-import './reset.css'
+import createRouter from '@/router'
+import Root from '@/App.vue'
+import '@/reset.css'
 
 const app: App = createApp(Root)
 

@@ -54,8 +54,7 @@ export default defineConfig((config) => {
         ],
         resolve: {
             alias: {
-                '@': resolve(__dirname, '.'),
-                '@examples': resolve(__dirname, './examples'),
+                '@': resolve(__dirname, './examples'),
                 '@site-pro/hooks': resolve(__dirname, './src')
             }
         },

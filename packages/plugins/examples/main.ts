@@ -1,11 +1,14 @@
+import type { App } from 'vue'
 import { createApp } from 'vue'
-import Root from './App.vue'
-import router from './router'
-import { createSite } from '../src'
+import type { Router } from 'vue-router'
+import createRouter from '@/router'
+import Root from '@/App.vue'
+import '@/reset.css'
 
-const site = createSite()
+const app: App = createApp(Root)
 
-const app = createApp(Root)
-app.use(site)
+const router: Router = createRouter()
+
 app.use(router)
+
 app.mount('#app')
