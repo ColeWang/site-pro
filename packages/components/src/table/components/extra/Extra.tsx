@@ -1,6 +1,6 @@
 import type { Ref, SlotsType } from 'vue'
 import { defineComponent, ref } from 'vue'
-import { ConfigProvider } from 'ant-design-vue'
+import { ConfigProvider as AntConfigProvider } from 'ant-design-vue'
 import { getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
 import type { ExtraSlots } from './typings'
@@ -25,13 +25,13 @@ export default defineComponent({
         return () => {
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <ConfigProvider getPopupContainer={getPopupContainer}>
+                    <AntConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                             <div class={`${prefixCls.value}-container`}>
                                 {slots.default && slots.default()}
                             </div>
                         </div>
-                    </ConfigProvider>
+                    </AntConfigProvider>
                 </div>
             )
         }

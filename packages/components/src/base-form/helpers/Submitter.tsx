@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Button, Space, theme } from 'ant-design-vue'
+import { Button as AntButton, Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import { preventDefault } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../locale'
 import type { ButtonProps } from '../../ant-typings'
@@ -49,7 +49,7 @@ export default defineComponent({
     props: submitterProps(),
     emits: ['reset', 'submit'],
     setup (props, { emit, attrs }) {
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         const { t } = useLocaleReceiver(['Form'])
 
@@ -75,18 +75,18 @@ export default defineComponent({
             }
 
             return (
-                <Space size={propsSize || sizeMS / 2} {...attrs}>
+                <AntSpace size={propsSize || sizeMS / 2} {...attrs}>
                     {resetButtonProps !== false && (
-                        <Button {...resetButtonProps} onClick={onReset}>
+                        <AntButton {...resetButtonProps} onClick={onReset}>
                             {resetText || t('reset')}
-                        </Button>
+                        </AntButton>
                     )}
                     {submitButtonProps !== false && (
-                        <Button {...needSubmitButtonProps} html-type={'submit'}>
+                        <AntButton {...needSubmitButtonProps} html-type={'submit'}>
                             {submitText || t('submit')}
-                        </Button>
+                        </AntButton>
                     )}
-                </Space>
+                </AntSpace>
             )
         }
     }

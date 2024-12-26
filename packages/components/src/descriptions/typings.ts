@@ -1,7 +1,6 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import { descriptionsProps as antDescriptionsProps } from 'ant-design-vue/es/descriptions'
-import { formItemProps } from 'ant-design-vue/es/form'
-import type { Recordable } from '@site-pro/utils'
+import type { NamePath, Recordable } from '@site-pro/utils'
 import { baseFieldProps } from '../base-field'
 
 export interface DescriptionsRequest {
@@ -52,17 +51,20 @@ export type DescriptionsInstance = ComponentPublicInstance<DescriptionsProps, De
 
 export const descriptionsItemProps = () => ({
     ...baseFieldProps(),
-    ...formItemProps(),
-    prefixCls: {
-        type: String as PropType<string>,
-        default: undefined
-    },
     label: {
         type: [String, Number, Array, Object, Function] as PropType<string>,
         default: undefined
     },
+    name: {
+        type: [String, Number, Array] as PropType<NamePath>,
+        default: undefined
+    },
     labelStyle: {
         type: Object as PropType<CSSProperties>,
+        default: undefined
+    },
+    prefixCls: {
+        type: String as PropType<string>,
         default: undefined
     },
     contentStyle: {
@@ -70,7 +72,7 @@ export const descriptionsItemProps = () => ({
         default: undefined
     },
     span: {
-        type: Number as PropType<any>,
+        type: Number as PropType<number>,
         default: 1
     },
     hide: {
@@ -85,6 +87,7 @@ export const descriptionsItemProps = () => ({
 
 export interface DescriptionsItemSlots {
     default?: any;
+    label?: any;
 }
 
 export type DescriptionsItemProps = Partial<ExtractPropTypes<ReturnType<typeof descriptionsItemProps>>>;

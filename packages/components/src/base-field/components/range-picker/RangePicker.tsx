@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { RangePicker } from 'ant-design-vue'
+import { RangePicker as AntRangePicker } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
@@ -47,7 +47,7 @@ export default defineComponent({
                 // -- placeholder 类型有问题 string | [string, string]
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <RangePicker {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntRangePicker {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

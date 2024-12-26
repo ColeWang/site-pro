@@ -1,6 +1,6 @@
 import type { VNodeChild } from 'vue'
-import { h, isVNode } from 'vue'
-import { Badge, Space } from 'ant-design-vue'
+import { createVNode, isVNode } from 'vue'
+import { Badge as AntBadge, Space as AntSpace } from 'ant-design-vue'
 import { compact, isArray, isNumber, isObject, isString, map, reduce, set } from 'lodash-es'
 import type { BaseEnumType, BaseFieldNames, BaseOptionType } from './types'
 import { isEmpty } from './is'
@@ -44,7 +44,7 @@ export function enumToText (text: BaseOptionType | VNodeChild, valueEnum: BaseEn
         const children: VNodeChild[] = compact(text).map((value) => {
             return enumToText(value, valueEnum)
         })
-        return h(Space, { size: 2, wrap: true }, {
+        return createVNode(AntSpace, { size: 2, wrap: true }, {
             default: () => children,
             split: () => ','
         })
@@ -52,7 +52,7 @@ export function enumToText (text: BaseOptionType | VNodeChild, valueEnum: BaseEn
     if (isString(text) || isNumber(text)) {
         const plain: string | number | BaseEnumType = valueEnum[text]
         if (plain && isObject(plain)) {
-            return h(Badge, { ...plain })
+            return createVNode(AntBadge, { ...plain })
         }
         return isEmpty(plain) ? text : plain
     }

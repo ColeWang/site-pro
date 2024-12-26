@@ -1,6 +1,6 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Form } from 'ant-design-vue'
+import { Form as AntForm } from 'ant-design-vue'
 import type { BaseAttrs, BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { namePathToString, toPx } from '@site-pro/utils'
 import { has, isArray, isString, merge, omit, pick } from 'lodash-es'
@@ -116,9 +116,9 @@ const Field = defineComponent({
 
             return (
                 <ColWrapper {...needColWrapProps} key={key}>
-                    <Form.Item {...needFormItemProps} v-slots={formItemSlots}>
+                    <AntForm.Item {...needFormItemProps} v-slots={formItemSlots}>
                         <BaseField {...needBaseFieldProps} v-slots={baseFieldSlots}/>
-                    </Form.Item>
+                    </AntForm.Item>
                 </ColWrapper>
             )
         }

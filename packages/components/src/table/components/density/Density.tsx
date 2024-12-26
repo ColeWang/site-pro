@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
-import { Menu, theme } from 'ant-design-vue'
+import { Menu as AntMenu, theme as antTheme } from 'ant-design-vue'
 import type { BaseAttrs } from '@site-pro/utils'
 import { toPx } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
@@ -14,7 +14,7 @@ export default defineComponent({
     name: 'ProTableDensity',
     props: densityProps(),
     setup (props, { attrs }) {
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
         const { tableSize, onSizeChange } = useSharedContext()
@@ -39,17 +39,17 @@ export default defineComponent({
                 onClick: onMenuClick
             }
             return (
-                <Menu {...menuProps} {...attrs}>
-                    <Menu.Item key={'large'}>
+                <AntMenu {...menuProps} {...attrs}>
+                    <AntMenu.Item key={'large'}>
                         {t('densityLarger')}
-                    </Menu.Item>
-                    <Menu.Item key={'middle'}>
+                    </AntMenu.Item>
+                    <AntMenu.Item key={'middle'}>
                         {t('densityMiddle')}
-                    </Menu.Item>
-                    <Menu.Item key={'small'}>
+                    </AntMenu.Item>
+                    <AntMenu.Item key={'small'}>
                         {t('densitySmall')}
-                    </Menu.Item>
-                </Menu>
+                    </AntMenu.Item>
+                </AntMenu>
             )
         }
     }

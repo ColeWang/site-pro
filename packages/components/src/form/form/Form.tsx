@@ -1,6 +1,6 @@
 import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
-import { Form as AForm } from 'ant-design-vue'
+import { Form as AntForm } from 'ant-design-vue'
 import { FormItem } from '../item'
 import { FormGroup } from '../group'
 import { FormDependency } from '../dependency'
@@ -35,13 +35,13 @@ Form.install = function (app: App): App {
     return app
 }
 
-Form.useForm = AForm.useForm
+Form.useForm = AntForm.useForm
 Form.Item = FormItem
 Form.Group = FormGroup
 Form.Dependency = FormDependency
 
 export default Form as typeof Form & Plugin & {
-    readonly useForm: typeof AForm.useForm;
+    readonly useForm: typeof AntForm.useForm;
     readonly Item: typeof FormItem;
     readonly Group: typeof FormGroup;
     readonly Dependency: typeof FormDependency;

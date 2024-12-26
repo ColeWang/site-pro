@@ -1,5 +1,5 @@
 import { defineComponent, unref } from 'vue'
-import { Button, Checkbox, theme } from 'ant-design-vue'
+import { Button as AntButton, Checkbox as AntCheckbox, theme as antTheme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
 import { toPx } from '@site-pro/utils'
@@ -19,7 +19,7 @@ export default defineComponent({
     setup (props, { attrs }) {
         const { prefixCls } = useConfigInject('pro-table-setting', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
         const {
             columns = [] as TableColumn[],
@@ -106,20 +106,20 @@ export default defineComponent({
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     <div class={`${prefixCls.value}-title`}>
-                        <Checkbox
+                        <AntCheckbox
                             indeterminate={indeterminate}
                             checked={checked}
                             onChange={onCheckClick}
                         >
                             {t('columnDisplay')}
-                        </Checkbox>
-                        <Button
+                        </AntCheckbox>
+                        <AntButton
                             style={{ padding: toPx(sizeXXS) }}
                             type={'link'}
                             onClick={onClearClick}
                         >
                             {t('reset')}
-                        </Button>
+                        </AntButton>
                     </div>
                     <div class={`${prefixCls.value}-tree-list-group`}>
                         <TreeList

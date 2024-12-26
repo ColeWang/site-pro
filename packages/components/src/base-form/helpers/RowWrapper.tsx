@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
-import { Row } from 'ant-design-vue'
+import { Row as AntRow } from 'ant-design-vue'
 import { rowProps as antRowProps } from 'ant-design-vue/es/grid/Row'
 import { pick } from 'lodash-es'
 import type { RowProps } from '../../ant-typings'
@@ -30,11 +30,11 @@ export default defineComponent({
             const { grid } = props
 
             if (grid) {
-                const needRowProps: RowProps = pick(props, Object.keys(Row.props)) as RowProps
+                const needRowProps: RowProps = pick(props, Object.keys(AntRow.props)) as RowProps
                 return (
-                    <Row {...needRowProps}>
+                    <AntRow {...needRowProps}>
                         {slots.default && slots.default()}
-                    </Row>
+                    </AntRow>
                 )
             }
             return slots.default && slots.default()

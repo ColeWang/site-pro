@@ -1,6 +1,6 @@
 import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Form } from 'ant-design-vue'
+import { Form as AntForm } from 'ant-design-vue'
 import type { BaseAttrs } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { ColWrapperProps } from '../../base-form'
@@ -26,12 +26,12 @@ const FormItem = defineComponent({
             }
 
             const formItemProps: FormItemProps & BaseAttrs = {
-                ...pick(props, Object.keys(Form.Item.props)) as FormItemProps,
+                ...pick(props, Object.keys(AntForm.Item.props)) as FormItemProps,
                 ...attrs
             }
             return (
                 <ColWrapper {...colWrapperProps}>
-                    <Form.Item {...formItemProps} v-slots={slots}/>
+                    <AntForm.Item {...formItemProps} v-slots={slots}/>
                 </ColWrapper>
             )
         }

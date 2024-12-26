@@ -1,6 +1,11 @@
 import type { App, ComputedRef, CSSProperties, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue'
-import { Card, ConfigProvider, Table as AntTable, theme } from 'ant-design-vue'
+import {
+    Card as AntCard,
+    ConfigProvider as AntConfigProvider,
+    Table as AntTable,
+    theme as antTheme
+} from 'ant-design-vue'
 import type { BaseSlot, NamePath, Recordable } from '@site-pro/utils'
 import { getElement, getSlot, getSlotVNode, omitNil, safeDestructureObject, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
@@ -40,7 +45,7 @@ const Table = defineComponent({
 
         const { prefixCls } = useConfigInject('pro-table', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         const popupContainer: Ref<HTMLElement | null> = ref(null)
         const tableRef: Ref<HTMLElement | null> = ref(null)
@@ -242,7 +247,7 @@ const Table = defineComponent({
                 return <Alert {...alertProps} v-slots={alertSlots}/>
             }
 
-            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', { ...requestProps })
+            const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', requestProps)
 
             const needTableProps: AntTableProps = {
                 ...pick(restProps, Object.keys(Table.props)) as AntTableProps,
@@ -273,17 +278,17 @@ const Table = defineComponent({
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     {propsSearch !== false && renderSearch()}
                     {extraDom && <Extra>{extraDom}</Extra>}
-                    <Card bodyStyle={cardBodyStyle}>
+                    <AntCard bodyStyle={cardBodyStyle}>
                         {propsToolbar !== false && renderToolbar()}
                         {propsRowSelection !== false && renderAlert()}
-                        <ConfigProvider getPopupContainer={getPopupContainer}>
+                        <AntConfigProvider getPopupContainer={getPopupContainer}>
                             <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                                 <div class={`${prefixCls.value}-container`} ref={tableRef}>
                                     {tableDom || baseTableDom}
                                 </div>
                             </div>
-                        </ConfigProvider>
-                    </Card>
+                        </AntConfigProvider>
+                    </AntCard>
                 </div>
             )
         }

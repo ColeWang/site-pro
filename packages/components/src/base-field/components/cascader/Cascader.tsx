@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { Cascader } from 'ant-design-vue'
+import { Cascader as AntCascader } from 'ant-design-vue'
 import type { BaseEnumType, Recordable } from '@site-pro/utils'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
@@ -37,7 +37,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <Cascader {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntCascader {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref } from 'vue'
-import { ConfigProvider, Space, theme } from 'ant-design-vue'
+import { ConfigProvider as AntConfigProvider, Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getElement, getSlotVNode } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
@@ -19,7 +19,7 @@ export default defineComponent({
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-table-alert', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { t } = useLocaleReceiver(['Table', 'alert'])
 
         const popupContainer = ref(null)
@@ -40,12 +40,12 @@ export default defineComponent({
 
             const contentText: string = `${t('selected')} ${selectedRowKeys.length} ${t('item')}`
             const defaultContent: VNodeChild = (
-                <Space size={sizeMS / 2}>
+                <AntSpace size={sizeMS / 2}>
                     <Fragment>{contentText}</Fragment>
                     <Action onClick={onCleanSelected}>
                         {t('clear')}
                     </Action>
-                </Space>
+                </AntSpace>
             )
 
             const slotProps: Recordable = {
@@ -59,7 +59,7 @@ export default defineComponent({
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <ConfigProvider getPopupContainer={getPopupContainer}>
+                    <AntConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                             <div class={`${prefixCls.value}-container`}>
                                 <div class={`${prefixCls.value}-wrapper`}>
@@ -72,7 +72,7 @@ export default defineComponent({
                                 </div>
                             </div>
                         </div>
-                    </ConfigProvider>
+                    </AntConfigProvider>
                 </div>
             )
         }

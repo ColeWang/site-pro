@@ -1,6 +1,6 @@
 import type { VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Space, theme } from 'ant-design-vue'
+import { Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import {
     VerticalAlignBottomOutlined,
     VerticalAlignMiddleOutlined,
@@ -21,7 +21,7 @@ export default defineComponent({
     setup (props, { emit }) {
         const { prefixCls } = useConfigInject('pro-table-setting-node', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
 
         /* v8 ignore next 3 */
@@ -39,7 +39,7 @@ export default defineComponent({
             }
 
             const iconDom: VNodeChild = (
-                <Space size={sizeXXS}>
+                <AntSpace size={sizeXXS}>
                     {fixed !== 'left' && (
                         <Tooltip title={t('leftPin')} fixed={'left'} {...tooltipProps}>
                             <VerticalAlignTopOutlined/>
@@ -55,7 +55,7 @@ export default defineComponent({
                             <VerticalAlignBottomOutlined/>
                         </Tooltip>
                     )}
-                </Space>
+                </AntSpace>
             )
 
             return wrapSSR(

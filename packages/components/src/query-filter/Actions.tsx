@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Button, Space, theme } from 'ant-design-vue'
+import { Button as AntButton, Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import { DownOutlined, UpOutlined } from '@ant-design/icons-vue'
 import { toPx } from '@site-pro/utils'
 import { pick } from 'lodash-es'
@@ -48,7 +48,7 @@ export default defineComponent({
     props: queryFilterActionsProps(),
     emits: ['submit', 'reset', 'collapse'],
     setup (props, { emit, attrs }) {
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { t } = useLocaleReceiver(['Form'])
 
         function onCollapse (): void {
@@ -61,10 +61,10 @@ export default defineComponent({
 
             const iconStyle: CSSProperties = { marginInlineStart: toPx(sizeXXS) }
             const collapseDom: false | VNodeChild = showCollapse && (
-                <Button style={{ padding: 0 }} type={'link'} onClick={onCollapse}>
+                <AntButton style={{ padding: 0 }} type={'link'} onClick={onCollapse}>
                     <span>{!collapsed ? t('expand') : t('collapsed')}</span>
                     {collapsed ? <DownOutlined style={iconStyle}/> : <UpOutlined style={iconStyle}/>}
-                </Button>
+                </AntButton>
             )
             const submitterProps: SubmitterProps = {
                 ...pick(props, Object.keys(Submitter.props)) as SubmitterProps,
@@ -73,10 +73,10 @@ export default defineComponent({
             }
             return (
                 <div {...attrs}>
-                    <Space size={sizeMS / 2}>
+                    <AntSpace size={sizeMS / 2}>
                         <Submitter {...submitterProps}/>
                         {collapseDom}
-                    </Space>
+                    </AntSpace>
                 </div>
             )
         }

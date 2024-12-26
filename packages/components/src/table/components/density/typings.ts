@@ -1,8 +1,8 @@
 import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
-import { menuProps } from 'ant-design-vue/es/menu/src/Menu'
+import { menuProps as antMenuProps } from 'ant-design-vue/es/menu/src/Menu'
 
 export const densityProps = () => ({
-    ...menuProps()
+    ...antMenuProps()
 })
 
 export type DensityProps = Partial<ExtractPropTypes<ReturnType<typeof densityProps>>>;

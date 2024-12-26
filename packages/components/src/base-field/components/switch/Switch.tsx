@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { Switch } from 'ant-design-vue'
+import { Switch as AntSwitch } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
@@ -45,7 +45,7 @@ export default defineComponent({
             }
             const editDom: VNodeChild = (
                 <div style={style}>
-                    <Switch {...needFieldProps} v-slots={slots}/>
+                    <AntSwitch {...needFieldProps} v-slots={slots}/>
                 </div>
             )
             // ----

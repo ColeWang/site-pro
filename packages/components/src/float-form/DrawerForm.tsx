@@ -1,6 +1,6 @@
 import type { App, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
-import { Drawer } from 'ant-design-vue'
+import { Drawer as AntDrawer } from 'ant-design-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { omit, pick } from 'lodash-es'
@@ -67,7 +67,7 @@ const DrawerForm = defineComponent({
             }
 
             const needDrawerProps: DrawerProps = {
-                ...pick(props, Object.keys(Drawer.props)) as DrawerProps,
+                ...pick(props, Object.keys(AntDrawer.props)) as DrawerProps,
                 ...attrs,
                 ...extraProps,
                 open: unref(sOpen),
@@ -93,9 +93,9 @@ const DrawerForm = defineComponent({
 
             return (
                 <Fragment>
-                    <Drawer {...needDrawerProps} v-slots={drawerSlots}>
+                    <AntDrawer {...needDrawerProps} v-slots={drawerSlots}>
                         <BaseForm {...baseFormProps} ref={onBaseFormRef} v-slots={baseFormSlots}/>
-                    </Drawer>
+                    </AntDrawer>
                     {triggerDom && (
                         <div style={{ display: 'inline-block' }} onClick={onOpen}>
                             {triggerDom}

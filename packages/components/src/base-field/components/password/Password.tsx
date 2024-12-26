@@ -1,6 +1,6 @@
 import type { Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, ref, unref } from 'vue'
-import { Input, Space, theme } from 'ant-design-vue'
+import { Input as AntInput, Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode, preventDefault } from '@site-pro/utils'
@@ -14,7 +14,7 @@ export default defineComponent({
     props: fieldPasswordProps(),
     slots: Object as SlotsType<FieldPasswordSlots>,
     setup (props, { slots }) {
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { t } = useLocaleReceiver(['global'])
 
         const visible: Ref<boolean> = ref(props.fieldProps.visible || false)
@@ -33,10 +33,10 @@ export default defineComponent({
                 const eyeIcon: VNodeChild = unref(visible) ? <EyeOutlined/> : <EyeInvisibleOutlined/>
 
                 const readDom: VNodeChild = (
-                    <Space size={sizeXXS}>
+                    <AntSpace size={sizeXXS}>
                         <span>{unref(visible) ? text ?? emptyText : '＊＊＊＊＊'}</span>
                         <a onClick={onVisibleClick}>{eyeIcon}</a>
-                    </Space>
+                    </AntSpace>
                 )
                 // ----
                 const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
@@ -49,7 +49,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <Input.Password {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntInput.Password {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

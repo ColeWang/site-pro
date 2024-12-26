@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { TimeRangePicker } from 'ant-design-vue'
+import { TimeRangePicker as AntTimeRangePicker } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
@@ -46,7 +46,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <TimeRangePicker {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntTimeRangePicker {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

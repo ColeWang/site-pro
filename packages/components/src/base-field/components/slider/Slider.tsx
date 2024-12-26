@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { Slider } from 'ant-design-vue'
+import { Slider as AntSlider } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { isArray } from 'lodash-es'
@@ -38,7 +38,7 @@ export default defineComponent({
                 style: { minWidth: 100, ...fieldProps.style },
                 ...fieldProps
             }
-            const editDom: VNodeChild = <Slider {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntSlider {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

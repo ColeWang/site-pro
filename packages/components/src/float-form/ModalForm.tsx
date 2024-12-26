@@ -1,6 +1,6 @@
 import type { App, Plugin, Ref, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment, ref, unref, watch } from 'vue'
-import { Modal } from 'ant-design-vue'
+import { Modal as AntModal } from 'ant-design-vue'
 import { omit, pick } from 'lodash-es'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
@@ -67,7 +67,7 @@ const ModalForm = defineComponent({
             }
 
             const needModalProps: ModalProps = {
-                ...pick(props, Object.keys(Modal.props)) as ModalProps,
+                ...pick(props, Object.keys(AntModal.props)) as ModalProps,
                 ...extraProps,
                 ...attrs,
                 open: unref(sOpen),
@@ -94,9 +94,9 @@ const ModalForm = defineComponent({
 
             return (
                 <Fragment>
-                    <Modal {...needModalProps} v-slots={modalSlots}>
+                    <AntModal {...needModalProps} v-slots={modalSlots}>
                         <BaseForm {...baseFormProps} ref={onBaseFormRef} v-slots={baseFormSlots}/>
-                    </Modal>
+                    </AntModal>
                     {triggerDom && (
                         <div style={{ display: 'inline-block' }} onClick={onOpen}>
                             {triggerDom}

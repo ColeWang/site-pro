@@ -1,6 +1,6 @@
 import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, Fragment, unref } from 'vue'
-import { Checkbox } from 'ant-design-vue'
+import { Checkbox as AntCheckbox } from 'ant-design-vue'
 import type { BaseEnumType, BaseOptionType, Recordable } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
@@ -40,7 +40,7 @@ export default defineComponent({
                 options: unref(options) as any,
                 ...fieldProps
             }
-            const editDom: VNodeChild = <Checkbox.Group {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntCheckbox.Group {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

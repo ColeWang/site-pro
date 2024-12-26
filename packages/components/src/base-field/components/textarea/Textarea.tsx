@@ -1,6 +1,6 @@
 import type { CSSProperties, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Input, theme } from 'ant-design-vue'
+import { Input as AntInput, theme as antTheme } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
@@ -15,7 +15,7 @@ export default defineComponent({
     slots: Object as SlotsType<FieldTextareaSlots>,
     setup (props, { slots }) {
         const { prefixCls } = useConfigInject('pro-field-textarea', props)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { t } = useLocaleReceiver(['global'])
 
         return () => {
@@ -51,7 +51,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <Input.TextArea {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntInput.TextArea {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

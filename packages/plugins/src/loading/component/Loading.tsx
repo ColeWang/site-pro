@@ -1,5 +1,5 @@
 import { defineComponent, Transition } from 'vue'
-import { Spin } from 'ant-design-vue'
+import { Spin as AntSpin } from 'ant-design-vue'
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import { loadingProps } from './typings'
@@ -28,7 +28,7 @@ export default defineComponent({
                     <Transition appear={true} name={`${prefixCls.value}-mask-fade`} onAfterLeave={onAfterLeave}>
                         <div v-show={visible} class={`${prefixCls.value}-mask`}>
                             <div class={`${prefixCls.value}-spin`}>
-                                <Spin v-slots={{
+                                <AntSpin v-slots={{
                                     indicator: () => <LoadingOutlined/>
                                 }}/>
                             </div>

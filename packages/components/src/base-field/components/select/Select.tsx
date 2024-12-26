@@ -1,6 +1,6 @@
 import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, Fragment, unref } from 'vue'
-import { Select } from 'ant-design-vue'
+import { Select as AntSelect } from 'ant-design-vue'
 import type { BaseEnumType, BaseOptionType, Recordable } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
@@ -46,7 +46,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <Select {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntSelect {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

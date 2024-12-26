@@ -1,6 +1,6 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
-import { Tooltip } from 'ant-design-vue'
+import { Tooltip as AntTooltip } from 'ant-design-vue'
 import { preventDefault } from '@site-pro/utils'
 
 export const tooltipProps = () => ({
@@ -45,11 +45,11 @@ export default defineComponent({
             const { title } = props
 
             return (
-                <Tooltip title={title}>
+                <AntTooltip title={title}>
                     <span onClick={onClick}>
                         {slots.default && slots.default()}
                     </span>
-                </Tooltip>
+                </AntTooltip>
             )
         }
     }

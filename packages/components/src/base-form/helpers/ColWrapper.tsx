@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
 import { colProps as antColProps } from 'ant-design-vue/es/grid/Col'
-import { Col } from 'ant-design-vue'
+import { Col as AntCol } from 'ant-design-vue'
 import { pick } from 'lodash-es'
 import type { ColProps } from '../../ant-typings'
 
@@ -34,14 +34,14 @@ export default defineComponent({
             const { grid } = props
 
             if (grid) {
-                const needColProps: ColProps = pick(props, Object.keys(Col.props)) as ColProps
+                const needColProps: ColProps = pick(props, Object.keys(AntCol.props)) as ColProps
                 if (!needColProps.span && !needColProps.xs) {
                     needColProps.xs = 24
                 }
                 return (
-                    <Col {...needColProps}>
+                    <AntCol {...needColProps}>
                         {slots.default && slots.default()}
-                    </Col>
+                    </AntCol>
                 )
             }
             return slots.default && slots.default()

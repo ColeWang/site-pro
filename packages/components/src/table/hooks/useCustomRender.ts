@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue'
-import { computed, h } from 'vue'
-import { TypographyText } from 'ant-design-vue'
+import { computed, createVNode } from 'vue'
+import { Typography as AntTypography } from 'ant-design-vue'
 import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject } from 'lodash-es'
 import type { TypographyCopyable } from '../../ant-typings'
@@ -43,7 +43,7 @@ function customRender (oldColumn: TableColumn, emptyText?: string): CustomRender
         if ((oldColumn.copyable || oldColumn.ellipsis) && !isEmpty(opt.text)) {
             const copyable: boolean | TypographyCopyable = getCopyable(oldColumn, opt.text)
             const ellipsis: boolean | undefined = getEllipsis(oldColumn)
-            return h(TypographyText, { copyable, ellipsis, content: opt.text })
+            return createVNode(AntTypography.Text, { copyable, ellipsis, content: opt.text })
         }
         return isEmpty(opt.text) ? emptyText : opt.text
     }

@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { TimePicker } from 'ant-design-vue'
+import { TimePicker as AntTimePicker } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
@@ -36,7 +36,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <TimePicker {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntTimePicker {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)

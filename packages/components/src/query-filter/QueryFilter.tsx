@@ -1,6 +1,6 @@
 import type { App, Plugin, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { cloneVNode, defineComponent, ref, unref } from 'vue'
-import { Col, Form, Row, theme } from 'ant-design-vue'
+import { Col as AntCol, Form as AntForm, Row as AntRow, theme as antTheme } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseClass, Recordable } from '@site-pro/utils'
 import { convertToCamelCaseProps, flatVNodeChildren } from '@site-pro/utils'
@@ -26,7 +26,7 @@ const QueryFilter = defineComponent({
     setup (props, { emit, slots, attrs }) {
         const { prefixCls } = useConfigInject('pro-query-filter', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
 
@@ -78,9 +78,9 @@ const QueryFilter = defineComponent({
 
                 const colClass: BaseClass = { [`${prefixCls.value}-col-hidden`]: hidden }
                 return (
-                    <Col key={key} class={colClass} span={unref(span)}>
+                    <AntCol key={key} class={colClass} span={unref(span)}>
                         {fieldNode}
-                    </Col>
+                    </AntCol>
                 )
             })
 
@@ -107,21 +107,21 @@ const QueryFilter = defineComponent({
                 [`${prefixCls.value}-form-item__vertical`]: unref(layout) === 'vertical' && !haveRow
             }
             const actionDom: VNodeChild = (
-                <Col class={`${prefixCls.value}-action-col`} span={unref(span)} offset={offset} key={'action'}>
-                    <Form.Item class={formItemClass} colon={false}>
+                <AntCol class={`${prefixCls.value}-action-col`} span={unref(span)} offset={offset} key={'action'}>
+                    <AntForm.Item class={formItemClass} colon={false}>
                         <Actions {...actionsProps}/>
-                    </Form.Item>
-                </Col>
+                    </AntForm.Item>
+                </AntCol>
             )
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     <ResizeObserver onResize={onResize}>
                         <BaseForm {...baseFormProps} ref={onBaseFormRef}>
-                            <Row {...needRowProps}>
+                            <AntRow {...needRowProps}>
                                 {colNodes}
                                 {actionDom}
-                            </Row>
+                            </AntRow>
                         </BaseForm>
                     </ResizeObserver>
                 </div>

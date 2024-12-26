@@ -1,6 +1,6 @@
 import type { App, CSSProperties, Plugin, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Col, theme } from 'ant-design-vue'
+import { Col as AntCol, theme as antTheme } from 'ant-design-vue'
 import { getPropsSlotVNode, toPx } from '@site-pro/utils'
 import type { GlobalToken } from '../../theme'
 import type { BaseFormLayout, RowWrapperProps } from '../../base-form'
@@ -28,7 +28,7 @@ const FormGroup = defineComponent({
     props: formGroupProps(),
     slots: Object as SlotsType<FormGroupSlots>,
     setup (props, { slots, attrs }) {
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
         const { formProps } = useFormInstance()
 
         return () => {
@@ -44,13 +44,13 @@ const FormGroup = defineComponent({
                 <ColWrapper span={24} grid={grid}>
                     <RowWrapper {...rowWrapperProps}>
                         {titleDom && (
-                            <Col span={24}>
+                            <AntCol span={24}>
                                 {noStyle ? titleDom : (
                                     <div style={titleStyle} {...attrs}>
                                         {titleDom}
                                     </div>
                                 )}
-                            </Col>
+                            </AntCol>
                         )}
                         {slots.default && slots.default()}
                     </RowWrapper>

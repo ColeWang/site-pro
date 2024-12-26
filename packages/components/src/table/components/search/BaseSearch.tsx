@@ -1,6 +1,6 @@
 import type { CSSProperties, Ref, SlotsType } from 'vue'
 import { defineComponent, onMounted, ref, unref } from 'vue'
-import { Card, theme } from 'ant-design-vue'
+import { Card as AntCard, theme as antTheme } from 'ant-design-vue'
 import { toPx } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 import type { BaseFormInstance } from '../../../base-form'
@@ -17,7 +17,7 @@ export default defineComponent({
     setup (props, { slots, attrs }) {
         const baseFormRef: Ref<BaseFormInstance | null> = ref(null)
 
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         onMounted(() => {
             !props.manualRequest && onSubmit()
@@ -45,9 +45,9 @@ export default defineComponent({
             }
 
             return (
-                <Card style={cardStyle} {...attrs}>
+                <AntCard style={cardStyle} {...attrs}>
                     <QueryFilter {...queryFilterProps} v-slots={slots}/>
-                </Card>
+                </AntCard>
             )
         }
     }

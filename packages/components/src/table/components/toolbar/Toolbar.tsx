@@ -1,6 +1,13 @@
 import type { ComputedRef, Ref, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, ref, unref } from 'vue'
-import { Button, ConfigProvider, Dropdown, Popover, Space, Tooltip } from 'ant-design-vue'
+import {
+    Button as AntButton,
+    ConfigProvider as AntConfigProvider,
+    Dropdown as AntDropdown,
+    Popover as AntPopover,
+    Space as AntSpace,
+    Tooltip as AntTooltip
+} from 'ant-design-vue'
 import {
     ColumnHeightOutlined,
     ReloadOutlined,
@@ -77,40 +84,40 @@ export default defineComponent({
             const renderSettings = () => {
                 const vNodeCatalog: Record<string, VNodeChild> = {
                     reload: (
-                        <Tooltip title={t('reload')}>
-                            <Button onClick={onReloadClick}>
+                        <AntTooltip title={t('reload')}>
+                            <AntButton onClick={onReloadClick}>
                                 <ReloadOutlined spin={requestProps.loading}/>
-                            </Button>
-                        </Tooltip>
+                            </AntButton>
+                        </AntTooltip>
                     ),
                     export: (
-                        <Tooltip title={t('export')}>
-                            <Button onClick={onExportClick}>
+                        <AntTooltip title={t('export')}>
+                            <AntButton onClick={onExportClick}>
                                 <VerticalAlignBottomOutlined/>
-                            </Button>
-                        </Tooltip>
+                            </AntButton>
+                        </AntTooltip>
                     ),
                     density: (
-                        <Tooltip title={t('density')}>
-                            <Dropdown trigger={['click']} placement={'bottomRight'} v-slots={{
+                        <AntTooltip title={t('density')}>
+                            <AntDropdown trigger={['click']} placement={'bottomRight'} v-slots={{
                                 overlay: () => <Density/>
                             }}>
-                                <Button>
+                                <AntButton>
                                     <ColumnHeightOutlined/>
-                                </Button>
-                            </Dropdown>
-                        </Tooltip>
+                                </AntButton>
+                            </AntDropdown>
+                        </AntTooltip>
                     ),
                     setting: (
-                        <Tooltip title={t('columnSetting')}>
-                            <Popover trigger={'click'} placement={'bottomRight'} v-slots={{
+                        <AntTooltip title={t('columnSetting')}>
+                            <AntPopover trigger={'click'} placement={'bottomRight'} v-slots={{
                                 content: () => <Setting/>
                             }}>
-                                <Button>
+                                <AntButton>
                                     <SettingOutlined/>
-                                </Button>
-                            </Popover>
-                        </Tooltip>
+                                </AntButton>
+                            </AntPopover>
+                        </AntTooltip>
                     )
                 }
 
@@ -125,14 +132,14 @@ export default defineComponent({
 
                 const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', requestProps)
                 return (
-                    <Space.Compact>{customSettings || defaultSettings}</Space.Compact>
+                    <AntSpace.Compact>{customSettings || defaultSettings}</AntSpace.Compact>
                 )
             }
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
                     <ResizeObserver onResize={onResize}>
-                        <ConfigProvider getPopupContainer={getPopupContainer}>
+                        <AntConfigProvider getPopupContainer={getPopupContainer}>
                             <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                                 <div class={[`${prefixCls.value}-container`, wrapCls.value]}>
                                     {titleDom || actionsDom ? (
@@ -152,7 +159,7 @@ export default defineComponent({
                                     </div>
                                 </div>
                             </div>
-                        </ConfigProvider>
+                        </AntConfigProvider>
                     </ResizeObserver>
                 </div>
             )

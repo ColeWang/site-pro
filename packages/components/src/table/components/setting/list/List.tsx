@@ -1,5 +1,5 @@
 import { defineComponent, unref } from 'vue'
-import { theme, Tree } from 'ant-design-vue'
+import { theme as antTheme, Tree as AntTree } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import type { NodeProps } from '../node'
@@ -19,7 +19,7 @@ export default defineComponent({
     setup (props, { emit }) {
         const { prefixCls } = useConfigInject('pro-table-setting-list', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         /* v8 ignore next 5 */
         function onTreeNodeCheck (_: any, info: TreeCheckInfo): void {
@@ -97,7 +97,7 @@ export default defineComponent({
                     {showTitle && (
                         <div class={`${prefixCls.value}-title`}>{title}</div>
                     )}
-                    <Tree {...needTreeProps} v-slots={treeSlots}/>
+                    <AntTree {...needTreeProps} v-slots={treeSlots}/>
                 </div>
             )
         }

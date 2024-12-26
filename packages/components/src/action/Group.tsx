@@ -1,6 +1,6 @@
 import type { App, Plugin, SlotsType, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
-import { Dropdown, Menu, Space, theme } from 'ant-design-vue'
+import { Dropdown as AntDropdown, Menu as AntMenu, Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { flatVNodeChildren } from '@site-pro/utils'
 import { drop, take } from 'lodash-es'
@@ -14,7 +14,8 @@ const ActionGroup = defineComponent({
     props: actionGroupProps(),
     slots: Object as SlotsType<ActionGroupSlots>,
     setup (props, { slots, attrs }) {
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
+
         return () => {
             const { max, size: propsSize } = props
             const { sizeMS } = unref(token)
@@ -26,29 +27,29 @@ const ActionGroup = defineComponent({
                 const dropNodes: VNode[] = drop(nodes, max)
 
                 const children: VNode[] = dropNodes.map((item, index) => {
-                    return <Menu.Item key={index}>{item}</Menu.Item>
+                    return <AntMenu.Item key={index}>{item}</AntMenu.Item>
                 })
                 /* v8 ignore next 9 */
                 const dropdownSlots: Recordable<BaseSlot> = {
                     overlay: () => (
-                        <Menu data-type={'dropdown'} selectedKeys={[]}>
+                        <AntMenu data-type={'dropdown'} selectedKeys={[]}>
                             {children}
-                        </Menu>
+                        </AntMenu>
                     )
                 }
                 return (
-                    <Space size={propsSize || sizeMS / 2} {...attrs}>
+                    <AntSpace size={propsSize || sizeMS / 2} {...attrs}>
                         {takeNodes}
-                        <Dropdown placement={'bottomRight'} v-slots={dropdownSlots}>
+                        <AntDropdown placement={'bottomRight'} v-slots={dropdownSlots}>
                             <Action>...</Action>
-                        </Dropdown>
-                    </Space>
+                        </AntDropdown>
+                    </AntSpace>
                 )
             }
             return (
-                <Space size={propsSize || sizeMS / 2} {...attrs}>
+                <AntSpace size={propsSize || sizeMS / 2} {...attrs}>
                     {nodes}
-                </Space>
+                </AntSpace>
             )
         }
     }

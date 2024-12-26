@@ -1,6 +1,6 @@
 import type { App, ComponentPublicInstance, ExtractPropTypes, Plugin, PropType, SlotsType } from 'vue'
 import { defineComponent } from 'vue'
-import { Form } from 'ant-design-vue'
+import { Form as AntForm } from 'ant-design-vue'
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import { pick } from 'lodash-es'
 import type { FieldProps, FieldSlots } from './Field'
@@ -36,7 +36,7 @@ const Select = defineComponent({
         return () => {
             const { formItemProps } = props
             const needFormItemProps: BaseFieldFormItemProps = {
-                ...pick(props, Object.keys(Form.Item.props)) as BaseFieldFormItemProps,
+                ...pick(props, Object.keys(AntForm.Item.props)) as BaseFieldFormItemProps,
                 ...formItemProps,
             }
             const needFieldProps: FieldProps = {

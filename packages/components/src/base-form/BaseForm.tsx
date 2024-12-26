@@ -1,6 +1,6 @@
 import type { App, ComputedRef, Plugin, Ref, SlotsType } from 'vue'
 import { computed, defineComponent, ref, unref, watch } from 'vue'
-import { ConfigProvider, Form, theme } from 'ant-design-vue'
+import { ConfigProvider as AntConfigProvider, Form as AntForm, theme as antTheme } from 'ant-design-vue'
 import type { NamePath, Recordable } from '@site-pro/utils'
 import { cloneProxyToRaw, getElement } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
@@ -22,7 +22,7 @@ const BaseForm = defineComponent({
     setup (props, { emit, slots, attrs, expose }) {
         const { prefixCls } = useConfigInject('pro-base-form', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
-        const { token } = theme.useToken()
+        const { token } = antTheme.useToken()
 
         const popupContainer: Ref<HTMLElement | null> = ref(null)
         const formInstanceRef: Ref<FormInstance | null> = ref(null)
@@ -142,7 +142,7 @@ const BaseForm = defineComponent({
             const { layout, grid, rowProps } = unref(formProps)
 
             const needFormProps: FormProps = {
-                ...pick(props, Object.keys(Form.props)) as FormProps,
+                ...pick(props, Object.keys(AntForm.props)) as FormProps,
                 layout: layout,
                 model: unref(model),
                 onFinish: onFinish
@@ -152,13 +152,13 @@ const BaseForm = defineComponent({
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <ConfigProvider getPopupContainer={getPopupContainer}>
+                    <AntConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
-                            <Form {...needFormProps} ref={formInstanceRef}>
+                            <AntForm {...needFormProps} ref={formInstanceRef}>
                                 <RowWrapper {...rowWrapperProps} v-slots={slots}/>
-                            </Form>
+                            </AntForm>
                         </div>
-                    </ConfigProvider>
+                    </AntConfigProvider>
                 </div>
             )
         }

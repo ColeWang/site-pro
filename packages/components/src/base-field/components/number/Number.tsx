@@ -1,6 +1,6 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
-import { InputNumber } from 'ant-design-vue'
+import { InputNumber as AntInputNumber } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale'
@@ -41,7 +41,7 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const editDom: VNodeChild = <InputNumber {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <AntInputNumber {...needFieldProps} v-slots={slots}/>
             // ----
             const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
             const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
