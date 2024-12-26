@@ -18,7 +18,7 @@ function readPackageFile (): Record<string, any> {
 }
 
 function readChunksEntry (fileNames: string[], root: string) {
-    const pairs = fileNames.map((name) => {
+    const pairs: Array<string[]> = fileNames.map((name) => {
         const path: string = name.slice(0, name.length - extname(name).length)
         return [
             relative(root, path),
@@ -62,7 +62,7 @@ export default defineConfig((config) => {
             minify: false,
             lib: {
                 entry: readChunksEntry(globSync('./src/**/*.{ts,tsx}', {
-                    ignore: ['src/**/__tests__/*.{ts,tsx}']
+                    ignore: ['**/demos/**']
                 }), 'src')
             },
             rollupOptions: {

@@ -50,6 +50,15 @@ export default defineConfig({
                             link: '/components/table'
                         }
                     ]
+                },
+                {
+                    text: '其他',
+                    items: [
+                        {
+                            text: 'Action - 操作',
+                            link: '/components/action'
+                        }
+                    ]
                 }
             ]
         },
