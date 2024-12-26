@@ -22,25 +22,31 @@ export default defineComponent({
             if (mode === 'read') {
                 const prefixDom: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'prefix')
                 const suffixDom: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'suffix')
-                return (
+
+                const readDom: VNodeChild = (
                     <Fragment>
                         {prefixDom}
                         {text ?? emptyText}
                         {suffixDom}
                     </Fragment>
                 )
+                // ----
+                const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
+                const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderRead', slotProps)
+
+                return fieldDom || readDom
             }
             const needFieldProps: FieldTextFieldProps = {
                 allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom: VNodeChild = <Input {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <Input {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
+            const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
+            const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
 
-            return renderFieldDom || fieldDom
+            return fieldDom || editDom
         }
     }
 })

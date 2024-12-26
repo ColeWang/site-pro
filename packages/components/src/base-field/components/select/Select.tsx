@@ -1,5 +1,5 @@
 import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
-import { computed, defineComponent, unref } from 'vue'
+import { computed, defineComponent, Fragment, unref } from 'vue'
 import { Select } from 'ant-design-vue'
 import type { BaseEnumType, BaseOptionType, Recordable } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
@@ -29,9 +29,16 @@ export default defineComponent({
 
             if (mode === 'read') {
                 const { options: propsOptions, fieldNames } = fieldProps
+
                 const optionsValueEnum: BaseEnumType = optionsToEnum(propsOptions as any, fieldNames)
                 const valueText: VNodeChild = enumToText(text, valueEnum || optionsValueEnum)
-                return valueText ?? emptyText
+
+                const readDom: VNodeChild = <Fragment>{valueText ?? emptyText}</Fragment>
+                // ----
+                const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
+                const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderRead', slotProps)
+
+                return fieldDom || readDom
             }
             const needFieldProps: FieldSelectFieldProps = {
                 options: unref(options),
@@ -39,12 +46,12 @@ export default defineComponent({
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom: VNodeChild = <Select {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <Select {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
+            const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
+            const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
 
-            return renderFieldDom || fieldDom
+            return fieldDom || editDom
         }
     }
 })

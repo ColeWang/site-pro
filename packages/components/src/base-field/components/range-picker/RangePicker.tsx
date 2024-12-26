@@ -23,16 +23,23 @@ export default defineComponent({
             const placeholder: [string, string] = fieldProps.placeholder || [t('selectPlaceholder')!, t('selectPlaceholder')!]
 
             if (mode === 'read') {
-                const [startText, endText] = isArray(text) ? text : []
+                const [startText, endText] = isArray(text) ? text : [text, text]
+
                 const valueStartText: VNodeChild = formatDate(startText, fieldProps.format as Format)
                 const valueEndText: VNodeChild = formatDate(endText, fieldProps.format as Format)
-                return (
+
+                const readDom: VNodeChild = (
                     <Fragment>
                         {valueStartText ?? emptyText}
                         {'~'}
                         {valueEndText ?? emptyText}
                     </Fragment>
                 )
+                // ----
+                const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
+                const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderRead', slotProps)
+
+                return fieldDom || readDom
             }
             const needFieldProps: FieldRangePickerFieldProps & any = {
                 allowClear: true,
@@ -40,12 +47,12 @@ export default defineComponent({
                 // -- placeholder 类型有问题 string | [string, string]
                 placeholder: placeholder
             }
-            const fieldDom: VNodeChild = <RangePicker {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <RangePicker {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
+            const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
+            const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
 
-            return renderFieldDom || fieldDom
+            return fieldDom || editDom
         }
     }
 })

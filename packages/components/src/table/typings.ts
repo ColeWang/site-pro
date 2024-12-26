@@ -30,7 +30,6 @@ export interface TableColumn<RecordType = any> extends AntTableColumnType<Record
     hideInSearch?: boolean;
     hideInTable?: boolean;
     hideInSetting?: boolean;
-    hideInDescriptions?: boolean;
     ellipsis?: boolean | { showTitle?: boolean };
     copyable?: boolean | TypographyCopyable;
     // field

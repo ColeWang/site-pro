@@ -34,23 +34,29 @@ export default defineComponent({
                     maxWidth: '100%',
                     whiteSpace: 'pre-wrap',
                 }
-                return (
+
+                const readDom: VNodeChild = (
                     <span class={`${prefixCls.value}__read`} style={styles}>
                         {text ?? emptyText}
                     </span>
                 )
+                // ----
+                const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
+                const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderRead', slotProps)
+
+                return fieldDom || readDom
             }
             const needFieldProps: FieldTextareaFieldProps = {
                 rows: 3,
                 ...fieldProps,
                 placeholder: placeholder
             }
-            const fieldDom: VNodeChild = <Input.TextArea {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <Input.TextArea {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
+            const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
+            const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
 
-            return renderFieldDom || fieldDom
+            return fieldDom || editDom
         }
     }
 })

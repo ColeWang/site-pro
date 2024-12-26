@@ -17,28 +17,33 @@ export default defineComponent({
             const { mode, text, emptyText, fieldProps } = props
 
             if (mode === 'read') {
-                if (isArray(text)) {
-                    const [startText, endText] = text
-                    return (
-                        <Fragment>
-                            {startText ?? emptyText}
-                            {'~'}
-                            {endText ?? emptyText}
-                        </Fragment>
-                    )
-                }
-                return text ?? emptyText
+                const [startText, endText] = isArray(text) ? text : [text, text]
+
+                const readDom: VNodeChild = isArray(text) ? (
+                    <Fragment>
+                        {startText ?? emptyText}
+                        {'~'}
+                        {endText ?? emptyText}
+                    </Fragment>
+                ) : (
+                    <Fragment>{text ?? emptyText}</Fragment>
+                )
+                // ----
+                const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
+                const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderRead', slotProps)
+
+                return fieldDom || readDom
             }
             const needFieldProps: FieldSliderFieldProps = {
                 style: { minWidth: 100, ...fieldProps.style },
                 ...fieldProps
             }
-            const fieldDom: VNodeChild = <Slider {...needFieldProps} v-slots={slots}/>
+            const editDom: VNodeChild = <Slider {...needFieldProps} v-slots={slots}/>
             // ----
-            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
+            const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
+            const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
 
-            return renderFieldDom || fieldDom
+            return fieldDom || editDom
         }
     }
 })

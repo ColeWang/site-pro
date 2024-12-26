@@ -32,7 +32,7 @@ const ActionGroup = defineComponent({
                 const dropdownSlots: Recordable<BaseSlot> = {
                     overlay: () => (
                         <Menu data-type={'dropdown'} selectedKeys={[]}>
-                            {() => children}
+                            {children}
                         </Menu>
                     )
                 }

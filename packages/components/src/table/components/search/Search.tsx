@@ -68,7 +68,7 @@ export default defineComponent({
 
             return (
                 <BaseSearch {...baseSearchProps}>
-                    {() => children}
+                    {children}
                 </BaseSearch>
             )
         }

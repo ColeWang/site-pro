@@ -79,7 +79,7 @@ const QueryFilter = defineComponent({
                 const colClass: BaseClass = { [`${prefixCls.value}-col-hidden`]: hidden }
                 return (
                     <Col key={key} class={colClass} span={unref(span)}>
-                        {() => fieldNode}
+                        {fieldNode}
                     </Col>
                 )
             })

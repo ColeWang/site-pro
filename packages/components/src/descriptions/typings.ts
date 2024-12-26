@@ -1,26 +1,11 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import { descriptionsProps as antDescriptionsProps } from 'ant-design-vue/es/descriptions'
 import { formItemProps } from 'ant-design-vue/es/form'
-import type { BaseSlot, Recordable } from '@site-pro/utils'
-import type { BaseFieldFieldProps, BaseFieldValueType } from '../base-field'
+import type { Recordable } from '@site-pro/utils'
 import { baseFieldProps } from '../base-field'
-import type { TableColumn } from '../table'
 
 export interface DescriptionsRequest {
     (params: Recordable): Promise<any>;
-}
-
-export type DescriptionsColumn<RecordType = any> = DescriptionsItemProps & TableColumn<RecordType> & {
-    __SLOTS__?: Recordable<BaseSlot>;
-}
-
-export function createDescriptionsColumn<T extends BaseFieldValueType, RecordType = any> (
-    column: Omit<DescriptionsColumn<RecordType>, 'valueType' | 'fieldProps'> & {
-        valueType?: T;
-        fieldProps?: BaseFieldFieldProps<T>;
-    }
-): DescriptionsColumn<RecordType> {
-    return column
 }
 
 export const descriptionsProps = () => ({
@@ -36,10 +21,6 @@ export const descriptionsProps = () => ({
     dataSource: {
         type: Object as PropType<Recordable>,
         default: () => ({})
-    },
-    columns: {
-        type: Array as PropType<DescriptionsColumn[]>,
-        default: () => ([])
     },
     emptyText: {
         type: String as PropType<string>,

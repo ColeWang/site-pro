@@ -85,14 +85,19 @@ export const baseFieldProps = () => ({
         type: String as PropType<string>,
         default: '-'
     },
-    renderField: {
+    renderRead: {
+        type: Function as PropType<BaseSlot>,
+        default: undefined
+    },
+    renderEdit: {
         type: Function as PropType<BaseSlot>,
         default: undefined
     }
 })
 
 export interface BaseFieldSlots extends Recordable {
-    renderField?: any;
+    renderRead?: any;
+    renderEdit?: any;
 }
 
 export type BaseFieldProps = Partial<ExtractPropTypes<ReturnType<typeof baseFieldProps>>>;

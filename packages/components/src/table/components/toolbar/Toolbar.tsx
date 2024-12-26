@@ -123,7 +123,7 @@ export default defineComponent({
                     .filter((key) => options[key])
                     .map((key) => vNodeCatalog[key])
 
-                const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', slotProps)
+                const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', requestProps)
                 return (
                     <Space.Compact>{customSettings || defaultSettings}</Space.Compact>
                 )

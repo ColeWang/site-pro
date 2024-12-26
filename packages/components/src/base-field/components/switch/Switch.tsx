@@ -1,5 +1,5 @@
 import type { SlotsType, VNodeChild } from 'vue'
-import { defineComponent } from 'vue'
+import { defineComponent, Fragment } from 'vue'
 import { Switch } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
@@ -30,23 +30,29 @@ export default defineComponent({
             if (mode === 'read') {
                 const open: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'checkedChildren') ?? t('open')
                 const close: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'unCheckedChildren') ?? t('close')
-                return text ? open : close
+
+                const readDom: VNodeChild = <Fragment>{text ? open : close}</Fragment>
+                // ----
+                const slotProps: Recordable = { text, props: fieldProps, slots, dom: readDom }
+                const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderRead', slotProps)
+
+                return fieldDom || readDom
             }
             const needFieldProps: FieldSwitchFieldProps = {
                 ...restFieldProps,
                 checked: checked || value,
                 ['onUpdate:checked']: onUpdateChecked
             }
-            const fieldDom: VNodeChild = (
+            const editDom: VNodeChild = (
                 <div style={style}>
                     <Switch {...needFieldProps} v-slots={slots}/>
                 </div>
             )
             // ----
-            const slotProps: Recordable = { text, props: { mode, ...fieldProps }, slots, dom: fieldDom }
-            const renderFieldDom: VNodeChild = getSlotVNode(slots, props, 'renderField', slotProps)
+            const slotProps: Recordable = { text, props: fieldProps, slots, dom: editDom }
+            const fieldDom: VNodeChild = getSlotVNode(slots, props, 'renderEdit', slotProps)
 
-            return renderFieldDom || fieldDom
+            return fieldDom || editDom
         }
     }
 })
