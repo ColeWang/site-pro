@@ -1,5 +1,5 @@
 import type { App, Plugin, Ref, SlotsType } from 'vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, unref } from 'vue'
 import type { Recordable } from '@site-pro/utils'
 import { useResizeObserver } from '@site-pro/hooks'
 import { debounce, head } from 'lodash-es'
@@ -32,7 +32,7 @@ const ResizeObserver = defineComponent({
         useResizeObserver(elRef, debounceCallback)
 
         return () => {
-            const slotProps: Recordable = { size: rectSize.value }
+            const slotProps: Recordable = { size: unref(rectSize) }
 
             return (
                 <div {...attrs} ref={elRef}>

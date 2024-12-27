@@ -45,9 +45,9 @@ function useFetchData (
                 context.dataSource = data || {}
                 onLoad && onLoad(data)
             }
-        } catch (err: unknown) {
-            if (!onRequestError) throw new Error(err as string)
-            onRequestError && onRequestError(err as Error)
+        } catch (error: unknown) {
+            if (!onRequestError) throw error
+            onRequestError && onRequestError(error as Error)
         } finally {
             context.loading = false
         }

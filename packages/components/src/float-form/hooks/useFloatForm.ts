@@ -50,9 +50,9 @@ function useFloatForm (props: FloatFormProps, options: UseFloatFormOptions): Use
             const result: any = await props.onFinish(values)
             loading.value = false
             result && onCancel()
-        } catch (err) {
+        } catch (error: unknown) {
             loading.value = false
-            console.warn(err)
+            console.warn(error)
         }
     }
 

@@ -34,7 +34,11 @@ interface CreateDescsItemOptions {
     emptyText: string;
 }
 
-function createDescsItem (props: DescriptionsItemProps, slots: Recordable<BaseSlot>, options: CreateDescsItemOptions): VNodeChild {
+function createDescsItem (
+    props: DescriptionsItemProps,
+    slots: Recordable<BaseSlot>,
+    options: CreateDescsItemOptions
+): VNodeChild {
     const { text, valueType, formItemProps, ellipsis, copyable } = props
     const { dataSource, prefixCls, emptyText } = options
 

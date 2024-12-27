@@ -1,7 +1,7 @@
 import type { App, Plugin, SlotsType, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
-import { get, isFunction, isObject } from 'lodash-es'
+import { get, isFunction } from 'lodash-es'
 import { useBaseFieldProvider } from './hooks/useBaseFieldProvider'
 import type { BaseFieldProps, BaseFieldProviderValueTypeMap, BaseFieldSlots, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
@@ -39,77 +39,77 @@ function defaultRenderText (
     slots: Recordable<BaseSlot>
 ): VNode {
     if (valueType === 'date') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'date',
             format: 'YYYY-MM-DD'
         })
         return <FieldDatePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'date',
             format: 'YYYY-MM-DD'
         })
         return <FieldRangePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateWeek') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'week',
             format: 'YYYY-wo'
         })
         return <FieldDatePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateWeekRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'week',
             format: 'YYYY-wo'
         })
         return <FieldRangePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateMonth') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'month',
             format: 'YYYY-MM'
         })
         return <FieldDatePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateMonthRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'month',
             format: 'YYYY-MM'
         })
         return <FieldRangePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateQuarter') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'quarter',
             format: 'YYYY-[Q]Q'
         })
         return <FieldDatePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateQuarterRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'quarter',
             format: 'YYYY-[Q]Q'
         })
         return <FieldRangePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateYear') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'year',
             format: 'YYYY'
         })
         return <FieldDatePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateYearRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'year',
             format: 'YYYY'
         })
         return <FieldRangePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateTime') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'date',
             format: 'YYYY-MM-DD HH:mm:ss',
             showTime: true
@@ -117,7 +117,7 @@ function defaultRenderText (
         return <FieldDatePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'dateTimeRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             picker: 'date',
             format: 'YYYY-MM-DD HH:mm:ss',
             showTime: true
@@ -125,13 +125,13 @@ function defaultRenderText (
         return <FieldRangePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'time') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             format: 'HH:mm:ss'
         })
         return <FieldTimePicker {...dateProps} v-slots={slots}/>
     }
     if (valueType === 'timeRange') {
-        const dateProps = mergeFieldProps(props, {
+        const dateProps: BaseFieldProps = mergeFieldProps(props, {
             format: 'HH:mm:ss'
         })
         return <FieldTimeRangePicker {...dateProps} v-slots={slots}/>
@@ -192,7 +192,9 @@ const BaseField = defineComponent({
             const placeholder = fieldProps.placeholder || props.placeholder
             const { model, name: namePath } = formItemProps
 
-            const inputValue: any = namePath ? get(model || {}, namePath) : undefined
+            const inputValue: any = namePath
+                ? get(model || {}, namePath, undefined)
+                : undefined
 
             const needFieldProps: BaseFieldFieldProps = {
                 ...fieldProps,
@@ -206,13 +208,14 @@ const BaseField = defineComponent({
                 fieldProps: needFieldProps
             }
 
-            const types: BaseFieldProviderValueTypeMap | undefined = unref(valueTypeMap)
-            const customRenderText: false | BaseSlot = isObject(types) && types[valueType]
-            if (customRenderText && isFunction(customRenderText)) {
-                // valueType: ({ props, slots }) => {}
-                return customRenderText({ props: needBaseFieldProps, slots: slots as Recordable<BaseSlot> })
+            const needTypes: BaseFieldProviderValueTypeMap = unref(valueTypeMap) || {}
+
+            const renderText: BaseSlot | undefined = needTypes[valueType]
+            if (renderText && isFunction(renderText)) {
+                return renderText({ props: needBaseFieldProps, slots })
             }
-            return defaultRenderText(valueType as BaseFieldValueType, needBaseFieldProps, slots as Recordable<BaseSlot>)
+
+            return defaultRenderText(valueType as BaseFieldValueType, needBaseFieldProps, slots)
         }
     }
 })
