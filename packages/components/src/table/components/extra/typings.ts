@@ -1,6 +1,11 @@
-import type { ComponentPublicInstance, ExtractPropTypes } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 
-export const extraProps = () => undefined
+export const extraProps = () => ({
+    seize: {
+        type: Number as PropType<number>,
+        default: 1
+    }
+})
 
 export interface ExtraSlots {
     default?: any;
