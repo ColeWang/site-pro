@@ -42,7 +42,7 @@ const BaseForm = defineComponent({
                 ? 'vertical'
                 : props.layout
 
-            return { ...attrs, ...props, layout, rowProps } as BaseFormProps
+            return { ...props, ...attrs, layout, rowProps } as BaseFormProps
         })
 
         watch(model, (curr: Recordable) => {

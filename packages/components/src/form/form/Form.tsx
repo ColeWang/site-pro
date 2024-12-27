@@ -4,7 +4,6 @@ import { Form as AntForm } from 'ant-design-vue'
 import { FormItem } from '../item'
 import { FormGroup } from '../group'
 import { FormDependency } from '../dependency'
-import type { BaseFormProps } from '../../base-form'
 import { BaseForm } from '../../base-form'
 import type { FormSlots } from './typings'
 import { formProps } from './typings'
@@ -22,9 +21,8 @@ const Form = defineComponent({
         }
 
         return () => {
-            const baseFormProps: BaseFormProps = { ...attrs, ...props }
             return (
-                <BaseForm {...baseFormProps} ref={onBaseFormRef} v-slots={slots}/>
+                <BaseForm {...props} {...attrs} ref={onBaseFormRef} v-slots={slots}/>
             )
         }
     }
