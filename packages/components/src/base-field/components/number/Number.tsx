@@ -20,14 +20,14 @@ export default defineComponent({
             const placeholder: string = fieldProps.placeholder || t('inputPlaceholder')!
 
             if (mode === 'read') {
-                const prefixDom: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'prefix')
-                const suffixDom: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'suffix')
+                const prefix: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'prefix')
+                const suffix: VNodeChild = getPropsSlotVNode(slots, fieldProps, 'suffix')
 
                 const readDom: VNodeChild = (
                     <Fragment>
-                        {prefixDom}
+                        {prefix}
                         {text ?? emptyText}
-                        {suffixDom}
+                        {suffix}
                     </Fragment>
                 )
                 // ----

@@ -216,7 +216,15 @@ const Table = defineComponent({
                     onFinish: onFinish,
                     onReset: onReset
                 }
-                return slots.search ? slots.search(searchProps) : <Search {...searchProps}/>
+
+                const defaultSearchDom: VNodeChild = <Search {...searchProps}/>
+
+                const customSearchDom: VNodeChild = slots.search && slots.search({
+                    props: searchProps,
+                    dom: defaultSearchDom
+                })
+
+                return customSearchDom || defaultSearchDom
             }
 
             const renderToolbar = () => {
@@ -259,11 +267,11 @@ const Table = defineComponent({
 
             const needTableSlots: Recordable<BaseSlot> = omit(slots, OMIT_SLOTS_KEYS)
 
-            const baseTableDom: VNodeChild = <AntTable {...needTableProps} v-slots={needTableSlots}/>
+            const defaultTableDom: VNodeChild = <AntTable {...needTableProps} v-slots={needTableSlots}/>
 
-            const tableDom: VNodeChild = getSlotVNode(slots, props, 'table', {
+            const customTableDom: VNodeChild = getSlotVNode(slots, props, 'table', {
                 props: needTableProps,
-                dom: baseTableDom
+                dom: defaultTableDom
             })
 
             const cardBodyStyle: CSSProperties = propsToolbar !== false ? ({
@@ -283,7 +291,7 @@ const Table = defineComponent({
                         <AntConfigProvider getPopupContainer={getPopupContainer}>
                             <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                                 <div class={`${prefixCls.value}-container`} ref={tableRef}>
-                                    {tableDom || baseTableDom}
+                                    {customTableDom || defaultTableDom}
                                 </div>
                             </div>
                         </AntConfigProvider>

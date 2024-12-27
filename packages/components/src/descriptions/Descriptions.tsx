@@ -45,7 +45,7 @@ function createDescsItem (
     // text 可以个函数
     const needText: VNodeChild = isFunction(text) ? text(dataSource) : text
 
-    const labelDom: VNodeChild = getPropsSlotVNode(slots, props, 'label')
+    const label: VNodeChild = getPropsSlotVNode(slots, props, 'label')
 
     const tooltip: VNodeChild = getPropsSlotVNode(slots, props, 'tooltip')
     const tooltipDom: VNodeChild = isString(tooltip) ? (
@@ -60,7 +60,7 @@ function createDescsItem (
     const needDescsItemProps: DescriptionsItemProps = omit(descsItemProps, ['label'])
 
     const descsItemSlots: Recordable<BaseSlot> = {
-        label: () => [labelDom, tooltipDom]
+        label: () => [label, tooltipDom]
     }
 
     if (valueType) {
@@ -132,7 +132,7 @@ const Descriptions = defineComponent({
         return () => {
             const { emptyText } = props
 
-            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
+            const title: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
             const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', requestProps)
 
             const descsProps: DescriptionsProps = pick(props, Object.keys(AntDescriptions.props))
@@ -156,10 +156,10 @@ const Descriptions = defineComponent({
                     <AntConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                             <div class={`${prefixCls.value}-container`}>
-                                {(titleDom || extraDom) && (
+                                {(title || extraDom) && (
                                     <div class={`${prefixCls.value}-header`}>
                                         <div class={`${prefixCls.value}-title`}>
-                                            {titleDom}
+                                            {title}
                                         </div>
                                         <div class={`${prefixCls.value}-extra`}>
                                             {extraDom}

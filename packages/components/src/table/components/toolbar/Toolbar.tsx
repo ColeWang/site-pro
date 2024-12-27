@@ -78,7 +78,7 @@ export default defineComponent({
         return () => {
             const { options: propsOptions } = props
 
-            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
+            const title: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
             const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', requestProps)
 
             const renderSettings = () => {
@@ -126,13 +126,13 @@ export default defineComponent({
                     ...safeDestructureObject(propsOptions)
                 }, Object.keys(defaultOptions))
 
-                const defaultSettings: any[] = Object.keys(options)
+                const defaultDom: any[] = Object.keys(options)
                     .filter((key) => options[key])
                     .map((key) => vNodeCatalog[key])
 
-                const customSettings: VNodeChild = getSlotVNode(slots, props, 'settings', requestProps)
+                const customDom: VNodeChild = getSlotVNode(slots, props, 'settings', requestProps)
                 return (
-                    <AntSpace.Compact>{customSettings || defaultSettings}</AntSpace.Compact>
+                    <AntSpace.Compact>{customDom || defaultDom}</AntSpace.Compact>
                 )
             }
 
@@ -142,10 +142,10 @@ export default defineComponent({
                         <AntConfigProvider getPopupContainer={getPopupContainer}>
                             <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                                 <div class={[`${prefixCls.value}-container`, wrapCls.value]}>
-                                    {titleDom || actionsDom ? (
+                                    {title || actionsDom ? (
                                         <div class={`${prefixCls.value}-header`}>
                                             <div class={`${prefixCls.value}-title`}>
-                                                {titleDom}
+                                                {title}
                                             </div>
                                             <div class={`${prefixCls.value}-actions`}>
                                                 {actionsDom}

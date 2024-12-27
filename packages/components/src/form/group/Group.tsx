@@ -35,7 +35,7 @@ const FormGroup = defineComponent({
             const { noStyle } = props
             const { layout, grid, rowProps } = unref(formProps) || {}
 
-            const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title')
+            const title: VNodeChild = getPropsSlotVNode(slots, props, 'title')
             const titleStyle: CSSProperties = genTitleStyle(layout || 'vertical', unref(token))
 
             const rowWrapperProps: RowWrapperProps = { ...rowProps, grid: grid }
@@ -43,11 +43,11 @@ const FormGroup = defineComponent({
             return (
                 <ColWrapper span={24} grid={grid}>
                     <RowWrapper {...rowWrapperProps}>
-                        {titleDom && (
+                        {title && (
                             <AntCol span={24}>
-                                {noStyle ? titleDom : (
+                                {noStyle ? title : (
                                     <div style={titleStyle} {...attrs}>
-                                        {titleDom}
+                                        {title}
                                     </div>
                                 )}
                             </AntCol>
