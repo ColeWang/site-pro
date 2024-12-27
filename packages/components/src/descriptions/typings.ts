@@ -1,7 +1,9 @@
 import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue'
 import { descriptionsProps as antDescriptionsProps } from 'ant-design-vue/es/descriptions'
-import type { NamePath, Recordable } from '@site-pro/utils'
+import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
+import type { Recordable } from '@site-pro/utils'
 import { baseFieldProps } from '../base-field'
+import type { TypographyCopyable } from '../ant-typings'
 
 export interface DescriptionsRequest {
     (params: Recordable): Promise<any>;
@@ -51,36 +53,25 @@ export type DescriptionsInstance = ComponentPublicInstance<DescriptionsProps, De
 
 export const descriptionsItemProps = () => ({
     ...baseFieldProps(),
-    label: {
-        type: [String, Number, Array, Object, Function] as PropType<string>,
+    ...antFormItemProps(),
+    ellipsis: {
+        type: [Boolean, Object] as PropType<{ showTitle?: boolean }>,
         default: undefined
     },
-    name: {
-        type: [String, Number, Array] as PropType<NamePath>,
-        default: undefined
-    },
-    labelStyle: {
-        type: Object as PropType<CSSProperties>,
-        default: undefined
-    },
-    prefixCls: {
-        type: String as PropType<string>,
-        default: undefined
-    },
-    contentStyle: {
-        type: Object as PropType<CSSProperties>,
+    copyable: {
+        type: [Boolean, Object] as PropType<boolean | TypographyCopyable>,
         default: undefined
     },
     span: {
         type: Number as PropType<number>,
         default: 1
     },
-    hide: {
-        type: Boolean as PropType<boolean>,
-        default: false
+    labelStyle: {
+        type: Object as PropType<CSSProperties>,
+        default: undefined
     },
-    order: {
-        type: Number as PropType<number>,
+    contentStyle: {
+        type: Object as PropType<CSSProperties>,
         default: undefined
     }
 })
@@ -88,6 +79,7 @@ export const descriptionsItemProps = () => ({
 export interface DescriptionsItemSlots {
     default?: any;
     label?: any;
+    tooltip?: any;
 }
 
 export type DescriptionsItemProps = Partial<ExtractPropTypes<ReturnType<typeof descriptionsItemProps>>>;

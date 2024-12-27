@@ -45,10 +45,10 @@ export default defineComponent({
         }
 
         return () => {
-            if (props.columns.length === 0) return null
-            // ----
             const { columns, showTitle, title, fixed, checkable, draggable } = props
             const { controlHeightSM } = unref(token)
+
+            if (columns.length === 0) return null
 
             const checkedKeys: string[] = columns
                 .filter((item) => item.checked !== false)

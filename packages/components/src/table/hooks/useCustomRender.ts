@@ -2,7 +2,7 @@ import type { ComputedRef } from 'vue'
 import { computed, createVNode } from 'vue'
 import { Typography as AntTypography } from 'ant-design-vue'
 import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
-import { isArray, isFunction, isObject } from 'lodash-es'
+import { isArray, isFunction, isObject, isString } from 'lodash-es'
 import type { TypographyCopyable } from '../../ant-typings'
 import { TableColumn, TableProps } from '../typings'
 
@@ -32,20 +32,25 @@ function getCopyable (column: TableColumn, text: any): false | TypographyCopyabl
 }
 
 function customRender (oldColumn: TableColumn, emptyText?: string): CustomRenderResult {
-    return function (opt: any): any {
+    return function (options: any): any {
         if (oldColumn.customRender && isFunction(oldColumn.customRender)) {
             const oldCustomRender = oldColumn.customRender
-            return oldCustomRender.call(null, opt)
+            return oldCustomRender.call(null, options)
         }
-        if (oldColumn.valueEnum && isObject(oldColumn.valueEnum) && !isEmpty(opt.text)) {
-            return enumToText(opt.text, oldColumn.valueEnum)
+        if (oldColumn.valueEnum && isObject(oldColumn.valueEnum) && !isEmpty(options.text)) {
+            return enumToText(options.text, oldColumn.valueEnum)
         }
-        if ((oldColumn.copyable || oldColumn.ellipsis) && !isEmpty(opt.text)) {
-            const copyable: boolean | TypographyCopyable = getCopyable(oldColumn, opt.text)
+        if ((oldColumn.copyable || oldColumn.ellipsis) && isString(options.text) && !isEmpty(options.text)) {
+            const copyable: boolean | TypographyCopyable = getCopyable(oldColumn, options.text)
             const ellipsis: boolean | undefined = getEllipsis(oldColumn)
-            return createVNode(AntTypography.Text, { copyable, ellipsis, content: opt.text })
+
+            return createVNode(AntTypography.Text, {
+                copyable: copyable,
+                ellipsis: ellipsis,
+                content: options.text
+            })
         }
-        return isEmpty(opt.text) ? emptyText : opt.text
+        return isEmpty(options.text) ? emptyText : options.text
     }
 }
 
@@ -56,6 +61,7 @@ function useCustomRender (props: TableProps): UseCustomRenderResult {
 
     function genCustomRenderColumns (columns: TableColumn[]): TableColumn[] {
         return columns
+            .filter((column) => !column.hideInTable)
             .map((column, index) => {
                 const key: string = namePathToString(column.dataIndex || column.key || index)
                 const tempColumns: TableColumn = { ...column, key: key }
@@ -66,7 +72,6 @@ function useCustomRender (props: TableProps): UseCustomRenderResult {
                 }
                 return tempColumns
             })
-            .filter((column) => !column.hideInTable)
     }
 
     return { columns }

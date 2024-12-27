@@ -1,7 +1,13 @@
 import type { App, Plugin, Ref, SlotsType, VNode, VNodeChild } from 'vue'
 import { defineComponent, ref } from 'vue'
-import { ConfigProvider, Descriptions as AntDescriptions, Spin } from 'ant-design-vue'
-import { useConfigInject } from '@site-pro/hooks'
+import {
+    ConfigProvider as AntConfigProvider,
+    Descriptions as AntDescriptions,
+    Form as AntForm,
+    Spin as AntSpin,
+    Tooltip as AntTooltip
+} from 'ant-design-vue'
+import { QuestionCircleOutlined } from '@ant-design/icons-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import {
     convertToCamelCaseProps,
@@ -9,10 +15,10 @@ import {
     getElement,
     getPropsSlotVNode,
     getSlotVNode,
-    namePathToString,
     safeDestructureObject
 } from '@site-pro/utils'
-import { omit, pick } from 'lodash-es'
+import { useConfigInject } from '@site-pro/hooks'
+import { isString, omit, pick } from 'lodash-es'
 import DescriptionsItem from './Item'
 import useFetchData from './hooks/useFetchData'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
@@ -20,6 +26,64 @@ import { BaseField } from '../base-field'
 import type { DescriptionsItemProps, DescriptionsProps, DescriptionsSlots } from './typings'
 import { descriptionsProps } from './typings'
 import useStyle from './style'
+
+interface CreateDescsItemOptions {
+    dataSource: Recordable;
+    prefixCls: string;
+    emptyText: string;
+}
+
+function createDescsItem (
+    props: DescriptionsItemProps,
+    slots: Recordable<BaseSlot>,
+    options: CreateDescsItemOptions
+): VNodeChild {
+    const { valueType, formItemProps } = props
+    const { dataSource, prefixCls, emptyText } = options
+
+    const labelDom: VNodeChild = getPropsSlotVNode(slots, props, 'label')
+
+    const tooltip: VNodeChild = getPropsSlotVNode(slots, props, 'tooltip')
+    const tooltipDom: VNodeChild = isString(tooltip) ? (
+        <span class={`${prefixCls}-item-tooltip`}>
+            <AntTooltip title={tooltip}>
+                <QuestionCircleOutlined/>
+            </AntTooltip>
+        </span>
+    ) : tooltip
+
+
+    const descsItemProps: DescriptionsItemProps = pick(props, Object.keys(AntDescriptions.Item.props))
+    const needDescsItemProps: DescriptionsItemProps = omit(descsItemProps, ['label'])
+
+    const descsItemSlots: Recordable<BaseSlot> = {
+        label: () => [labelDom, tooltipDom]
+    }
+
+    if (valueType) {
+        const needFormItemProps: BaseFieldFormItemProps = {
+            ...pick(props, Object.keys(AntForm.Item.props)) as BaseFieldFormItemProps,
+            ...formItemProps,
+            model: dataSource
+        }
+        const needBaseFieldProps: BaseFieldProps = {
+            ...pick(props, Object.keys(BaseField.props)) as BaseFieldProps,
+            mode: 'read',
+            formItemProps: needFormItemProps
+        }
+        return (
+            <AntDescriptions.Item {...needDescsItemProps} v-slots={descsItemSlots}>
+                <BaseField {...needBaseFieldProps}/>
+            </AntDescriptions.Item>
+        )
+    }
+
+    return (
+        <AntDescriptions.Item {...needDescsItemProps} v-slots={descsItemSlots}>
+            {slots.default ? slots.default() : emptyText}
+        </AntDescriptions.Item>
+    )
+}
 
 const Descriptions = defineComponent({
     inheritAttrs: false,
@@ -58,47 +122,20 @@ const Descriptions = defineComponent({
 
             const nodes: VNode[] = flatVNodeChildren(slots.default ? slots.default() : [])
 
-            const children: VNode[] = nodes.map((child, index) => {
+            const children: VNodeChild[] = nodes.map((child) => {
                 const childProps: Recordable = convertToCamelCaseProps(child.props || {})
                 const childSlots: Recordable<BaseSlot> = safeDestructureObject(child.children)
 
-                const key: string = namePathToString(childProps.name || childProps.key || index)
-
-                const descsItemProps: DescriptionsItemProps = {
-                    ...pick(childProps, Object.keys(AntDescriptions.Item.props)) as DescriptionsItemProps,
-                    label: getPropsSlotVNode(childSlots, childProps, 'label', requestProps)
-                }
-
-                if (childProps.valueType) {
-                    const needFormItemProps: BaseFieldFormItemProps = {
-                        model: requestProps.dataSource,
-                        name: childProps.name || childProps.key
-                    }
-                    const needFieldProps: BaseFieldProps = {
-                        ...pick(childProps, Object.keys(BaseField.props)) as BaseFieldProps,
-                        mode: 'read',
-                        emptyText: emptyText,
-                        formItemProps: needFormItemProps
-                    }
-                    const baseFieldSlots: Recordable<BaseSlot> = omit(childSlots, ['default', 'label'])
-                    return (
-                        <Descriptions.Item {...descsItemProps} key={key}>
-                            <BaseField {...needFieldProps} v-slots={baseFieldSlots}/>
-                        </Descriptions.Item>
-                    )
-                }
-
-                const childDefaultDom: VNodeChild = getSlotVNode(childSlots, {}, 'default', requestProps)
-                return (
-                    <Descriptions.Item {...descsItemProps} key={key}>
-                        {childDefaultDom || emptyText}
-                    </Descriptions.Item>
-                )
+                return createDescsItem(childProps, childSlots, {
+                    dataSource: requestProps.dataSource,
+                    prefixCls: prefixCls.value,
+                    emptyText: emptyText
+                })
             })
 
             return wrapSSR(
                 <div class={[prefixCls.value, hashId.value]} {...attrs}>
-                    <ConfigProvider getPopupContainer={getPopupContainer}>
+                    <AntConfigProvider getPopupContainer={getPopupContainer}>
                         <div class={`${prefixCls.value}-popup-container`} ref={popupContainer}>
                             <div class={`${prefixCls.value}-container`}>
                                 {(titleDom || extraDom) && (
@@ -111,14 +148,14 @@ const Descriptions = defineComponent({
                                         </div>
                                     </div>
                                 )}
-                                <Spin spinning={requestProps.loading}>
+                                <AntSpin spinning={requestProps.loading}>
                                     <AntDescriptions {...needDescsProps}>
                                         {children}
                                     </AntDescriptions>
-                                </Spin>
+                                </AntSpin>
                             </div>
                         </div>
-                    </ConfigProvider>
+                    </AntConfigProvider>
                 </div>
             )
         }

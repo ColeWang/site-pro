@@ -33,10 +33,10 @@ export default defineComponent({
         }
 
         return () => {
-            if (props.selectedRowKeys.length < 1) return null
-            // ----
             const { selectedRowKeys, selectedRows } = props
             const { sizeMS } = unref(token)
+
+            if (selectedRowKeys.length < 1) return null
 
             const contentText: string = `${t('selected')} ${selectedRowKeys.length} ${t('item')}`
             const defaultContent: VNodeChild = (
@@ -54,7 +54,6 @@ export default defineComponent({
                 cleanSelected: onCleanSelected
             }
 
-            const customContent: VNodeChild = getSlotVNode(slots, props, 'default', slotProps)
             const optionsDom: VNodeChild = getSlotVNode(slots, props, 'options', slotProps)
 
             return wrapSSR(
@@ -64,7 +63,7 @@ export default defineComponent({
                             <div class={`${prefixCls.value}-container`}>
                                 <div class={`${prefixCls.value}-wrapper`}>
                                     <div class={`${prefixCls.value}-content`}>
-                                        {customContent || defaultContent}
+                                        {slots.default ? slots.default(slotProps) : defaultContent}
                                     </div>
                                     <div class={`${prefixCls.value}-options`}>
                                         {optionsDom}

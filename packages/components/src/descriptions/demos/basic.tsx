@@ -9,6 +9,7 @@ export default defineComponent(() => {
                 <Descriptions.Item
                     label={'文本'}
                     valueType={'text'}
+                    tooltip={'Text'}
                     text={'这是一段很长很长超级超级长的无意义说明文本并且重复了很多没有意义的词语，就是为了让它变得很长很长超级超级长'}
                     span={2}
                     contentStyle={{

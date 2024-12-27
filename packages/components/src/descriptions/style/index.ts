@@ -42,6 +42,12 @@ function genBaseStyle (token: ProDescriptionsToken): CSSInterpolation {
                 [proFieldTextareaReadCls]: {
                     padding: '0 !important'
                 }
+            },
+            [`${componentCls}-item-tooltip`]: {
+                color: token.colorTextDescription,
+                cursor: 'help',
+                writingMode: 'horizontal-tb',
+                marginInlineStart: token.marginXXS,
             }
         }
     }
@@ -52,8 +58,8 @@ export default genComponentStyleHook('ProDescriptions', (token) => {
 
     const proFieldTextareaReadCls: string = `${antCls}-pro-field-textarea__read`
 
-    const descriptionsToken: ProDescriptionsToken = mergeToken<ProDescriptionsToken>(token, {
+    const proDescriptionsToken: ProDescriptionsToken = mergeToken<ProDescriptionsToken>(token, {
         proFieldTextareaReadCls
     })
-    return genBaseStyle(descriptionsToken)
+    return genBaseStyle(proDescriptionsToken)
 })

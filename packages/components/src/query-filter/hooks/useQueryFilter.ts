@@ -41,8 +41,6 @@ function useQueryFilter (
     size: Ref<ResizeObserverRectSize>,
     props: QueryFilterProps
 ): UseQueryFilterResult {
-    const { showCollapse } = props
-
     const { layout, span } = useBreakPoint(size, props)
 
     const collapsed: Ref<boolean> = ref(props.collapsed!)
@@ -66,7 +64,7 @@ function useQueryFilter (
         const isChildHidden = (propsHidden: boolean, index: number) => {
             propsHidden && (hiddenCount += 1)
             const cHidden: boolean = unref(collapsed) && (index - hiddenCount) > maxIndex
-            return showCollapse ? (propsHidden || cHidden) : propsHidden
+            return props.showCollapse ? (propsHidden || cHidden) : propsHidden
         }
 
         return children.map((child, index) => {
