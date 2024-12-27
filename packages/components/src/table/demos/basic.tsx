@@ -77,7 +77,7 @@ export default defineComponent(() => {
     return () => {
         return (
             <Fragment>
-                <Table request={request} columns={columns}/>
+                <Table search={{ showCollapse: true }} request={request} columns={columns}/>
             </Fragment>
         )
     }

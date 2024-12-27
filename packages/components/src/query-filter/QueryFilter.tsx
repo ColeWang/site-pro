@@ -32,7 +32,7 @@ const QueryFilter = defineComponent({
 
         const size: Ref<ResizeObserverRectSize> = ref({ width: 0, height: 0 })
 
-        const { layout, span, collapsed, setCollapse, genColNodes } = useQueryFilter(size, props)
+        const { layout, span, showCollapse, collapsed, setCollapse, genColNodes } = useQueryFilter(size, props)
 
         function onResize (value: ResizeObserverRectSize): void {
             size.value = value
@@ -90,6 +90,7 @@ const QueryFilter = defineComponent({
 
             const actionsProps: QueryFilterActionsProps = {
                 ...pick(props, Object.keys(Actions.props)) as QueryFilterActionsProps,
+                showCollapse: unref(showCollapse),
                 collapsed: unref(collapsed),
                 onSubmit: onSubmit,
                 onReset: onReset,

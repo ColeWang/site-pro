@@ -27,6 +27,7 @@ interface GenColNodesResult {
 interface UseQueryFilterResult {
     layout: Ref<QueryFilterLayout>;
     span: Ref<number>;
+    showCollapse: Ref<boolean>;
     collapsed: Ref<boolean>;
     setCollapse: (value: boolean) => void;
     genColNodes: (children: VNode[], iteratee: GenColNodesIteratee) => GenColNodesResult;
@@ -43,9 +44,11 @@ function useQueryFilter (
 ): UseQueryFilterResult {
     const { layout, span } = useBreakPoint(size, props)
 
+    const showCollapse: Ref<boolean> = ref(props.showCollapse!)
     const collapsed: Ref<boolean> = ref(props.collapsed!)
+
     const showNumber: ComputedRef<number> = computed(() => {
-        const cols = 24 / unref(span) * props.defaultRowsNumber!
+        const cols: number = 24 / unref(span) * props.defaultRowsNumber!
         return Math.max(1, cols - 1)
     })
 
@@ -55,6 +58,15 @@ function useQueryFilter (
 
     function setCollapse (value: boolean): void {
         collapsed.value = value
+    }
+
+    function checkShowCollapse (children: VNode[]): void {
+        const showNodes: VNode[] = children.filter((child) => {
+            const childProps: Recordable = convertToCamelCaseProps(child.props || {})
+            return childProps.hidden === false || childProps.hidden === undefined
+        })
+        // 最大显示节点数 > 保留节点数
+        showCollapse.value = showNodes.length > unref(showNumber)
     }
 
     function createDealNodes (children: VNode[]): ColDealNode[] {
@@ -77,10 +89,14 @@ function useQueryFilter (
     }
 
     function genColNodes (children: VNode[], iteratee: GenColNodesIteratee): GenColNodesResult {
+        // 校验 showCollapse
+        props.showCollapse && checkShowCollapse(children)
+
         const dealNodes: ColDealNode[] = createDealNodes(children)
         const showNodes: ColDealNode[] = dealNodes.filter((c) => !c.hidden)
         const offset: number = getOffset(showNodes.length, unref(span))
         const haveRow: boolean = unref(span) + offset === 24
+
         return { nodes: map(dealNodes, iteratee), offset, haveRow }
     }
 
@@ -88,7 +104,7 @@ function useQueryFilter (
         stopWatchCollapsed && stopWatchCollapsed()
     })
 
-    return { layout, span, collapsed, setCollapse, genColNodes }
+    return { layout, span, showCollapse, collapsed, setCollapse, genColNodes }
 }
 
 export default useQueryFilter
