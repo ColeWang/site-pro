@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -8,7 +8,7 @@ declare module 'ant-design-vue/es/theme/interface' {
 }
 
 
-interface ProActionToken extends FullToken<'ProAction'> {
+interface ProActionToken extends ThemeFullToken<'ProAction'> {
     proActionTransition: string;
 }
 
@@ -56,7 +56,7 @@ function genBaseStyle (token: ProActionToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProAction'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProAction'>): CSSInterpolation {
     const proActionTransition: string = `all ${token.motionDurationMid} ${token.motionEaseInOut}`
 
     const proActionToken: ProActionToken = mergeToken<ProActionToken>(token, {

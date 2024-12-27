@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProTableToolbarToken extends FullToken<'ProTableToolbar'> {
+interface ProTableToolbarToken extends ThemeFullToken<'ProTableToolbar'> {
     proTableToolbarSettingsPaddingLeft: number;
 }
 
@@ -68,7 +68,7 @@ function genBaseStyle (token: ProTableToolbarToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProTableToolbar'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProTableToolbar'>): CSSInterpolation {
     const proTableToolbarSettingsPaddingLeft: number = token.sizeMS / 2
     const proTableToolbarToken: ProTableToolbarToken = mergeToken<ProTableToolbarToken>(token, {
         proTableToolbarSettingsPaddingLeft

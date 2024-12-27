@@ -2,13 +2,13 @@ import type { App, CSSProperties, Plugin, SlotsType, VNodeChild } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Col as AntCol, theme as antTheme } from 'ant-design-vue'
 import { getPropsSlotVNode, toPx } from '@site-pro/utils'
-import type { GlobalToken } from '../../theme'
+import type { ThemeGlobalToken } from '../../theme'
 import type { BaseFormLayout, RowWrapperProps } from '../../base-form'
 import { ColWrapper, RowWrapper, useFormInstance } from '../../base-form'
 import type { FormGroupSlots } from './typings'
 import { formGroupProps } from './typings'
 
-function genTitleStyle (layout: BaseFormLayout, token: GlobalToken): CSSProperties {
+function genTitleStyle (layout: BaseFormLayout, token: ThemeGlobalToken): CSSProperties {
     const baseStyle: CSSProperties = {
         fontSize: token.fontSize,
         color: token.colorText,

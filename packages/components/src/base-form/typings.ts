@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import { formProps as antFormProps } from 'ant-design-vue/es/form'
 import type { NamePath, Recordable } from '@site-pro/utils'
-import type { FormInstance, RowProps, ValidateErrorEntity } from '../ant-typings'
+import type { FormInstance, RowProps, FormValidateError } from '../ant-typings'
 
 export interface BaseFormUpdater {
     (value: any): any;
@@ -44,7 +44,7 @@ export const baseFormProps = () => ({
         default: undefined
     },
     onFinishFailed: {
-        type: Function as PropType<(errorInfo: ValidateErrorEntity) => void>,
+        type: Function as PropType<(errorInfo: FormValidateError) => void>,
         default: undefined
     },
     onReset: {

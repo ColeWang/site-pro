@@ -41,8 +41,8 @@ export default defineComponent({
 
         return () => {
             const baseSearchProps: BaseSearchProps & BaseAttrs = {
+                ...pick(props, Object.keys(BaseSearch.props)) as BaseSearchProps,
                 ...attrs,
-                ...pick(props, Object.keys(BaseSearch.props)),
                 initialValues: initialValues
             }
 

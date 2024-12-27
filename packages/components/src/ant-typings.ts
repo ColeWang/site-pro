@@ -24,7 +24,7 @@ import type { ColProps } from 'ant-design-vue/es/grid/Col'
 import type { RowProps } from 'ant-design-vue/es/grid/Row'
 import type { FormInstance, FormProps } from 'ant-design-vue/es/form/Form'
 import type { FormItemProps } from 'ant-design-vue/es/form/FormItem'
-import type { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+import type { ValidateErrorEntity as FormValidateError } from 'ant-design-vue/es/form/interface'
 import type { ModalProps } from 'ant-design-vue/es/modal/Modal'
 import type { DrawerProps } from 'ant-design-vue/es/drawer'
 import type { TableProps } from 'ant-design-vue/es/table/Table'
@@ -38,7 +38,7 @@ import type {
     TablePaginationConfig as TablePagination,
     TableRowSelection
 } from 'ant-design-vue/es/table/interface'
-import type { CopyConfig as TypographyCopyable } from 'ant-design-vue/es/typography/Base'
+import type { CopyConfig as TextCopyable, EllipsisConfig as TextEllipsis } from 'ant-design-vue/es/typography/Base'
 import type { MenuProps } from 'ant-design-vue/es/menu'
 import type { MenuInfo } from 'ant-design-vue/es/menu/src/interface'
 import type { DataNode as TreeDataNode, TreeProps } from 'ant-design-vue/es/tree'
@@ -47,7 +47,13 @@ import type { EventDataNode as TreeEventDataNode } from 'ant-design-vue/es/vc-tr
 import type { NodeDragEventParams as TreeNodeDragEventParams } from 'ant-design-vue/es/vc-tree/contextTypes'
 import type { MappingAlgorithm as ThemeAlgorithm, ThemeConfig } from 'ant-design-vue/es/config-provider/context'
 import type { AliasToken as ThemeToken } from 'ant-design-vue/es/theme/interface/alias'
-import type { OverrideToken as ThemeOverrideToken } from 'ant-design-vue/es/theme/interface'
+import type {
+    GlobalToken as ThemeGlobalToken,
+    OverrideToken as ThemeOverrideToken
+} from 'ant-design-vue/es/theme/interface'
+import type { FullToken as ThemeFullToken } from 'ant-design-vue/es/theme/internal'
+import type { CSSInterpolation } from 'ant-design-vue/es/_util/cssinjs'
+
 import type { Dayjs } from 'dayjs'
 
 const passwordProps = () => ({
@@ -88,6 +94,7 @@ export type {
     FormProps,
     FormInstance,
     FormItemProps,
+    FormValidateError,
     RowProps,
     ColProps,
     ModalProps,
@@ -102,8 +109,8 @@ export type {
     TableRowSelection,
     TableCurrentDataSource,
     // --
-    ValidateErrorEntity,
-    TypographyCopyable,
+    TextCopyable,
+    TextEllipsis,
     MenuProps,
     MenuInfo,
     TreeProps,
@@ -112,6 +119,9 @@ export type {
     TreeEventDataNode,
     TreeNodeDragEventParams,
     // --
+    CSSInterpolation,
+    ThemeFullToken,
+    ThemeGlobalToken,
     ThemeConfig,
     ThemeToken,
     ThemeAlgorithm,

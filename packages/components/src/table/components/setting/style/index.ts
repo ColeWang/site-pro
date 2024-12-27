@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProTableSettingToken extends FullToken<'ProTableSetting'> {
+interface ProTableSettingToken extends ThemeFullToken<'ProTableSetting'> {
     proTableSettingListMinWidth: number;
 }
 
@@ -34,7 +34,7 @@ function genBaseStyle (token: ProTableSettingToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProTableSetting'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProTableSetting'>): CSSInterpolation {
     const proTableSettingListMinWidth: number = token.controlHeightSM * 8
     const proTableSettingToken: ProTableSettingToken = mergeToken<ProTableSettingToken>(token, {
         proTableSettingListMinWidth

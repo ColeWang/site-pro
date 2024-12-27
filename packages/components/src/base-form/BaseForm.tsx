@@ -8,7 +8,7 @@ import { get, head, isFunction, isObject, pick, set, unset, update } from 'lodas
 import { createFromInstance } from './hooks/useFormInstance'
 import type { RowWrapperProps } from './helpers'
 import { RowWrapper } from './helpers'
-import type { FormInstance, FormProps, RowProps, ValidateErrorEntity } from '../ant-typings'
+import type { FormInstance, FormProps, FormValidateError, RowProps } from '../ant-typings'
 import type { BaseFormExpose, BaseFormLayout, BaseFormProps, BaseFormSlots, BaseFormUpdater } from './typings'
 import { baseFormProps } from './typings'
 import useStyle from './style'
@@ -91,7 +91,7 @@ const BaseForm = defineComponent({
             context && context.scrollToField(namePath, options)
         }
 
-        function onFinishFailed (errorInfo: ValidateErrorEntity): void {
+        function onFinishFailed (errorInfo: FormValidateError): void {
             const { scrollToFirstError } = props
             if (scrollToFirstError && errorInfo.errorFields.length) {
                 const headField: any = head(errorInfo.errorFields)

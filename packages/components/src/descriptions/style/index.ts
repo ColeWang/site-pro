@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProDescriptionsToken extends FullToken<'ProDescriptions'> {
+interface ProDescriptionsToken extends ThemeFullToken<'ProDescriptions'> {
     proFieldTextareaReadCls: string;
 }
 

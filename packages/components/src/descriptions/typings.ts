@@ -3,7 +3,7 @@ import { descriptionsProps as antDescriptionsProps } from 'ant-design-vue/es/des
 import { formItemProps as antFormItemProps } from 'ant-design-vue/es/form'
 import type { Recordable } from '@site-pro/utils'
 import { baseFieldProps } from '../base-field'
-import type { TypographyCopyable } from '../ant-typings'
+import type { TextCopyable, TextEllipsis } from '../ant-typings'
 
 export interface DescriptionsRequest {
     (params: Recordable): Promise<any>;
@@ -55,11 +55,11 @@ export const descriptionsItemProps = () => ({
     ...baseFieldProps(),
     ...antFormItemProps(),
     ellipsis: {
-        type: [Boolean, Object] as PropType<{ showTitle?: boolean }>,
+        type: [Boolean, Object] as PropType<boolean | Omit<TextEllipsis, 'expandable' | 'rows' | 'onExpand'>>,
         default: undefined
     },
     copyable: {
-        type: [Boolean, Object] as PropType<boolean | TypographyCopyable>,
+        type: [Boolean, Object] as PropType<boolean | TextCopyable>,
         default: undefined
     },
     span: {
@@ -76,7 +76,7 @@ export const descriptionsItemProps = () => ({
     }
 })
 
-export interface DescriptionsItemSlots {
+export interface DescriptionsItemSlots extends Recordable {
     default?: any;
     label?: any;
     tooltip?: any;

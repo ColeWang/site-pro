@@ -34,7 +34,7 @@ export default defineComponent({
             const { grid } = props
 
             if (grid) {
-                const needColProps: ColProps = pick(props, Object.keys(AntCol.props)) as ColProps
+                const needColProps: ColProps = pick(props, Object.keys(AntCol.props))
                 if (!needColProps.span && !needColProps.xs) {
                     needColProps.xs = 24
                 }

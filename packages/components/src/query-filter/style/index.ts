@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProQueryFilterToken extends FullToken<'ProQueryFilter'> {
+interface ProQueryFilterToken extends ThemeFullToken<'ProQueryFilter'> {
     proQueryFilterVerticalMargin: number;
 }
 
@@ -31,7 +31,7 @@ function genBaseStyle (token: ProQueryFilterToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProQueryFilter'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProQueryFilter'>): CSSInterpolation {
     const proQueryFilterVerticalMargin: number = token.fontSize * token.lineHeight + token.sizeXS
 
     const proQueryFilterToken: ProQueryFilterToken = mergeToken<ProQueryFilterToken>(token, {

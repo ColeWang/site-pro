@@ -54,7 +54,7 @@ export type BaseFieldFormItemProps = FormItemProps & { model?: FormProps['model'
 
 export const baseFieldProps = () => ({
     text: {
-        type: [String, Number, Boolean, Array, Object] as PropType<any>,
+        type: [String, Number, Boolean, Array, Object, Function] as PropType<any>,
         default: undefined
     },
     mode: {

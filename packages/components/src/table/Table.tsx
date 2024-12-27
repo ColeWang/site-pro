@@ -215,9 +215,7 @@ const Table = defineComponent({
                     onFinish: onFinish,
                     onReset: onReset
                 }
-                // custom search 只有插槽的形式
-                const customSearch: VNodeChild = getSlotVNode(slots, {}, 'search', searchProps)
-                return customSearch || <Search {...searchProps}/>
+                return slots.search ? slots.search(searchProps) : <Search {...searchProps}/>
             }
 
             const renderToolbar = () => {

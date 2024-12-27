@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../../../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProTableSettingNodeToken extends FullToken<'ProTableSettingNode'> {
+interface ProTableSettingNodeToken extends ThemeFullToken<'ProTableSettingNode'> {
     proTableSettingNodeTitleMaxWidth: number;
     proTableSettingNodeOptionWidth: number;
     proTableSettingNodeOptionPaddingInline: number;
@@ -55,7 +55,7 @@ function genBaseStyle (token: ProTableSettingNodeToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProTableSettingNode'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProTableSettingNode'>): CSSInterpolation {
     const proTableSettingNodeTitleMaxWidth: number = token.controlHeightSM * 7
     const proTableSettingNodeOptionWidth: number = token.fontSize * 2 + token.sizeMS + token.sizeXXS
     const proTableSettingNodeOptionPaddingInline: number = token.sizeMS / 2

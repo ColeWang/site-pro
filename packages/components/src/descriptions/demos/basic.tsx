@@ -8,13 +8,18 @@ export default defineComponent(() => {
             <Descriptions column={2} title={'定义列表'}>
                 <Descriptions.Item
                     label={'文本'}
-                    valueType={'text'}
                     tooltip={'Text'}
                     text={'这是一段很长很长超级超级长的无意义说明文本并且重复了很多没有意义的词语，就是为了让它变得很长很长超级超级长'}
+                    ellipsis={true}
                     span={2}
                     contentStyle={{
                         maxWidth: '80%',
                     }}
+                />
+                <Descriptions.Item
+                    label={'文本'}
+                    copyable={true}
+                    text={'文本文本文本'}
                 />
                 <Descriptions.Item
                     label={'选择框'}
@@ -56,6 +61,22 @@ export default defineComponent(() => {
                     valueType={'time'}
                     text={dayjs().valueOf()}
                 />
+                <Descriptions.Item
+                    label={'RenderRead'}
+                    valueType={'text'}
+                    text={'1111'}
+                    v-slots={{
+                        renderRead: (slotProps: any) => {
+                            console.log(slotProps)
+                            return 'RenderRead'
+                        }
+                    }}
+                />
+                <Descriptions.Item label={'测试'} text={'123'}/>
+                <Descriptions.Item label={'ChildDom'}>
+                    ChildDom
+                </Descriptions.Item>
+                <Descriptions.Item label={'EmptyText'}/>
             </Descriptions>
         )
     }

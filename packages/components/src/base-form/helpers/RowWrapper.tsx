@@ -30,7 +30,7 @@ export default defineComponent({
             const { grid } = props
 
             if (grid) {
-                const needRowProps: RowProps = pick(props, Object.keys(AntRow.props)) as RowProps
+                const needRowProps: RowProps = pick(props, Object.keys(AntRow.props))
                 return (
                     <AntRow {...needRowProps}>
                         {slots.default && slots.default()}

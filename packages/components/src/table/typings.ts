@@ -14,7 +14,7 @@ import type {
     TableRowSelection,
     TableSorterResult,
     TableSortOrder,
-    TypographyCopyable
+    TextCopyable
 } from '../ant-typings'
 
 interface TableColumnSearchObject {
@@ -31,7 +31,7 @@ export interface TableColumn<RecordType = any> extends AntTableColumnType<Record
     hideInTable?: boolean;
     hideInSetting?: boolean;
     ellipsis?: boolean | { showTitle?: boolean };
-    copyable?: boolean | TypographyCopyable;
+    copyable?: boolean | TextCopyable;
     // field
     valueType?: BaseFieldValueType;
     initialValue?: any;

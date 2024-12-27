@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../../../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProTableSettingListToken extends FullToken<'ProTableSettingList'> {
+interface ProTableSettingListToken extends ThemeFullToken<'ProTableSettingList'> {
     proTableSettingListTitleMargin: number;
     proTableSettingListHolderPadding: number;
     proTableSettingListCheckboxMargin: number;
@@ -61,7 +61,7 @@ function genBaseStyle (token: ProTableSettingListToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProTableSettingList'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProTableSettingList'>): CSSInterpolation {
     const proTableSettingListTitleMargin: number = token.controlHeightSM - token.fontSizeSM * token.lineHeightSM
     const proTableSettingListHolderPadding: number = token.sizeXS / 2
     const proTableSettingListCheckboxMargin: number = (token.controlHeightSM - token.controlHeight / 2) / 2

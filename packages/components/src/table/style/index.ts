@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../theme'
 import { genComponentStyleHook, mergeToken } from '../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProTableToken extends FullToken<'ProTable'> {
+interface ProTableToken extends ThemeFullToken<'ProTable'> {
     // ---
 }
 
@@ -23,7 +23,7 @@ function genBaseStyle (token: ProTableToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProTable'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProTable'>): CSSInterpolation {
     const proTableToken: ProTableToken = mergeToken<ProTableToken>(token, {})
     return genBaseStyle(proTableToken)
 }

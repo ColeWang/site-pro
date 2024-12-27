@@ -5,7 +5,8 @@ import {
     Descriptions as AntDescriptions,
     Form as AntForm,
     Spin as AntSpin,
-    Tooltip as AntTooltip
+    Tooltip as AntTooltip,
+    Typography as AntTypography,
 } from 'ant-design-vue'
 import { QuestionCircleOutlined } from '@ant-design/icons-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
@@ -18,7 +19,7 @@ import {
     safeDestructureObject
 } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { isString, omit, pick } from 'lodash-es'
+import { isFunction, isString, omit, pick } from 'lodash-es'
 import DescriptionsItem from './Item'
 import useFetchData from './hooks/useFetchData'
 import type { BaseFieldFormItemProps, BaseFieldProps } from '../base-field'
@@ -33,13 +34,12 @@ interface CreateDescsItemOptions {
     emptyText: string;
 }
 
-function createDescsItem (
-    props: DescriptionsItemProps,
-    slots: Recordable<BaseSlot>,
-    options: CreateDescsItemOptions
-): VNodeChild {
-    const { valueType, formItemProps } = props
+function createDescsItem (props: DescriptionsItemProps, slots: Recordable<BaseSlot>, options: CreateDescsItemOptions): VNodeChild {
+    const { text, valueType, formItemProps, ellipsis, copyable } = props
     const { dataSource, prefixCls, emptyText } = options
+
+    // text 可以个函数
+    const needText: VNodeChild = isFunction(text) ? text(dataSource) : text
 
     const labelDom: VNodeChild = getPropsSlotVNode(slots, props, 'label')
 
@@ -51,7 +51,6 @@ function createDescsItem (
             </AntTooltip>
         </span>
     ) : tooltip
-
 
     const descsItemProps: DescriptionsItemProps = pick(props, Object.keys(AntDescriptions.Item.props))
     const needDescsItemProps: DescriptionsItemProps = omit(descsItemProps, ['label'])
@@ -71,16 +70,33 @@ function createDescsItem (
             mode: 'read',
             formItemProps: needFormItemProps
         }
+
+        const baseFieldSlots: Recordable<BaseSlot> = omit(slots, ['label', 'tooltip'])
         return (
             <AntDescriptions.Item {...needDescsItemProps} v-slots={descsItemSlots}>
-                <BaseField {...needBaseFieldProps}/>
+                <BaseField {...needBaseFieldProps} v-slots={baseFieldSlots}/>
             </AntDescriptions.Item>
         )
     }
 
+    // 当非 BaseField 时支持 ellipsis 与 copyable 必须传递 text
+    if ((ellipsis || copyable) && isString(needText)) {
+        return (
+            <AntDescriptions.Item {...needDescsItemProps} v-slots={descsItemSlots}>
+                <AntTypography.Text
+                    ellipsis={ellipsis}
+                    copyable={copyable}
+                    content={needText}
+                />
+            </AntDescriptions.Item>
+        )
+    }
+
+    const childDom: VNodeChild = slots.default && slots.default()
+
     return (
         <AntDescriptions.Item {...needDescsItemProps} v-slots={descsItemSlots}>
-            {slots.default ? slots.default() : emptyText}
+            {needText ?? childDom ?? emptyText}
         </AntDescriptions.Item>
     )
 }
@@ -115,10 +131,8 @@ const Descriptions = defineComponent({
             const titleDom: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
             const extraDom: VNodeChild = getSlotVNode(slots, props, 'extra', requestProps)
 
-            const restProps: DescriptionsProps = omit(props, ['title', 'extra'])
-            const needDescsProps: DescriptionsProps = {
-                ...pick(restProps, Object.keys(Descriptions.props)) as DescriptionsProps
-            }
+            const descsProps: DescriptionsProps = pick(props, Object.keys(AntDescriptions.props))
+            const needDescsProps: DescriptionsProps = omit(descsProps, ['title', 'extra'])
 
             const nodes: VNode[] = flatVNodeChildren(slots.default ? slots.default() : [])
 

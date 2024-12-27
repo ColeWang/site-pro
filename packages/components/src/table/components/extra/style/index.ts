@@ -1,4 +1,4 @@
-import type { CSSInterpolation, FullToken } from '../../../../theme'
+import type { CSSInterpolation, ThemeFullToken } from '../../../../theme'
 import { genComponentStyleHook, mergeToken } from '../../../../theme'
 
 declare module 'ant-design-vue/es/theme/interface' {
@@ -7,7 +7,7 @@ declare module 'ant-design-vue/es/theme/interface' {
     }
 }
 
-interface ProTableExtraToken extends FullToken<'ProTableExtra'> {
+interface ProTableExtraToken extends ThemeFullToken<'ProTableExtra'> {
     proTableExtraMarginBottom: number;
 }
 
@@ -24,7 +24,7 @@ function genBaseStyle (token: ProTableExtraToken): CSSInterpolation {
     }
 }
 
-function styleFn (token: FullToken<'ProTableExtra'>): CSSInterpolation {
+function styleFn (token: ThemeFullToken<'ProTableExtra'>): CSSInterpolation {
     const proTableExtraMarginBottom: number = token.sizeMS
     const proTableExtraToken: ProTableExtraToken = mergeToken<ProTableExtraToken>(token, {
         proTableExtraMarginBottom

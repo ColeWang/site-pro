@@ -3,7 +3,7 @@ import { computed, createVNode } from 'vue'
 import { Typography as AntTypography } from 'ant-design-vue'
 import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject, isString } from 'lodash-es'
-import type { TypographyCopyable } from '../../ant-typings'
+import type { TextCopyable } from '../../ant-typings'
 import { TableColumn, TableProps } from '../typings'
 
 interface UseCustomRenderResult {
@@ -21,7 +21,7 @@ function getEllipsis (column: TableColumn): boolean | undefined {
     return column.ellipsis
 }
 
-function getCopyable (column: TableColumn, text: any): false | TypographyCopyable {
+function getCopyable (column: TableColumn, text: any): false | TextCopyable {
     if (column.copyable && text) {
         if (isObject(column.copyable)) {
             return { text, ...column.copyable }
@@ -41,12 +41,9 @@ function customRender (oldColumn: TableColumn, emptyText?: string): CustomRender
             return enumToText(options.text, oldColumn.valueEnum)
         }
         if ((oldColumn.copyable || oldColumn.ellipsis) && isString(options.text) && !isEmpty(options.text)) {
-            const copyable: boolean | TypographyCopyable = getCopyable(oldColumn, options.text)
-            const ellipsis: boolean | undefined = getEllipsis(oldColumn)
-
             return createVNode(AntTypography.Text, {
-                copyable: copyable,
-                ellipsis: ellipsis,
+                copyable: getCopyable(oldColumn, options.text),
+                ellipsis: getEllipsis(oldColumn),
                 content: options.text
             })
         }
