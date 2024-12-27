@@ -1,4 +1,4 @@
-import { defineComponent, unref } from 'vue'
+import { defineComponent, onUnmounted, unref } from 'vue'
 import { theme as antTheme, Tree as AntTree } from 'ant-design-vue'
 import { useConfigInject } from '@site-pro/hooks'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
@@ -43,6 +43,19 @@ export default defineComponent({
             const column: TableColumn | undefined = props.columns.find((item) => item.key === key)
             column && emit('fixedChange', key, { ...column, fixed: fixed })
         }
+
+        // @TODO 重写 console.warn
+        const originWarn: any = console.warn
+
+        console.warn = function (message: string, ...params: any[]): void {
+            if (!(message && /draggable/.test(message) && /Expected/.test(message))) {
+                originWarn(message, ...params)
+            }
+        }
+
+        onUnmounted(() => {
+            console.warn = originWarn
+        })
 
         return () => {
             const { columns, showTitle, title, fixed, checkable, draggable } = props
