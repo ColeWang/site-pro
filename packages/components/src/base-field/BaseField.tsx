@@ -180,13 +180,6 @@ const BaseField = defineComponent({
     setup (props, { slots }) {
         const { valueTypeMap } = useBaseFieldProvider()
 
-        function onUpdateValue (value: any): void {
-            const { fieldProps } = props
-            if (isFunction(fieldProps['onUpdate:value'])) {
-                fieldProps['onUpdate:value'](value)
-            }
-        }
-
         return () => {
             const { mode, text, valueType, fieldProps, formItemProps } = props
             const placeholder = fieldProps.placeholder || props.placeholder
@@ -199,8 +192,7 @@ const BaseField = defineComponent({
             const needFieldProps: BaseFieldFieldProps = {
                 ...fieldProps,
                 value: inputValue,
-                placeholder: placeholder,
-                ['onUpdate:value']: onUpdateValue
+                placeholder: placeholder
             }
             const needBaseFieldProps: BaseFieldProps = {
                 ...props,
