@@ -30,7 +30,7 @@ export default defineComponent(() => {
             }
         },
         {
-            title: 'Address',
+            title: 'Address Address Address',
             dataIndex: 'address'
         },
         {

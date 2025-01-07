@@ -34,6 +34,8 @@ function genBaseStyle (token: ProTableSettingListToken): CSSInterpolation {
             [`${antCls}-tree`]: {
                 background: token.colorFillQuaternary,
                 [`${antCls}-tree-list-holder`]: {
+                    // fix: 元素自动撑开
+                    position: 'relative !important' as any,
                     paddingBlockStart: proTableSettingListHolderPadding
                 },
                 [`${antCls}-tree-node-content-wrapper`]: {
