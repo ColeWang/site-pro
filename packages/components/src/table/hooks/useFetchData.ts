@@ -78,7 +78,9 @@ function useFetchData (
     const stopWatchPagination: WatchStopHandle = watch(() => context.pagination, (value, oldValue) => {
         if (value && oldValue && (value.current !== oldValue.current || value.pageSize !== oldValue.pageSize)) {
             oldValue.pageSize !== value.pageSize && setPaginate({ current: 1 })
-            fetchData()
+            if (props.requestOnPaginateChange === true) {
+                fetchData()
+            }
         }
     })
 
@@ -124,12 +126,13 @@ function useFetchData (
         context.pagination = validatePaginate(needPaginate as Required<TablePagination>)
     }
 
-    function getParams (): Recordable {
-        return { ...unref(sParams), ...props.params }
-    }
-
     function setParams (params: Recordable): void {
         sParams.value = params
+    }
+
+    // 包括 props.params
+    function getParams (): Recordable {
+        return { ...unref(sParams), ...props.params }
     }
 
     function onReload (resetCurrent: boolean = false): void {

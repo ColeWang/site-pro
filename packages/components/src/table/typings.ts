@@ -129,6 +129,10 @@ export const tableProps = () => ({
         type: Boolean as PropType<boolean>,
         default: false
     },
+    requestOnPaginateChange: {
+        type: Boolean as PropType<boolean>,
+        default: true
+    },
     request: {
         type: Function as PropType<TableRequest>,
         default: undefined
