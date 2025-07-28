@@ -67,7 +67,7 @@ jobs:
       - name: Build with Astro
         run: |
           npm run docs:build
-          touch .vitepress/dist/.nojekyll
+          touch docs/.vitepress/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
