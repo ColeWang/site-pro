@@ -6,7 +6,7 @@ hero:
   tagline: 让中后台开发更简单
   actions:
     - theme: brand
-      text: 快速开始
+      text: 开始
       link: /intro/introduce
 features:
   - title: 简单易用

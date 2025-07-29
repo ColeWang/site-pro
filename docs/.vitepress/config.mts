@@ -15,7 +15,7 @@ export default defineConfig({
         nav: [
             { text: '指南', link: '/intro/introduce' },
             { text: '组件', link: '/components/form' },
-            { text: '插件', link: '/plugins/loading' },
+            { text: '插件', link: '/plugins/screen' },
         ],
         sidebar: {
             '/intro': [
@@ -27,8 +27,16 @@ export default defineConfig({
                             link: '/intro/introduce'
                         },
                         {
-                            text: '快速开始',
+                            text: '快速上手',
                             link: '/intro/started'
+                        },
+                        {
+                            text: '定制主题',
+                            link: '/intro/custom-theme'
+                        },
+                        {
+                            text: '国际化',
+                            link: '/intro/custom-locale'
                         }
                     ]
                 }
@@ -86,7 +94,7 @@ export default defineConfig({
                     items: [
                         {
                             text: 'Locale - 国际化',
-                            link: '/components/locale'
+                            link: '/components/locale-provider'
                         },
                         {
                             text: 'Theme - 主题',
@@ -97,20 +105,30 @@ export default defineConfig({
             ],
             '/plugins': [
                 {
-                    text: 'Loading - 加载',
-                    link: '/plugins/loading'
+                    text: '屏幕插件',
+                    items: [
+                        {
+                            text: 'Screen - 屏幕',
+                            link: '/plugins/screen'
+                        },
+                        {
+                            text: 'Fullscreen - 全屏',
+                            link: '/plugins/fullscreen'
+                        }
+                    ]
                 },
                 {
-                    text: 'Progress - 进度',
-                    link: '/plugins/progress'
-                },
-                {
-                    text: 'Screen - 屏幕',
-                    link: '/plugins/screen'
-                },
-                {
-                    text: 'Fullscreen - 全屏',
-                    link: '/plugins/fullscreen'
+                    text: '加载插件',
+                    items: [
+                        {
+                            text: 'Loading - 加载',
+                            link: '/plugins/loading'
+                        },
+                        {
+                            text: 'Progress - 进度',
+                            link: '/plugins/progress'
+                        }
+                    ]
                 }
             ]
         },

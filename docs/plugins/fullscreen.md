@@ -1,3 +1,5 @@
+## API
+
 ### Fullscreen Props
 
 | 属性       | 说明                     | 类型              |
