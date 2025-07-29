@@ -23,7 +23,7 @@ export interface ScreenState extends Record<ScreenStateName, boolean> {
 }
 
 export interface ScreenPlugin extends ObjectPlugin {
-    install: (this: ScreenState & ScreenPlugin, app: App, options: ScreenPluginInstallOptions) => App;
+    install: (this: ScreenState & ScreenPlugin, app: App, options?: ScreenPluginInstallOptions) => App;
 }
 
 const state: ScreenState = {

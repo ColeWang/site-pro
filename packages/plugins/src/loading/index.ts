@@ -22,7 +22,7 @@ export interface LoadingPlugin extends ObjectPlugin {
     update: (props: LoadingProps) => void;
     destroy: () => void;
     render: (props: LoadingProps, options: Omit<LoadingPluginInstallOptions, '$site'>) => VNode | null;
-    install: (this: LoadingState & LoadingPlugin, app: App, options: LoadingPluginInstallOptions) => App;
+    install: (this: LoadingState & LoadingPlugin, app: App, options?: LoadingPluginInstallOptions) => App;
 }
 
 

@@ -16,7 +16,7 @@ export interface FullscreenPlugin extends ObjectPlugin {
     request: (this: FullscreenState & FullscreenPlugin, target?: HTMLElement) => Promise<void>;
     exit: (this: FullscreenState & FullscreenPlugin) => Promise<void>;
     toggle: (this: FullscreenState & FullscreenPlugin, target?: HTMLElement) => Promise<void>;
-    install: (this: FullscreenState & FullscreenPlugin, app: App, options: FullscreenPluginInstallOptions) => App;
+    install: (this: FullscreenState & FullscreenPlugin, app: App, options?: FullscreenPluginInstallOptions) => App;
 }
 
 interface Native {
