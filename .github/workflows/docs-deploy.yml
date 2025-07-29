@@ -1,0 +1,24 @@
+name: Docs Deploy
+
+on:
+  workflow_run:
+    workflows: ["Docs Build"]
+    types: ["completed"]
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docs-build-output
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
