@@ -1,8 +1,8 @@
-name: Docs Build
+name: Docs Build Deploy
 
 on:
   push:
-    branches: ["master"]
+    branches: [ "master" ]
     workflow_dispatch: true
 
 concurrency:
@@ -37,7 +37,19 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          name: docs-build-output
           path: docs/.vitepress/dist/
-          retention-days: 1
 
+  deploy:
+    name: Deploy
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
