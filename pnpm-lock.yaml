@@ -90,9 +90,6 @@ importers:
       '@site-pro/hooks':
         specifier: workspace:*
         version: link:../hooks
-      '@site-pro/locale':
-        specifier: workspace:*
-        version: link:../locale
       '@site-pro/utils':
         specifier: workspace:*
         version: link:../utils
@@ -102,8 +99,6 @@ importers:
       '@site-pro/utils':
         specifier: workspace:*
         version: link:../utils
-
-  packages/locale: {}
 
   packages/plugins:
     dependencies:

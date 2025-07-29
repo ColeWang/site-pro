@@ -5,10 +5,11 @@
 ```bash
 $ npm install @site-pro/utils
 $ npm install @site-pro/hooks
-$ npm install @site-pro/locale
 $ npm install @site-pro/components
 $ npm install @site-pro/plugins
 ```
+
+
 
 ## TODO
 

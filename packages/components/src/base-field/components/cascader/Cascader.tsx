@@ -3,7 +3,7 @@ import { defineComponent, Fragment } from 'vue'
 import { Cascader as AntCascader } from 'ant-design-vue'
 import type { BaseEnumType, Recordable } from '@site-pro/utils'
 import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldCascaderFieldProps, FieldCascaderSlots } from './typings'
 import { fieldCascaderProps } from './typings'
 

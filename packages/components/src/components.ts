@@ -34,8 +34,8 @@ export { Field } from './form'
 export type { UserFieldProps, UserFieldInstance } from './form'
 export { UserField } from './form'
 
-export type { LocaleProviderProps, LocaleProviderInstance } from './locale'
-export { LocaleProvider } from './locale'
+export type { LocaleProviderProps, LocaleProviderInstance } from './locale-provider'
+export { LocaleProvider } from './locale-provider'
 
 export type { QueryFilterProps, QueryFilterInstance } from './query-filter'
 export { QueryFilter } from './query-filter'

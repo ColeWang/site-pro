@@ -35,12 +35,6 @@
             "@site-pro/hooks/*": [
                 "./packages/hooks/src/*"
             ],
-            "@site-pro/locale": [
-                "./packages/locale/src/index"
-            ],
-            "@site-pro/locale/*": [
-                "./packages/locale/src/*"
-            ],
             "@site-pro/plugins": [
                 "./packages/plugins/src/index"
             ],

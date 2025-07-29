@@ -1,9 +1,9 @@
 import type { ComputedRef, InjectionKey } from 'vue'
 import { computed, inject, provide, unref } from 'vue'
 import type { NamePath } from '@site-pro/utils'
-import { zhCN } from '@site-pro/locale'
 import { get, has } from 'lodash-es'
 import type { LocaleProviderExpose, LocaleType } from '../typings'
+import { zhCN } from '../../locale'
 
 interface UseLocaleReceiverResult {
     locale: ComputedRef<LocaleType>;

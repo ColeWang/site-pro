@@ -21,6 +21,12 @@
         "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
         "paths": {
+            "@site-pro/components": [
+                "./src/index"
+            ],
+            "@site-pro/components/*": [
+                "./src/*"
+            ],
             "vue-types": [
                 "../../node_modules/vue-types"
             ],

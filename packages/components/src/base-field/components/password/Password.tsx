@@ -4,7 +4,7 @@ import { Input as AntInput, Space as AntSpace, theme as antTheme } from 'ant-des
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode, preventDefault } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldPasswordFieldProps, FieldPasswordSlots } from './typings'
 import { fieldPasswordProps } from './typings'
 

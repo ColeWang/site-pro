@@ -3,7 +3,7 @@ import { defineComponent, Fragment } from 'vue'
 import { Input as AntInput } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldTextFieldProps, FieldTextSlots } from './typings'
 import { fieldTextProps } from './typings'
 

@@ -4,7 +4,7 @@ import { Switch as AntSwitch } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getPropsSlotVNode, getSlotVNode } from '@site-pro/utils'
 import { isFunction } from 'lodash-es'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldSwitchFieldProps, FieldSwitchSlots } from './typings'
 import { fieldSwitchProps } from './typings'
 

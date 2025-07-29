@@ -2,7 +2,7 @@ import type { Ref } from 'vue'
 import { defineComponent, Fragment, ref } from 'vue'
 import { Button } from 'ant-design-vue'
 import { LocaleProvider, Text } from '@site-pro/components'
-import { enUS, zhCN } from '@site-pro/locale'
+import { enUS, zhCN } from '@site-pro/components/locale'
 
 export default defineComponent(() => {
     const locale: Ref<Record<string, any>> = ref(zhCN)

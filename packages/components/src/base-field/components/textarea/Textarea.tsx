@@ -4,7 +4,7 @@ import { Input as AntInput, theme as antTheme } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode, toPx } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldTextareaFieldProps, FieldTextareaSlots } from './typings'
 import { fieldTextareaProps } from './typings'
 

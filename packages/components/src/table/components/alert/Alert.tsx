@@ -4,7 +4,7 @@ import { ConfigProvider as AntConfigProvider, Space as AntSpace, theme as antThe
 import type { Recordable } from '@site-pro/utils'
 import { getElement, getSlotVNode } from '@site-pro/utils'
 import { useConfigInject } from '@site-pro/hooks'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import { Action } from '../../../action'
 import type { AlertSlots } from './typings'
 import { alertProps } from './typings'

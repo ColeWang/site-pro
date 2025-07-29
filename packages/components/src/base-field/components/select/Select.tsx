@@ -4,7 +4,7 @@ import { Select as AntSelect } from 'ant-design-vue'
 import type { BaseEnumType, BaseOptionType, Recordable } from '@site-pro/utils'
 import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
-import { useLocaleReceiver } from '../../../locale'
+import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldSelectFieldProps, FieldSelectSlots } from './typings'
 import { fieldSelectProps } from './typings'
 

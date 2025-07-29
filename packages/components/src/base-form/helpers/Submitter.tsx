@@ -2,7 +2,7 @@ import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import { Button as AntButton, Space as AntSpace, theme as antTheme } from 'ant-design-vue'
 import { preventDefault } from '@site-pro/utils'
-import { useLocaleReceiver } from '../../locale'
+import { useLocaleReceiver } from '../../locale-provider'
 import type { ButtonProps } from '../../ant-typings'
 
 export const submitterProps = () => ({

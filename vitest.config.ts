@@ -27,7 +27,6 @@ export default defineConfig({
         alias: {
             '@site-pro/components': resolve(__dirname, './packages/components/src'),
             '@site-pro/hooks': resolve(__dirname, './packages/hooks/src'),
-            '@site-pro/locale': resolve(__dirname, './packages/locale/src'),
             '@site-pro/plugins': resolve(__dirname, './packages/plugins/src'),
             '@site-pro/utils': resolve(__dirname, './packages/utils/src')
         }

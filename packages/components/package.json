@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "@site-pro/hooks": "workspace:*",
-        "@site-pro/locale": "workspace:*",
         "@site-pro/utils": "workspace:*"
     },
     "main": "./lib/index.js",
@@ -61,6 +60,11 @@
             "require": "./lib/locale/index.js",
             "import": "./es/locale/index.js",
             "types": "./types/locale/index.d.ts"
+        },
+        "./locale-provider": {
+            "require": "./lib/locale-provider/index.js",
+            "import": "./es/locale-provider/index.js",
+            "types": "./types/locale-provider/index.d.ts"
         },
         "./query-filter": {
             "require": "./lib/query-filter/index.js",
