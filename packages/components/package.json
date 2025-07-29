@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/components",
-    "version": "0.4.8",
+    "version": "0.4.9",
     "description": "Vue3 AdminPro Components of Vue",
     "scripts": {
         "dev": "vite",
