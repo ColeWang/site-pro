@@ -4,6 +4,25 @@
 
 ## 新建项目
 
+如果你需要一个开箱即用的模版项目，建议使用 [Vue3 Admin Pro](https://github.com/ColeWang/vue3-admin-pro.git) 开发。
+
+```shell
+# 克隆项目
+git clone https://github.com/ColeWang/vue3-admin-pro.git
+
+# 进入项目目录
+cd vue3-admin-pro
+
+# 安装依赖
+npm install
+
+# 启动服务
+npm run serve
+
+# 打包
+npm run build
+```
+
 如果你需要新建一个项目，建议使用 [Vite](https://github.com/vitejs/vite) 构建。
 
 请使用命令行来初始化项目：
@@ -35,6 +54,12 @@ app.mount('#app')
 
 ```
 
+```vue
+<template>
+  <pro-table></pro-table>
+</template>
+```
+
 #### 全局部分注册
 
 ```js
@@ -54,7 +79,6 @@ app.mount('#app')
 #### 局部注册组件
 
 ```vue
-
 <template>
   <pro-table></pro-table>
 </template>
@@ -95,6 +119,16 @@ app.mount('#app')
 
 ```
 
+```vue
+<script>
+  import { useSite } from '@site-pro/plugins'
+  
+  const $site = useSite()
+  
+  console.log($site.screen.name)
+</script>
+```
+
 #### 部分注册
 
 ```js
@@ -113,3 +147,10 @@ app.mount('#app')
 
 ```
 
+```vue
+<script>
+  import { Screen } from '@site-pro/plugins'
+  
+  console.log(Screen.name)
+</script>
+```
