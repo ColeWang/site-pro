@@ -18,6 +18,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: docs-build-output
+          path: "./"
 
       - name: Deploy to GitHub Pages
         id: deployment
