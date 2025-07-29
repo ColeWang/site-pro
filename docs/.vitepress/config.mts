@@ -7,7 +7,7 @@ export default defineConfig({
             vueJsx()
         ]
     },
-    base: '/docs/',
+    base: '/site-pro/',
     appearance: false,
     title: 'SitePro',
     description: '中后台重型组件',
