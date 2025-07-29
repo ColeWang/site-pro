@@ -6,6 +6,8 @@
 
 如果你需要一个开箱即用的模版项目，建议使用 [Vue3 Admin Pro](https://github.com/ColeWang/vue3-admin-pro.git) 开发。
 
+尽管存在学习曲线，但回报值得。
+
 ```shell
 # 克隆项目
 git clone https://github.com/ColeWang/vue3-admin-pro.git
@@ -36,6 +38,10 @@ npm create vite@latest
 #### 安装
 
 ```shell
+# 安装必要依赖
+npm install ant-design-vue @ant-design/icons-vue dayjs lodash-es --save
+
+# 安装 @site-pro
 npm install @site-pro/utils @site-pro/hooks @site-pro/components --save 
 ```
 
@@ -88,7 +94,7 @@ app.mount('#app')
   
   export default {
     components: {
-      [Table.name]: Table,
+      [Table.name]: Table
     }
   }
 </script>
@@ -108,12 +114,14 @@ npm install @site-pro/plugins --save
 import { createApp } from 'vue'
 import { createSite } from '@site-pro/plugins'
 
-// createSite(options?: BaseSitePluginsOptions) => BaseSitePlugins
+/**
+ * createSite(options?: BaseSitePluginsOptions) => BaseSitePlugins
+ */
 const site = createSite()
 
 const app = createApp(App)
 
-app.use(plugins)
+app.use(site)
 // ...
 app.mount('#app')
 
@@ -137,10 +145,14 @@ import { Screen, Progress } from '@site-pro/plugins'
 
 const app = createApp(App)
 
-// install(app: App, options?: ScreenPluginInstallOptions)
+/**
+ * install(app: App, options?: ScreenPluginInstallOptions)
+ */
 app.use(Screen)
 
-// install(app: App, options?: ProgressPluginInstallOptions)
+/**
+ * install(app: App, options?: ProgressPluginInstallOptions)
+ */
 app.use(Progress)
 // ...
 app.mount('#app')
