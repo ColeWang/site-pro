@@ -13,17 +13,17 @@ QueryFilter 除了继承 [Form](./form) 的 API 以外还支持下面的属性�
 
 ### QueryFilter Props {#query-filter-props}
 
-| 属性                | 说明                | 类型                                                                                                                                    | 可选值                       | 默认值          |
-|-------------------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------|--------------|
-| layout            | 布局                | string                                                                                                                                | 'horizontal' / 'vertical' | 'horizontal' |
-| labelWidth        | 	label 宽度         | 'auto' / number                                                                                                                       | -                         | 80           |
-| collapse          | 是否折叠超出的表单项，用于受控模式 | boolean                                                                                                                               | -                         | false        |
-| defaultCollapsed  | 默认状态下是否折叠超出的表单项   | boolean                                                                                                                               | -                         | true         |
-| defaultRowsNumber | 折叠状态下默认显示的表单控件行数  | number                                                                                                                                | -                         | 1            |
-| compact           | 开启紧凑模式            | boolean                                                                                                                               | -                         | false        |
-| breakPoints       | 断点                | [BreakPointsConfig](https://github.com/ColeWang/site-pro/blob/master/packages/components/src/query-filter/hooks/useBreakPoint.ts#L32) | -                         | -            |
-| loading           | 提交按钮的加载状态         | boolean                                                                                                                               | -                         | false        |
-| submitter         | 提交/重置按钮所在 props   | [SubmitterProps](https://github.com/ColeWang/site-pro/blob/master/packages/components/src/base-form/helpers/Submitter.tsx#L8)         | -                         | -            |
+| 属性                | 说明                             | 类型                                                                                                                                    | 可选值                       | 默认值          |
+|-------------------|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------------------------|--------------|
+| layout            | 布局                             | string                                                                                                                                | 'horizontal' / 'vertical' | 'horizontal' |
+| labelWidth        | label 宽度                       | 'auto' / number                                                                                                                       | -                         | 80           |
+| collapse          | 开启折叠模式                         | boolean                                                                                                                               | -                         | false        |
+| defaultCollapsed  | 默认状态下是否折叠超出的表单项                | boolean                                                                                                                               | -                         | true         |
+| defaultRowsNumber | 折叠状态下默认显示的表单控件行数，表单项不足时将隐藏展开按钮 | number                                                                                                                                | -                         | 1            |
+| compact           | 开启紧凑模式                         | boolean                                                                                                                               | -                         | false        |
+| breakPoints       | 断点                             | [BreakPointsConfig](https://github.com/ColeWang/site-pro/blob/master/packages/components/src/query-filter/hooks/useBreakPoint.ts#L32) | -                         | -            |
+| loading           | 提交按钮的加载状态                      | boolean                                                                                                                               | -                         | false        |
+| submitter         | 提交/重置按钮所在 props                | [SubmitterProps](https://github.com/ColeWang/site-pro/blob/master/packages/components/src/base-form/helpers/Submitter.tsx#L8)         | -                         | -            |
 
 ### QueryFilter Emits {#query-filter-emits}
 

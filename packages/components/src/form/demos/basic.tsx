@@ -1,19 +1,28 @@
-import { defineComponent, Fragment } from 'vue'
+import { defineComponent } from 'vue'
 import { Form, Number, Text } from '@site-pro/components'
+import { Button } from 'ant-design-vue'
 
 export default defineComponent(() => {
-    function onValuesChange (values: any) {
+    function onFinish (values: any) {
         console.log(values)
     }
 
     return () => {
         return (
-            <Fragment>
-                <Form onValuesChange={onValuesChange}>
-                    <Text label={'Text'} name={'text'} width={180}/>
-                    <Number tooltip={'Number'} label={'Number'} name={'number'}/>
-                </Form>
-            </Fragment>
+            <Form onFinish={onFinish}>
+                <Text
+                    label={'Text'}
+                    name={'text'}
+                    width={180}
+                />
+                <Number
+                    label={'Number'}
+                    name={'number'}
+                    width={180}
+                    required={true}
+                />
+                <Button type={'primary'} html-type={'submit'}>提交</Button>
+            </Form>
         )
     }
 })
