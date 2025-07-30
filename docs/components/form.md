@@ -1,7 +1,14 @@
+<h1 align="center">
+Form - 高级表单
+</h1>
 
-## API
+Form 在 [Antd Form](https://www.antdv.com/components/form-cn) 的基础上增加了一些语法糖，快速开发表单。
 
-### Form Props
+## API {#form-api}
+
+Form 是对 [Antd Form](https://www.antdv.com/components/form-cn) 的再封装，除了继承 Antd Form 的 API 还支持下面属性和方法。
+
+### Form Props {#form-props}
 
 | 属性            | 说明         | 类型      | 可选值                            | 默认值      |
 |---------------|------------|---------|--------------------------------|----------|
@@ -12,17 +19,18 @@
 | rowProps      | 开启 grid 模式 | object  | -                              | false    |
 | transform     | 开启 grid 模式 | object  | -                              | false    |
 
-### Form Emits
+### Form Emits {#form-emits}
 
 | 事件             | 说明          | 回调参数                                               |
 |----------------|-------------|----------------------------------------------------|
 | onSubmit       | 提交时触发       | Function(e: Event \| \{ \_\_MARK\_\_: 'submit' \}) |
 | onFinish       | 提交并且校验通过的回调 | Function(values)                                   |
+| onFormRef      | 提交并且校验通过的回调 | Function(values)                                   |
 | onFinishFailed | 提交并且校验通过的回调 | Function(values)                                   |
 | onReset        | 重置表单回调      | Function(values)                                   |
 | onValuesChange | 数据变化时回调     | Function(values)                                   |
 
-### Form Expose
+### Form Expose {#form-expose}
 
 | 属性/方法            | 说明          | 类型            |
 |------------------|-------------|---------------|

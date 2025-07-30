@@ -11,6 +11,10 @@ import { BaseField, baseFieldProps } from '../../base-field'
 
 export const fieldProps = () => ({
     ...baseFieldProps(),
+    initialValue: {
+        type: [String, Number, Boolean, Array, Object, Function] as PropType<any>,
+        default: undefined
+    },
     width: {
         type: [Number, String] as PropType<number | string>,
         default: undefined
@@ -64,13 +68,14 @@ const Field = defineComponent({
 
         const { model, formProps, setModelValue } = useFormInstance()
 
-        // 初始化值 防止 form 报错
-        const { name: fieldNamePath } = props.formItemProps
-        fieldNamePath && setDefaultValue(fieldNamePath)
+        const { initialValue, formItemProps } = props
 
-        function setDefaultValue (namePath: NamePath): void {
+        // 初始化值 (同时防止 form 报错)
+        formItemProps.name && setDefaultValue(formItemProps.name, initialValue)
+
+        function setDefaultValue (namePath: NamePath, value: any): void {
             const hasValue: boolean = has(unref(model), namePath)
-            !hasValue && onUpdateValue(namePath, undefined)
+            !hasValue && onUpdateValue(namePath, value)
         }
 
         function onUpdateValue (namePath: NamePath, value: any): void {
