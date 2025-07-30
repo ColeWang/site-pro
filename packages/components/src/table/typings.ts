@@ -258,6 +258,7 @@ export type TableProps = Partial<ExtractPropTypes<ReturnType<typeof tableProps>>
 
 export interface TableExpose {
     reload: (resetCurrent: boolean) => void;
+    finish: (values: Recordable) => void;
     cleanSelected: () => void;
 }
 

@@ -119,7 +119,7 @@ const Table = defineComponent({
             finalAction[extra.action] && finalAction[extra.action]()
         }
 
-        function transformValues (values: any, columns: TableColumn[]): any {
+        function transformValues (values: Recordable, columns: TableColumn[]): Recordable {
             const nextValues = reduce(columns, (result, column) => {
                 const namePath: NamePath = column.dataIndex || column.key as string
                 const transform: ((value: any) => any) | undefined = isObject(column.search)
@@ -188,6 +188,8 @@ const Table = defineComponent({
 
         expose({
             reload: onReload,
+            // 提供自定义 search 的触发 request 途径
+            finish: onFinish,
             cleanSelected: onCleanSelected
         })
 
