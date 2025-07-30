@@ -9,9 +9,11 @@ export default defineComponent(() => {
     return () => {
         return (
             <Fragment>
-                <QueryFilter onValuesChange={onValuesChange}>
+                <QueryFilter collapse={false} defaultCollapsed={true} onValuesChange={onValuesChange}>
                     <Text label={'Text'} name={'text'}/>
                     <Number tooltip={'Number'} label={'Number'} name={'number'}/>
+                    <Number tooltip={'Number'} label={'Number'} name={'number2'}/>
+                    <Number tooltip={'Number'} label={'Number'} name={'number3'}/>
                 </QueryFilter>
             </Fragment>
         )

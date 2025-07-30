@@ -10,14 +10,14 @@ Form 是对 [Antd Form](https://www.antdv.com/components/form-cn) 的再封装�
 
 ### Form Props {#form-props}
 
-| 属性            | 说明         | 类型      | 可选值                            | 默认值      |
-|---------------|------------|---------|--------------------------------|----------|
-| layout        | 布局         | string  | horizontal / vertical / inline | vertical |
-| initialValues | 默认值        | object  | -                              | -        |
-| submitOnReset | 重置后是否执行提交  | boolean | -                              | false    |
-| grid          | 开启 grid 模式 | boolean | -                              | false    |
-| rowProps      | 开启 grid 模式 | object  | -                              | false    |
-| transform     | 开启 grid 模式 | object  | -                              | false    |
+| 属性            | 说明                                                               | 类型                                                       | 可选值                                  | 默认值        |
+|---------------|------------------------------------------------------------------|----------------------------------------------------------|--------------------------------------|------------|
+| layout        | 布局                                                               | string                                                   | 'horizontal' / 'vertical' / 'inline' | 'vertical' |
+| initialValues | 默认值                                                              | object                                                   | -                                    | -          |
+| submitOnReset | 重置后是否执行 submit                                                   | boolean                                                  | -                                    | false      |
+| grid          | 开启 grid 模式                                                       | boolean                                                  | -                                    | false      |
+| rowProps      | [Antd Row](https://www.antdv.com/components/grid-cn#row) 的 props | [RowProps](https://www.antdv.com/components/grid-cn#row) | -                                    |
+| transform     | onFinish 触发前，可以对 values 做修改                                      | (values) => values                                       | -                                    | -          |
 
 ### Form Emits {#form-emits}
 

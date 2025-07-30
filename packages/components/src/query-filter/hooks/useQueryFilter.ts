@@ -1,6 +1,5 @@
-import type { ComputedRef, Ref, VNode, WatchStopHandle } from 'vue'
-import { computed, ref, unref, watch } from 'vue'
-import { tryOnScopeDispose } from '@site-pro/hooks'
+import type { ComputedRef, Ref, VNode } from 'vue'
+import { computed, ref, unref } from 'vue'
 import type { Recordable } from '@site-pro/utils'
 import { convertToCamelCaseProps, isValidElement } from '@site-pro/utils'
 import { map } from 'lodash-es'
@@ -52,10 +51,6 @@ function useQueryFilter (
         return Math.max(1, cols - 1)
     })
 
-    const stopWatchCollapsed: WatchStopHandle = watch(() => props.collapsed, (value) => {
-        collapsed.value = value!
-    }, { immediate: true })
-
     function setCollapse (value: boolean): void {
         collapsed.value = value
     }
@@ -99,10 +94,6 @@ function useQueryFilter (
 
         return { nodes: map(dealNodes, iteratee), offset, haveRow }
     }
-
-    tryOnScopeDispose(() => {
-        stopWatchCollapsed && stopWatchCollapsed()
-    })
 
     return { layout, span, showCollapse, collapsed, setCollapse, genColNodes }
 }
