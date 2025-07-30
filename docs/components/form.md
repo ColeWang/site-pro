@@ -14,7 +14,7 @@ Form 是对 [Antd Form](https://www.antdv.com/components/form-cn) 的再封装�
 |---------------|------------|---------|--------------------------------|----------|
 | layout        | 布局         | string  | horizontal / vertical / inline | vertical |
 | initialValues | 默认值        | object  | -                              | -        |
-| submitOnReset | 重置是否提交     | boolean | -                              | false    |
+| submitOnReset | 重置后是否执行提交  | boolean | -                              | false    |
 | grid          | 开启 grid 模式 | boolean | -                              | false    |
 | rowProps      | 开启 grid 模式 | object  | -                              | false    |
 | transform     | 开启 grid 模式 | object  | -                              | false    |

@@ -18,13 +18,21 @@ export const queryFilterProps = () => ({
         type: [Number, String] as PropType<'auto' | number>,
         default: undefined
     },
-    compact: {
-        type: Boolean as PropType<boolean>,
+    collapse: {
+        ype: Boolean as PropType<boolean>,
         default: false
+    },
+    defaultCollapsed: {
+        type: Boolean as PropType<boolean>,
+        default: true
     },
     defaultRowsNumber: {
         type: Number as PropType<number>,
         default: 1
+    },
+    compact: {
+        type: Boolean as PropType<boolean>,
+        default: false
     },
     breakPoints: {
         type: Array as PropType<QueryFilterBreakPoint[]>,

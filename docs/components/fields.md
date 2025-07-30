@@ -8,12 +8,25 @@ Fields - 表单项
 
 | 属性            | 说明         | 类型      | 可选值                            | 默认值      |
 |---------------|------------|---------|--------------------------------|----------|
-| layout        | 布局         | string  | horizontal / vertical / inline | vertical |
-| initialValues | 默认值        | object  | -                              | -        |
-| submitOnReset | 重置是否提交     | boolean | -                              | false    |
-| grid          | 开启 grid 模式 | boolean | -                              | false    |
-| rowProps      | 开启 grid 模式 | object  | -                              | false    |
-| transform     | 开启 grid 模式 | object  | -                              | false    |
+| text          | 布局         | string  | horizontal / vertical / inline | vertical |
+| mode          | 默认值        | object  | -                              | -        |
+| placeholder   | 重置是否提交     | boolean | -                              | false    |
+| valueType     | 开启 grid 模式 | boolean | -                              | false    |
+| valueEnum     | 开启 grid 模式 | object  | -                              | false    |
+| fieldProps    | 开启 grid 模式 | object  | -                              | false    |
+| formItemProps | 开启 grid 模式 | object  | -                              | false    |
+| emptyText     | 开启 grid 模式 | object  | -                              | false    |
+| renderRead    | 开启 grid 模式 | object  | -                              | false    |
+| renderEdit    | 开启 grid 模式 | object  | -                              | false    |
+| initialValue  | 开启 grid 模式 | object  | -                              | false    |
+| width         | 开启 grid 模式 | object  | -                              | false    |
+| labelWidth    | 开启 grid 模式 | object  | -                              | false    |
+| hidden        | 开启 grid 模式 | object  | -                              | false    |
+| colProps      | 开启 grid 模式 | object  | -                              | false    |
+| extra         | 开启 grid 模式 | object  | -                              | false    |
+| help          | 开启 grid 模式 | object  | -                              | false    |
+| label         | 开启 grid 模式 | object  | -                              | false    |
+| tooltip       | 开启 grid 模式 | object  | -                              | false    |
 
 ### Fields Emits {#fields-emits}
 

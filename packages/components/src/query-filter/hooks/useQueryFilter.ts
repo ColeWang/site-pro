@@ -44,8 +44,8 @@ function useQueryFilter (
 ): UseQueryFilterResult {
     const { layout, span } = useBreakPoint(size, props)
 
-    const showCollapse: Ref<boolean> = ref(props.showCollapse!)
-    const collapsed: Ref<boolean> = ref(props.collapsed!)
+    const showCollapse: Ref<boolean> = ref(props.collapse!)
+    const collapsed: Ref<boolean> = ref(props.defaultCollapsed!)
 
     const showNumber: ComputedRef<number> = computed(() => {
         const cols: number = 24 / unref(span) * props.defaultRowsNumber!
@@ -76,7 +76,7 @@ function useQueryFilter (
         const isChildHidden = (propsHidden: boolean, index: number) => {
             propsHidden && (hiddenCount += 1)
             const cHidden: boolean = unref(collapsed) && (index - hiddenCount) > maxIndex
-            return props.showCollapse ? (propsHidden || cHidden) : propsHidden
+            return props.collapse ? (propsHidden || cHidden) : propsHidden
         }
 
         return children.map((child, index) => {
@@ -89,8 +89,8 @@ function useQueryFilter (
     }
 
     function genColNodes (children: VNode[], iteratee: GenColNodesIteratee): GenColNodesResult {
-        // 校验 showCollapse
-        props.showCollapse && checkShowCollapse(children)
+        // 校验 collapse
+        props.collapse && checkShowCollapse(children)
 
         const dealNodes: ColDealNode[] = createDealNodes(children)
         const showNodes: ColDealNode[] = dealNodes.filter((c) => !c.hidden)
