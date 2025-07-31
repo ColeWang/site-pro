@@ -8,6 +8,10 @@ import type { UseResizeObserverResult } from './useResizeObserver'
 import useResizeObserver from './useResizeObserver'
 import type { UseRefsResult } from './useRefs'
 import useRefs from './useRefs'
+import type { UseBreakPointResult } from './useBreakPoint'
+import useBreakPoint from './useBreakPoint'
+
+import type { BreakPointConfig, BreakPointLayout, BreakPointTuple } from './breakPointConfig'
 
 export { version }
 
@@ -16,7 +20,11 @@ export { useConfigInject }
 export { useGlobalProperties }
 export { useResizeObserver }
 export { useRefs }
+export { useBreakPoint }
 
 export type { UseConfigInjectResult }
 export type { UseResizeObserverResult }
 export type { UseRefsResult }
+export type { UseBreakPointResult }
+
+export type { BreakPointLayout, BreakPointTuple, BreakPointConfig }
