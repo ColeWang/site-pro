@@ -69,6 +69,7 @@ const QueryFilter = defineComponent({
 
                 const childProps: Recordable = convertToCamelCaseProps(child.props || {})
 
+                // 没传递 hidden 仅 Col 隐藏
                 const fieldNode: VNode = cloneVNode(child, {
                     labelWidth: childProps.labelWidth || labelWidth || sizeMD * 4,
                     width: '100%'
