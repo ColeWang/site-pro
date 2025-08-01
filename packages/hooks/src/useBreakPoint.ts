@@ -1,9 +1,9 @@
 import type { Ref, WatchStopHandle } from 'vue'
-import { ref, watch } from 'vue'
+import { ref, unref, watch } from 'vue'
 import type { Recordable } from '@site-pro/utils'
+import tryOnScopeDispose from './tryOnScopeDispose'
 import type { BreakPointConfig, BreakPointLayout, BreakPointTuple } from './breakPointConfig'
 import { BREAK_POINT_CONFIG, COMPACT_BREAK_POINT_CONFIG } from './breakPointConfig'
-import { tryOnScopeDispose } from '../types'
 
 interface ResizeObserverRectSize extends Partial<DOMRectReadOnly> {
     width: number;
@@ -26,8 +26,8 @@ export interface UseBreakPointResult {
     span: Ref<number>;
 }
 
-function getBreakPointConfig (width: number, options: BreakPointOptions): GetBreakPointConfigResult {
-    const { compact, layout, breakPointConfig } = options
+function getBreakPointConfig (width: number, options?: BreakPointOptions): GetBreakPointConfigResult {
+    const { compact, layout, breakPointConfig } = options || {}
 
     const needConfig: BreakPointConfig = compact ? COMPACT_BREAK_POINT_CONFIG : BREAK_POINT_CONFIG
     const needLayout: BreakPointLayout = layout || 'horizontal'
@@ -38,12 +38,12 @@ function getBreakPointConfig (width: number, options: BreakPointOptions): GetBre
     return { span: breakPointTuple[1], layout: breakPointTuple[2] }
 }
 
-function useBreakPoint (size: Ref<ResizeObserverRectSize>, options: BreakPointOptions): UseBreakPointResult {
+function useBreakPoint (size: Ref<ResizeObserverRectSize>, options?: BreakPointOptions | Ref<BreakPointOptions>): UseBreakPointResult {
     const span: Ref<number> = ref(24)
     const layout: Ref<BreakPointLayout> = ref('horizontal')
 
     const stopWatchSize: WatchStopHandle = watch(size, (value) => {
-        const result: GetBreakPointConfigResult = getBreakPointConfig(value.width, options)
+        const result: GetBreakPointConfigResult = getBreakPointConfig(value.width, unref(options))
         // ---
         span.value = result.span || 24
         layout.value = result.layout || 'horizontal'

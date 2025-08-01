@@ -16,15 +16,15 @@ import {
 } from '@ant-design/icons-vue'
 import type { BaseAttrs, Recordable } from '@site-pro/utils'
 import { getElement, getPropsSlotVNode, getSlotVNode, safeDestructureObject } from '@site-pro/utils'
-import { useConfigInject } from '@site-pro/hooks'
+import { useBreakPoint, useConfigInject } from '@site-pro/hooks'
 import { pick } from 'lodash-es'
 import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import { Density } from '../density'
 import { Setting } from '../setting'
-import useBreakPoint from '../../../query-filter/hooks/useBreakPoint'
 import type { UseFetchDataContext } from '../../hooks/useFetchData'
 import { useSharedContext } from '../../hooks/useSharedContext'
+import { useConfigReceiverExtended } from '../../../config-provider'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { ToolbarSlots } from './typings'
 import { toolbarProps } from './typings'
@@ -52,7 +52,9 @@ export default defineComponent({
 
         const size: Ref<ResizeObserverRectSize> = ref({ width: 0, height: 0 })
 
-        const { span } = useBreakPoint(size, props as any)
+        // 断点同步 QueryFilter
+        const { extended } = useConfigReceiverExtended('QueryFilter')
+        const { span } = useBreakPoint(size, extended)
 
         // 换行
         const wrapCls: ComputedRef<BaseAttrs> = computed(() => {

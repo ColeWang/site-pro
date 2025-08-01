@@ -45,7 +45,11 @@ import type { DataNode as TreeDataNode, TreeProps } from 'ant-design-vue/es/tree
 import type { CheckInfo as TreeCheckInfo } from 'ant-design-vue/es/vc-tree/props'
 import type { EventDataNode as TreeEventDataNode } from 'ant-design-vue/es/vc-tree/interface'
 import type { NodeDragEventParams as TreeNodeDragEventParams } from 'ant-design-vue/es/vc-tree/contextTypes'
-import type { MappingAlgorithm as ThemeAlgorithm, ThemeConfig } from 'ant-design-vue/es/config-provider/context'
+import type {
+    ConfigProviderProps,
+    MappingAlgorithm as ThemeAlgorithm,
+    ThemeConfig
+} from 'ant-design-vue/es/config-provider/context'
 import type { AliasToken as ThemeToken } from 'ant-design-vue/es/theme/interface/alias'
 import type {
     GlobalToken as ThemeGlobalToken,
@@ -120,6 +124,7 @@ export type {
     TreeNodeDragEventParams,
     // --
     CSSInterpolation,
+    ConfigProviderProps,
     ThemeFullToken,
     ThemeGlobalToken,
     ThemeConfig,

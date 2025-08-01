@@ -1,8 +1,9 @@
-import type { ComputedRef, InjectionKey } from 'vue'
+import type { ComputedRef, InjectionKey, Ref } from 'vue'
 import { computed, inject, provide, unref } from 'vue'
 import type { NamePath } from '@site-pro/utils'
 import { get, has } from 'lodash-es'
-import type { LocaleProviderExpose, LocaleType } from '../typings'
+import type { LocaleProviderExpose } from '../typings'
+import type { LocaleType } from '../../locale'
 import { zhCN } from '../../locale'
 
 interface UseLocaleReceiverResult {
@@ -16,7 +17,7 @@ export function createLocaleReceiver (value: LocaleProviderExpose): void {
     provide(LocaleReceiverKey, value)
 }
 
-export function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType): UseLocaleReceiverResult {
+export function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType | Ref<LocaleType>): UseLocaleReceiverResult {
     const { locale } = inject(LocaleReceiverKey, {})
 
     const mergeLocale: ComputedRef<LocaleType> = computed(() => {

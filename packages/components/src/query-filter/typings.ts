@@ -30,14 +30,6 @@ export const queryFilterProps = () => ({
         type: Number as PropType<number>,
         default: 1
     },
-    compact: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    },
-    breakPoints: {
-        type: Array as PropType<QueryFilterBreakPoint[]>,
-        default: undefined
-    },
     onFormRef: {
         type: Function as PropType<(el: BaseFormInstance | null) => void>,
         default: undefined

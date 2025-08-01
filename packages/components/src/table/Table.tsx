@@ -197,8 +197,6 @@ const Table = defineComponent({
             const { columns: propsColumns, rowSelection: propsRowSelection } = props
             // restProps 去除 title 等
             const {
-                compact,
-                breakPoints,
                 manualRequest,
                 title: propsTitle,
                 search: propsSearch,
@@ -212,8 +210,6 @@ const Table = defineComponent({
                     ...safeDestructureObject(propsSearch),
                     loading: requestProps.loading,
                     columns: propsColumns,
-                    compact: compact,
-                    breakPoints: breakPoints,
                     manualRequest: manualRequest,
                     onFinish: onFinish,
                     onReset: onReset
@@ -236,8 +232,6 @@ const Table = defineComponent({
                 }
                 const toolbarProps: ToolbarProps = {
                     ...safeDestructureObject(propsToolbar),
-                    compact: compact,
-                    breakPoints: breakPoints,
                     title: propsTitle
                 }
                 return <Toolbar {...toolbarProps} v-slots={toolbarSlots}/>

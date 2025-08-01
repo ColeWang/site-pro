@@ -1,8 +1,9 @@
 import type { App, Plugin, Ref, SlotsType } from 'vue'
 import { defineComponent, ref, watch } from 'vue'
 import { createLocaleReceiver } from './hooks/useLocaleReceiver'
-import type { LocaleProviderExpose, LocaleProviderSlots, LocaleType } from './typings'
+import type { LocaleProviderExpose, LocaleProviderSlots } from './typings'
 import { localeProviderProps } from './typings'
+import type { LocaleType } from '../locale'
 
 const LocaleProvider = defineComponent({
     inheritAttrs: false,

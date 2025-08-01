@@ -2,9 +2,10 @@ import type { ComputedRef, Ref, VNode } from 'vue'
 import { computed, ref, unref } from 'vue'
 import type { Recordable } from '@site-pro/utils'
 import { convertToCamelCaseProps, isValidElement } from '@site-pro/utils'
+import { useBreakPoint } from '@site-pro/hooks'
 import { map } from 'lodash-es'
+import { useConfigReceiverExtended } from '../../config-provider'
 import type { ResizeObserverRectSize } from '../../resize-observer'
-import useBreakPoint from './useBreakPoint'
 import type { QueryFilterLayout, QueryFilterProps } from '../typings'
 
 interface ColDealNode {
@@ -41,7 +42,8 @@ function useQueryFilter (
     size: Ref<ResizeObserverRectSize>,
     props: QueryFilterProps
 ): UseQueryFilterResult {
-    const { layout, span } = useBreakPoint(size, props)
+    const { extended } = useConfigReceiverExtended('QueryFilter', props)
+    const { layout, span } = useBreakPoint(size, extended)
 
     const showCollapse: Ref<boolean> = ref(props.collapse!)
     const collapsed: Ref<boolean> = ref(props.defaultCollapsed!)

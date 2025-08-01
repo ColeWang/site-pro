@@ -34,6 +34,9 @@ export { Field } from './form'
 export type { UserFieldProps, UserFieldInstance } from './form'
 export { UserField } from './form'
 
+export type { ConfigProviderProps, ConfigProviderInstance } from './config-provider'
+export { ConfigProvider } from './config-provider'
+
 export type { LocaleProviderProps, LocaleProviderInstance } from './locale-provider'
 export { LocaleProvider } from './locale-provider'
 
@@ -45,9 +48,6 @@ export { ResizeObserver } from './resize-observer'
 
 export type { TableProps, TableInstance } from './table'
 export { Table } from './table'
-
-export type { ThemeProviderProps, ThemeProviderInstance } from './theme'
-export { ThemeProvider } from './theme'
 
 export type { DateProps, DateInstance } from './form'
 export { Date } from './form'
