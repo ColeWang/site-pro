@@ -11,6 +11,9 @@ export { BaseFieldProvider } from './base-field'
 export type { BaseFormProps, BaseFormInstance } from './base-form'
 export { BaseForm } from './base-form'
 
+export type { ConfigProviderProps, ConfigProviderInstance } from './config-provider'
+export { ConfigProvider } from './config-provider'
+
 export type { DescriptionsProps, DescriptionsInstance } from './descriptions'
 export { Descriptions } from './descriptions'
 export type { DescriptionsItemProps, DescriptionsItemInstance } from './descriptions'
@@ -33,9 +36,6 @@ export type { FieldProps, FieldInstance } from './form'
 export { Field } from './form'
 export type { UserFieldProps, UserFieldInstance } from './form'
 export { UserField } from './form'
-
-export type { ConfigProviderProps, ConfigProviderInstance } from './config-provider'
-export { ConfigProvider } from './config-provider'
 
 export type { LocaleProviderProps, LocaleProviderInstance } from './locale-provider'
 export { LocaleProvider } from './locale-provider'

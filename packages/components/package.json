@@ -36,6 +36,11 @@
             "import": "./es/base-form/index.js",
             "types": "./types/base-form/index.d.ts"
         },
+        "./config-provider": {
+            "require": "./lib/config-provider/index.js",
+            "import": "./es/config-provider/index.js",
+            "types": "./types/config-provider/index.d.ts"
+        },
         "./descriptions": {
             "require": "./lib/descriptions/index.js",
             "import": "./es/descriptions/index.js",
