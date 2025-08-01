@@ -17,7 +17,7 @@ function mergeRowSelection (
 ): TableRowSelection {
     const { selectedRowKeys, ...restValue } = defaultValue
     return {
-        selectedRowKeys,
+        selectedRowKeys: selectedRowKeys,
         ...safeDestructureObject(rowSelection),
         ...restValue
     }
@@ -34,13 +34,13 @@ function useRowSelection (props: TableProps): UseRowSelectionResult {
     const selectedRows: Ref<any[]> = ref([])
 
     /* v8 ignore next 14 */
-    function setSelectedRowKeys (keys: (string | number)[], rows: any[]): void {
+    function updateSelectedRows (keys: (string | number)[], rows: any[]): void {
         rowSelection.selectedRowKeys = keys
         if (keys.length !== rows.length) {
             const { rowKey = 'key' } = props
             selectedRows.value = keys.map((key) => {
-                const oldRow = unref(selectedRows).find((row) => row[rowKey] === key)
-                const newRow = rows.find((row) => row[rowKey] === key)
+                const oldRow: any = unref(selectedRows).find((row) => row[rowKey] === key)
+                const newRow: any = rows.find((row) => row[rowKey] === key)
                 return oldRow || newRow
             })
         } else {
@@ -54,11 +54,11 @@ function useRowSelection (props: TableProps): UseRowSelectionResult {
         if (isObject(rowSelection) && isFunction(rowSelection.onChange)) {
             rowSelection.onChange(keys, rows)
         }
-        setSelectedRowKeys(keys, rows)
+        updateSelectedRows(keys, rows)
     }
 
     function onCleanSelected (): void {
-        setSelectedRowKeys([], [])
+        updateSelectedRows([], [])
     }
 
     return { rowSelection, selectedRows, onCleanSelected }

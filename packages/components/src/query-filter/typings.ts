@@ -5,7 +5,6 @@ import { baseFormProps } from '../base-form'
 import { queryFilterActionsProps } from './Actions'
 
 export type QueryFilterLayout = 'horizontal' | 'vertical';
-export type QueryFilterBreakPoint = [number, number, QueryFilterLayout];
 
 export const queryFilterProps = () => ({
     ...baseFormProps(),

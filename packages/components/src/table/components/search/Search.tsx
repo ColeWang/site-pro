@@ -1,8 +1,8 @@
 import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, unref } from 'vue'
-import type { BaseAttrs, NamePath, Recordable } from '@site-pro/utils'
-import { isEmpty, namePathToString, safeDestructureObject } from '@site-pro/utils'
-import { pick, reduce, set } from 'lodash-es'
+import type { BaseAttrs, NamePath } from '@site-pro/utils'
+import { namePathToString, safeDestructureObject } from '@site-pro/utils'
+import { pick } from 'lodash-es'
 import BaseSearch from './BaseSearch'
 import type { BaseFieldFormItemProps } from '../../../base-field'
 import type { FieldProps } from '../../../form'
@@ -15,26 +15,12 @@ function filterSearchColumns (columns: TableColumn[]): TableColumn[] {
     return columns.filter((column) => !!column.search)
 }
 
-function genInitialValues (columns: TableColumn[]): Recordable {
-    const needColumns: TableColumn[] = filterSearchColumns(columns)
-
-    return reduce(needColumns, (result, column) => {
-        const namePath: NamePath = column.dataIndex || column.key as string
-        if (namePath && !isEmpty(column.initialValue)) {
-            return set(result, namePath, column.initialValue)
-        }
-        return result
-    }, {})
-}
-
 export default defineComponent({
     inheritAttrs: false,
     name: 'ProTableSearch',
     props: searchProps(),
     slots: Object as SlotsType<SearchSlots>,
     setup (props, { attrs }) {
-        const initialValues: Recordable = genInitialValues(props.columns)
-
         const sColumns: ComputedRef<TableColumn[]> = computed(() => {
             return filterSearchColumns(props.columns)
         })
@@ -42,18 +28,15 @@ export default defineComponent({
         return () => {
             const baseSearchProps: BaseSearchProps & BaseAttrs = {
                 ...pick(props, Object.keys(BaseSearch.props)) as BaseSearchProps,
-                ...attrs,
-                initialValues: initialValues
+                ...attrs
             }
 
             const children: VNodeChild = unref(sColumns).map((column) => {
-                const { formItemProps } = column
-
                 const namePath: NamePath = column.dataIndex || column.key as string
                 const key: string = namePathToString(namePath!)
 
                 const needFormItemProps: BaseFieldFormItemProps = {
-                    ...safeDestructureObject(formItemProps),
+                    ...safeDestructureObject(column.formItemProps),
                     name: namePath,
                     label: column.title
                 }

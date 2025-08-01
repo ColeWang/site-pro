@@ -21,7 +21,7 @@ export function useLocaleReceiver (namePath?: NamePath, propsLocale?: LocaleType
     const { locale } = inject(LocaleReceiverKey, {})
 
     const mergeLocale: ComputedRef<LocaleType> = computed(() => {
-        const needLocale: LocaleType = { ...zhCN, ...(unref(locale) || {}) }
+        const needLocale: LocaleType = { ...zhCN, ...unref(locale) }
         if (namePath && has(needLocale, namePath)) {
             const stateLocale: LocaleType = get(needLocale, namePath, {})
             return { ...stateLocale, ...unref(propsLocale) }

@@ -1,9 +1,9 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
 import { configProviderProps as antConfigProviderProps } from 'ant-design-vue/es/config-provider/context'
-import type { BreakPointOptions } from '@site-pro/hooks'
+import type { UseBreakPointOptions } from '../query-filter'
 
 export interface ConfigProviderExtended {
-    QueryFilter?: BreakPointOptions;
+    QueryFilter?: UseBreakPointOptions;
 }
 
 export const configProviderProps = () => ({

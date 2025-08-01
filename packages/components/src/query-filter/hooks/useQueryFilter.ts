@@ -1,9 +1,10 @@
 import type { ComputedRef, Ref, VNode } from 'vue'
 import { computed, ref, unref } from 'vue'
+import { useReactivePick } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
 import { convertToCamelCaseProps, isValidElement } from '@site-pro/utils'
-import { useBreakPoint } from '@site-pro/hooks'
 import { map } from 'lodash-es'
+import useBreakPoint from './useBreakPoint'
 import { useConfigReceiverExtended } from '../../config-provider'
 import type { ResizeObserverRectSize } from '../../resize-observer'
 import type { QueryFilterLayout, QueryFilterProps } from '../typings'
@@ -42,7 +43,8 @@ function useQueryFilter (
     size: Ref<ResizeObserverRectSize>,
     props: QueryFilterProps
 ): UseQueryFilterResult {
-    const { extended } = useConfigReceiverExtended('QueryFilter', props)
+    const mergeProps: Partial<QueryFilterProps> = useReactivePick(props, ['layout'])
+    const { extended } = useConfigReceiverExtended('QueryFilter', mergeProps)
     const { layout, span } = useBreakPoint(size, extended)
 
     const showCollapse: Ref<boolean> = ref(props.collapse!)

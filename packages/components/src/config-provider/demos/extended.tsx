@@ -1,12 +1,12 @@
 import { defineComponent, reactive, ref, unref } from 'vue'
 import { ConfigProvider, QueryFilter, Text } from '@site-pro/components'
-import type { BreakPointConfig } from '@site-pro/hooks'
+import type { UseBreakPointConfig } from '@site-pro/components/query-filter'
 import { Button } from 'ant-design-vue'
 
 export default defineComponent(() => {
     const isChange = ref(false)
 
-    const baseConfig: BreakPointConfig = {
+    const baseConfig: UseBreakPointConfig = {
         horizontal: [
             [Infinity, 6, 'vertical']
         ],
@@ -15,7 +15,7 @@ export default defineComponent(() => {
         ]
     }
 
-    const changeConfig: BreakPointConfig = {
+    const changeConfig: UseBreakPointConfig = {
         horizontal: [
             [Infinity, 12, 'horizontal']
         ],
