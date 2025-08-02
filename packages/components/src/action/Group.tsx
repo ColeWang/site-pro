@@ -8,6 +8,27 @@ import Action from './Action'
 import type { ActionGroupSlots } from './typings'
 import { actionGroupProps } from './typings'
 
+interface SplitNodesResult<T extends VNode> {
+    visible: T[];
+    hidden: T[];
+}
+
+function splitNodes<T extends VNode> (nodes: T[], max: number): SplitNodesResult<T> {
+    return { visible: take(nodes, max), hidden: drop(nodes, max) }
+}
+
+function createDropdownMenu (nodes: VNode[]): JSX.Element {
+    const children: JSX.Element[] = nodes.map((node, index) => (
+        <AntMenu.Item key={node.key ?? index}>{node}</AntMenu.Item>
+    ))
+
+    return (
+        <AntMenu data-type={'dropdown'} selectedselectedKeys={[]}>
+            {children}
+        </AntMenu>
+    )
+}
+
 const ActionGroup = defineComponent({
     inheritAttrs: false,
     name: 'ProActionGroup',
@@ -22,33 +43,27 @@ const ActionGroup = defineComponent({
 
             const nodes: VNode[] = flatVNodeChildren(slots.default ? slots.default() : [])
 
-            if (nodes.length && nodes.length > max) {
-                const takeNodes: VNode[] = take(nodes, max)
-                const dropNodes: VNode[] = drop(nodes, max)
-
-                const children: VNode[] = dropNodes.map((item, index) => {
-                    return <AntMenu.Item key={index}>{item}</AntMenu.Item>
-                })
-                /* v8 ignore next 9 */
-                const dropdownSlots: Recordable<BaseSlot> = {
-                    overlay: () => (
-                        <AntMenu data-type={'dropdown'} selectedKeys={[]}>
-                            {children}
-                        </AntMenu>
-                    )
-                }
+            if (!(nodes.length > 0) || nodes.length <= max) {
                 return (
                     <AntSpace size={propsSize || sizeMS / 2} {...attrs}>
-                        {takeNodes}
-                        <AntDropdown placement={'bottomRight'} v-slots={dropdownSlots}>
-                            <Action>...</Action>
-                        </AntDropdown>
+                        {nodes}
                     </AntSpace>
                 )
             }
+
+            const { visible: visibleNodes, hidden: hiddenNodes } = splitNodes(nodes, max)
+
+            /* v8 ignore next 9 */
+            const dropdownSlots: Recordable<BaseSlot> = {
+                overlay: () => createDropdownMenu(hiddenNodes)
+            }
+
             return (
                 <AntSpace size={propsSize || sizeMS / 2} {...attrs}>
-                    {nodes}
+                    {visibleNodes}
+                    <AntDropdown placement={'bottomRight'} v-slots={dropdownSlots}>
+                        <Action>...</Action>
+                    </AntDropdown>
                 </AntSpace>
             )
         }
