@@ -182,7 +182,7 @@ const BaseField = defineComponent({
 
         return () => {
             const { mode, text, valueType, fieldProps, formItemProps } = props
-            const placeholder = fieldProps.placeholder || props.placeholder
+            const placeholder: any = fieldProps.placeholder || props.placeholder
             const { model, name: namePath } = formItemProps
 
             const inputValue: any = namePath

@@ -1,7 +1,6 @@
 import type { App, Plugin, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { Recordable } from '@site-pro/utils'
-import { cloneProxyToRaw } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
 import type { ColWrapperProps } from '../../base-form'
 import { ColWrapper, useFormInstance } from '../../base-form'
@@ -23,7 +22,7 @@ const FormDependency = defineComponent({
             const slotProps: Recordable = reduce(namePathList, (result, namePath) => {
                 if (namePath && getModelValue && isFunction(getModelValue)) {
                     const value: Recordable = getModelValue(namePath)
-                    return set(result, namePath, cloneProxyToRaw(value))
+                    return set(result, namePath, value)
                 }
                 return result
             }, {})
