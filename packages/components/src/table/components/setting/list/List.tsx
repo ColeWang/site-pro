@@ -61,6 +61,7 @@ export default defineComponent({
             const { columns, showTitle, title, fixed, checkable, draggable } = props
             const { controlHeightSM } = unref(token)
 
+            // 不渲染
             if (columns.length === 0) return null
 
             const checkedKeys: string[] = columns

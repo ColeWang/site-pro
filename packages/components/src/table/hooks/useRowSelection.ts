@@ -33,16 +33,20 @@ function useRowSelection (props: TableProps): UseRowSelectionResult {
     // rows
     const selectedRows: Ref<any[]> = ref([])
 
+    function mergeSelectedRows (keys: (string | number)[], rows: any[]): any[] {
+        const rowKey: string = props.rowKey || 'key'
+        return keys.map((key) => {
+            const oldRow: any = unref(selectedRows).find((row) => row[rowKey] === key)
+            const newRow: any = rows.find((row) => row[rowKey] === key)
+            return oldRow || newRow
+        })
+    }
+
     /* v8 ignore next 14 */
     function updateSelectedRows (keys: (string | number)[], rows: any[]): void {
         rowSelection.selectedRowKeys = keys
         if (keys.length !== rows.length) {
-            const { rowKey = 'key' } = props
-            selectedRows.value = keys.map((key) => {
-                const oldRow: any = unref(selectedRows).find((row) => row[rowKey] === key)
-                const newRow: any = rows.find((row) => row[rowKey] === key)
-                return oldRow || newRow
-            })
+            selectedRows.value = mergeSelectedRows(keys, rows)
         } else {
             selectedRows.value = rows
         }

@@ -23,7 +23,6 @@ import type { ResizeObserverRectSize } from '../../../resize-observer'
 import { ResizeObserver } from '../../../resize-observer'
 import { Density } from '../density'
 import { Setting } from '../setting'
-import type { UseFetchDataContext } from '../../hooks/useFetchData'
 import { useSharedContext } from '../../hooks/useSharedContext'
 import { useConfigReceiverExtended } from '../../../config-provider'
 import { useLocaleReceiver } from '../../../locale-provider'
@@ -47,7 +46,7 @@ export default defineComponent({
         const { prefixCls } = useConfigInject('pro-table-toolbar', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { t } = useLocaleReceiver(['Table', 'toolbar'])
-        const { requestProps = {} as Partial<UseFetchDataContext>, onReload, onExport } = useSharedContext()
+        const { requestProps, onReload, onExport } = useSharedContext()
 
         const popupContainer: Ref<HTMLElement | null> = ref(null)
 
@@ -80,6 +79,7 @@ export default defineComponent({
 
         return () => {
             const { options: propsOptions } = props
+            const { loading } = requestProps || {}
 
             const title: VNodeChild = getPropsSlotVNode(slots, props, 'title', requestProps)
             const actionsDom: VNodeChild = getSlotVNode(slots, props, 'actions', requestProps)
@@ -89,7 +89,7 @@ export default defineComponent({
                     reload: (
                         <AntTooltip title={t('reload')}>
                             <AntButton onClick={onReloadClick}>
-                                <ReloadOutlined spin={requestProps.loading}/>
+                                <ReloadOutlined spin={loading}/>
                             </AntButton>
                         </AntTooltip>
                     ),
