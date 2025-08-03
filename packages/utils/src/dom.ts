@@ -1,5 +1,6 @@
 import type { ComponentPublicInstance, CSSProperties, MaybeRef } from 'vue'
 import { unref } from 'vue'
+import { isNumber } from 'lodash-es'
 import type { BaseRefType } from './types'
 
 export const isBrowserClient: boolean = isUseDom()
@@ -58,7 +59,7 @@ export function getElement (el: MaybeRef<BaseRefType>): HTMLElement | null {
 }
 
 export function getWindowSize (): { width: number; height: number } {
-    if (typeof window !== 'undefined' && typeof window.innerWidth === 'number') {
+    if (isBrowserClient && isNumber(window.innerWidth)) {
         return { width: window.innerWidth, height: window.innerHeight }
     }
     return { width: 0, height: 0 }
