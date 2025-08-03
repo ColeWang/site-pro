@@ -34,6 +34,8 @@ import type { TableColumn, TableSize, TableSlots } from './typings'
 import { tableProps } from './typings'
 import useStyle from './style'
 
+const TABLE_SLOTS_KEYS: string[] = ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions']
+
 const Table = defineComponent({
     inheritAttrs: false,
     name: 'ProTable',
@@ -41,8 +43,6 @@ const Table = defineComponent({
     slots: Object as SlotsType<TableSlots>,
     emits: ['change', 'paginateChange', 'filterChange', 'sortChange', 'loadingChange', 'export', 'columnsChange', 'load', 'requestError', 'finish', 'reset'],
     setup (props, { emit, slots, attrs, expose }) {
-        const OMIT_SLOTS_KEYS: string[] = ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions']
-
         const { prefixCls } = useConfigInject('pro-table', props)
         const [wrapSSR, hashId] = useStyle(prefixCls)
         const { token } = antTheme.useToken()
@@ -261,7 +261,7 @@ const Table = defineComponent({
                 onChange: onChange as any
             }
 
-            const needTableSlots: Recordable<BaseSlot> = omit(slots, OMIT_SLOTS_KEYS)
+            const needTableSlots: Recordable<BaseSlot> = omit(slots, TABLE_SLOTS_KEYS)
 
             const defaultTableDom: VNodeChild = <AntTable {...needTableProps} v-slots={needTableSlots}/>
 

@@ -1,5 +1,6 @@
-import type { App, Plugin, SlotsType } from 'vue'
+import type { App, Plugin, Ref, SlotsType } from 'vue'
 import { defineComponent, unref } from 'vue'
+import { useMemo } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
 import { isFunction, reduce, set } from 'lodash-es'
 import type { ColWrapperProps } from '../../base-form'
@@ -13,19 +14,21 @@ const FormDependency = defineComponent({
     props: formDependencyProps(),
     slots: Object as SlotsType<FormDependencySlots>,
     setup (props, { slots }) {
-        const { formProps, getModelValue } = useFormInstance()
+        const { formProps, getModelValue, model } = useFormInstance()
 
-        return () => {
-            const { name: namePathList, colProps } = props
-            const { grid } = unref(formProps) || {}
-
-            const slotProps: Recordable = reduce(namePathList, (result, namePath) => {
+        const cache: Ref<any> = useMemo(() => {
+            return reduce(props.name, (result, namePath) => {
                 if (namePath && getModelValue && isFunction(getModelValue)) {
                     const value: Recordable = getModelValue(namePath)
                     return set(result, namePath, value)
                 }
                 return result
             }, {})
+        }, [() => props.name, () => model && model.value], { deep: true })
+
+        return () => {
+            const { colProps } = props
+            const { grid } = unref(formProps) || {}
 
             const colWrapperProps: ColWrapperProps = {
                 ...colProps,
@@ -33,7 +36,7 @@ const FormDependency = defineComponent({
             }
             return (
                 <ColWrapper {...colWrapperProps}>
-                    {slots.default && slots.default(slotProps)}
+                    {slots.default && slots.default(unref(cache))}
                 </ColWrapper>
             )
         }

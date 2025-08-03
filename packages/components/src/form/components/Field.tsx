@@ -58,14 +58,14 @@ function genFormItemFixStyle (
     return {}
 }
 
+const FORM_ITEM_SLOTS_KEYS: string[] = ['extra', 'help', 'label', 'tooltip']
+
 const Field = defineComponent({
     inheritAttrs: false,
     name: 'ProField',
     props: fieldProps(),
     slots: Object as SlotsType<FieldSlots>,
     setup (props, { slots }) {
-        const SLOTS_KEYS: string[] = ['extra', 'help', 'label', 'tooltip']
-
         const { model, formProps, setModelValue } = useFormInstance()
 
         const { initialValue, formItemProps } = props
@@ -116,8 +116,8 @@ const Field = defineComponent({
                 grid: grid,
             }
 
-            const formItemSlots: Recordable<BaseSlot> = pick(slots, SLOTS_KEYS)
-            const baseFieldSlots: Recordable<BaseSlot> = omit(slots, SLOTS_KEYS)
+            const formItemSlots: Recordable<BaseSlot> = pick(slots, FORM_ITEM_SLOTS_KEYS)
+            const baseFieldSlots: Recordable<BaseSlot> = omit(slots, FORM_ITEM_SLOTS_KEYS)
 
             return (
                 <ColWrapper {...needColWrapProps} key={key}>

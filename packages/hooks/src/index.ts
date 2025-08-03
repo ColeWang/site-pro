@@ -10,6 +10,7 @@ import type { UseRefsResult } from './useRefs'
 import useRefs from './useRefs'
 import type { UseReactivePickResult } from './useReactivePick'
 import useReactivePick from './useReactivePick'
+import useMemo from './useMemo'
 
 export { version }
 
@@ -19,6 +20,7 @@ export { useConfigInject }
 export { useResizeObserver }
 export { useRefs }
 export { useReactivePick }
+export { useMemo }
 
 export type { UseConfigInjectResult }
 export type { UseResizeObserverResult }
