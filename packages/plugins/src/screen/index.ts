@@ -70,7 +70,7 @@ const plugin: ScreenPlugin = {
         this.sizes = pick({ ...this.sizes, ...optionsSizes }, ['sm', 'md', 'lg', 'xl', 'xxl'])
 
         const update = () => {
-            const [width, height] = getWindowSize()
+            const { width, height } = getWindowSize()
 
             this.width = width
             this.height = height

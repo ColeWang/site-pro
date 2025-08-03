@@ -2,6 +2,12 @@ import type { ComponentPublicInstance, CSSProperties, MaybeRef } from 'vue'
 import { unref } from 'vue'
 import type { BaseRefType } from './types'
 
+export const isBrowserClient: boolean = isUseDom()
+
+export function isUseDom (): boolean {
+    return !!(typeof window !== 'undefined' && window.document && window.document.createElement)
+}
+
 export function hasClass (node: HTMLElement, className: string): boolean {
     if (node.classList) {
         return node.classList.contains(className)
@@ -51,7 +57,9 @@ export function getElement (el: MaybeRef<BaseRefType>): HTMLElement | null {
     return target as (HTMLElement | null)
 }
 
-export function getWindowSize (): [number, number] {
-    // @todo visualViewport
-    return [window.innerWidth, window.innerHeight]
+export function getWindowSize (): { width: number; height: number } {
+    if (typeof window !== 'undefined' && typeof window.innerWidth === 'number') {
+        return { width: window.innerWidth, height: window.innerHeight }
+    }
+    return { width: 0, height: 0 }
 }
