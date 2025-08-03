@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
-import type { BaseEnumType, BaseSlot, Recordable } from '@site-pro/utils'
+import type { BaseEnumType, BaseOptionType, BaseSlot, Recordable } from '@site-pro/utils'
 import type {
     CascaderProps,
     CheckboxGroupProps,
@@ -19,6 +19,10 @@ import type {
     TimeRangePickerProps,
     TreeSelectProps
 } from '../ant-typings'
+
+export interface BaseFieldRequest<T = any> {
+    (params?: T): Promise<BaseOptionType[]>;
+}
 
 export interface BaseFieldValueTypeWithFieldProps {
     date: DatePickerProps;
@@ -61,17 +65,25 @@ export const baseFieldProps = () => ({
         type: String as PropType<'edit' | 'read'>,
         default: 'edit'
     },
-    placeholder: {
-        type: [String, Array] as PropType<string | string[]>,
-        default: undefined
-    },
     valueType: {
         type: String as PropType<BaseFieldValueType | string>,
         default: 'text'
     },
+    placeholder: {
+        type: [String, Array] as PropType<string | string[]>,
+        default: undefined
+    },
+    request: {
+        type: Function as PropType<BaseFieldRequest>,
+        default: undefined
+    },
     valueEnum: {
         type: Object as PropType<BaseEnumType>,
         default: undefined
+    },
+    emptyText: {
+        type: String as PropType<string>,
+        default: '-'
     },
     fieldProps: {
         type: Object as PropType<any>,
@@ -80,10 +92,6 @@ export const baseFieldProps = () => ({
     formItemProps: {
         type: Object as PropType<BaseFieldFormItemProps>,
         default: () => ({})
-    },
-    emptyText: {
-        type: String as PropType<string>,
-        default: '-'
     },
     renderRead: {
         type: Function as PropType<BaseSlot>,
