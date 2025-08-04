@@ -4,10 +4,10 @@ import type { BaseFieldProviderExpose } from '../typings'
 
 export const BaseFieldProviderKey: InjectionKey<Partial<BaseFieldProviderExpose>> = Symbol('BaseFieldProvider')
 
-export function createBaseFieldProvider (value: BaseFieldProviderExpose): void {
+export function createBaseFieldReceiver (value: BaseFieldProviderExpose): void {
     provide(BaseFieldProviderKey, value)
 }
 
-export function useBaseFieldProvider (): Partial<BaseFieldProviderExpose> {
+export function useBaseFieldReceiver (): Partial<BaseFieldProviderExpose> {
     return inject(BaseFieldProviderKey, {})
 }

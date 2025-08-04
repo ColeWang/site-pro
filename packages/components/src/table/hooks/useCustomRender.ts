@@ -1,8 +1,9 @@
 import type { ComputedRef } from 'vue'
 import { computed, createVNode } from 'vue'
 import { Typography as AntTypography } from 'ant-design-vue'
-import { enumToText, isEmpty, namePathToString } from '@site-pro/utils'
+import { isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject, isString } from 'lodash-es'
+import { valueEnumToText } from '../../base-field'
 import type { TextCopyable } from '../../ant-typings'
 import { TableColumn, TableProps } from '../typings'
 
@@ -10,7 +11,7 @@ interface UseCustomRenderResult {
     columns: ComputedRef<TableColumn[]>;
 }
 
-interface CustomRenderResult {
+interface CreateCustomRenderResult {
     (opt: any): any;
 }
 
@@ -31,19 +32,18 @@ function getCopyable (column: TableColumn, text: any): false | TextCopyable {
     return false
 }
 
-function customRender (oldColumn: TableColumn, emptyText?: string): CustomRenderResult {
+function createCustomRender (column: TableColumn, emptyText?: string): CreateCustomRenderResult {
     return function (options: any): any {
-        if (oldColumn.customRender && isFunction(oldColumn.customRender)) {
-            const oldCustomRender = oldColumn.customRender
-            return oldCustomRender.call(null, options)
+        if (column.customRender && isFunction(column.customRender)) {
+            return column.customRender.call(null, options)
         }
-        if (oldColumn.valueEnum && isObject(oldColumn.valueEnum) && !isEmpty(options.text)) {
-            return enumToText(options.text, oldColumn.valueEnum)
+        if (column.valueEnum && isObject(column.valueEnum) && !isEmpty(options.text)) {
+            return valueEnumToText(options.text, column.valueEnum)
         }
-        if ((oldColumn.copyable || oldColumn.ellipsis) && isString(options.text) && !isEmpty(options.text)) {
+        if ((column.copyable || column.ellipsis) && isString(options.text) && !isEmpty(options.text)) {
             return createVNode(AntTypography.Text, {
-                copyable: getCopyable(oldColumn, options.text),
-                ellipsis: getEllipsis(oldColumn),
+                copyable: getCopyable(column, options.text),
+                ellipsis: getEllipsis(column),
                 content: options.text
             })
         }
@@ -53,22 +53,24 @@ function customRender (oldColumn: TableColumn, emptyText?: string): CustomRender
 
 function useCustomRender (props: TableProps): UseCustomRenderResult {
     const columns: ComputedRef<TableColumn[]> = computed(() => {
-        return genCustomRenderColumns(props.columns || [])
+        const needColumns: TableColumn[] = (props.columns || []).filter((column) => {
+            return column && !column.hideInTable
+        })
+        return transformColumns(needColumns, props.emptyText)
     })
 
-    function genCustomRenderColumns (columns: TableColumn[]): TableColumn[] {
-        return columns
-            .filter((column) => !column.hideInTable)
-            .map((column, index) => {
-                const key: string = namePathToString(column.dataIndex || column.key || index)
-                const tempColumns: TableColumn = { ...column, key: key }
-                if (column.children && isArray(column.children)) {
-                    tempColumns.children = genCustomRenderColumns(column.children)
-                } else {
-                    tempColumns.customRender = customRender(column, props.emptyText)
-                }
-                return tempColumns
-            })
+
+    function transformColumns (columns: TableColumn[], emptyText?: string): TableColumn[] {
+        return columns.map((column, index) => {
+            const key: string = namePathToString(column.dataIndex || column.key || index)
+            const enhanced: TableColumn = { ...column, key: key }
+            if (column.children && isArray(column.children)) {
+                enhanced.children = transformColumns(column.children, emptyText)
+            } else {
+                enhanced.customRender = createCustomRender(column, emptyText)
+            }
+            return enhanced
+        })
     }
 
     return { columns }

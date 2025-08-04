@@ -24,17 +24,14 @@ interface UseFetchDataResult {
 function useFetchData (
     request: DescriptionsRequest | undefined,
     props: DescriptionsProps,
-    options: UseFetchDataOptions
+    options?: UseFetchDataOptions
 ): UseFetchDataResult {
-    const { manualRequest, onLoad, onRequestError } = options || {}
+    const { onLoad, onRequestError } = options || {}
 
     const context: UseFetchDataContext = shallowReactive({
         loading: false,
         dataSource: props.dataSource || {}
     })
-
-    // 主动发起一次请求
-    !manualRequest && fetchData()
 
     async function fetchData (): Promise<void> {
         if (!isFunction(request) || context.loading) return

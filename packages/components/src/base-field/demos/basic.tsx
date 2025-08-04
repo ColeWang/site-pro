@@ -5,8 +5,8 @@ export default defineComponent(() => {
     return () => {
         return (
             <Fragment>
-                <BaseField valueType={'text'}/>
                 <BaseField valueType={'number'}/>
+                <BaseField valueType={'select'}/>
             </Fragment>
         )
     }

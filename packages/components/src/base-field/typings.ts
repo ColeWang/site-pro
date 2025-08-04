@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType } from 'vue'
-import type { BaseEnumType, BaseOptionType, BaseSlot, Recordable } from '@site-pro/utils'
+import type { BaseSlot, LiteralUnion, Recordable } from '@site-pro/utils'
 import type {
     CascaderProps,
     CheckboxGroupProps,
@@ -20,8 +20,27 @@ import type {
     TreeSelectProps
 } from '../ant-typings'
 
+export interface BaseFieldBadge extends Recordable {
+    text?: any;
+    value?: string | number;
+    status?: 'error' | 'default' | 'success' | 'processing' | 'warning';
+    color?: LiteralUnion<'blue' | 'cyan' | 'gold' | 'green' | 'lime' | 'magenta' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow' | 'volcano' | 'geekblue'>;
+    disabled?: boolean;
+}
+
 export interface BaseFieldRequest<T = any> {
-    (params?: T): Promise<BaseOptionType[]>;
+    (params?: T): Promise<any>;
+}
+
+export interface BaseFieldOption extends Recordable {
+    label?: any;
+    value?: string | number;
+    disabled?: boolean;
+    children?: BaseFieldOption[];
+}
+
+export interface BaseFieldValueEnum {
+    [key: string]: string | number | BaseFieldBadge;
 }
 
 export interface BaseFieldValueTypeWithFieldProps {
@@ -56,7 +75,19 @@ export type BaseFieldValueType = keyof BaseFieldValueTypeWithFieldProps;
 export type BaseFieldFieldProps<T extends BaseFieldValueType> = BaseFieldValueTypeWithFieldProps[T];
 export type BaseFieldFormItemProps = FormItemProps & { model?: FormProps['model'] };
 
+const innerBaseFieldProps = () => ({
+    placeholder: {
+        type: [String, Array] as PropType<string | string[]>,
+        default: undefined
+    },
+    emptyText: {
+        type: String as PropType<string>,
+        default: '-'
+    }
+})
+
 export const baseFieldProps = () => ({
+    ...innerBaseFieldProps(),
     text: {
         type: [String, Number, Boolean, Array, Object, Function] as PropType<any>,
         default: undefined
@@ -69,21 +100,17 @@ export const baseFieldProps = () => ({
         type: String as PropType<BaseFieldValueType | string>,
         default: 'text'
     },
-    placeholder: {
-        type: [String, Array] as PropType<string | string[]>,
-        default: undefined
-    },
     request: {
         type: Function as PropType<BaseFieldRequest>,
         default: undefined
     },
-    valueEnum: {
-        type: Object as PropType<BaseEnumType>,
+    options: {
+        type: Array as PropType<BaseFieldOption[]>,
         default: undefined
     },
-    emptyText: {
-        type: String as PropType<string>,
-        default: '-'
+    valueEnum: {
+        type: Object as PropType<BaseFieldValueEnum>,
+        default: undefined
     },
     fieldProps: {
         type: Object as PropType<any>,

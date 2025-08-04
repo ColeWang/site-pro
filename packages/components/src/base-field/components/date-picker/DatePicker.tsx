@@ -6,8 +6,7 @@ import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldDatePickerFieldProps, FieldDatePickerSlots } from './typings'
 import { fieldDatePickerProps } from './typings'
-import type { Format } from '../share-utils'
-import { formatDate } from '../share-utils'
+import { dateFormat } from '../date-utils'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -19,10 +18,11 @@ export default defineComponent({
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
+
             const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
-                const valueText: VNodeChild = formatDate(text, fieldProps.format as Format)
+                const valueText: VNodeChild = dateFormat(text, fieldProps.format)
 
                 const readDom: VNodeChild = <Fragment>{valueText ?? emptyText}</Fragment>
                 // ----

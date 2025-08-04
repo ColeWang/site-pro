@@ -1,5 +1,5 @@
 import type { App, Plugin, Ref, SlotsType, VNode, VNodeChild } from 'vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import {
     ConfigProvider as AntConfigProvider,
     Descriptions as AntDescriptions,
@@ -118,9 +118,13 @@ const Descriptions = defineComponent({
         const popupContainer: Ref<HTMLElement | null> = ref(null)
 
         const { context: requestProps, onReload } = useFetchData(props.request, props, {
-            manualRequest: !props.request,
             onLoad: (dataSource: any[]) => emit('load', dataSource),
             onRequestError: (err: Error) => emit('requestError', err)
+        })
+
+        onMounted(() => {
+            // 初始化 发起请求
+            !props.manualRequest && onReload()
         })
 
         function getPopupContainer (): HTMLElement {

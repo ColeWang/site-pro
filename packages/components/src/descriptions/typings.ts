@@ -9,8 +9,16 @@ export interface DescriptionsRequest {
     (params: Recordable): Promise<any>;
 }
 
-export const descriptionsProps = () => ({
+const innerDescriptionsProps = () => ({
     ...antDescriptionsProps(),
+    emptyText: {
+        type: String as PropType<string>,
+        default: '-'
+    }
+})
+
+export const descriptionsProps = () => ({
+    ...innerDescriptionsProps(),
     request: {
         type: Function as PropType<DescriptionsRequest>,
         default: undefined
@@ -19,13 +27,13 @@ export const descriptionsProps = () => ({
         type: Object as PropType<Recordable>,
         default: () => ({})
     },
+    manualRequest: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
     dataSource: {
         type: Object as PropType<Recordable>,
         default: () => ({})
-    },
-    emptyText: {
-        type: String as PropType<string>,
-        default: '-'
     },
     onLoad: {
         type: Function as PropType<(dataSource: Recordable) => void>,
@@ -54,6 +62,10 @@ export type DescriptionsInstance = ComponentPublicInstance<DescriptionsProps, De
 export const descriptionsItemProps = () => ({
     ...baseFieldProps(),
     ...antFormItemProps(),
+    span: {
+        type: Number as PropType<number>,
+        default: 1
+    },
     ellipsis: {
         type: [Boolean, Object] as PropType<boolean | Omit<TextEllipsis, 'expandable' | 'rows' | 'onExpand'>>,
         default: undefined
@@ -61,10 +73,6 @@ export const descriptionsItemProps = () => ({
     copyable: {
         type: [Boolean, Object] as PropType<boolean | TextCopyable>,
         default: undefined
-    },
-    span: {
-        type: Number as PropType<number>,
-        default: 1
     },
     labelStyle: {
         type: Object as PropType<CSSProperties>,

@@ -1,10 +1,16 @@
 import { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
-import type { BaseEnumType, BaseSlot, Recordable } from '@site-pro/utils'
+import type { BaseSlot, Recordable } from '@site-pro/utils'
 import type { SearchProps } from './components/search'
 import type { ToolbarProps } from './components/toolbar'
 import type { UseFetchDataContext } from './hooks/useFetchData'
-import type { BaseFieldFieldProps, BaseFieldFormItemProps, BaseFieldValueType } from '../base-field'
+import type {
+    BaseFieldFieldProps,
+    BaseFieldFormItemProps,
+    BaseFieldOption,
+    BaseFieldValueEnum,
+    BaseFieldValueType
+} from '../base-field'
 import type {
     TableColumnType as AntTableColumnType,
     TableCurrentDataSource,
@@ -34,7 +40,8 @@ export interface TableColumn<RecordType = any> extends AntTableColumnType<Record
     // field
     valueType?: BaseFieldValueType;
     initialValue?: any;
-    valueEnum?: BaseEnumType;
+    options?: BaseFieldOption[];
+    valueEnum?: BaseFieldValueEnum;
     // 对应 valueType 需要使用类型断言来确保类型正确
     fieldProps?: BaseFieldFieldProps<BaseFieldValueType>;
     formItemProps?: BaseFieldFormItemProps;
@@ -78,7 +85,7 @@ export function createTableColumn<T extends BaseFieldValueType, RecordType = any
     return column
 }
 
-const baseTableProps = () => ({
+const innerTableProps = () => ({
     ...antTableProps(),
     rowKey: {
         type: String as PropType<string>,
@@ -111,18 +118,10 @@ const baseTableProps = () => ({
 })
 
 export const tableProps = () => ({
-    ...baseTableProps(),
+    ...innerTableProps(),
     search: {
         type: [Boolean, Object] as PropType<boolean | SearchProps>,
         default: undefined
-    },
-    manualRequest: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    },
-    requestOnPaginateChange: {
-        type: Boolean as PropType<boolean>,
-        default: true
     },
     request: {
         type: Function as PropType<TableRequest>,
@@ -131,6 +130,14 @@ export const tableProps = () => ({
     params: {
         type: Object as PropType<Recordable>,
         default: () => ({})
+    },
+    manualRequest: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
+    requestOnPaginateChange: {
+        type: Boolean as PropType<boolean>,
+        default: true
     },
     beforeSearchSubmit: {
         type: Function as PropType<(values: Recordable) => Recordable>,

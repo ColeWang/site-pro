@@ -2,7 +2,7 @@ import type { App, Plugin, SlotsType, VNode } from 'vue'
 import { defineComponent, unref } from 'vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import { get, isFunction } from 'lodash-es'
-import { useBaseFieldProvider } from './hooks/useBaseFieldProvider'
+import { useBaseFieldReceiver } from './hooks/useBaseFieldReceiver'
 import type { BaseFieldProps, BaseFieldProviderValueTypeMap, BaseFieldSlots, BaseFieldValueType } from './typings'
 import { baseFieldProps } from './typings'
 // ---
@@ -178,7 +178,7 @@ const BaseField = defineComponent({
     props: baseFieldProps(),
     slots: Object as SlotsType<BaseFieldSlots>,
     setup (props, { slots }) {
-        const { valueTypeMap } = useBaseFieldProvider()
+        const { valueTypeMap } = useBaseFieldReceiver()
 
         return () => {
             const { mode, text, valueType, fieldProps, formItemProps } = props

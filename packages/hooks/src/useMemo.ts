@@ -22,13 +22,13 @@ function useMemo<T> (getValue: () => T, condition: UseMemoCondition, options?: U
         }
     }
 
-    const stopWatch: WatchStopHandle = watch(condition, callback, {
+    const stopWatchCondition: WatchStopHandle = watch(condition, callback, {
         immediate: immediate || false,
         deep: deep || false,
     })
 
     function onStopHandle (): void {
-        stopWatch && stopWatch()
+        stopWatchCondition && stopWatchCondition()
     }
 
     tryOnScopeDispose(onStopHandle)

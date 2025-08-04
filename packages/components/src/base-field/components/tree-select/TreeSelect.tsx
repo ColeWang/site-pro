@@ -1,9 +1,11 @@
 import type { SlotsType, VNodeChild } from 'vue'
 import { defineComponent, Fragment } from 'vue'
 import { TreeSelect as AntTreeSelect } from 'ant-design-vue'
-import type { BaseEnumType, Recordable } from '@site-pro/utils'
-import { enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
+import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
+import { optionsToValueEnum, valueEnumToText } from '../../valueEnum'
+import type { BaseFieldValueEnum } from '../../typings'
 import type { FieldTreeSelectFieldProps, FieldTreeSelectSlots } from './typings'
 import { fieldTreeSelectProps } from './typings'
 
@@ -16,15 +18,13 @@ export default defineComponent({
         const { t } = useLocaleReceiver(['global'])
 
         return () => {
-            const { mode, text, emptyText, fieldProps } = props
-            const { options, ...restFieldProps } = fieldProps
+            const { mode, text, emptyText, options, valueEnum, fieldProps } = props
+
             const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
-                const { options: propsOptions, fieldNames } = fieldProps
-
-                const optionsValueEnum: BaseEnumType = optionsToEnum(propsOptions as any, fieldNames)
-                const valueText: VNodeChild = enumToText(text, optionsValueEnum)
+                const optionsValueEnum: BaseFieldValueEnum = optionsToValueEnum(options as any)
+                const valueText: VNodeChild = valueEnumToText(text, valueEnum || optionsValueEnum)
 
                 const readDom: VNodeChild = <Fragment>{valueText ?? emptyText}</Fragment>
                 // ----
@@ -36,7 +36,7 @@ export default defineComponent({
             const needFieldProps: FieldTreeSelectFieldProps = {
                 treeData: options as any,
                 allowClear: true,
-                ...restFieldProps,
+                ...fieldProps,
                 placeholder: placeholder
             }
             const editDom: VNodeChild = <AntTreeSelect {...needFieldProps} v-slots={slots}/>

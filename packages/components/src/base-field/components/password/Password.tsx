@@ -27,6 +27,7 @@ export default defineComponent({
         return () => {
             const { mode, text, emptyText, fieldProps } = props
             const { sizeXXS } = unref(token)
+
             const placeholder: string | number = fieldProps.placeholder || t('inputPlaceholder')!
 
             if (mode === 'read') {

@@ -1,9 +1,11 @@
 import type { ComputedRef, SlotsType, VNodeChild } from 'vue'
 import { computed, defineComponent, Fragment, unref } from 'vue'
 import { Checkbox as AntCheckbox } from 'ant-design-vue'
-import type { BaseEnumType, BaseOptionType, Recordable } from '@site-pro/utils'
-import { enumToOptions, enumToText, getSlotVNode, optionsToEnum } from '@site-pro/utils'
+import type { Recordable } from '@site-pro/utils'
+import { getSlotVNode } from '@site-pro/utils'
 import { isUndefined } from 'lodash-es'
+import { optionsToValueEnum, valueEnumToOptions, valueEnumToText } from '../../valueEnum'
+import type { BaseFieldOption, BaseFieldValueEnum } from '../../typings'
 import type { FieldCheckboxFieldProps, FieldCheckboxSlots } from './typings'
 import { fieldCheckboxProps } from './typings'
 
@@ -13,21 +15,19 @@ export default defineComponent({
     props: fieldCheckboxProps(),
     slots: Object as SlotsType<FieldCheckboxSlots>,
     setup (props, { slots }) {
-        const options: ComputedRef<BaseOptionType[]> = computed(() => {
+        const sOptions: ComputedRef<BaseFieldOption[]> = computed(() => {
             if (isUndefined(props.valueEnum)) {
-                return (props.fieldProps.options || []) as BaseOptionType[]
+                return (props.options || []) as BaseFieldOption[]
             }
-            return enumToOptions(props.valueEnum)
+            return valueEnumToOptions(props.valueEnum)
         })
 
         return () => {
-            const { mode, text, emptyText, valueEnum, fieldProps } = props
+            const { mode, text, emptyText, options, valueEnum, fieldProps } = props
 
             if (mode === 'read') {
-                const { options: propsOptions } = fieldProps
-
-                const optionsValueEnum: BaseEnumType = optionsToEnum(propsOptions as any, {})
-                const valueText: VNodeChild = enumToText(text, valueEnum || optionsValueEnum)
+                const optionsValueEnum: BaseFieldValueEnum = optionsToValueEnum(options as any)
+                const valueText: VNodeChild = valueEnumToText(text, valueEnum || optionsValueEnum)
 
                 const readDom: VNodeChild = <Fragment>{valueText ?? emptyText}</Fragment>
                 // ----
@@ -37,7 +37,7 @@ export default defineComponent({
                 return fieldDom || readDom
             }
             const needFieldProps: FieldCheckboxFieldProps = {
-                options: unref(options) as any,
+                options: unref(sOptions) as any,
                 ...fieldProps
             }
             const editDom: VNodeChild = <AntCheckbox.Group {...needFieldProps} v-slots={slots}/>

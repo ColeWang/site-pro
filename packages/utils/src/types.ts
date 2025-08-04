@@ -24,28 +24,3 @@ export interface BaseAttrs extends Recordable {
     style?: CSSProperties;
     class?: BaseClass;
 }
-
-export interface BaseFieldNames extends Recordable {
-    value?: string;
-    label?: string;
-    children?: string;
-}
-
-export interface BaseBadgeType extends Recordable {
-    text?: any;
-    value?: string | number;
-    status?: 'error' | 'default' | 'success' | 'processing' | 'warning';
-    color?: LiteralUnion<'blue' | 'cyan' | 'gold' | 'green' | 'lime' | 'magenta' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow' | 'volcano' | 'geekblue'>;
-    disabled?: boolean;
-}
-
-export interface BaseEnumType {
-    [key: string]: string | number | BaseBadgeType;
-}
-
-export interface BaseOptionType extends Recordable {
-    label?: any;
-    value?: string | number;
-    disabled?: boolean;
-    children?: BaseOptionType[];
-}

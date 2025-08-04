@@ -22,7 +22,7 @@ function useResizeObserver (
 
     const elTarget: ComputedRef<HTMLElement | null> = computed(() => getElement(target))
 
-    const stopWatch: WatchStopHandle = watch(elTarget, (el) => {
+    const stopWatchElTarget: WatchStopHandle = watch(elTarget, (el) => {
         cleanup()
         if (window && 'ResizeObserver' in window) {
             observer = new ResizeObserver(callback)
@@ -31,7 +31,7 @@ function useResizeObserver (
     }, { immediate: true, flush: 'post', deep: true })
 
     function onStopHandle (): void {
-        stopWatch && stopWatch()
+        stopWatchElTarget && stopWatchElTarget()
         // --
         cleanup()
     }

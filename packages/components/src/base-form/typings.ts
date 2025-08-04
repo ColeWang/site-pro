@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
 import { formProps as antFormProps } from 'ant-design-vue/es/form'
 import type { NamePath, Recordable } from '@site-pro/utils'
-import type { FormInstance, RowProps, FormValidateError } from '../ant-typings'
+import type { FormInstance, FormValidateError, RowProps } from '../ant-typings'
 
 export interface BaseFormUpdater {
     (value: any): any;
@@ -9,12 +9,16 @@ export interface BaseFormUpdater {
 
 export type BaseFormLayout = 'horizontal' | 'vertical' | 'inline';
 
-export const baseFormProps = () => ({
+const innerBaseFormProps = () => ({
     ...antFormProps(),
     layout: {
         type: String as PropType<BaseFormLayout>,
         default: 'vertical'
-    },
+    }
+})
+
+export const baseFormProps = () => ({
+    ...innerBaseFormProps(),
     initialValues: {
         type: Object as PropType<Recordable>,
         default: () => ({})
@@ -63,16 +67,16 @@ export interface BaseFormSlots {
 
 export type BaseFormProps = Partial<ExtractPropTypes<ReturnType<typeof baseFormProps>>>;
 
-export interface BaseFormExpose<RecordType = Recordable> {
+export interface BaseFormExpose<T = Recordable> {
     formInstanceRef: Ref<FormInstance | null>;
-    model: Ref<RecordType>;
+    model: Ref<T>;
     formProps: ComputedRef<BaseFormProps>;
-    setModelValue: (namePath: NamePath, value: any) => RecordType;
-    getModelValue: (namePath: NamePath) => RecordType;
-    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => RecordType;
+    setModelValue: (namePath: NamePath, value: any) => T;
+    getModelValue: (namePath: NamePath) => T;
+    updateModelValue: (namePath: NamePath, updater: BaseFormUpdater) => T;
     deleteModelValue: (namePath: NamePath) => boolean;
     submit: () => void;
-    validate: (names?: NamePath[]) => Promise<RecordType>;
+    validate: (names?: NamePath[]) => Promise<T>;
     resetFields: (names?: NamePath[]) => void;
 }
 

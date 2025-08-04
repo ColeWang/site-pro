@@ -7,8 +7,7 @@ import { isArray } from 'lodash-es'
 import { useLocaleReceiver } from '../../../locale-provider'
 import type { FieldRangePickerFieldProps, FieldRangePickerSlots } from './typings'
 import { fieldRangePickerProps } from './typings'
-import type { Format } from '../share-utils'
-import { formatDate } from '../share-utils'
+import { dateFormat } from '../date-utils'
 
 export default defineComponent({
     inheritAttrs: false,
@@ -25,8 +24,8 @@ export default defineComponent({
             if (mode === 'read') {
                 const [startText, endText] = isArray(text) ? text : [text, text]
 
-                const valueStartText: VNodeChild = formatDate(startText, fieldProps.format as Format)
-                const valueEndText: VNodeChild = formatDate(endText, fieldProps.format as Format)
+                const valueStartText: VNodeChild = dateFormat(startText, fieldProps.format)
+                const valueEndText: VNodeChild = dateFormat(endText, fieldProps.format)
 
                 const readDom: VNodeChild = (
                     <Fragment>
