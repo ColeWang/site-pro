@@ -104,10 +104,10 @@ export const baseFieldProps = () => ({
         type: Function as PropType<BaseFieldRequest>,
         default: undefined
     },
-    options: {
-        type: Array as PropType<BaseFieldOption[]>,
-        default: undefined
-    },
+    // options: {
+    //     type: Array as PropType<BaseFieldOption[]>,
+    //     default: undefined
+    // },
     valueEnum: {
         type: Object as PropType<BaseFieldValueEnum>,
         default: undefined

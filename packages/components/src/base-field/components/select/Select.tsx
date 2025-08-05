@@ -1,12 +1,11 @@
-import type { SlotsType, VNodeChild } from 'vue'
-import { defineComponent, Fragment, unref } from 'vue'
+import type { Ref, SlotsType, VNodeChild } from 'vue'
+import { defineComponent, Fragment, ref, unref } from 'vue'
 import { Select as AntSelect } from 'ant-design-vue'
 import type { Recordable } from '@site-pro/utils'
 import { getSlotVNode } from '@site-pro/utils'
 import { useLocaleReceiver } from '../../../locale-provider'
-import useFieldFetchData from '../../hooks/useFieldFetchData'
-import { optionsToValueEnum, valueEnumToText } from '../../valueEnum'
-import type { BaseFieldValueEnum } from '../../typings'
+import useBaseFieldOptions from '../../hooks/useBaseFieldOptions'
+import { baseFieldParsingText } from '../../utils'
 import type { FieldSelectFieldProps, FieldSelectSlots } from './typings'
 import { fieldSelectProps } from './typings'
 
@@ -17,7 +16,9 @@ export default defineComponent({
     slots: Object as SlotsType<FieldSelectSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
-        const { search, loading, options } = useFieldFetchData(props.request, props)
+        const { loading, options, valueEnum } = useBaseFieldOptions(props.request, props)
+
+        const searchValue: Ref<string> = ref('')
 
         // const options: ComputedRef<BaseOptionType[]> = computed(() => {
         //     if (isUndefined(props.valueEnum)) {
@@ -26,16 +27,12 @@ export default defineComponent({
         //     return enumToOptions(props.valueEnum)
         // })
 
-        function fetchData (value: string): void {
-            search.value = value
-        }
-
         function onSearch (value: string): void {
             console.log(value)
         }
 
-        function onChange (value: string): void {
-            console.log('onChange', value)
+        function onChange (value: any, option: any): void {
+            console.log('onChange', value, option)
         }
 
         function onClear () {
@@ -43,15 +40,12 @@ export default defineComponent({
         }
 
         return () => {
-            const { mode, text, emptyText, valueEnum, fieldProps } = props
+            const { mode, text, emptyText, fieldProps } = props
 
             const placeholder: string = fieldProps.placeholder || t('selectPlaceholder')!
 
             if (mode === 'read') {
-                const { options: propsOptions } = fieldProps
-
-                const optionsValueEnum: BaseFieldValueEnum = optionsToValueEnum(propsOptions as any)
-                const valueText: VNodeChild = valueEnumToText(text, valueEnum || optionsValueEnum)
+                const valueText: VNodeChild = baseFieldParsingText(text, unref(valueEnum))
 
                 const readDom: VNodeChild = <Fragment>{valueText ?? emptyText}</Fragment>
                 // ----
@@ -61,7 +55,7 @@ export default defineComponent({
                 return fieldDom || readDom
             }
             const needFieldProps: FieldSelectFieldProps = {
-                searchValue: unref(search),
+                searchValue: unref(searchValue),
                 loading: unref(loading),
                 options: unref(options),
                 allowClear: true,

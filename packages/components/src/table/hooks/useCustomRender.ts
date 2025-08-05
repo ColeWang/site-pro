@@ -3,7 +3,7 @@ import { computed, createVNode } from 'vue'
 import { Typography as AntTypography } from 'ant-design-vue'
 import { isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject, isString } from 'lodash-es'
-import { valueEnumToText } from '../../base-field'
+import { baseFieldParsingText } from '../../base-field'
 import type { TextCopyable } from '../../ant-typings'
 import { TableColumn, TableProps } from '../typings'
 
@@ -38,7 +38,7 @@ function createCustomRender (column: TableColumn, emptyText?: string): CreateCus
             return column.customRender.call(null, options)
         }
         if (column.valueEnum && isObject(column.valueEnum) && !isEmpty(options.text)) {
-            return valueEnumToText(options.text, column.valueEnum)
+            return baseFieldParsingText(options.text, column.valueEnum)
         }
         if ((column.copyable || column.ellipsis) && isString(options.text) && !isEmpty(options.text)) {
             return createVNode(AntTypography.Text, {

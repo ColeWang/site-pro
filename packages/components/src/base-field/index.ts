@@ -1,6 +1,6 @@
 import BaseField from './BaseField'
 import BaseFieldProvider from './BaseFieldProvider'
-import { optionsToValueEnum, valueEnumToOptions, valueEnumToText } from './valueEnum'
+import { baseFieldParsingText } from './utils'
 import type {
     BaseFieldFieldProps,
     BaseFieldFormItemProps,
@@ -21,7 +21,7 @@ import { baseFieldProps, baseFieldProviderProps } from './typings'
 
 export { BaseField, baseFieldProps }
 export { BaseFieldProvider, baseFieldProviderProps }
-export { valueEnumToOptions, optionsToValueEnum, valueEnumToText }
+export { baseFieldParsingText }
 
 export type {
     BaseFieldValueType,
