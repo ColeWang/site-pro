@@ -58,7 +58,7 @@ export interface BaseFieldValueTypeWithFieldProps {
     dateTimeRange: RangePickerProps;
     time: TimePickerProps;
     timeRange: TimeRangePickerProps;
-    select: SelectProps;
+    select: SelectProps & { fetchDataOnSearch?: boolean };
     treeSelect: TreeSelectProps;
     cascader: CascaderProps;
     radio: RadioGroupProps;

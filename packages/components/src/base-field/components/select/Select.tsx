@@ -25,7 +25,7 @@ export default defineComponent({
 
         function onSearch (value: string): void {
             // fieldProps 扩展 fetchDataOnSearch
-            if ((props.fieldProps as any).fetchDataOnSearch) {
+            if (props.fieldProps.fetchDataOnSearch) {
                 fetchData(value)
             }
             searchValue.value = value
