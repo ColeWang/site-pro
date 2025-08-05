@@ -16,27 +16,33 @@ export default defineComponent({
     slots: Object as SlotsType<FieldSelectSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
-        const { loading, options, valueEnum } = useBaseFieldOptions(props.request, props)
+        const { loading, options, valueEnum, fetchData } = useBaseFieldOptions(props.request, props)
 
         const searchValue: Ref<string> = ref('')
 
-        // const options: ComputedRef<BaseOptionType[]> = computed(() => {
-        //     if (isUndefined(props.valueEnum)) {
-        //         return (props.fieldProps.options || []) as BaseOptionType[]
-        //     }
-        //     return enumToOptions(props.valueEnum)
-        // })
+        // 初始化请求
+        props.request && fetchData()
 
         function onSearch (value: string): void {
-            console.log(value)
+            // fieldProps 扩展 fetchDataOnSearch
+            if ((props.fieldProps as any).fetchDataOnSearch) {
+                fetchData(value)
+            }
+            searchValue.value = value
         }
 
         function onChange (value: any, option: any): void {
-            console.log('onChange', value, option)
+            if (props.fieldProps.showSearch && props.fieldProps.autoClearSearchValue) {
+                onSearch('')
+            }
+            props.fieldProps.onChange && props.fieldProps.onChange(value, option)
         }
 
-        function onClear () {
-
+        function onClear (): void {
+            if (props.fieldProps.showSearch) {
+                onSearch('')
+            }
+            props.fieldProps.onClear && props.fieldProps.onClear()
         }
 
         return () => {

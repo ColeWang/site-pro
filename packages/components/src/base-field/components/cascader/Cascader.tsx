@@ -16,7 +16,10 @@ export default defineComponent({
     slots: Object as SlotsType<FieldCascaderSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
-        const { options, valueEnum } = useBaseFieldOptions(props.request, props)
+        const { loading, options, valueEnum, fetchData } = useBaseFieldOptions(props.request, props)
+
+        // 初始化请求
+        props.request && fetchData()
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
@@ -34,8 +37,9 @@ export default defineComponent({
                 return fieldDom || readDom
             }
             const needFieldProps: FieldCascaderFieldProps = {
-                allowClear: true,
+                loading: unref(loading),
                 options: unref(options),
+                allowClear: true,
                 ...fieldProps,
                 placeholder: placeholder
             }

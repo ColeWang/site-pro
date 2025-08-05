@@ -9,7 +9,7 @@ export interface UseFetchDataResult {
     loading: Ref<boolean>;
     options: Ref<BaseFieldOption[]>;
     valueEnum: Ref<BaseFieldValueEnum>;
-    fetchData: (params: any) => Promise<void>;
+    fetchData: (words?: string) => Promise<void>;
 }
 
 function valueEnumToOptions (valueEnum?: BaseFieldValueEnum): BaseFieldOption[] {
@@ -66,10 +66,11 @@ function useBaseFieldOptions (request: BaseFieldRequest | undefined, props: Base
         options.value = detFieldOptions(props)
     }, { deep: true })
 
-    async function fetchData (params: any): Promise<void> {
+    async function fetchData (words?: string): Promise<void> {
         if (!isFunction(request) || loading.value) return
         loading.value = true
         try {
+            const params: any = { words: words }
             const { success, data } = await request(params)
             if (success !== false) {
                 options.value = data

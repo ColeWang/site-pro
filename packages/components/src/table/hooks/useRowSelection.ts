@@ -54,9 +54,8 @@ function useRowSelection (props: TableProps): UseRowSelectionResult {
 
     /* v8 ignore next 7 */
     function onChange (keys: (string | number)[], rows: any[]): void {
-        const { rowSelection } = props
-        if (isObject(rowSelection) && isFunction(rowSelection.onChange)) {
-            rowSelection.onChange(keys, rows)
+        if (isObject(props.rowSelection) && isFunction(props.rowSelection.onChange)) {
+            props.rowSelection.onChange(keys, rows)
         }
         updateSelectedRows(keys, rows)
     }

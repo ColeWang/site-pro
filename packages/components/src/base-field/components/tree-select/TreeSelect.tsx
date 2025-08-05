@@ -16,7 +16,10 @@ export default defineComponent({
     slots: Object as SlotsType<FieldTreeSelectSlots>,
     setup (props, { slots }) {
         const { t } = useLocaleReceiver(['global'])
-        const { options, valueEnum } = useBaseFieldOptions(props.request, props)
+        const { loading, options, valueEnum, fetchData } = useBaseFieldOptions(props.request, props)
+
+        // 初始化请求
+        props.request && fetchData()
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props
@@ -34,6 +37,7 @@ export default defineComponent({
                 return fieldDom || readDom
             }
             const needFieldProps: FieldTreeSelectFieldProps = {
+                loading: unref(loading),
                 treeData: unref(options) as any,
                 allowClear: true,
                 ...fieldProps,

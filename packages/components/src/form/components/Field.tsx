@@ -68,10 +68,8 @@ const Field = defineComponent({
     setup (props, { slots }) {
         const { model, formProps, setModelValue } = useFormInstance()
 
-        const { initialValue, formItemProps } = props
-
         // 初始化值 (同时防止 form 报错)
-        formItemProps.name && setDefaultValue(formItemProps.name, initialValue)
+        props.formItemProps.name && setDefaultValue(props.formItemProps.name, props.initialValue)
 
         function setDefaultValue (namePath: NamePath, value: any): void {
             const hasValue: boolean = has(unref(model), namePath)

@@ -17,9 +17,8 @@ export default defineComponent({
         const { t } = useLocaleReceiver(['global'])
 
         function onUpdateChecked (value: boolean | string | number): void {
-            const { fieldProps } = props
-            if (isFunction(fieldProps['onUpdate:value'])) {
-                fieldProps['onUpdate:value'](value)
+            if (isFunction(props.fieldProps['onUpdate:value'])) {
+                props.fieldProps['onUpdate:value'](value)
             }
         }
 

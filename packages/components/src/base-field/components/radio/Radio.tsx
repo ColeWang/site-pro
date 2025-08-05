@@ -14,7 +14,10 @@ export default defineComponent({
     props: fieldRadioProps(),
     slots: Object as SlotsType<FieldRadioSlots>,
     setup (props, { slots }) {
-        const { options, valueEnum } = useBaseFieldOptions(props.request, props)
+        const { options, valueEnum, fetchData } = useBaseFieldOptions(props.request, props)
+
+        // 初始化请求
+        props.request && fetchData()
 
         return () => {
             const { mode, text, emptyText, fieldProps } = props

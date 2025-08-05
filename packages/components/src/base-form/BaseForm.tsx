@@ -92,10 +92,9 @@ const BaseForm = defineComponent({
         }
 
         function onFinishFailed (errorInfo: FormValidateError): void {
-            const { scrollToFirstError } = props
-            if (scrollToFirstError && errorInfo.errorFields.length) {
+            if (props.scrollToFirstError && errorInfo.errorFields.length) {
                 const headField: any = head(errorInfo.errorFields)
-                const options: any = isObject(scrollToFirstError) ? scrollToFirstError : {}
+                const options: any = isObject(props.scrollToFirstError) ? props.scrollToFirstError : {}
                 onScrollToField(headField.name, options)
             }
             emit('finishFailed', errorInfo)
