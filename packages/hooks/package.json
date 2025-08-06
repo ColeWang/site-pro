@@ -2,11 +2,11 @@
     "name": "@site-pro/hooks",
     "version": "0.4.9",
     "description": "Vue3 AdminPro Hooks of Vue",
+    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
-        "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-        "lint": "TIMING=1 eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+        "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
     },
     "dependencies": {
         "@site-pro/utils": "workspace:*"

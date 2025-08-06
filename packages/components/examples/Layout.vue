@@ -7,7 +7,7 @@
                         {{ (parent.meta as any).title }}
                     </template>
                     <Menu.Item v-for="item in parent.children" :key="item.name">
-                        {{ (parent.meta as any).title }}
+                        {{ (item.meta as any).title }}
                     </Menu.Item>
                 </Menu.SubMenu>
             </Menu>

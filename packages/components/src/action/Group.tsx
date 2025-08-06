@@ -23,7 +23,7 @@ function createDropdownMenu (nodes: VNode[]): JSX.Element {
     ))
 
     return (
-        <AntMenu data-type={'dropdown'} selectedselectedKeys={[]}>
+        <AntMenu data-type={'dropdown'}>
             {children}
         </AntMenu>
     )

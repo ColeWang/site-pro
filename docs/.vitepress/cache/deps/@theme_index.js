@@ -1,58 +1,66 @@
 import {
   useMediaQuery
-} from "./chunk-Z56KDJMM.js";
+} from "./chunk-AL3U6LXN.js";
 import {
   computed,
   ref,
   shallowRef,
   watch
-} from "./chunk-HBGG36HX.js";
+} from "./chunk-G6266EAP.js";
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/index.js
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/fonts.css";
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/index.js
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/fonts.css";
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/without-fonts.js
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/vars.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/base.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/icons.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/utils.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/components/custom-block.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/components/vp-code.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/components/vp-code-group.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/components/vp-doc.css";
-import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/styles/components/vp-sponsor.css";
-import VPBadge from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue";
-import Layout from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/Layout.vue";
-import { default as default2 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue";
-import { default as default3 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPImage.vue";
-import { default as default4 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPButton.vue";
-import { default as default5 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPHomeContent.vue";
-import { default as default6 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPHomeHero.vue";
-import { default as default7 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPHomeFeatures.vue";
-import { default as default8 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPHomeSponsors.vue";
-import { default as default9 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPLink.vue";
-import { default as default10 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideSponsors.vue";
-import { default as default11 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPSocialLink.vue";
-import { default as default12 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPSocialLinks.vue";
-import { default as default13 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPSponsors.vue";
-import { default as default14 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPTeamPage.vue";
-import { default as default15 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageTitle.vue";
-import { default as default16 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageSection.vue";
-import { default as default17 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembers.vue";
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/without-fonts.js
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/vars.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/base.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/icons.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/utils.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/components/custom-block.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/components/vp-code.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/components/vp-code-group.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/components/vp-doc.css";
+import "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/styles/components/vp-sponsor.css";
+import VPBadge from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue";
+import Layout from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/Layout.vue";
+import { default as default2 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPBadge.vue";
+import { default as default3 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPButton.vue";
+import { default as default4 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPDocAsideSponsors.vue";
+import { default as default5 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPFeatures.vue";
+import { default as default6 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPHomeContent.vue";
+import { default as default7 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPHomeFeatures.vue";
+import { default as default8 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPHomeHero.vue";
+import { default as default9 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPHomeSponsors.vue";
+import { default as default10 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPImage.vue";
+import { default as default11 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPLink.vue";
+import { default as default12 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
+import { default as default13 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPSocialLink.vue";
+import { default as default14 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPSocialLinks.vue";
+import { default as default15 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPSponsors.vue";
+import { default as default16 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPTeamMembers.vue";
+import { default as default17 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPTeamPage.vue";
+import { default as default18 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageSection.vue";
+import { default as default19 } from "/Users/cole/Desktop/Cole/site-pro/node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/components/VPTeamPageTitle.vue";
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/support/utils.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/composables/local-nav.js
+import { onContentUpdated } from "vitepress";
+
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/composables/outline.js
+import { getScrollOffset } from "vitepress";
+
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/support/utils.js
 import { withBase } from "vitepress";
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/composables/data.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/composables/data.js
 import { useData as useData$ } from "vitepress";
 var useData = useData$;
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/support/utils.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/support/utils.js
 function ensureStartingSlash(path) {
-  return /^\//.test(path) ? path : `/${path}`;
+  return path.startsWith("/") ? path : `/${path}`;
 }
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/support/sidebar.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/support/sidebar.js
 function getSidebar(_sidebar, path) {
   if (Array.isArray(_sidebar))
     return addBase(_sidebar);
@@ -95,7 +103,7 @@ function addBase(items, _base) {
   });
 }
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/composables/sidebar.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/composables/sidebar.js
 function useSidebar() {
   const { frontmatter, page, theme: theme2 } = useData();
   const is960 = useMediaQuery("(min-width: 960px)");
@@ -152,11 +160,8 @@ function useSidebar() {
   };
 }
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/composables/local-nav.js
-import { onContentUpdated } from "vitepress";
-
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/composables/outline.js
-import { getScrollOffset } from "vitepress";
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/composables/outline.js
+var ignoreRE = /\b(?:VPBadge|header-anchor|footnote-ref|ignore-header)\b/;
 var resolvedHeaders = [];
 function getHeaders(range) {
   const headers = [
@@ -176,9 +181,8 @@ function serializeHeader(h) {
   let ret = "";
   for (const node of h.childNodes) {
     if (node.nodeType === 1) {
-      if (node.classList.contains("VPBadge") || node.classList.contains("header-anchor") || node.classList.contains("ignore-header")) {
+      if (ignoreRE.test(node.className))
         continue;
-      }
       ret += node.textContent;
     } else if (node.nodeType === 3) {
       ret += node.textContent;
@@ -221,7 +225,7 @@ function buildTree(data, min, max) {
   return result;
 }
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/composables/local-nav.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/composables/local-nav.js
 function useLocalNav() {
   const { theme: theme2, frontmatter } = useData();
   const headers = shallowRef([]);
@@ -237,7 +241,7 @@ function useLocalNav() {
   };
 }
 
-// node_modules/.pnpm/vitepress@1.5.0_@algolia+client-search@5.18.0_@types+node@22.5.0_async-validator@4.2.5_postcs_ywxk4z2tc564zhagzd6evxrtqu/node_modules/vitepress/dist/client/theme-default/without-fonts.js
+// node_modules/.pnpm/vitepress@1.6.4_@algolia+client-search@5.35.0_@types+node@24.2.0_async-validator@4.2.5__f93071303f62ab37985d74739ffec72e/node_modules/vitepress/dist/client/theme-default/without-fonts.js
 var theme = {
   Layout,
   enhanceApp: ({ app }) => {
@@ -247,21 +251,23 @@ var theme = {
 var without_fonts_default = theme;
 export {
   default2 as VPBadge,
-  default4 as VPButton,
-  default10 as VPDocAsideSponsors,
-  default5 as VPHomeContent,
+  default3 as VPButton,
+  default4 as VPDocAsideSponsors,
+  default5 as VPFeatures,
+  default6 as VPHomeContent,
   default7 as VPHomeFeatures,
-  default6 as VPHomeHero,
-  default8 as VPHomeSponsors,
-  default3 as VPImage,
-  default9 as VPLink,
-  default11 as VPSocialLink,
-  default12 as VPSocialLinks,
-  default13 as VPSponsors,
-  default17 as VPTeamMembers,
-  default14 as VPTeamPage,
-  default16 as VPTeamPageSection,
-  default15 as VPTeamPageTitle,
+  default8 as VPHomeHero,
+  default9 as VPHomeSponsors,
+  default10 as VPImage,
+  default11 as VPLink,
+  default12 as VPNavBarSearch,
+  default13 as VPSocialLink,
+  default14 as VPSocialLinks,
+  default15 as VPSponsors,
+  default16 as VPTeamMembers,
+  default17 as VPTeamPage,
+  default18 as VPTeamPageSection,
+  default19 as VPTeamPageTitle,
   without_fonts_default as default,
   useLocalNav,
   useSidebar
