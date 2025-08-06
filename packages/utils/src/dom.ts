@@ -14,7 +14,7 @@ export function hasClass (node: HTMLElement, className: string): boolean {
         return node.classList.contains(className)
     }
     const originClass: string = node.className
-    return ` ${originClass} `.indexOf(` ${className} `) > -1
+    return ` ${originClass} `.includes(` ${className} `)
 }
 
 export function addClass (node: HTMLElement, className: string): void {

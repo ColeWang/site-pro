@@ -93,7 +93,7 @@ const Field = defineComponent({
             const needFieldProps: any & BaseAttrs = {
                 ...fieldProps,
                 style: { width: needWidth, ...fieldProps.style },
-                ['onUpdate:value']: onUpdateValue.bind(null, formItemProps.name!)
+                'onUpdate:value': onUpdateValue.bind(null, formItemProps.name!)
             }
 
             const needFormItemProps: BaseFieldFormItemProps & BaseAttrs = merge({

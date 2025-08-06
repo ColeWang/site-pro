@@ -19,7 +19,7 @@ export function onceWindowEvt<K extends keyof WindowEventMap> (
     listener: (evt: WindowEventMap[K]) => void,
     options?: boolean | AddEventListenerOptions
 ): void {
-    function handler (evt: WindowEventMap[K]) {
+    function handler (evt: WindowEventMap[K]): void {
         listener.call(null, evt)
         cleanWindowEvt(type, handler, options)
     }
@@ -48,7 +48,7 @@ export function onceDocumentEvt<K extends keyof DocumentEventMap> (
     listener: (evt: DocumentEventMap[K]) => void,
     options?: boolean | AddEventListenerOptions
 ): void {
-    function handler (evt: DocumentEventMap[K]) {
+    function handler (evt: DocumentEventMap[K]): void {
         listener.call(null, evt)
         cleanDocumentEvt(type, handler, options)
     }
@@ -80,7 +80,7 @@ export function onceEvt<T extends HTMLElement, K extends keyof HTMLElementEventM
     listener: (evt: HTMLElementEventMap[K]) => void,
     options?: boolean | AddEventListenerOptions
 ): void {
-    function handler (evt: HTMLElementEventMap[K]) {
+    function handler (evt: HTMLElementEventMap[K]): void {
         listener.call(null, evt)
         cleanEvt(target, type, handler, options)
     }

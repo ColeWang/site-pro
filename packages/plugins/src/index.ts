@@ -45,7 +45,7 @@ const defaultPlugins: BaseDefaultPlugins = {
     screen: Screen
 }
 
-function install (app: App, options: BaseSitePluginsOptions) {
+function install (app: App, options: BaseSitePluginsOptions): void {
     const $site: Partial<BaseSitePluginsExpose> = {
         name: 'site-plugins',
         version: version,
@@ -70,7 +70,7 @@ function useSite (): BaseSitePluginsExpose {
 }
 
 function createSite (options: BaseSitePluginsOptions = {}): BaseSitePlugins {
-    const installExtend = (app: App) => {
+    const installExtend = (app: App): void => {
         install(app, { ...options })
     }
     return { name: 'site-plugins', install: installExtend }

@@ -1,6 +1,6 @@
-import { fileURLToPath } from 'url'
-import { readFileSync } from 'fs'
-import { dirname, extname, relative, resolve } from 'path'
+import { readFileSync } from 'node:fs'
+import { dirname, extname, relative, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { sync as globSync } from 'glob'
 // --
 import { defineConfig, loadEnv } from 'vite'

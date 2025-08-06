@@ -5,7 +5,7 @@ import { isEmpty, namePathToString } from '@site-pro/utils'
 import { isArray, isFunction, isObject, isString } from 'lodash-es'
 import { baseFieldParsingText } from '../../base-field'
 import type { TextCopyable } from '../../ant-typings'
-import { TableColumn, TableProps } from '../typings'
+import type { TableColumn, TableProps } from '../typings'
 
 interface UseCustomRenderResult {
     columns: ComputedRef<TableColumn[]>;

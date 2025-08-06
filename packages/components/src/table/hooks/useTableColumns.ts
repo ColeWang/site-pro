@@ -4,7 +4,7 @@ import { tryOnScopeDispose } from '@site-pro/hooks'
 import type { Recordable } from '@site-pro/utils'
 import { isBoolean, map, reduce, set } from 'lodash-es'
 import useCustomRender from './useCustomRender'
-import { TableColumn, TableProps } from '../typings'
+import type { TableColumn, TableProps } from '../typings'
 
 interface UseTableColumnsResult {
     columns: ComputedRef<TableColumn[]>;

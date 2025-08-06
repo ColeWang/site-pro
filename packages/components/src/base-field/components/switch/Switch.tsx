@@ -40,7 +40,7 @@ export default defineComponent({
             const needFieldProps: FieldSwitchFieldProps = {
                 ...restFieldProps,
                 checked: checked || value,
-                ['onUpdate:checked']: onUpdateChecked
+                'onUpdate:checked': onUpdateChecked
             }
             const editDom: VNodeChild = (
                 <div style={style}>

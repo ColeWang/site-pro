@@ -1,4 +1,4 @@
-import { App, ObjectPlugin } from 'vue'
+import type { App, ObjectPlugin } from 'vue'
 import { addDocumentEvt } from '@site-pro/utils'
 import { createReactivePlugin } from '../plugin-utils'
 
@@ -46,7 +46,7 @@ function getFullElement (): HTMLElement | null {
 function promisify (target: any, event: string): Promise<void> {
     try {
         const result = target[event]()
-        return result ? result : Promise.resolve()
+        return result || Promise.resolve()
     } catch (err) {
         return Promise.reject(err)
     }

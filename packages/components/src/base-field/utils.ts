@@ -3,7 +3,7 @@ import { createVNode, isVNode } from 'vue'
 import { Badge as AntBadge, Space as AntSpace } from 'ant-design-vue'
 import { isEmpty, omitNil } from '@site-pro/utils'
 import { compact, isArray, isNumber, isObject, isString } from 'lodash-es'
-import { BaseFieldOption, BaseFieldValueEnum } from './typings'
+import type { BaseFieldOption, BaseFieldValueEnum } from './typings'
 
 export function baseFieldParsingText (text: any, valueEnum?: BaseFieldValueEnum): VNodeChild {
     const needValueEnum: BaseFieldValueEnum = omitNil(valueEnum)

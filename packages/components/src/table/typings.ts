@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, ExtractPropTypes, PropType, Ref } from 'vue'
 import { tableProps as antTableProps } from 'ant-design-vue/es/table/Table'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 import type { SearchProps } from './components/search'

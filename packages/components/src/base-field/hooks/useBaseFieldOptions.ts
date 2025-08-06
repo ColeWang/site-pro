@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import { useMemo } from '@site-pro/hooks'
 import { isEmpty, omitNil } from '@site-pro/utils'
 import { compact, isArray, isFunction, isObject, map, reduce, set } from 'lodash-es'
-import { BaseFieldOption, BaseFieldProps, BaseFieldRequest, BaseFieldValueEnum } from '../typings'
+import type { BaseFieldOption, BaseFieldProps, BaseFieldRequest, BaseFieldValueEnum } from '../typings'
 
 export interface UseFetchDataResult {
     loading: Ref<boolean>;

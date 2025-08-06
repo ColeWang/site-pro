@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vue-tsc --noEmit && vite build",
-        "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false"
+        "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+        "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts"
     },
     "exports": {
         ".": {

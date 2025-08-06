@@ -36,9 +36,11 @@
     },
     "include": [
         "./vite-env.d.ts",
-        "./src/**/*",
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
         "./src/**/*.vue",
-        "./examples/**/*",
+        "./examples/**/*.ts",
+        "./examples/**/*.tsx",
         "./examples/**/*.vue"
     ]
 }

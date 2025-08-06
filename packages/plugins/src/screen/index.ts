@@ -1,4 +1,4 @@
-import { App, ObjectPlugin } from 'vue'
+import type { App, ObjectPlugin } from 'vue'
 import { addClass, addWindowEvt, getWindowSize, removeClass } from '@site-pro/utils'
 import { debounce, pick } from 'lodash-es'
 import { createReactivePlugin } from '../plugin-utils'
