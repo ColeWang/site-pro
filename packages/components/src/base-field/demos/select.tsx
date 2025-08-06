@@ -1,10 +1,10 @@
-import { defineComponent } from 'vue'
+import { defineComponent, Fragment } from 'vue'
 import { BaseField } from '@site-pro/components'
 
 export default defineComponent(() => {
     const options = [
-        { value: '1', label: '选项一' },
-        { value: '2', label: '选项二' }
+        { value: '1', label: '选项1' },
+        { value: '2', label: '选项2' }
     ]
 
     function request () {
@@ -17,7 +17,10 @@ export default defineComponent(() => {
 
     return () => {
         return (
-            <BaseField request={request} fieldProps={{ showSearch: true }} valueType={'select'}/>
+            <Fragment>
+                <BaseField request={request} fieldProps={{ showSearch: true }} valueType={'select'}/>
+                <BaseField mode={'read'} text={'1'} request={request} valueType={'select'}/>
+            </Fragment>
         )
     }
 })

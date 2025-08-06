@@ -1,6 +1,5 @@
 import type { ComponentPublicInstance, ExtractPropTypes, PropType } from 'vue'
-import type { BaseOptionType } from '@site-pro/utils'
-import type { BaseFieldFieldProps, BaseFieldSlots } from '../../typings'
+import type { BaseFieldFieldProps, BaseFieldOption, BaseFieldSlots } from '../../typings'
 import { baseFieldProps } from '../../typings'
 
 export type FieldTreeSelectFieldProps = BaseFieldFieldProps<'treeSelect'>;
@@ -9,7 +8,7 @@ export const fieldTreeSelectProps = () => ({
     ...baseFieldProps(),
     fieldProps: {
         type: Object as PropType<FieldTreeSelectFieldProps & {
-            options?: BaseOptionType;
+            options?: BaseFieldOption[];
         }>,
         default: () => ({})
     }

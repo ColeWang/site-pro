@@ -4,10 +4,10 @@
             <Menu mode="inline" theme="dark" :selected-keys="selectedKeys" @select="onSelect">
                 <Menu.SubMenu v-for="parent in routes">
                     <template v-slot:title>
-                        {{ parent.meta!.title }}
+                        {{ (parent.meta as any).title }}
                     </template>
                     <Menu.Item v-for="item in parent.children" :key="item.name">
-                        {{ item.meta!.title }}
+                        {{ (parent.meta as any).title }}
                     </Menu.Item>
                 </Menu.SubMenu>
             </Menu>

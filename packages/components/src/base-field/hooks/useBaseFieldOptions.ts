@@ -43,10 +43,10 @@ function optionsToValueEnum (options?: BaseFieldOption[]): BaseFieldValueEnum {
 
 function detFieldOptions (props: BaseFieldProps): BaseFieldOption[] {
     const { valueEnum, fieldProps } = props
-    if (isArray(fieldProps.options)) {
+    if (fieldProps.options && isArray(fieldProps.options)) {
         return fieldProps.options
     }
-    if (isArray(fieldProps.treeData)) {
+    if (fieldProps.treeData && isArray(fieldProps.treeData)) {
         return fieldProps.treeData
     }
     return valueEnumToOptions(valueEnum)
