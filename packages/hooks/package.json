@@ -11,16 +11,16 @@
     "dependencies": {
         "@site-pro/utils": "workspace:*"
     },
-    "main": "./lib/index.js",
-    "module": "./es/index.js",
-    "types": "./types/index.d.ts",
     "exports": {
         ".": {
+            "types": "./types/index.d.ts",
             "require": "./lib/index.js",
-            "import": "./es/index.js",
-            "types": "./types/index.d.ts"
+            "import": "./es/index.js"
         }
     },
+    "types": "./types/index.d.ts",
+    "main": "./lib/index.js",
+    "module": "./es/index.js",
     "files": [
         "lib",
         "es",

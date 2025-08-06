@@ -12,91 +12,91 @@
         "@site-pro/hooks": "workspace:*",
         "@site-pro/utils": "workspace:*"
     },
-    "main": "./lib/index.js",
-    "module": "./es/index.js",
-    "types": "./types/index.d.ts",
     "exports": {
         ".": {
+            "types": "./types/index.d.ts",
             "require": "./lib/index.js",
-            "import": "./es/index.js",
-            "types": "./types/index.d.ts"
+            "import": "./es/index.js"
         },
         "./action": {
+            "types": "./types/action/index.d.ts",
             "require": "./lib/action/index.js",
-            "import": "./es/action/index.js",
-            "types": "./types/action/index.d.ts"
+            "import": "./es/action/index.js"
         },
         "./base-field": {
+            "types": "./types/base-field/index.d.ts",
             "require": "./lib/base-field/index.js",
-            "import": "./es/base-field/index.js",
-            "types": "./types/base-field/index.d.ts"
+            "import": "./es/base-field/index.js"
         },
         "./base-form": {
+            "types": "./types/base-form/index.d.ts",
             "require": "./lib/base-form/index.js",
-            "import": "./es/base-form/index.js",
-            "types": "./types/base-form/index.d.ts"
+            "import": "./es/base-form/index.js"
         },
         "./config-provider": {
+            "types": "./types/config-provider/index.d.ts",
             "require": "./lib/config-provider/index.js",
-            "import": "./es/config-provider/index.js",
-            "types": "./types/config-provider/index.d.ts"
+            "import": "./es/config-provider/index.js"
         },
         "./descriptions": {
+            "types": "./types/descriptions/index.d.ts",
             "require": "./lib/descriptions/index.js",
-            "import": "./es/descriptions/index.js",
-            "types": "./types/descriptions/index.d.ts"
+            "import": "./es/descriptions/index.js"
         },
         "./editable-table": {
+            "types": "./types/editable-table/index.d.ts",
             "require": "./lib/editable-table/index.js",
-            "import": "./es/editable-table/index.js",
-            "types": "./types/editable-table/index.d.ts"
+            "import": "./es/editable-table/index.js"
         },
         "./float-form": {
+            "types": "./types/float-form/index.d.ts",
             "require": "./lib/float-form/index.js",
-            "import": "./es/float-form/index.js",
-            "types": "./types/float-form/index.d.ts"
+            "import": "./es/float-form/index.js"
         },
         "./form": {
+            "types": "./types/form/index.d.ts",
             "require": "./lib/form/index.js",
-            "import": "./es/form/index.js",
-            "types": "./types/form/index.d.ts"
+            "import": "./es/form/index.js"
         },
         "./locale": {
+            "types": "./types/locale/index.d.ts",
             "require": "./lib/locale/index.js",
-            "import": "./es/locale/index.js",
-            "types": "./types/locale/index.d.ts"
+            "import": "./es/locale/index.js"
         },
         "./locale-provider": {
+            "types": "./types/locale-provider/index.d.ts",
             "require": "./lib/locale-provider/index.js",
-            "import": "./es/locale-provider/index.js",
-            "types": "./types/locale-provider/index.d.ts"
+            "import": "./es/locale-provider/index.js"
         },
         "./query-filter": {
+            "types": "./types/query-filter/index.d.ts",
             "require": "./lib/query-filter/index.js",
-            "import": "./es/query-filter/index.js",
-            "types": "./types/query-filter/index.d.ts"
+            "import": "./es/query-filter/index.js"
         },
         "./resize-observer": {
+            "types": "./types/resize-observer/index.d.ts",
             "require": "./lib/resize-observer/index.js",
-            "import": "./es/resize-observer/index.js",
-            "types": "./types/resize-observer/index.d.ts"
+            "import": "./es/resize-observer/index.js"
         },
         "./table": {
+            "types": "./types/table/index.d.ts",
             "require": "./lib/table/index.js",
-            "import": "./es/table/index.js",
-            "types": "./types/table/index.d.ts"
+            "import": "./es/table/index.js"
         },
         "./theme": {
+            "types": "./types/theme/index.d.ts",
             "require": "./lib/theme/index.js",
-            "import": "./es/theme/index.js",
-            "types": "./types/theme/index.d.ts"
+            "import": "./es/theme/index.js"
         },
         "./ant-typings": {
+            "types": "./types/ant-typings.d.ts",
             "require": "./lib/ant-typings.js",
-            "import": "./es/ant-typings.js",
-            "types": "./types/ant-typings.d.ts"
+            "import": "./es/ant-typings.js"
         }
     },
+    "types": "./types/index.d.ts",
+    "main": "./lib/index.js",
+    "module": "./es/index.js",
     "files": [
         "lib",
         "es",
