@@ -54,6 +54,9 @@ importers:
       axios-mock-adapter:
         specifier: ^2.1.0
         version: 2.1.0(axios@1.11.0)
+      eslint:
+        specifier: ^9.32.0
+        version: 9.32.0
       glob:
         specifier: ^11.0.3
         version: 11.0.3
