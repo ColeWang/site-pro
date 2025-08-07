@@ -28,6 +28,7 @@ export type DateWeekRangeProps = Partial<ExtractPropTypes<ReturnType<typeof date
 export type DateWeekRangeInstance = ComponentPublicInstance<DateWeekRangeProps>;
 
 const DateWeekRange = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateWeekRange',
     props: dateWeekRangeProps(),

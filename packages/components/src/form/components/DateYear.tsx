@@ -28,6 +28,7 @@ export type DateYearProps = Partial<ExtractPropTypes<ReturnType<typeof dateYearP
 export type DateYearInstance = ComponentPublicInstance<DateYearProps>;
 
 const DateYear = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateYear',
     props: dateYearProps(),

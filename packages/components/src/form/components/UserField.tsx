@@ -17,6 +17,7 @@ export type UserFieldProps = Partial<ExtractPropTypes<ReturnType<typeof userFiel
 export type UserFieldInstance = ComponentPublicInstance<UserFieldProps>;
 
 const UserField = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProUserField',
     props: userFieldProps(),

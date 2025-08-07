@@ -14,6 +14,7 @@ import { baseFormProps } from './typings'
 import useStyle from './style'
 
 const BaseForm = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProBaseForm',
     props: baseFormProps(),

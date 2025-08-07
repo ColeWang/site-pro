@@ -28,6 +28,7 @@ export type DateQuarterRangeProps = Partial<ExtractPropTypes<ReturnType<typeof d
 export type DateQuarterRangeInstance = ComponentPublicInstance<DateQuarterRangeProps>;
 
 const DateQuarterRange = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateQuarterRange',
     props: dateQuarterRangeProps(),

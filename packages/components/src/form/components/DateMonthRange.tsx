@@ -28,6 +28,7 @@ export type DateMonthRangeProps = Partial<ExtractPropTypes<ReturnType<typeof dat
 export type DateMonthRangeInstance = ComponentPublicInstance<DateMonthRangeProps>;
 
 const DateMonthRange = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateMonthRange',
     props: dateMonthRangeProps(),

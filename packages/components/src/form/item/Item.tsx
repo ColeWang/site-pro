@@ -9,6 +9,7 @@ import type { FormItemProps, FormItemSlots } from './typings'
 import { formItemProps } from './typings'
 
 const FormItem = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFormItem',
     props: formItemProps(),

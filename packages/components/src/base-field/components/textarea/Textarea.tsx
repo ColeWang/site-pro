@@ -9,6 +9,7 @@ import type { FieldTextareaFieldProps, FieldTextareaSlots } from './typings'
 import { fieldTextareaProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldTextarea',
     props: fieldTextareaProps(),

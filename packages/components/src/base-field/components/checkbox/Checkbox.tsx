@@ -9,6 +9,7 @@ import type { FieldCheckboxFieldProps, FieldCheckboxSlots } from './typings'
 import { fieldCheckboxProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldCheckbox',
     props: fieldCheckboxProps(),

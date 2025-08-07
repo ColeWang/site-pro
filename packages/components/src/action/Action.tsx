@@ -9,6 +9,7 @@ import { actionProps } from './typings'
 import useStyle from './style'
 
 const Action = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProAction',
     props: actionProps(),

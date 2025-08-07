@@ -8,6 +8,7 @@ import { configProviderProps } from './typings'
 import type { ConfigProviderProps as AntConfigProviderProps, ThemeAlgorithm } from '../ant-typings'
 
 const ConfigProvider = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProConfigProvider',
     props: configProviderProps(),

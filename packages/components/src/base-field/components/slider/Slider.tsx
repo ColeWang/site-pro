@@ -8,6 +8,7 @@ import type { FieldSliderFieldProps, FieldSliderSlots } from './typings'
 import { fieldSliderProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldSlider',
     props: fieldSliderProps(),

@@ -28,6 +28,7 @@ export type PasswordProps = Partial<ExtractPropTypes<ReturnType<typeof passwordP
 export type PasswordInstance = ComponentPublicInstance<PasswordProps>;
 
 const Password = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProPassword',
     props: passwordProps(),

@@ -14,6 +14,7 @@ import { nodeProps } from './typings'
 import useStyle from './style'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableSettingNode',
     props: nodeProps(),

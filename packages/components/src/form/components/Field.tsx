@@ -61,6 +61,7 @@ function genFormItemFixStyle (
 const FORM_ITEM_SLOTS_KEYS: string[] = ['extra', 'help', 'label', 'tooltip']
 
 const Field = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProField',
     props: fieldProps(),

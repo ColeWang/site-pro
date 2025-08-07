@@ -28,6 +28,7 @@ export type SwitchProps = Partial<ExtractPropTypes<ReturnType<typeof switchProps
 export type SwitchInstance = ComponentPublicInstance<SwitchProps>;
 
 const Switch = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProSwitch',
     props: switchProps(),

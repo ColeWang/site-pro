@@ -23,6 +23,7 @@ export type TextProps = Partial<ExtractPropTypes<ReturnType<typeof textProps>>>;
 export type TextInstance = ComponentPublicInstance<TextProps>;
 
 const Text = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProText',
     props: textProps(),

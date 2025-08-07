@@ -173,6 +173,7 @@ function defaultRenderText (
 }
 
 const BaseField = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProBaseField',
     props: baseFieldProps(),

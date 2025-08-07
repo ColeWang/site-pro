@@ -37,6 +37,7 @@ import useStyle from './style'
 const TABLE_SLOTS_KEYS: string[] = ['search', 'extra', 'title', 'actions', 'settings', 'alert', 'alertOptions']
 
 const Table = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTable',
     props: tableProps(),

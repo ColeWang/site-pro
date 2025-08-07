@@ -106,6 +106,7 @@ function createDescsItem (
 }
 
 const Descriptions = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDescriptions',
     props: descriptionsProps(),

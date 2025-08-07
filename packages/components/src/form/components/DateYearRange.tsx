@@ -28,6 +28,7 @@ export type DateYearRangeProps = Partial<ExtractPropTypes<ReturnType<typeof date
 export type DateYearRangeInstance = ComponentPublicInstance<DateYearRangeProps>;
 
 const DateYearRange = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateYearRange',
     props: dateYearRangeProps(),

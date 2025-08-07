@@ -30,6 +30,7 @@ export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipPro
 export type TooltipInstance = ComponentPublicInstance<TooltipProps>;
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     props: tooltipProps(),
     emits: ['change'],

@@ -5,6 +5,7 @@ import { cloneProxyToRaw } from '@site-pro/utils'
 import { pick } from 'lodash-es'
 
 const WithHelp = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     props: {
         errors: {
@@ -34,6 +35,7 @@ const WithHelp = defineComponent({
 })
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     props: {
         ...Popover.props,

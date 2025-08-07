@@ -9,6 +9,7 @@ import type { FormDependencySlots } from './typings'
 import { formDependencyProps } from './typings'
 
 const FormDependency = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFormDependency',
     props: formDependencyProps(),

@@ -9,6 +9,7 @@ import type { FieldRadioFieldProps, FieldRadioSlots } from './typings'
 import { fieldRadioProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldRadio',
     props: fieldRadioProps(),

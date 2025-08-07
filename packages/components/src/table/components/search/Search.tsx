@@ -16,6 +16,7 @@ function filterSearchColumns (columns: TableColumn[]): TableColumn[] {
 }
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableSearch',
     props: searchProps(),

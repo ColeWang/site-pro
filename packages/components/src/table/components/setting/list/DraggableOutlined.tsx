@@ -3,6 +3,7 @@ import Icon from '@ant-design/icons-vue'
 import type { BaseSlot, Recordable } from '@site-pro/utils'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     setup (_, { attrs }) {
         return () => {

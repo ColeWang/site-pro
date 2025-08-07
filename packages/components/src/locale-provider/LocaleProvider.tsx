@@ -6,6 +6,7 @@ import { localeProviderProps } from './typings'
 import type { LocaleType } from '../locale'
 
 const LocaleProvider = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProLocaleProvider',
     props: localeProviderProps(),

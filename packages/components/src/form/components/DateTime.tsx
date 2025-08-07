@@ -28,6 +28,7 @@ export type DateTimeProps = Partial<ExtractPropTypes<ReturnType<typeof dateTimeP
 export type DateTimeInstance = ComponentPublicInstance<DateTimeProps>;
 
 const DateTime = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateTime',
     props: dateTimeProps(),

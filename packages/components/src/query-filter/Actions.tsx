@@ -43,6 +43,7 @@ export type QueryFilterActionsProps = Partial<ExtractPropTypes<ReturnType<typeof
 export type QueryFilterActionsInstance = ComponentPublicInstance<QueryFilterActionsProps>;
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProQueryFilterActions',
     props: queryFilterActionsProps(),

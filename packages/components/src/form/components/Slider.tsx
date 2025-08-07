@@ -28,6 +28,7 @@ export type SliderProps = Partial<ExtractPropTypes<ReturnType<typeof sliderProps
 export type SliderInstance = ComponentPublicInstance<SliderProps>;
 
 const Slider = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProSlider',
     props: sliderProps(),

@@ -30,6 +30,7 @@ function createDropdownMenu (nodes: VNode[]): JSX.Element {
 }
 
 const ActionGroup = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProActionGroup',
     props: actionGroupProps(),

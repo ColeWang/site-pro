@@ -4,7 +4,8 @@ import type { DescriptionsItemSlots } from './typings'
 import { descriptionsItemProps } from './typings'
 
 const DescriptionsItem = defineComponent({
-    inheritAttrs: false,
+    compatConfig: { MODE: 3 },
+        inheritAttrs: false,
     name: 'ProDescriptionsItem',
     props: descriptionsItemProps(),
     slots: Object as SlotsType<DescriptionsItemSlots>,

@@ -28,6 +28,7 @@ export type CascaderProps = Partial<ExtractPropTypes<ReturnType<typeof cascaderP
 export type CascaderInstance = ComponentPublicInstance<CascaderProps>;
 
 const Cascader = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProCascader',
     props: cascaderProps(),

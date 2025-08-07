@@ -18,6 +18,8 @@
         "rootDir": "src",
         // 文件生成 .d.ts 文件
         "declaration": true,
+        // 隐藏内部实现
+        "stripInternal": true,
         // 禁止创建源映射文件
         "sourceMap": false,
         // 模块解析策略 适配打包工具

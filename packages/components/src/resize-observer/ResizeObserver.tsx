@@ -7,6 +7,7 @@ import type { ResizeObserverRectSize, ResizeObserverSlots } from './typings'
 import { resizeObserverProps } from './typings'
 
 const ResizeObserver = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProResizeObserver',
     props: resizeObserverProps(),

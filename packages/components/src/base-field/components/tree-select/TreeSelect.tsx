@@ -10,6 +10,7 @@ import type { FieldTreeSelectFieldProps, FieldTreeSelectSlots } from './typings'
 import { fieldTreeSelectProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldTreeSelect',
     props: fieldTreeSelectProps(),

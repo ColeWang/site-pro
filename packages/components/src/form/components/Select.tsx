@@ -28,6 +28,7 @@ export type SelectProps = Partial<ExtractPropTypes<ReturnType<typeof selectProps
 export type SelectInstance = ComponentPublicInstance<SelectProps>;
 
 const Select = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProSelect',
     props: selectProps(),

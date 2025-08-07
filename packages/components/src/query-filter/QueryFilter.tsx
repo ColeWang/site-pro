@@ -18,6 +18,7 @@ import { queryFilterProps } from './typings'
 import useStyle from './style'
 
 const QueryFilter = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProQueryFilter',
     props: queryFilterProps(),

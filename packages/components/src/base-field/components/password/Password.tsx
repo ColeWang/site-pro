@@ -9,6 +9,7 @@ import type { FieldPasswordFieldProps, FieldPasswordSlots } from './typings'
 import { fieldPasswordProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldPassword',
     props: fieldPasswordProps(),

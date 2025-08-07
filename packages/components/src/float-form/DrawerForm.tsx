@@ -13,6 +13,7 @@ import type { DrawerFormExpose, DrawerFormSlots } from './typings'
 import { drawerFormProps } from './typings'
 
 const DrawerForm = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDrawerForm',
     props: drawerFormProps(),

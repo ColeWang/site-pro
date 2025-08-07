@@ -10,6 +10,7 @@ import { fieldTimeRangePickerProps } from './typings'
 import { dateFormat } from '../date-utils'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldTimeRangePicker',
     props: fieldTimeRangePickerProps(),

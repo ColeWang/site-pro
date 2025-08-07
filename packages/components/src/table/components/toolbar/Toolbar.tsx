@@ -38,6 +38,7 @@ const defaultOptions: Recordable<boolean> = {
 }
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableToolbar',
     props: toolbarProps(),

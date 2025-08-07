@@ -28,6 +28,7 @@ export type TimeProps = Partial<ExtractPropTypes<ReturnType<typeof timeProps>>>;
 export type TimeInstance = ComponentPublicInstance<TimeProps>;
 
 const Time = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTime',
     props: timeProps(),

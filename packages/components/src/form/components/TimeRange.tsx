@@ -28,6 +28,7 @@ export type TimeRangeProps = Partial<ExtractPropTypes<ReturnType<typeof timeRang
 export type TimeRangeInstance = ComponentPublicInstance<TimeRangeProps>;
 
 const TimeRange = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTimeRange',
     props: timeRangeProps(),

@@ -23,6 +23,7 @@ function genTitleStyle (layout: BaseFormLayout, token: ThemeGlobalToken): CSSPro
 }
 
 const FormGroup = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFormGroup',
     props: formGroupProps(),

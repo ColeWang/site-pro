@@ -26,6 +26,7 @@ export type ColWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof colWrap
 export type ColWrapperInstance = ComponentPublicInstance<ColWrapperProps>;
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProColWrapper',
     props: colWrapperProps(),

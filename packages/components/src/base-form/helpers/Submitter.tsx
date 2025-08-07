@@ -44,6 +44,7 @@ export type SubmitterProps = Partial<ExtractPropTypes<ReturnType<typeof submitte
 export type SubmitterInstance = ComponentPublicInstance<SubmitterProps>;
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProSubmitter',
     props: submitterProps(),

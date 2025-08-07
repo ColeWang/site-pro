@@ -19,6 +19,7 @@ const editable = {
 
 // @todo 编辑表格 开发中
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     props: {
         ...Table.props,

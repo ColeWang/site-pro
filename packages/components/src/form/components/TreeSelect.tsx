@@ -28,6 +28,7 @@ export type TreeSelectProps = Partial<ExtractPropTypes<ReturnType<typeof treeSel
 export type TreeSelectInstance = ComponentPublicInstance<TreeSelectProps>;
 
 const TreeSelect = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTreeSelect',
     props: treeSelectProps(),

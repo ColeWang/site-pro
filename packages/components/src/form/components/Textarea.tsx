@@ -28,6 +28,7 @@ export type TextareaProps = Partial<ExtractPropTypes<ReturnType<typeof textareaP
 export type TextareaInstance = ComponentPublicInstance<TextareaProps>;
 
 const Textarea = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTextarea',
     props: textareaProps(),

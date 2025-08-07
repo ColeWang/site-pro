@@ -28,6 +28,7 @@ export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>
 export type RadioInstance = ComponentPublicInstance<RadioProps>;
 
 const Radio = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProRadio',
     props: radioProps(),

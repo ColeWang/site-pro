@@ -13,6 +13,7 @@ import type { ModalFormExpose, ModalFormSlots } from './typings'
 import { modalFormProps } from './typings'
 
 const ModalForm = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProModalForm',
     props: modalFormProps(),

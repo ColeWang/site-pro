@@ -10,6 +10,7 @@ import type { FieldSelectFieldProps, FieldSelectSlots } from './typings'
 import { fieldSelectProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldSelect',
     props: fieldSelectProps(),

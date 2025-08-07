@@ -8,6 +8,7 @@ import { extraProps } from './typings'
 import useStyle from './style'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableExtra',
     props: extraProps(),

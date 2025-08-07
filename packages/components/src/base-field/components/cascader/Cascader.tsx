@@ -10,6 +10,7 @@ import type { FieldCascaderFieldProps, FieldCascaderSlots } from './typings'
 import { fieldCascaderProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldCascader',
     props: fieldCascaderProps(),

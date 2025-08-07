@@ -28,6 +28,7 @@ export type DateQuarterProps = Partial<ExtractPropTypes<ReturnType<typeof dateQu
 export type DateQuarterInstance = ComponentPublicInstance<DateQuarterProps>;
 
 const DateQuarter = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProDateQuarter',
     props: dateQuarterProps(),

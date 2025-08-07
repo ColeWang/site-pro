@@ -28,6 +28,7 @@ export type NumberProps = Partial<ExtractPropTypes<ReturnType<typeof numberProps
 export type NumberInstance = ComponentPublicInstance<NumberProps>;
 
 const Number = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProNumber',
     props: numberProps(),

@@ -8,6 +8,7 @@ import type { FieldTextFieldProps, FieldTextSlots } from './typings'
 import { fieldTextProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldText',
     props: fieldTextProps(),

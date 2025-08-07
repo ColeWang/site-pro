@@ -12,6 +12,7 @@ import { listProps } from './typings'
 import useStyle from './style'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableSettingList',
     props: listProps(),

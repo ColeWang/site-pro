@@ -28,6 +28,7 @@ export type CheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof checkboxP
 export type CheckboxInstance = ComponentPublicInstance<CheckboxProps>;
 
 const Checkbox = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProCheckbox',
     props: checkboxProps(),

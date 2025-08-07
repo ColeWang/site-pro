@@ -10,6 +10,7 @@ import type { BaseSearchSlots } from './typings'
 import { baseSearchProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableBaseSearch',
     props: baseSearchProps(),

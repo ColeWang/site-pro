@@ -8,6 +8,7 @@ import type { FieldNumberFieldProps, FieldNumberSlots } from './typings'
 import { fieldNumberProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProFieldNumber',
     props: fieldNumberProps(),

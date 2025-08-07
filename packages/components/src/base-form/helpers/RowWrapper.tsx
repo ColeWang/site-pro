@@ -21,6 +21,7 @@ export type RowWrapperProps = Partial<ExtractPropTypes<ReturnType<typeof rowWrap
 export type RowWrapperInstance = ComponentPublicInstance<RowWrapperProps>;
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProRowWrapper',
     props: rowWrapperProps(),

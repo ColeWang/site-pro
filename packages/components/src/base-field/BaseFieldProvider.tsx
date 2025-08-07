@@ -5,6 +5,7 @@ import type { BaseFieldProviderExpose, BaseFieldProviderSlots, BaseFieldProvider
 import { baseFieldProviderProps } from './typings'
 
 const BaseFieldProvider = defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProBaseFieldProvider',
     props: baseFieldProviderProps(),

@@ -10,6 +10,7 @@ import type { TableSize } from '../../typings'
 import { densityProps } from './typings'
 
 export default defineComponent({
+    compatConfig: { MODE: 3 },
     inheritAttrs: false,
     name: 'ProTableDensity',
     props: densityProps(),
