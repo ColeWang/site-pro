@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "clean": "rimraf -rf packages/*/{es,lib,types}",
-        "clean:all": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
+        "clean:deps": "rimraf -rf packages/*/{node_modules} && rimraf node_modules",
+        "reset": "pnpm run clean && pnpm run clean:deps && pnpm install",
         "build": "pnpm --filter=./packages/* run build",
         "build:publish": "pnpm --filter=./packages/* publish --no-git-checks",
         "docs:dev": "vitepress dev docs",
@@ -43,11 +44,6 @@
         "vitest": "3.2.4",
         "vue-router": "^4.5.1",
         "vue-tsc": "^3.0.5"
-    },
-    "peerDependencies": {
-        "@ant-design/icons-vue": ">=7.0.0",
-        "ant-design-vue": ">=4.2.0",
-        "vue": ">=3.3.0"
     },
     "engines": {
         "node": "^20.19.0 || ^22.12.0"
