@@ -60,6 +60,7 @@ import type { CSSInterpolation } from 'ant-design-vue/es/_util/cssinjs'
 
 import type { Dayjs } from 'dayjs'
 
+// eslint-disable-next-line unused-imports/no-unused-vars
 const passwordProps = () => ({
     prefixCls: String,
     inputPrefixCls: String,

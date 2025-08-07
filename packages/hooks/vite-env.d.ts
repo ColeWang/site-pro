@@ -1,13 +1,12 @@
-/// <reference types="vite/client" />
-
+import 'vite/client'
 import 'vue/jsx'
 
 declare global {
     export const __VERSION__: string
 }
+import 'vite/client'
+import 'vue/jsx'
 
-declare module '*.vue' {
-    import type { DefineComponent } from 'vue'
-    const component: DefineComponent<{}, {}, any>
-    export default component
+declare global {
+    export const __VERSION__: string
 }

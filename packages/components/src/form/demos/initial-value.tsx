@@ -1,4 +1,4 @@
-import { Ref } from 'vue'
+import type { Ref } from 'vue'
 import { defineComponent, ref } from 'vue'
 import type { BaseFormInstance } from '@site-pro/components/base-form'
 import { Form, Number, Text } from '@site-pro/components'

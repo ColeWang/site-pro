@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
         "baseUrl": ".",
+        // 保留符号链接的原始路径
         "preserveSymlinks": true
     },
+    // 不包含任何顶层文件 通过 references 关联子配置
     "files": [],
     "references": [
         {
@@ -10,9 +12,12 @@
         },
         {
             "path": "./tsconfig.app.json"
-        },
-        {
-            "path": "./tsconfig.vitest.json"
         }
+    ],
+    "exclude": [
+        "node_modules",
+        "types",
+        "lib",
+        "es"
     ]
 }

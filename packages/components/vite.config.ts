@@ -48,8 +48,9 @@ export default defineConfig((config) => {
             vue(),
             vueJsx(),
             dts({
-                tsconfigPath: './tsconfig.dts.json',
-                outDir: 'types'
+                staticImport: true,
+                outDir: 'types',
+                tsconfigPath: './tsconfig.dts.json'
             })
         ],
         resolve: {

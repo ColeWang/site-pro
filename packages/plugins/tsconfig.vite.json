@@ -1,27 +1,52 @@
 {
     "compilerOptions": {
+        // 启用复合项目模式 允许被其他配置引用
         "composite": true,
+        // 目标 ECMAScript 版本
         "target": "ESNext",
+        // 模块系统 使用ES模块
         "module": "ESNext",
+        // 引入的库文件 包含 DOM 和 ES 最新特性
         "lib": [
             "ESNext"
         ],
-        "skipLibCheck": true,
-        "moduleResolution": "Bundler",
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "moduleDetection": "force",
-        "noEmit": true,
+        // 启用严格类型检查模式
         "strict": true,
+        // 模块解析策略 适配打包工具
+        "moduleResolution": "Bundler",
+        // 强制模块检测 避免非模块文件被误判
+        "moduleDetection": "force",
+        // 兼容 Node 的导入
+        "esModuleInterop": true,
+        // 跳过第三方库类型检查
+        "skipLibCheck": true,
+        // 允许导入 JSON 文件
+        "resolveJsonModule": true,
+        // 允许导入 .ts/.tsx 扩展名的模块
+        "allowImportingTsExtensions": true,
+        // 禁止对模块语法进行额外转换
+        "verbatimModuleSyntax": true,
+        // 禁止未使用的局部变量
         "noUnusedLocals": true,
+        // 禁止未使用的函数参数
         "noUnusedParameters": true,
+        // 禁止 switch 语句中的穿透情况
         "noFallthroughCasesInSwitch": true,
+        // 无副作用
+        "noUncheckedSideEffectImports": true,
+        // 加载类型声明
         "types": [
             "node",
-            "vitest"
+            "vite/client"
         ]
     },
     "include": [
-        "./vite.config.ts"
+        "vite.config.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "types",
+        "lib",
+        "es"
     ]
 }

@@ -5,9 +5,14 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vue-tsc --noEmit && vite build",
-        "typecheck": "vue-tsc --noEmit && vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
+        "build": "vite build",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+        "typecheck:vite": "vue-tsc --noEmit -p tsconfig.vite.json --composite false",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts"
+    },
+    "peerDependencies": {
+        "lodash-es": ">=4.17.15",
+        "vue": ">=3.2.0"
     },
     "exports": {
         ".": {

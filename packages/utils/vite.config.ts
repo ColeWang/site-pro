@@ -1,6 +1,6 @@
+import { fileURLToPath } from 'node:url'
 import { readFileSync } from 'node:fs'
 import { dirname, extname, relative, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { sync as globSync } from 'glob'
 // --
 import { defineConfig, loadEnv } from 'vite'
@@ -48,8 +48,9 @@ export default defineConfig((config) => {
             vue(),
             vueJsx(),
             dts({
-                tsconfigPath: './tsconfig.dts.json',
-                outDir: 'types'
+                staticImport: true,
+                outDir: 'types',
+                tsconfigPath: './tsconfig.dts.json'
             })
         ],
         resolve: {
