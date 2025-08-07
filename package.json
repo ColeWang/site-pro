@@ -4,7 +4,8 @@
     "description": "Vue3 Admin Pro",
     "type": "module",
     "scripts": {
-        "clean": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
+        "clean": "rimraf -rf packages/*/{es,lib,types}",
+        "clean:all": "rimraf -rf packages/*/{node_modules,es,lib,types} && rimraf node_modules",
         "build": "pnpm --filter=./packages/* run build",
         "build:publish": "pnpm --filter=./packages/* publish --no-git-checks",
         "docs:dev": "vitepress dev docs",

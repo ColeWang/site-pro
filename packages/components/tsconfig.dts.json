@@ -14,6 +14,8 @@
         ],
         // 启用严格类型检查模式
         "strict": true,
+        // 指定源文件根目录
+        "rootDir": "src",
         // 文件生成 .d.ts 文件
         "declaration": true,
         // 禁止创建源映射文件
