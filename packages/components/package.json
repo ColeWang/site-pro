@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/components",
-    "version": "0.4.9",
+    "version": "1.0.0-alpha.1",
     "description": "Vue3 AdminPro Components of Vue",
     "type": "module",
     "scripts": {
@@ -10,17 +10,9 @@
         "typecheck:vite": "vue-tsc --noEmit -p tsconfig.vite.json --composite false",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts"
     },
-    "dependencies": {
-        "@site-pro/hooks": "workspace:*",
-        "@site-pro/utils": "workspace:*"
-    },
-    "peerDependencies": {
-        "@ant-design/icons-vue": ">=7.0.0",
-        "ant-design-vue": ">=3.2.0",
-        "dayjs": ">=1.10.5",
-        "lodash-es": ">=4.17.15",
-        "vue": ">=3.2.0"
-    },
+    "types": "./types/index.d.ts",
+    "main": "./lib/index.js",
+    "module": "./es/index.js",
     "exports": {
         ".": {
             "types": "./types/index.d.ts",
@@ -103,9 +95,17 @@
             "import": "./es/ant-typings.js"
         }
     },
-    "types": "./types/index.d.ts",
-    "main": "./lib/index.js",
-    "module": "./es/index.js",
+    "dependencies": {
+        "@site-pro/hooks": "workspace:*",
+        "@site-pro/utils": "workspace:*"
+    },
+    "peerDependencies": {
+        "@ant-design/icons-vue": ">=7.0.0",
+        "ant-design-vue": ">=3.2.0",
+        "dayjs": ">=1.10.5",
+        "lodash-es": ">=4.17.15",
+        "vue": ">=3.2.0"
+    },
     "files": [
         "lib",
         "es",

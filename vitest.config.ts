@@ -1,8 +1,8 @@
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 const __filename: string = fileURLToPath(import.meta.url)
 const __dirname: string = dirname(__filename)

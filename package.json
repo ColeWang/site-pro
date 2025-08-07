@@ -1,5 +1,6 @@
 {
     "name": "site-pro-monorepo",
+    "version": "1.0.0-alpha.1",
     "description": "Vue3 Admin Pro",
     "type": "module",
     "scripts": {

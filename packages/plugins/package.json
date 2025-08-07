@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/plugins",
-    "version": "0.4.9",
+    "version": "1.0.0-alpha.1",
     "description": "Vue3 AdminPro Plugins of Vue",
     "type": "module",
     "scripts": {
@@ -9,6 +9,16 @@
         "typecheck": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
         "typecheck:vite": "vue-tsc --noEmit -p tsconfig.vite.json --composite false",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts"
+    },
+    "types": "./types/index.d.ts",
+    "main": "./lib/index.js",
+    "module": "./es/index.js",
+    "exports": {
+        ".": {
+            "types": "./types/index.d.ts",
+            "require": "./lib/index.js",
+            "import": "./es/index.js"
+        }
     },
     "dependencies": {
         "@site-pro/hooks": "workspace:*",
@@ -20,16 +30,6 @@
         "lodash-es": ">=4.17.15",
         "vue": ">=3.2.0"
     },
-    "exports": {
-        ".": {
-            "types": "./types/index.d.ts",
-            "require": "./lib/index.js",
-            "import": "./es/index.js"
-        }
-    },
-    "types": "./types/index.d.ts",
-    "main": "./lib/index.js",
-    "module": "./es/index.js",
     "files": [
         "lib",
         "es",
