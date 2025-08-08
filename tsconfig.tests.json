@@ -40,7 +40,7 @@
         "noFallthroughCasesInSwitch": true,
         // 禁止隐式的 this 类型
         "noImplicitThis": true,
-        // 无副作用
+        // 无副作用导入检查
         "noUncheckedSideEffectImports": true,
         // 编译类型擦除
         "erasableSyntaxOnly": true,
@@ -52,7 +52,7 @@
         "jsxImportSource": "vue",
         // 基础路径 与根配置保持一致
         "baseUrl": ".",
-        // 路径别名配置
+        // 路径别名
         "paths": {
             "@site-pro/components": [
                 "packages/components/src/index"
@@ -79,7 +79,7 @@
                 "packages/utils/src/*"
             ]
         },
-        // 加载类型声明
+        // 测试相关类型声明
         "types": [
             "node",
             "vite/client",
@@ -91,5 +91,12 @@
         "tests/**/*.ts",
         "tests/**/*.tsx",
         "tests/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "types",
+        "lib",
+        "es"
     ]
 }

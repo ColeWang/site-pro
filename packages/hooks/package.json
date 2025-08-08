@@ -1,7 +1,7 @@
 {
     "name": "@site-pro/hooks",
     "version": "1.0.0-alpha.1",
-    "description": "Vue3 AdminPro Hooks of Vue",
+    "description": "SitePro Hooks",
     "type": "module",
     "scripts": {
         "dev": "vite",

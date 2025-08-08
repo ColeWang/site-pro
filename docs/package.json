@@ -1,0 +1,20 @@
+{
+    "name": "@site-pro/docs",
+    "description": "Site Pro Docs",
+    "type": "module",
+    "scripts": {
+        "dev": "vitepress dev .",
+        "build": "vitepress build .",
+        "preview": "vitepress preview ."
+    },
+    "dependencies": {
+        "@site-pro/components": "workspace:*",
+        "@site-pro/hooks": "workspace:*",
+        "@site-pro/plugins": "workspace:*",
+        "@site-pro/utils": "workspace:*"
+    },
+    "devDependencies": {
+        "markdown-it-container": "^4.0.0",
+        "vitepress": "^1.6.4"
+    }
+}

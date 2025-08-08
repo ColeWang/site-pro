@@ -12,13 +12,10 @@
             "path": "./tsconfig.app.json"
         },
         {
-            "path": "./tsconfig.vite.json"
+            "path": "./tsconfig.vitepress.json"
         }
     ],
     "exclude": [
-        "node_modules",
-        "types",
-        "lib",
-        "es"
+        "node_modules"
     ]
 }

@@ -32,7 +32,7 @@
         "noUnusedParameters": true,
         // 禁止 switch 语句中的穿透情况
         "noFallthroughCasesInSwitch": true,
-        // 无副作用
+        // 无副作用导入检查
         "noUncheckedSideEffectImports": true,
         // 加载类型声明
         "types": [

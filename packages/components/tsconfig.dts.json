@@ -46,7 +46,7 @@
         "noFallthroughCasesInSwitch": true,
         // 禁止隐式的 this 类型
         "noImplicitThis": true,
-        // 无副作用
+        // 无副作用导入检查
         "noUncheckedSideEffectImports": true,
         // 编译类型擦除
         "erasableSyntaxOnly": true,

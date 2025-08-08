@@ -1,23 +1,45 @@
 {
     "compilerOptions": {
+        // 基础路径 与根配置保持一致
         "baseUrl": ".",
         // 保留符号链接的原始路径
-        "preserveSymlinks": true
+        "preserveSymlinks": true,
+        // 启用复合项目模式
+        "composite": true,
+        // 禁止自动引入子项目的类型声明
+        "declarationMap": false
     },
     // 不包含任何顶层文件 通过 references 关联子配置
     "files": [],
     "references": [
         {
-            "path": "./tsconfig.vite.json"
+            "path": "./tsconfig.tests.json"
         },
         {
-            "path": "./tsconfig.app.json"
+            "path": "./tsconfig.vitest.json"
+        },
+        {
+            "path": "./packages/components"
+        },
+        {
+            "path": "./packages/hooks"
+        },
+        {
+            "path": "./packages/plugins"
+        },
+        {
+            "path": "./packages/utils"
+        },
+        {
+            "path": "./docs"
         }
     ],
     "exclude": [
         "node_modules",
-        "types",
-        "lib",
-        "es"
+        "**/node_modules",
+        "**/dist",
+        "**/types",
+        "**/lib",
+        "**/es"
     ]
 }

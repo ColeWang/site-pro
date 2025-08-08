@@ -8,10 +8,14 @@
         "module": "ESNext",
         // 引入的库文件 包含 DOM 和 ES 最新特性
         "lib": [
-            "ESNext"
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
         ],
         // 启用严格类型检查模式
         "strict": true,
+        // 不生成输出文件
+        "noEmit": true,
         // 模块解析策略 适配打包工具
         "moduleResolution": "Bundler",
         // 强制模块检测 避免非模块文件被误判
@@ -24,6 +28,8 @@
         "resolveJsonModule": true,
         // 允许导入 .ts/.tsx 扩展名的模块
         "allowImportingTsExtensions": true,
+        // 强制每个文件作为独立模块 避免全局污染
+        "isolatedModules": true,
         // 禁止对模块语法进行额外转换
         "verbatimModuleSyntax": true,
         // 禁止未使用的局部变量
@@ -32,19 +38,36 @@
         "noUnusedParameters": true,
         // 禁止 switch 语句中的穿透情况
         "noFallthroughCasesInSwitch": true,
+        // 禁止隐式的 this 类型
+        "noImplicitThis": true,
         // 无副作用导入检查
         "noUncheckedSideEffectImports": true,
+        // 编译类型擦除
+        "erasableSyntaxOnly": true,
+        // 对类字段使用 Vue.DefineProperty 语义
+        "useDefineForClassFields": true,
+        // JSX 语法处理方式 保留原始格式
+        "jsx": "preserve",
+        // 在 Vue 中 JSX 导入源
+        "jsxImportSource": "vue",
+        // 基础路径 与根配置保持一致
+        "baseUrl": ".",
         // 加载类型声明
         "types": [
             "node",
-            "vite/client"
+            "vitepress",
+            "vue"
         ]
     },
     "include": [
-        "vite.config.ts"
+        "**/*.md",
+        "components/**/*.ts",
+        "components/**/*.tsx",
+        "components/**/*.vue",
+        "intro/**/*.ts",
+        "plugins/**/*.ts"
     ],
     "exclude": [
-        "node_modules",
         "types",
         "lib",
         "es"

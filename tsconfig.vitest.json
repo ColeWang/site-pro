@@ -37,16 +37,15 @@
         // 加载类型声明
         "types": [
             "node",
-            "vite/client"
+            "vite/client",
+            "vitest",
+            "jsdom"
         ]
     },
     "include": [
-        "vite.config.ts"
+        "vitest.config.ts"
     ],
     "exclude": [
-        "node_modules",
-        "types",
-        "lib",
-        "es"
+        "node_modules"
     ]
 }

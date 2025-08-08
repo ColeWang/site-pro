@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        // 基础路径
         "baseUrl": ".",
         // 保留符号链接的原始路径
         "preserveSymlinks": true
@@ -8,10 +9,10 @@
     "files": [],
     "references": [
         {
-            "path": "./tsconfig.vite.json"
+            "path": "./tsconfig.app.json"
         },
         {
-            "path": "./tsconfig.app.json"
+            "path": "./tsconfig.vite.json"
         }
     ],
     "exclude": [

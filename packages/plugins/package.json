@@ -1,7 +1,7 @@
 {
     "name": "@site-pro/plugins",
     "version": "1.0.0-alpha.1",
-    "description": "Vue3 AdminPro Plugins of Vue",
+    "description": "SitePro Plugins",
     "type": "module",
     "scripts": {
         "dev": "vite",
