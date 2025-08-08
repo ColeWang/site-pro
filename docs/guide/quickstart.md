@@ -25,6 +25,8 @@ npm run serve
 npm run build
 ```
 
+## 使用组件
+
 如果你需要新建一个项目，建议使用 [Vite](https://github.com/vitejs/vite) 构建。
 
 请使用命令行来初始化项目：
@@ -33,16 +35,15 @@ npm run build
 npm create vite@latest
 ```
 
-## 使用组件
 
 #### 安装
 
 ```shell
-# 安装必要依赖
-npm install ant-design-vue @ant-design/icons-vue dayjs lodash-es --save
+# 依赖 ant-design-vue
+npm install ant-design-vue --save
 
 # 安装 @site-pro
-npm install @site-pro/utils @site-pro/hooks @site-pro/components --save 
+npm install @site-pro/components --save
 ```
 
 #### 全局完整注册
@@ -55,7 +56,7 @@ import App from './App'
 const app = createApp(App)
 
 app.use(SitePro)
-// ...
+
 app.mount('#app')
 
 ```
@@ -77,7 +78,7 @@ const app = createApp(App)
 
 app.use(Table)
 app.use(Form)
-// ...
+
 app.mount('#app')
 
 ```
@@ -114,15 +115,12 @@ npm install @site-pro/plugins --save
 import { createApp } from 'vue'
 import { createSite } from '@site-pro/plugins'
 
-/**
- * createSite(options?: BaseSitePluginsOptions) => BaseSitePlugins
- */
-const site = createSite()
-
 const app = createApp(App)
 
+const site = createSite()
+
 app.use(site)
-// ...
+
 app.mount('#app')
 
 ```
@@ -145,16 +143,9 @@ import { Screen, Progress } from '@site-pro/plugins'
 
 const app = createApp(App)
 
-/**
- * install(app: App, options?: ScreenPluginInstallOptions)
- */
 app.use(Screen)
-
-/**
- * install(app: App, options?: ProgressPluginInstallOptions)
- */
 app.use(Progress)
-// ...
+
 app.mount('#app')
 
 ```

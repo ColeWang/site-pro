@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 coverage
+.vitepress/cache
+.vitepress/dist
 *.local
 
 # Editor directories and files

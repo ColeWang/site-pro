@@ -2,8 +2,6 @@
 Action - 操作
 </h1>
 
-<<< ../../packages/components/src/action/demos/basic.tsx
-
 ## API
 
 ### Action Props

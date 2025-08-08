@@ -13,30 +13,30 @@ export default defineConfig({
     description: '中后台重型组件',
     themeConfig: {
         nav: [
-            { text: '指南', link: '/intro/introduce' },
+            { text: '指南', link: '/guide/introduce' },
             { text: '组件', link: '/components/form' },
             { text: '插件', link: '/plugins/screen' },
         ],
         sidebar: {
-            '/intro': [
+            '/guide': [
                 {
                     text: '指南',
                     items: [
                         {
                             text: '介绍',
-                            link: '/intro/introduce'
+                            link: '/guide/introduce'
                         },
                         {
                             text: '快速上手',
-                            link: '/intro/started'
+                            link: '/guide/quickstart'
                         },
                         {
                             text: '定制主题',
-                            link: '/intro/custom-theme'
+                            link: '/guide/theming'
                         },
                         {
                             text: '国际化',
-                            link: '/intro/custom-locale'
+                            link: '/guide/i18n'
                         }
                     ]
                 }

@@ -63,6 +63,9 @@ importers:
       jsdom:
         specifier: ^26.1.0
         version: 26.1.0
+      markdown-it-container:
+        specifier: ^4.0.0
+        version: 4.0.0
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -87,6 +90,28 @@ importers:
       vue-tsc:
         specifier: ^3.0.5
         version: 3.0.5(typescript@5.9.2)
+
+  docs:
+    dependencies:
+      '@site-pro/components':
+        specifier: workspace:*
+        version: link:../packages/components
+      '@site-pro/hooks':
+        specifier: workspace:*
+        version: link:../packages/hooks
+      '@site-pro/plugins':
+        specifier: workspace:*
+        version: link:../packages/plugins
+      '@site-pro/utils':
+        specifier: workspace:*
+        version: link:../packages/utils
+    devDependencies:
+      markdown-it-container:
+        specifier: ^4.0.0
+        version: 4.0.0
+      vitepress:
+        specifier: ^1.6.4
+        version: 1.6.4(@algolia/client-search@5.35.0)(@types/node@24.2.0)(async-validator@4.2.5)(axios@1.11.0)(change-case@5.4.4)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.2)
 
   packages/components:
     dependencies:
@@ -2466,6 +2491,9 @@ packages:
 
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
+
+  markdown-it-container@4.0.0:
+    resolution: {integrity: sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw==}
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
@@ -5865,6 +5893,8 @@ snapshots:
       semver: 7.7.2
 
   mark.js@8.11.1: {}
+
+  markdown-it-container@4.0.0: {}
 
   markdown-table@3.0.4: {}
 

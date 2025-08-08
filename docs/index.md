@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /intro/introduce
+      link: /guide/introduce
 features:
   - title: 简单易用
     details: 基于 Ant Design Vue 的二次封装，更加易用
