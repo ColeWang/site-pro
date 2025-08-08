@@ -63,9 +63,6 @@ importers:
       jsdom:
         specifier: ^26.1.0
         version: 26.1.0
-      markdown-it-container:
-        specifier: ^4.0.0
-        version: 4.0.0
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -78,9 +75,6 @@ importers:
       vite-plugin-dts:
         specifier: ^4.5.4
         version: 4.5.4(@types/node@24.2.0)(rollup@4.46.2)(typescript@5.9.2)(vite@7.1.0(@types/node@24.2.0)(yaml@2.8.1))
-      vitepress:
-        specifier: ^1.6.4
-        version: 1.6.4(@algolia/client-search@5.35.0)(@types/node@24.2.0)(async-validator@4.2.5)(axios@1.11.0)(change-case@5.4.4)(postcss@8.5.6)(search-insights@2.17.3)(typescript@5.9.2)
       vitest:
         specifier: 3.2.4
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.2.0)(jsdom@26.1.0)(yaml@2.8.1)
@@ -93,6 +87,9 @@ importers:
 
   docs:
     dependencies:
+      '@ant-design/icons-vue':
+        specifier: '>=7.0.0'
+        version: 7.0.1(vue@3.5.18(typescript@5.9.2))
       '@site-pro/components':
         specifier: workspace:*
         version: link:../packages/components
@@ -105,6 +102,18 @@ importers:
       '@site-pro/utils':
         specifier: workspace:*
         version: link:../packages/utils
+      ant-design-vue:
+        specifier: '>=3.2.0'
+        version: 4.2.6(vue@3.5.18(typescript@5.9.2))
+      dayjs:
+        specifier: '>=1.10.5'
+        version: 1.11.13
+      lodash-es:
+        specifier: '>=4.17.15'
+        version: 4.17.21
+      vue:
+        specifier: '>=3.2.0'
+        version: 3.5.18(typescript@5.9.2)
     devDependencies:
       markdown-it-container:
         specifier: ^4.0.0

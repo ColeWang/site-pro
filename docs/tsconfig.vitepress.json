@@ -40,12 +40,5 @@
             "vite/client",
             "vitepress"
         ]
-    },
-    "include": [
-        ".vitepress/config/*"
-    ],
-    "exclude": [
-        "node_modules",
-        ".vitepress/cache"
-    ]
+    }
 }

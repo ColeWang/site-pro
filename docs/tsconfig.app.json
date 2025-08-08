@@ -58,18 +58,5 @@
             "vitepress",
             "vue"
         ]
-    },
-    "include": [
-        "**/*.md",
-        "components/**/*.ts",
-        "components/**/*.tsx",
-        "components/**/*.vue",
-        "intro/**/*.ts",
-        "plugins/**/*.ts"
-    ],
-    "exclude": [
-        "types",
-        "lib",
-        "es"
-    ]
+    }
 }

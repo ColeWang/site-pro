@@ -1,11 +1,8 @@
 import { defineConfig } from 'vitepress'
+import viteConfig from './vite'
 
 export default defineConfig({
-    vite: {
-        plugins: [
-            vueJsx()
-        ]
-    },
+    vite: viteConfig(),
     base: '/site-pro/',
     appearance: false,
     title: 'SitePro',
