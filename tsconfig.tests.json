@@ -88,15 +88,20 @@
         ]
     },
     "include": [
+        "packages/*/src/vite-env.d.ts",
+        "packages/*/src/**/*.ts",
+        "packages/*/src/**/*.tsx",
+        "packages/*/src/**/*.vue",
         "tests/**/*.ts",
         "tests/**/*.tsx",
         "tests/**/*.vue"
     ],
     "exclude": [
-        "node_modules",
-        "dist",
-        "types",
-        "lib",
-        "es"
+        "packages/*/node_modules",
+        "packages/*/vite.config.ts",
+        "packages/*/examples",
+        "packages/*/types",
+        "packages/*/lib",
+        "packages/*/es"
     ]
 }

@@ -21,6 +21,7 @@
         "vue": ">=3.2.0"
     },
     "devDependencies": {
+        "@vitejs/plugin-vue-jsx": "^5.0.1",
         "markdown-it-container": "^4.0.0",
         "vitepress": "^1.6.4"
     }

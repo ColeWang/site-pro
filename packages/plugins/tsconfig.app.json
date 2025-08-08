@@ -78,10 +78,5 @@
         "examples/**/*.ts",
         "examples/**/*.tsx",
         "examples/**/*.vue"
-    ],
-    "exclude": [
-        "types",
-        "lib",
-        "es"
     ]
 }

@@ -73,9 +73,6 @@
         "src/**/*.vue"
     ],
     "exclude": [
-        "types",
-        "lib",
-        "es",
         "src/**/demos"
     ]
 }

@@ -1,8 +1,16 @@
 import { defineConfig } from 'vitepress'
-import viteConfig from './vite'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
-    vite: viteConfig(),
+    vite: {
+        plugins: [vueJsx()],
+        ssr: {
+            noExternal: [
+                'ant-design-vue',
+                '@ant-design/icons-vue'
+            ]
+        }
+    },
     base: '/site-pro/',
     appearance: false,
     title: 'SitePro',
