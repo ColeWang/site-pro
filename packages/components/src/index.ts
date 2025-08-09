@@ -1,11 +1,13 @@
-import type { App } from 'vue'
-import { forIn } from 'lodash-es'
+import type { App, Plugin } from 'vue'
 import version from './version'
 import * as components from './components'
 
 function install (app: App): App {
-    forIn(components, (component) => {
-        component.install && app.use(component)
+    Object.keys(components).forEach((key) => {
+        const comp: Plugin = (components as Record<string, Plugin>)[key]
+        if (comp && comp.install) {
+            app.use(comp)
+        }
     })
     return app
 }
@@ -13,6 +15,7 @@ function install (app: App): App {
 export { version }
 export { install }
 
+export * from './theme'
 export * from './components'
 
 export default { version, install }
