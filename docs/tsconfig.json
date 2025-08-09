@@ -18,8 +18,6 @@
         "moduleResolution": "Bundler",
         // 强制模块检测 避免非模块文件被误判
         "moduleDetection": "force",
-        // 保留符号链接的原始路径
-        "preserveSymlinks": true,
         // 兼容 Node 的导入
         "esModuleInterop": true,
         // 跳过第三方库类型检查
