@@ -5,6 +5,12 @@ export default defineConfig(() => {
     return {
         plugins: [
             vueJsx()
-        ]
+        ],
+        ssr: {
+            noExternal: [
+                'ant-design-vue',
+                '@ant-design/icons-vue'
+            ]
+        }
     }
 })

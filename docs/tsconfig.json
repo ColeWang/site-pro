@@ -15,7 +15,7 @@
         // 不生成输出文件
         "noEmit": true,
         // 模块解析策略 适配打包工具
-        "moduleResolution": "Node",
+        "moduleResolution": "Bundler",
         // 强制模块检测 避免非模块文件被误判
         "moduleDetection": "force",
         // 保留符号链接的原始路径
@@ -61,14 +61,19 @@
         ]
     },
     "include": [
-        "**/*.ts",
-        "**/*.tsx",
-        "**/*.vue"
+        "vite-env.d.ts",
+        ".vitepress/**/*.ts",
+        ".vitepress/**/*.mts",
+        ".vitepress/**/*.tsx",
+        ".vitepress/**/*.vue",
+        "examples/**/*.ts",
+        "examples/**/*.tsx",
+        "examples/**/*.vue"
     ],
     "exclude": [
         "node_modules",
-        "public",
         ".vitepress/cache",
-        ".vitepress/dist"
+        ".vitepress/dist",
+        "public"
     ]
 }
