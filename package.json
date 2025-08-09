@@ -12,6 +12,8 @@
         "docs:dev": "pnpm --filter=./docs run dev",
         "docs:build": "pnpm --filter=./docs run build",
         "docs:preview": "pnpm --filter=./docs run preview",
+        "typecheck:tests": "vue-tsc --noEmit -p tsconfig.tests.json --composite false",
+        "typecheck:vitest": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
         "test": "vitest --config ./vitest.config.ts",
         "test:coverage": "vitest run --config ./vitest.config.ts --coverage"
     },

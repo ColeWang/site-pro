@@ -5,7 +5,8 @@
     "scripts": {
         "dev": "vitepress dev .",
         "build": "vitepress build .",
-        "preview": "vitepress preview ."
+        "preview": "vitepress preview .",
+        "typecheck": "vue-tsc --noEmit -p tsconfig.json --composite false"
     },
     "dependencies": {
         "@site-pro/components": "workspace:*",
