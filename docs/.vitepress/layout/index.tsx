@@ -33,7 +33,7 @@ export default defineComponent({
                     return (
                         <Sidebar
                             logo={() => 'logo'}
-                            menus={site.value.themeConfig.sidebar['/plugins']}
+                            menus={site.value.themeConfig.sidebar['/components']}
                             styleFn={styleFn}
                             onChange={onChange(onClose)}
                         />

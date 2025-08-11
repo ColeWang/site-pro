@@ -7,8 +7,12 @@ export default defineConfig({
     ],
     ssr: {
         noExternal: [
+            '@ant-design/icons-vue',
             'ant-design-vue',
-            '@ant-design/icons-vue'
+            '@site-pro/components',
+            '@site-pro/plugins',
+            '@site-pro/utils',
+            '@site-pro/hooks'
         ]
     }
 })

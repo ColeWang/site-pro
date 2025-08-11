@@ -48,6 +48,11 @@ function genBaseStyle (token: ProLayoutSidebarToken): CSSInterpolation {
                     },
                     [`${antCls}-menu-light`]: {
                         borderInlineEnd: 'none'
+                    },
+                    [`${antCls}-menu-item-group-title`]: {
+                        paddingLeft: '24px',
+                        marginInline: '4px',
+                        marginBlock: '16px'
                     }
                 }
             }

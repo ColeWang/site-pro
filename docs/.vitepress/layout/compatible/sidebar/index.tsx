@@ -63,6 +63,7 @@ export default defineComponent({
 
             const menuProps: MenuProps = {
                 mode: 'inline',
+                theme: 'light',
                 selectedKeys: unref(selectedKeys),
                 onSelect: onSelectMenu
             }
