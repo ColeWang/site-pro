@@ -1,10 +1,12 @@
 import type { MarkdownRenderer } from 'vitepress'
 
-export default (md: MarkdownRenderer): void => {
+function createTableContainer (md: MarkdownRenderer): void {
     md.renderer.rules.table_open = () => {
-        return '<div class="table-wrapper"><table>'
+        return '<div class="doc-table-wrapper"><table>'
     }
     md.renderer.rules.table_close = () => {
         return '</table></div>'
     }
 }
+
+export default createTableContainer

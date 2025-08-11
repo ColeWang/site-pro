@@ -34,9 +34,9 @@ function combineScript (codes: string[]): string {
     return codes.length ? `\n<script setup>\n${codes.join('\n')}\n</script>\n` : ''
 }
 
-function mdTransformPlugin (): Plugin {
+function transformPlugin (): Plugin {
     return {
-        name: 'md-transform',
+        name: 'transform',
         enforce: 'pre',
         async transform (code: string, id: string) {
             if (id && id.endsWith('.md')) {
@@ -49,4 +49,4 @@ function mdTransformPlugin (): Plugin {
     }
 }
 
-export default mdTransformPlugin
+export default transformPlugin

@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import mdTransform from '../plugins/md-transform'
+import transform from '../plugins/transform'
 
 export default defineConfig({
     plugins: [
         vueJsx(),
-        mdTransform()
+        transform()
     ],
     ssr: {
         noExternal: [

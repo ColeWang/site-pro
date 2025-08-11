@@ -1,13 +1,13 @@
 import type { UserConfig } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import viteConfig from './vite-config'
-import mdPlugins from './md-plugins'
+import mdPlugin from './md-plugin'
 import nav from './nav'
 import sidebar from './sidebar'
 
 export default defineConfig({
     vite: viteConfig as UserConfig,
-    markdown: { config: mdPlugins },
+    markdown: { config: mdPlugin },
     base: '/site-pro/',
     appearance: false,
     title: 'Site Pro',
