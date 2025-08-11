@@ -1,12 +1,16 @@
 import type { ObjectPlugin, Reactive } from 'vue'
 import { reactive } from 'vue'
 import type { Recordable } from '@site-pro/utils'
+import { isBrowserClient } from '@site-pro/utils'
 
-export function createDocumentFragment (id?: string): HTMLElement {
-    const container: HTMLElement = document.createElement('div')
-    id && (container.id = id)
-    document.body.appendChild(container)
-    return container
+export function createDocumentFragment (id?: string): HTMLElement | null {
+    if (isBrowserClient && document.body) {
+        const container: HTMLElement = document.createElement('div')
+        id && (container.id = id)
+        document.body.appendChild(container)
+        return container
+    }
+    return null
 }
 
 export function createReactivePlugin<T extends Recordable, P extends ObjectPlugin> (state: T, plugin: P): T & P {

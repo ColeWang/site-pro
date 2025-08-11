@@ -1,5 +1,5 @@
 import type { App, ObjectPlugin } from 'vue'
-import { addClass, addWindowEvt, getWindowSize, removeClass } from '@site-pro/utils'
+import { addClass, addWindowEvt, getWindowSize, isBrowserClient, removeClass } from '@site-pro/utils'
 import { debounce, pick } from 'lodash-es'
 import { createReactivePlugin } from '../plugin-utils'
 
@@ -101,7 +101,7 @@ const plugin: ScreenPlugin = {
                 || (this.xl && 'xl')
                 || 'xxl'
 
-            if (name !== this.name) {
+            if (isBrowserClient && name !== this.name) {
                 if (classes === true) {
                     removeClass(document.body, `screen--${this.name}`)
                     addClass(document.body, `screen--${name}`)
@@ -116,8 +116,10 @@ const plugin: ScreenPlugin = {
 
         update()
 
-        if (classes === true && this.name === 'xs') {
-            addClass(document.body, `screen--xs`)
+        if (isBrowserClient && this.name === 'xs') {
+            if (classes === true) {
+                addClass(document.body, `screen--xs`)
+            }
         }
 
         return app

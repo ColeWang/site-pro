@@ -30,7 +30,7 @@ export interface ProgressPlugin extends ObjectPlugin {
     install: (this: ProgressState & ProgressPlugin, app: App, options?: ProgressPluginInstallOptions) => App;
 }
 
-const container: HTMLElement = createDocumentFragment('site-progress')
+const container: HTMLElement | null = createDocumentFragment('site-progress')
 let instance: VNode | null = null
 let configOptions: Omit<ProgressPluginInstallOptions, '$site'> = {}
 

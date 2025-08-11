@@ -1,6 +1,5 @@
 import type { ComponentPublicInstance, CSSProperties, MaybeRef } from 'vue'
 import { unref } from 'vue'
-import { isNumber } from 'lodash-es'
 import type { BaseRefType } from './types'
 
 export const isBrowserClient: boolean = isUseDom()
@@ -10,43 +9,53 @@ export function isUseDom (): boolean {
 }
 
 export function hasClass (node: HTMLElement, className: string): boolean {
-    if (node.classList) {
-        return node.classList.contains(className)
+    if (isBrowserClient && node) {
+        if (node.classList) {
+            return node.classList.contains(className)
+        }
+        const originClass: string = node.className
+        return ` ${originClass} `.includes(` ${className} `)
     }
-    const originClass: string = node.className
-    return ` ${originClass} `.includes(` ${className} `)
+    return false
 }
 
 export function addClass (node: HTMLElement, className: string): void {
-    if (node.classList) {
-        node.classList.add(className)
-    } else {
-        if (!hasClass(node, className)) {
-            node.className = `${node.className} ${className}`
+    if (isBrowserClient && node) {
+        if (node.classList) {
+            node.classList.add(className)
+        } else {
+            if (!hasClass(node, className)) {
+                node.className = `${node.className} ${className}`
+            }
         }
     }
 }
 
 export function removeClass (node: HTMLElement, className: string): void {
-    if (node.classList) {
-        node.classList.remove(className)
-    } else {
-        if (hasClass(node, className)) {
-            const originClass = node.className
-            node.className = ` ${originClass} `.replace(` ${className} `, ' ')
+    if (isBrowserClient && node) {
+        if (node.classList) {
+            node.classList.remove(className)
+        } else {
+            if (hasClass(node, className)) {
+                const originClass: string = node.className
+                node.className = ` ${originClass} `.replace(` ${className} `, ' ')
+            }
         }
     }
 }
 
 export function setStyle (node: HTMLElement, style: CSSProperties): CSSProperties {
-    const keys: any[] = Object.keys(style)
     const oldStyle: CSSProperties = {}
-    keys.forEach((key) => {
-        oldStyle[key] = node.style[key]
-    })
-    keys.forEach((key) => {
-        node.style[key] = style[key] as any
-    })
+    if (isBrowserClient && node) {
+        const keys: any[] = Object.keys(style)
+        keys.forEach((key) => {
+            oldStyle[key] = node.style[key]
+        })
+        keys.forEach((key) => {
+            node.style[key] = style[key] as any
+        })
+        return oldStyle
+    }
     return oldStyle
 }
 
@@ -59,8 +68,8 @@ export function getElement (el: MaybeRef<BaseRefType>): HTMLElement | null {
 }
 
 export function getWindowSize (): { width: number; height: number } {
-    if (isBrowserClient && isNumber(window.innerWidth)) {
-        return { width: window.innerWidth, height: window.innerHeight }
+    if (isBrowserClient) {
+        return { width: window.innerWidth || 0, height: window.innerHeight || 0 }
     }
     return { width: 0, height: 0 }
 }

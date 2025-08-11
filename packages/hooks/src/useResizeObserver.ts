@@ -1,7 +1,7 @@
 import type { ComputedRef, Ref, WatchStopHandle } from 'vue'
 import { computed, watch } from 'vue'
 import type { BaseRefType } from '@site-pro/utils'
-import { getElement } from '@site-pro/utils'
+import { getElement, isBrowserClient } from '@site-pro/utils'
 import tryOnScopeDispose from './tryOnScopeDispose'
 
 export interface UseResizeObserverResult {
@@ -24,7 +24,7 @@ function useResizeObserver (
 
     const stopWatchElTarget: WatchStopHandle = watch(elTarget, (el) => {
         cleanup()
-        if (window && 'ResizeObserver' in window) {
+        if (isBrowserClient && window.ResizeObserver) {
             observer = new ResizeObserver(callback)
             el && observer.observe(el, options)
         }

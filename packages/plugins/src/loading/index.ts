@@ -25,8 +25,7 @@ export interface LoadingPlugin extends ObjectPlugin {
     install: (this: LoadingState & LoadingPlugin, app: App, options?: LoadingPluginInstallOptions) => App;
 }
 
-
-const container: HTMLElement = createDocumentFragment('site-loading')
+const container: HTMLElement | null = createDocumentFragment('site-loading')
 let instance: VNode | null = null
 let configOptions: Omit<LoadingPluginInstallOptions, '$site'> = {}
 
