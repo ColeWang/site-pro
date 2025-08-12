@@ -1,6 +1,8 @@
-<h1 align="center">
-Fields - 表单项
-</h1>
+---
+title: Fields
+---
+
+# Fields
 
 ## API {#fields-api}
 

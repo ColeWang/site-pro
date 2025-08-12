@@ -1,6 +1,8 @@
-<h1 align="center">
-Form - 高级表单
-</h1>
+---
+title: Form
+---
+
+# Form
 
 Form 在 [Antd Form](https://www.antdv.com/components/form-cn) 的基础上增加了一些语法糖，快速开发表单。
 

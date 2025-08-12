@@ -6,7 +6,7 @@ title: Action
 
 ::: demo 操作Test
 
-action/test
+action/basic
 
 :::
 

@@ -1,6 +1,8 @@
-<h1 align="center">
-QueryFilter - 筛选表单
-</h1>
+---
+title: QueryFilter
+---
+
+# QueryFilter
 
 QueryFilter 是 [Form](./form) 的一个变体，表现与 Form 相同。有些时候表单要与别的组件组合使用，就需要一些特殊形态的表单。QueryFilter
 解决了配合组件使用的问题。

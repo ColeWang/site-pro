@@ -76,10 +76,6 @@ export default {
                 {
                     text: 'Locale - 国际化',
                     link: '/components/locale-provider'
-                },
-                {
-                    text: 'Theme - 主题',
-                    link: '/components/theme'
                 }
             ]
         }
