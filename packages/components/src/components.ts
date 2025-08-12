@@ -99,3 +99,53 @@ export type { TextareaProps, TextareaInstance } from './form'
 export { Textarea } from './form'
 export type { PasswordProps, PasswordInstance } from './form'
 export { Password } from './form'
+
+declare module 'vue' {
+    export interface GlobalComponents {
+        ProAction: typeof import('./action')['Action'];
+        ProActionGroup: typeof import('./action')['ActionGroup'];
+        ProBaseField: typeof import('./base-field')['BaseField'];
+        ProBaseFieldProvider: typeof import('./base-field')['BaseFieldProvider'];
+        ProBaseForm: typeof import('./base-form')['BaseForm'];
+        ProConfigProvider: typeof import('./config-provider')['ConfigProvider'];
+        ProDescriptions: typeof import('./descriptions')['Descriptions'];
+        ProDescriptionsItem: typeof import('./descriptions')['DescriptionsItem'];
+        ProModalForm: typeof import('./float-form')['ModalForm'];
+        ProDrawerForm: typeof import('./float-form')['DrawerForm'];
+        ProForm: typeof import('./form')['Form'];
+        ProFormItem: typeof import('./form')['FormItem'];
+        ProFormGroup: typeof import('./form')['FormGroup'];
+        ProFormDependency: typeof import('./form')['FormDependency'];
+        ProField: typeof import('./form')['Field'];
+        ProUserField: typeof import('./form')['UserField'];
+        ProLocaleProvider: typeof import('./locale-provider')['LocaleProvider'];
+        ProQueryFilter: typeof import('./query-filter')['QueryFilter'];
+        ProResizeObserver: typeof import('./resize-observer')['ResizeObserver'];
+        ProTable: typeof import('./table')['Table'];
+        ProDate: typeof import('./form')['Date'];
+        ProDateRange: typeof import('./form')['DateRange'];
+        ProDateWeek: typeof import('./form')['DateWeek'];
+        ProDateWeekRange: typeof import('./form')['DateWeekRange'];
+        ProDateMonth: typeof import('./form')['DateMonth'];
+        ProDateMonthRange: typeof import('./form')['DateMonthRange'];
+        ProDateQuarter: typeof import('./form')['DateQuarter'];
+        ProDateQuarterRange: typeof import('./form')['DateQuarterRange'];
+        ProDateYear: typeof import('./form')['DateYear'];
+        ProDateYearRange: typeof import('./form')['DateYearRange'];
+        ProDateTime: typeof import('./form')['DateTime'];
+        ProDateTimeRange: typeof import('./form')['DateTimeRange'];
+        ProTime: typeof import('./form')['Time'];
+        ProTimeRange: typeof import('./form')['TimeRange'];
+        ProSelect: typeof import('./form')['Select'];
+        ProTreeSelect: typeof import('./form')['TreeSelect'];
+        ProCascader: typeof import('./form')['Cascader'];
+        ProRadio: typeof import('./form')['Radio'];
+        ProCheckbox: typeof import('./form')['Checkbox'];
+        ProSwitch: typeof import('./form')['Switch'];
+        ProSlider: typeof import('./form')['Slider'];
+        ProText: typeof import('./form')['Text'];
+        ProNumber: typeof import('./form')['Number'];
+        ProTextarea: typeof import('./form')['Textarea'];
+        ProPassword: typeof import('./form')['Password'];
+    }
+}
