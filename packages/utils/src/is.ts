@@ -1,4 +1,4 @@
-import { Comment, Fragment } from 'vue'
+import { Comment, Fragment, Text } from 'vue'
 import { isEqual, isFunction, isNaN, isNil, isObject, isSymbol } from 'lodash-es'
 
 export function isValidElement (value: any): boolean {
