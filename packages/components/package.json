@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/components",
-    "version": "1.0.0-alpha.1",
+    "version": "1.0.0-alpha.2",
     "description": "SitePro Components",
     "type": "module",
     "scripts": {

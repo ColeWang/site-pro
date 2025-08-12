@@ -1,6 +1,6 @@
 {
     "name": "@site-pro/utils",
-    "version": "1.0.0-alpha.1",
+    "version": "1.0.0-alpha.2",
     "description": "SitePro Utils",
     "type": "module",
     "scripts": {
