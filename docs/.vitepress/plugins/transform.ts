@@ -6,12 +6,13 @@ import type { Plugin } from 'vite'
 const __filename: string = fileURLToPath(import.meta.url)
 const __dirname: string = dirname(__filename)
 
+const docPath: string = resolve(__dirname, '../../')
+
 function camelize (str: string): string {
     return str.replace(/-(\w)/g, (_, c) => c.toUpperCase())
 }
 
 function getExampleImports (comp: string): string[] {
-    const docPath: string = resolve(__dirname, '../../')
     const path: string = resolve(docPath, 'examples', comp)
     if (path && existsSync(path)) {
         return readdirSync(path).filter((item) => /\.vue$/.test(item)).map((item) => {

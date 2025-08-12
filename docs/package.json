@@ -3,9 +3,9 @@
     "description": "Site Pro Docs",
     "type": "module",
     "scripts": {
-        "dev": "vitepress dev .",
-        "build": "vitepress build .",
-        "preview": "vitepress preview .",
+        "dev": "vitepress dev . --mode development",
+        "build": "vitepress build . --mode production",
+        "preview": "vitepress preview . --mode production",
         "typecheck": "vue-tsc --noEmit -p tsconfig.json --composite false"
     },
     "dependencies": {

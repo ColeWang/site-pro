@@ -8,6 +8,8 @@ import type { Token } from '../typings'
 const __filename: string = fileURLToPath(import.meta.url)
 const __dirname: string = dirname(__filename)
 
+const docPath: string = resolve(__dirname, '../../')
+
 interface DemoInfo {
     path: string;
     code: string;
@@ -22,7 +24,6 @@ interface DemoContainerOptions {
 }
 
 function parseDemoInfo (token: Token): DemoInfo {
-    const docPath: string = resolve(__dirname, '../../')
     const first: Token | undefined = head(token.children)
     // --
     const path: string = first ? first.content : ''
